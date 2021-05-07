@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Nmap (Network Mapper) 是在渗透测试中常用的扫描工具，可用于扫描网络中的 IP 地址和端口，并检测已安装的应用程序。无论是作为网络安全工具还是黑客工具，Nmap 是一个很强大的工具，在《黑客帝国2》电影中就有出现，用于入侵发电站的能源管理系统。本文将介绍 Nmap 的安装和常用命令。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nmap扫描工具介绍">
+<meta property="og:url" content="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="Nmap (Network Mapper) 是在渗透测试中常用的扫描工具，可用于扫描网络中的 IP 地址和端口，并检测已安装的应用程序。无论是作为网络安全工具还是黑客工具，Nmap 是一个很强大的工具，在《黑客帝国2》电影中就有出现，用于入侵发电站的能源管理系统。本文将介绍 Nmap 的安装和常用命令。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/nmap-rpm-pacakage.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/nmap-zenmap.png">
+<meta property="article:published_time" content="2021-03-27T04:02:00.000Z">
+<meta property="article:modified_time" content="2021-03-26T14:27:34.886Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="nmap">
+<meta property="article:tag" content="NSE">
+<meta property="article:tag" content="Zenmap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/nmap-rpm-pacakage.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Nmap扫描工具介绍 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nmap扫描工具介绍
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-27 12:02:00" itemprop="dateCreated datePublished" datetime="2021-03-27T12:02:00+08:00">2021-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/api-test-security-testing-nmap-tool/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/api-test-security-testing-nmap-tool/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Nmap (Network Mapper) 是在渗透测试中常用的扫描工具，可用于扫描网络中的 IP 地址和端口，并检测已安装的应用程序。无论是作为网络安全工具还是黑客工具，Nmap 是一个很强大的工具，在《黑客帝国2》电影中就有出现，用于入侵发电站的能源管理系统。本文将介绍 Nmap 的安装和常用命令。</p>
+<a id="more"></a>
+<h1 id="Nmap简介及安装"><a href="#Nmap简介及安装" class="headerlink" title="Nmap简介及安装"></a>Nmap简介及安装</h1><p>Nmap官网地址：<a target="_blank" rel="noopener" href="https://nmap.org/">https://nmap.org/</a></p>
+<h2 id="Nmap-特性"><a href="#Nmap-特性" class="headerlink" title="Nmap 特性"></a>Nmap 特性</h2><p>Nmap使用IP数据包来确定网络上有哪些主机可用、提供哪些服务（应用程序名称和版本）、它们运行的操作系统（操作系统版本信息）、使用的数据包过滤/防火墙类型等其它特性。Nmap可以运行在所有主流的操作系统上，比如Linux、Windows和Mac OS等。</p>
+<ul>
+<li>Nmap 支持检查主机是否启动，可用于监视主机或服务正常运行时间等</li>
+<li>快速识别网络中的设备，包括服务器，路由器，交换机，移动设备等</li>
+<li>帮助识别系统上运行的服务，包括 web 服务器、 DNS 服务器和其他常见应用程序。Nmap 还可以检测应用程序版本，帮助检测漏洞</li>
+<li>查找在设备上运行的操作系统详细信息</li>
+<li>漏洞扫描中，可以使用 Nmap 脚本攻击系统</li>
+</ul>
+<p>Nmap提供了以下工具：</p>
+<ul>
+<li>Zenmap 图形界面：可以绘制网络映射图</li>
+<li>Ncat：数据传输、重定向和调试工具</li>
+<li>Ndiff：比较扫描结果</li>
+<li>Nping：数据包生成和响应分析工具</li>
+</ul>
+<h2 id="Nmap安装"><a href="#Nmap安装" class="headerlink" title="Nmap安装"></a>Nmap安装</h2><h3 id="centos7"><a href="#centos7" class="headerlink" title="centos7"></a>centos7</h3><p>Linux系统安装：<a target="_blank" rel="noopener" href="https://nmap.org/book/inst-linux.html#inst-rpm">https://nmap.org/book/inst-linux.html#inst-rpm</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -vhU https://nmap.org/dist/nmap-7.91-1.x86_64.rpm</span><br></pre></td></tr></table></figure><br>也可以先把rpm下载下来后，再安装<br><img src="nmap-rpm-pacakage.png" width="80%" height="80%" /></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -vhU nmap-7.91-1.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>查看nmap版本<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># nmap -version</span></span><br><span class="line">Nmap version 7.91 ( https://nmap.org )</span><br><span class="line">Platform: x86_64-redhat-linux-gnu</span><br><span class="line">Compiled with: nmap-liblua-5.3.5 openssl-1.1.1h nmap-libssh2-1.9.0 nmap-libz-1.2.11 nmap-libpcre-7.6 nmap-libpcap-1.9.1 nmap-libdnet-1.12 ipv6</span><br><span class="line">Compiled without:</span><br><span class="line">Available nsock engines: epoll poll select</span><br><span class="line">[root@Client ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ol>
+<li>下载exe可执行文件，双击安装，不勾选npcap，其它默认</li>
+<li>安装npcap，下载地址：<a target="_blank" rel="noopener" href="https://nmap.org/npcap/#download">https://nmap.org/npcap/#download</a></li>
+</ol>
+<p>安装完成后，npcap默认加入了环境变量，不需要手动添加<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">D:\software\Nmap&gt;nmap --version</span><br><span class="line">Nmap version 7.91 ( https://nmap.org )</span><br><span class="line">Platform: i686-pc-windows-windows</span><br><span class="line">Compiled with: nmap-liblua-5.3.5 openssl-1.1.1h nmap-libssh2-1.9.0 nmap-libz-1.2.11 nmap-libpcre-7.6 Npcap-1.10 nmap-libdnet-1.12 ipv6</span><br><span class="line">Compiled without:</span><br><span class="line">Available nsock engines: iocp poll select</span><br><span class="line"></span><br><span class="line">D:\software\Nmap&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其它系统安装方法参考：<a target="_blank" rel="noopener" href="https://nmap.org/download.html">https://nmap.org/download.html</a></p>
+<h1 id="Nmap命令"><a href="#Nmap命令" class="headerlink" title="Nmap命令"></a>Nmap命令</h1><p>查看帮助命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -h</span><br></pre></td></tr></table></figure></p>
+<h2 id="扫描单个主机"><a href="#扫描单个主机" class="headerlink" title="扫描单个主机"></a>扫描单个主机</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ nmap 192.168.20.9</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 16:29 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 192.168.20.9</span><br><span class="line">Host is up (0.00010s latency).</span><br><span class="line">Not shown: 998 closed ports</span><br><span class="line">PORT    STATE SERVICE</span><br><span class="line">22/tcp  open  ssh</span><br><span class="line">111/tcp open  rpcbind</span><br><span class="line">MAC Address: 00:0C:29:BB:0C:02 (VMware)</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 13.15 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="扫描多个主机"><a href="#扫描多个主机" class="headerlink" title="扫描多个主机"></a>扫描多个主机</h2><p>同时扫描多个主机，<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmap 192.168.20.9 192.168.20.8</span><br><span class="line">$ nmap 192.168.20.*</span><br><span class="line">$ nmap 192.168.20.8,9,10</span><br><span class="line">$ nmap 192.168.20.8-255</span><br></pre></td></tr></table></figure></p>
+<h2 id="隐秘扫描-Stealth-scan"><a href="#隐秘扫描-Stealth-scan" class="headerlink" title="隐秘扫描(Stealth scan)"></a>隐秘扫描(Stealth scan)</h2><p>通过发送 SYN 数据包并分析响应。如果收到 SYN/ACK，则表示端口已打开，可以进行 TCP 连接。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sS 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 17:15 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.077s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE  SERVICE</span><br><span class="line">22/tcp   open   ssh</span><br><span class="line">23/tcp   closed telnet</span><br><span class="line">3306/tcp open mysql</span><br><span class="line">3389/tcp closed ms-wbt-server</span><br><span class="line">8080/tcp closed http-proxy</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 30.31 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="版本扫描"><a href="#版本扫描" class="headerlink" title="版本扫描"></a>版本扫描</h2><p>查找应用程序的版本，确认目标主机使用的应用版本后，可以在<a target="_blank" rel="noopener" href="https://cve.mitre.org/">Common vulnerability and Exploits (CVE)</a>数据库中找到应用特定版本的现有漏洞。然后可以使用 Metasploit 类似的工具来攻击计算机。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sV 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 17:37 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.066s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE  SERVICE       VERSION</span><br><span class="line">22/tcp   open   ssh           OpenSSH 8.0 (protocol 2.0)</span><br><span class="line">23/tcp   closed telnet</span><br><span class="line">3306/tcp open   mysql         MySQL 5.7.29</span><br><span class="line">3389/tcp closed ms-wbt-server</span><br><span class="line">8080/tcp closed http-proxy</span><br><span class="line"></span><br><span class="line">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 13.26 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="操作系统探测"><a href="#操作系统探测" class="headerlink" title="操作系统探测"></a>操作系统探测</h2><p>Nmap 还可以使用 TCP/IP 指纹技术提供有关底层操作系统的信息。Nmap 还将尝试在操作系统扫描期间查找系统正常运行时间。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -O 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-05 17:49 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.061s latency).</span><br><span class="line">Not shown: 998 filtered ports</span><br><span class="line">PORT     STATE  SERVICE</span><br><span class="line">22/tcp   open   ssh</span><br><span class="line">3389/tcp closed ms-wbt-server</span><br><span class="line">Aggressive OS guesses: Linux 5.1 (94%), Linux 3.10 - 4.11 (92%), HP P2000 G3 NAS device (91%), Linux 3.2 - 4.9 (91%), Linux 3.16 - 4.6 (90%), Linux 2.6.32 (90%), Linux 5.0 (90%), Ubiquiti AirOS 5.5.9 (90%), Linux 4.4 (90%), Linux 5.0 - 5.4 (89%)</span><br><span class="line">No exact OS matches <span class="keyword">for</span> host (<span class="built_in">test</span> conditions non-ideal).</span><br><span class="line"></span><br><span class="line">OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 40.84 seconds</span><br></pre></td></tr></table></figure>
+<p>激烈扫描模式（-A参数）启用了操作系统检测(-O) 和版本扫描(-sV)，返回系统信息和版本信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -A 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-12 14:40 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.056s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE  SERVICE       VERSION</span><br><span class="line">22/tcp   open   ssh           OpenSSH 8.0 (protocol 2.0)</span><br><span class="line">| ssh-hostkey:</span><br><span class="line">|   3072 06:56:59:1d:73:7d:8f:e0:e0:0c:65:fa:75:4b:61:0b (RSA)</span><br><span class="line">|   256 3b:2e:45:69:49:7a:b2:fa:06:42:d2:1f:4a:c8:e6:2a (ECDSA)</span><br><span class="line">|_  256 6b:a5:e5:b7:39:28:1b:03:e0:c1:6b:2b:fb:19:f0:7b (ED25519)</span><br><span class="line">23/tcp   closed telnet</span><br><span class="line">3306/tcp open   mysql         MySQL 5.7.29</span><br><span class="line">| mysql-info:</span><br><span class="line">|   Protocol: 10</span><br><span class="line">|   Version: 5.7.29</span><br><span class="line">|   Thread ID: 35</span><br><span class="line">|   Capabilities flags: 65535</span><br><span class="line">|   Some Capabilities: Support41Auth, Speaks41ProtocolNew, Speaks41ProtocolOld, SwitchToSSLAfterHandshake, IgnoreSigpipes, InteractiveClient, DontAllowDatabaseTableColumn, FoundRows, LongPassword, SupportsTransactions, ODBCClient, ConnectWithDatabase, IgnoreSpaceBeforeParenthesis, LongColumnFlag, SupportsLoadDataLocal, SupportsCompression, SupportsMultipleStatments, SupportsMultipleResults, SupportsAuthPlugins</span><br><span class="line">|   Status: Autocommit</span><br><span class="line">|   Salt: \x1E7aZ5\x07%|\x02+\x01_<span class="comment">#\x1B6FX~\x07</span></span><br><span class="line">|_  Auth Plugin Name: mysql_native_password</span><br><span class="line">| ssl-cert: Subject: commonName=MySQL_Server_5.7.29_Auto_Generated_Server_Certificate</span><br><span class="line">| Not valid before: 2020-06-17T09:36:07</span><br><span class="line">|_Not valid after:  2030-06-15T09:36:07</span><br><span class="line">|_ssl-date: TLS randomness does not represent time</span><br><span class="line">3389/tcp closed ms-wbt-server</span><br><span class="line">8080/tcp closed http-proxy</span><br><span class="line">Aggressive OS guesses: Linux 5.1 (94%), Linux 3.10 - 4.11 (92%), HP P2000 G3 NAS device (91%), Linux 3.2 - 4.9 (91%), Linux 3.16 - 4.6 (90%), Linux 2.6.32 (90%), Linux 2.6.32 - 3.1 (90%), Ubiquiti AirMax NanoStation WAP (Linux 2.6.32) (90%), Linux 3.7 (90%), Linux 4.4 (90%)</span><br><span class="line">No exact OS matches <span class="keyword">for</span> host (<span class="built_in">test</span> conditions non-ideal).</span><br><span class="line">Network Distance: 16 hops</span><br><span class="line"></span><br><span class="line">TRACEROUTE (using port 3389/tcp)</span><br><span class="line">HOP RTT      ADDRESS</span><br><span class="line">1   1.00 ms  192.168.101.1</span><br><span class="line">2   6.00 ms  120.237.96.81</span><br><span class="line">3   8.00 ms  183.233.126.85</span><br><span class="line">4   8.00 ms  211.136.248.81</span><br><span class="line">5   12.00 ms 221.183.39.157</span><br><span class="line">6   75.00 ms 221.183.37.137</span><br><span class="line">7   ...</span><br><span class="line">8   51.00 ms 111.13.0.173</span><br><span class="line">9   44.00 ms 39.156.0.37</span><br><span class="line">10  52.00 ms 39.156.7.249</span><br><span class="line">11  ... 12</span><br><span class="line">13  54.00 ms 116.251.124.194</span><br><span class="line">14  ... 15</span><br><span class="line">16  61.00 ms 39.99.181.194</span><br><span class="line"></span><br><span class="line">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 23.85 seconds</span><br></pre></td></tr></table></figure>
+<h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><p>使用 <code>-p</code> 参数扫描单个端口<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -p 3306 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-16 17:35 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.049s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">3306/tcp open  mysql</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 0.99 seconds</span><br></pre></td></tr></table></figure></p>
+<p>指定端口连接类型，比如TCP连接<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -p T:3306 39.99.181.194</span><br></pre></td></tr></table></figure><br>指定端口范围<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -p 22-8080 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-16 17:38 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.052s latency).</span><br><span class="line">Not shown: 8054 filtered ports</span><br><span class="line">PORT     STATE  SERVICE</span><br><span class="line">22/tcp   open   ssh</span><br><span class="line">23/tcp   open   telnet</span><br><span class="line">3306/tcp open   mysql</span><br><span class="line">3389/tcp closed ms-wbt-server</span><br><span class="line">8080/tcp closed http-proxy</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 22.10 seconds</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ nmap --top-ports 10 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-16 17:41 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.15s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE    SERVICE</span><br><span class="line">21/tcp   filtered ftp</span><br><span class="line">22/tcp   open     ssh</span><br><span class="line">23/tcp   open     telnet</span><br><span class="line">25/tcp   filtered smtp</span><br><span class="line">80/tcp   filtered http</span><br><span class="line">110/tcp  filtered pop3</span><br><span class="line">139/tcp  filtered netbios-ssn</span><br><span class="line">443/tcp  filtered https</span><br><span class="line">445/tcp  filtered microsoft-ds</span><br><span class="line">3389/tcp filtered ms-wbt-server</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 5.29 seconds</span><br></pre></td></tr></table></figure>
+<p>TCP扫描：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sT 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 16:47 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.049s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">22/tcp   open  ssh</span><br><span class="line">23/tcp   open  telnet</span><br><span class="line">25/tcp   open  smtp</span><br><span class="line">110/tcp  open  pop3</span><br><span class="line">3306/tcp open  mysql</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 49.29 seconds</span><br></pre></td></tr></table></figure><br>TCP SYN扫描（半开放扫描）：<br>SYN扫描执行快，每秒钟可以扫描数千个 端口，因为它不完成TCP连接</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sS 39.99.181.194</span><br></pre></td></tr></table></figure>
+<p>UDP扫描：<br>UDP扫描一般较慢，DNS，SNMP，和DHCP (端口53，161/162，和67/68)是最常见的三个UDP服务。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sU 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 16:49 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.052s latency).</span><br><span class="line">All 1000 scanned ports on 39.99.181.194 are open|filtered</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 59.64 seconds</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>open|filtered表示无法确定端口是开放还是被过滤的</p>
+</blockquote>
+<p>UDP扫描比TCP扫描慢的原因是UDP是无连接的，Nmap无法区分应用过滤数据包的开放端口、数据包被防火墙阻止丢弃的端口或者数据包由于网络拥塞而在传输过程中丢失。而且对于closed端口（ICMP端口无法访问），Nmap无法区分端口被防火墙过滤还是数据包丢失。除非端口返回数据或返回ICMP不可达报文，否则Nmap需要发送多个数据包来消除速率限制或丢失数据包的可能性。</p>
+<p>可以通过如下方式提高扫描速度（牺牲扫描精度）</p>
+<ul>
+<li><code>--min-rate</code>参数：<code>--min-rate 5000</code>表示每秒发送5000个数据包</li>
+<li><code>--max-rtt-timeout</code>参数：控制nmap等待响应时间，需大于5ms，具体时间可以通过ping命令查看。<code>--max-rtt-timeout 0.005</code>：5ms等待时间</li>
+<li><code>--max-retries</code>参数：设置重试次数，<code>--max-retries 1</code>重试1次</li>
+<li><code>--max-scan-delay</code>参数：设置扫描间隔，用在主机响应慢的情况下。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sU --min-rate 5000 39.99.181.194</span><br></pre></td></tr></table></figure>
+<p>Null扫描 (-sN)：<br>不设置任何标志位(tcp标志头是0)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sN 39.99.181.194</span><br></pre></td></tr></table></figure>
+<p>FIN扫描 (-sF)：<br>只设置TCP FIN标志位。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sF 39.99.181.194</span><br></pre></td></tr></table></figure>
+<p>Xmas扫描 (-sX)：<br>设置FIN，PSH，和URG标志位</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sX 39.99.181.194</span><br></pre></td></tr></table></figure>
+<p>TCP ACK扫描：<br>用于发现防火墙规则，确定它们是有状态的还是无状态的，哪些端口是被过滤的。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sA 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 17:07 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.053s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE      SERVICE</span><br><span class="line">22/tcp   unfiltered ssh</span><br><span class="line">23/tcp   unfiltered telnet</span><br><span class="line">3306/tcp unfiltered mysql</span><br><span class="line">3389/tcp unfiltered ms-wbt-server</span><br><span class="line">8080/tcp unfiltered http-proxy</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 11.24 seconds</span><br></pre></td></tr></table></figure>
+<p>IP协议扫描：<br>确定目标机支持哪些IP协议 (TCP，ICMP，IGMP等)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sO 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 17:11 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.054s latency).</span><br><span class="line">Not shown: 255 open|filtered protocols</span><br><span class="line">PROTOCOL STATE SERVICE</span><br><span class="line">1        open  icmp</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 16.49 seconds</span><br></pre></td></tr></table></figure>
+<p>PING扫描：检测目标主机是否在线<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sP 39.99.181.194</span><br></pre></td></tr></table></figure></p>
+<h2 id="读取文件扫描"><a href="#读取文件扫描" class="headerlink" title="读取文件扫描"></a>读取文件扫描</h2><p>如果需要扫描的IP地址很多，可以存放在一个文件里面进行扫描</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -iL nmap_test.txt</span><br></pre></td></tr></table></figure>
+<h2 id="扫描日志"><a href="#扫描日志" class="headerlink" title="扫描日志"></a>扫描日志</h2><p><code>-v</code>参数打印扫描日志</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -v -p 3306 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-16 17:51 CST</span><br><span class="line">Initiating Ping Scan at 17:51</span><br><span class="line">Scanning 39.99.181.194 [4 ports]</span><br><span class="line">Completed Ping Scan at 17:51, 0.23s elapsed (1 total hosts)</span><br><span class="line">Initiating Parallel DNS resolution of 1 host. at 17:51</span><br><span class="line">Completed Parallel DNS resolution of 1 host. at 17:51, 0.35s elapsed</span><br><span class="line">Initiating SYN Stealth Scan at 17:51</span><br><span class="line">Scanning 39.99.181.194 [1 port]</span><br><span class="line">Discovered open port 3306/tcp on 39.99.181.194</span><br><span class="line">Completed SYN Stealth Scan at 17:51, 0.05s elapsed (1 total ports)</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.049s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">3306/tcp open  mysql</span><br><span class="line"></span><br><span class="line">Read data files from: D:\software\Nmap</span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 1.06 seconds</span><br><span class="line">           Raw packets sent: 5 (196B) | Rcvd: 2 (72B)</span><br><span class="line"></span><br><span class="line">D:\software\Nmap&gt;</span><br></pre></td></tr></table></figure>
+<p>保存到文件，保存格式支持text、xml</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -oN output.txt 39.99.181.194</span><br><span class="line">$ nmap -oX output.xml 39.99.181.194</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -oA output 39.99.181.194</span><br></pre></td></tr></table></figure><br>生成output,xml、output.nmap、output.gnmap文件</p>
+<h1 id="NSE脚本"><a href="#NSE脚本" class="headerlink" title="NSE脚本"></a>NSE脚本</h1><p>NSE(Nmap Scripting Engine)是一个非常强大的渗透工具，它允许用户编写各种网络任务的自动化脚本。脚本基于Lua语言，可以自己编写满足需求的脚本或者修改已有的脚本。目前Nmap集成了600多个脚本，参考：<a target="_blank" rel="noopener" href="https://nmap.org/nsedoc/">https://nmap.org/nsedoc/</a></p>
+<p>语法：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nmap --script &lt;filename&gt;</span><br><span class="line">$ nmap -sC <span class="comment"># 使用默认脚本集执行脚本扫描，等价于 --script=default</span></span><br></pre></td></tr></table></figure><br>多个脚本使用逗号分隔</p>
+<h2 id="NSE脚本类别"><a href="#NSE脚本类别" class="headerlink" title="NSE脚本类别"></a>NSE脚本类别</h2><p>NSE 通过 <code>-sC</code> 选项（或<code>--script</code>）激活，主要包括以下功能：</p>
+<ul>
+<li>网络发现：扫描目标主机信息、服务等</li>
+<li>版本检测：检测应用版本</li>
+<li>漏洞检测：扫描系统漏洞</li>
+<li>后门检测</li>
+<li>攻击、利用漏洞</li>
+</ul>
+<p>NSE 脚本主要包括以下14类：</p>
+<ul>
+<li>auth：身份认证</li>
+<li>broadcast：广播，通过在本地网络上广播来发现没有列出的主机</li>
+<li>brute：使用暴力破解来猜测远程服务器的身份认证凭据</li>
+<li>default：默认设置的脚本，使用 -sC 或 -A 选项时默认运行，比如identd-owners、http-auth、ftp-anon。</li>
+<li>discovery：通过查询公共注册中心、支持 snmp 的设备、目录服务等来发现更多关于网络的信息</li>
+<li>dos：测试拒绝服务的漏洞</li>
+<li>exploit：主动利用某些漏洞</li>
+<li>external：将数据发送到第三方数据库或其他网络资源，比如whois-ip通过连接到 whois 服务器获取目标地址</li>
+<li>fuzzer：在每个数据包中发送随机字段，可用于发现软件的缺陷和漏洞</li>
+<li>intrusive：可能会消耗目标主机大量资源，风险太高，可能会导致目标系统崩溃</li>
+<li>malware：测试目标平台是否被恶意软件或后门感染</li>
+<li>safe：安全脚本，不攻击，不使用大量网络带宽或其他资源</li>
+<li>version：版本检测：</li>
+<li>vuln：检查特定的已知漏洞，通常只报告发现的结果</li>
+</ul>
+<h2 id="NSE脚本示例"><a href="#NSE脚本示例" class="headerlink" title="NSE脚本示例"></a>NSE脚本示例</h2><h3 id="discovery"><a href="#discovery" class="headerlink" title="discovery"></a>discovery</h3><p>mysql-info：打印mysql服务器版本，协议，进程ID，密码盐度等信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sV --script=mysql-info 39.99.181.194</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.064s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE  SERVICE       VERSION</span><br><span class="line">22/tcp   open   ssh           OpenSSH 8.0 (protocol 2.0)</span><br><span class="line">23/tcp   open   telnet        Linux telnetd</span><br><span class="line">3306/tcp open   mysql         MySQL 5.7.29</span><br><span class="line">| mysql-info:</span><br><span class="line">|   Protocol: 10</span><br><span class="line">|   Version: 5.7.29</span><br><span class="line">|   Thread ID: 33</span><br><span class="line">|   Capabilities flags: 65535</span><br><span class="line">|   Some Capabilities: LongColumnFlag, SupportsLoadDataLocal, Support41Auth, DontAllowDatabaseTableColumn, SupportsTransactions, IgnoreSigpipes, FoundRows, SwitchToSSLAfterHandshake, IgnoreSpaceBeforeParenthesis, ODBCClient, Speaks41ProtocolNew, ConnectWithDatabase, InteractiveClient, Speaks41ProtocolOld, LongPassword, SupportsCompression, SupportsMultipleResults, SupportsAuthPlugins, SupportsMultipleStatments</span><br><span class="line">|   Status: Autocommit</span><br><span class="line">|   Salt:</span><br><span class="line">| =\x06Dq\x17Z|W<span class="string">&#x27;\x1F:\x1C)\x07`Bx,D</span></span><br><span class="line"><span class="string">|_  Auth Plugin Name: mysql_native_password</span></span><br><span class="line"><span class="string">3389/tcp closed ms-wbt-server</span></span><br><span class="line"><span class="string">8080/tcp closed http-proxy</span></span><br><span class="line"><span class="string">Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel</span></span><br></pre></td></tr></table></figure>
+<h3 id="auth"><a href="#auth" class="headerlink" title="auth"></a>auth</h3><p>ssh-auth-methods：返回SSH服务器支持的认证方法<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ nmap --script=ssh-auth-methods 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 16:03 ?D1ú±ê×?ê±??</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.069s latency).</span><br><span class="line">Not shown: 995 filtered ports</span><br><span class="line">PORT     STATE  SERVICE</span><br><span class="line">22/tcp   open   ssh</span><br><span class="line">| ssh-auth-methods:</span><br><span class="line">|   Supported authentication methods:</span><br><span class="line">|     publickey</span><br><span class="line">|     gssapi-keyex</span><br><span class="line">|     gssapi-with-mic</span><br><span class="line">|_    password</span><br><span class="line">23/tcp   open   telnet</span><br><span class="line">3306/tcp open   mysql</span><br><span class="line">3389/tcp closed ms-wbt-server</span><br><span class="line">8080/tcp closed http-proxy</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 60.76 seconds</span><br></pre></td></tr></table></figure></p>
+<h3 id="brute"><a href="#brute" class="headerlink" title="brute"></a>brute</h3><p>暴力破解<br>对SSH服务进行暴力破解：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -p 22 --script ssh-brute --script-args userdb=users.lst,passdb=pass.lst --script-args ssh-brute.timeout=4s 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 16:11 CST</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: root:root</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: admin:admin</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: administrator:administrator</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: webadmin:webadmin</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: sysadmin:sysadmin</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: netadmin:netadmin</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: guest:guest</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: user:user</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: web:web</span><br><span class="line">NSE: [ssh-brute] Trying username/password pair: <span class="built_in">test</span>:<span class="built_in">test</span></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>ftp暴力破解<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap --script ftp-brute -p 21 &lt;host&gt;</span><br></pre></td></tr></table></figure></p>
+<p>mysql-enum：获取mysql有效用户<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -p 3306 --script=mysql-enum 39.99.181.194</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-18 16:19 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> 39.99.181.194</span><br><span class="line">Host is up (0.23s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">3306/tcp open  mysql</span><br><span class="line">| mysql-enum:</span><br><span class="line">|   Valid usernames:</span><br><span class="line">|     root:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     netadmin:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     guest:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     <span class="built_in">test</span>:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     web:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     sysadmin:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     administrator:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     webadmin:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     admin:&lt;empty&gt; - Valid credentials</span><br><span class="line">|     user:&lt;empty&gt; - Valid credentials</span><br><span class="line">|_  Statistics: Performed 10 guesses <span class="keyword">in</span> 1 seconds, average tps: 10.0</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 9.15 seconds</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>mysql-brute：密码破解<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ nmap --script=mysql-brute  -p 3306 127.0.0.1</span><br><span class="line">Starting Nmap 7.91 ( https://nmap.org ) at 2021-03-22 16:24 CST</span><br><span class="line">Nmap scan report <span class="keyword">for</span> localhost (127.0.0.1)</span><br><span class="line">Host is up (0.0010s latency).</span><br><span class="line"></span><br><span class="line">PORT     STATE SERVICE</span><br><span class="line">3306/tcp open  mysql</span><br><span class="line">| mysql-brute:</span><br><span class="line">|   Accounts:</span><br><span class="line">|     admin:admin - Valid credentials</span><br><span class="line">|     root:123456 - Valid credentials</span><br><span class="line">|_  Statistics: Performed 40012 guesses <span class="keyword">in</span> 20 seconds, average tps: 2000.6</span><br><span class="line"></span><br><span class="line">Nmap <span class="keyword">done</span>: 1 IP address (1 host up) scanned <span class="keyword">in</span> 21.36 seconds</span><br></pre></td></tr></table></figure></p>
+<h1 id="Zenmap可视化"><a href="#Zenmap可视化" class="headerlink" title="Zenmap可视化"></a>Zenmap可视化</h1><p>Zenmap是Nmap的图形化界面</p>
+<p><img src="nmap-zenmap.png" width="80%" height="80%" /></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文简要介绍了nmap工具的安装、一些常用扫描命令、NSE脚本以及可视化工具Zenmap的演示。nmap是一个强大的渗透测试工具，提供丰富的命令脚本，可以说是网络的“瑞士军刀”，更多用法可以参考Nmap官网网站：<a target="_blank" rel="noopener" href="https://nmap.org/">https://nmap.org/</a> ，上面介绍了Nmap工具的详细信息和更高级的用法。中文文档参考：<a target="_blank" rel="noopener" href="https://nmap.org/man/zh/">https://nmap.org/man/zh/</a></p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>Nmap扫描工具介绍</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/api-test-security-testing-nmap-tool/" title="Nmap扫描工具介绍">https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nmap/" rel="tag"># nmap</a>
+              <a href="/tags/NSE/" rel="tag"># NSE</a>
+              <a href="/tags/Zenmap/" rel="tag"># Zenmap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/continuous-integration-for-jenkins-api/" rel="prev" title="持续集成：Jenkins API简单使用">
+      <i class="fa fa-chevron-left"></i> 持续集成：Jenkins API简单使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/performance-monitoring-for-server-with-prometheus/" rel="next" title="系统性能监控：Prometheus + Grafana 监控服务器性能">
+      系统性能监控：Prometheus + Grafana 监控服务器性能 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nmap%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Nmap简介及安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nmap-%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">Nmap 特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nmap%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">Nmap安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos7"><span class="nav-number">1.2.1.</span> <span class="nav-text">centos7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">1.2.2.</span> <span class="nav-text">Windows</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nmap%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">Nmap命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%AB%E6%8F%8F%E5%8D%95%E4%B8%AA%E4%B8%BB%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">扫描单个主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%AB%E6%8F%8F%E5%A4%9A%E4%B8%AA%E4%B8%BB%E6%9C%BA"><span class="nav-number">2.2.</span> <span class="nav-text">扫描多个主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%90%E7%A7%98%E6%89%AB%E6%8F%8F-Stealth-scan"><span class="nav-number">2.3.</span> <span class="nav-text">隐秘扫描(Stealth scan)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E6%89%AB%E6%8F%8F"><span class="nav-number">2.4.</span> <span class="nav-text">版本扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8E%A2%E6%B5%8B"><span class="nav-number">2.5.</span> <span class="nav-text">操作系统探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-number">2.6.</span> <span class="nav-text">端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E6%89%AB%E6%8F%8F"><span class="nav-number">2.7.</span> <span class="nav-text">读取文件扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%AB%E6%8F%8F%E6%97%A5%E5%BF%97"><span class="nav-number">2.8.</span> <span class="nav-text">扫描日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSE%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">NSE脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSE%E8%84%9A%E6%9C%AC%E7%B1%BB%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">NSE脚本类别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSE%E8%84%9A%E6%9C%AC%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.</span> <span class="nav-text">NSE脚本示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#discovery"><span class="nav-number">3.2.1.</span> <span class="nav-text">discovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auth"><span class="nav-number">3.2.2.</span> <span class="nav-text">auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brute"><span class="nav-number">3.2.3.</span> <span class="nav-text">brute</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Zenmap%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">Zenmap可视化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

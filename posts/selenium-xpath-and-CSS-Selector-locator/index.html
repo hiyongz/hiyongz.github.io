@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Xpath 和 CSS Selector简介CSS SelectorCSS Selector和Xpath都可以用来表示XML文档中的位置。CSS (Cascading Style Sheets)是一种样式表语言，是所有浏览器内置的，用于描述以HTML或XML编写的文档的外观和样式。CSS Selector用于选择样式化的元素，所以理论上前端人员可以定位 DOM 节点并设置样式，那么对于测试人员这些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web自动化测试 | xpath &amp; CSS Selector定位">
+<meta property="og:url" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="Xpath 和 CSS Selector简介CSS SelectorCSS Selector和Xpath都可以用来表示XML文档中的位置。CSS (Cascading Style Sheets)是一种样式表语言，是所有浏览器内置的，用于描述以HTML或XML编写的文档的外观和样式。CSS Selector用于选择样式化的元素，所以理论上前端人员可以定位 DOM 节点并设置样式，那么对于测试人员这些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/1.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/3.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/4.png">
+<meta property="article:published_time" content="2020-09-16T11:30:36.000Z">
+<meta property="article:modified_time" content="2021-02-23T12:13:44.641Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="元素定位">
+<meta property="article:tag" content="selenium">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/1.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Web自动化测试 | xpath & CSS Selector定位 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web自动化测试 | xpath & CSS Selector定位
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-16 19:30:36" itemprop="dateCreated datePublished" datetime="2020-09-16T19:30:36+08:00">2020-09-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Web自动化测试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/selenium-xpath-and-CSS-Selector-locator/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/selenium-xpath-and-CSS-Selector-locator/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Xpath-和-CSS-Selector简介"><a href="#Xpath-和-CSS-Selector简介" class="headerlink" title="Xpath 和 CSS Selector简介"></a>Xpath 和 CSS Selector简介</h1><h2 id="CSS-Selector"><a href="#CSS-Selector" class="headerlink" title="CSS Selector"></a>CSS Selector</h2><p>CSS Selector和Xpath都可以用来表示XML文档中的位置。CSS (Cascading Style Sheets)是一种样式表语言，是所有浏览器内置的，用于描述以HTML或XML编写的文档的外观和样式。CSS Selector用于选择样式化的元素，所以理论上前端人员可以定位 DOM 节点并设置样式，那么对于测试人员这些元素也可以定位到。<br><a id="more"></a></p>
+<h2 id="XPath"><a href="#XPath" class="headerlink" title="XPath"></a>XPath</h2><p>XPath是XML路径语言，是一种查询语言，使用路径表达式浏览XML文档中的元素和属性。XPath标准语法如下：</p>
+<p><strong>Xpath=//tagname[@attribute=’value’]</strong></p>
+<ul>
+<li>\// : 选择当前节点</li>
+<li>Tagname: 节点标签名</li>
+<li>@: 选择属性</li>
+<li>Attribute: 节点属性名</li>
+<li>Value: 属性值</li>
+</ul>
+<p>XPath有绝对定位和相对定位两种，绝对定位使用绝对路径，缺点是路径太长，只要一个节点变动就无法定位。以单斜杠（/）开始，表示从根节点开始选择元素。下面是页面<a target="_blank" rel="noopener" href="https://www.baidu.com/上“百度一下”按钮的绝对路径：">https://www.baidu.com/上“百度一下”按钮的绝对路径：</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;html&#x2F;body&#x2F;div[1]&#x2F;div[1]&#x2F;div[5]&#x2F;div[1]&#x2F;div&#x2F;form&#x2F;span[2]&#x2F;input</span><br></pre></td></tr></table></figure>
+<p><img src="1.png" alt="img"></p>
+<p>相对路径以双斜杠（//）开始，可以从HTML文档的任何位置开始，“百度一下”按钮的相对路径可以表示如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;input[@id&#x3D;&quot;su&quot;]</span><br></pre></td></tr></table></figure>
+<h2 id="Xpath-VS-CSS-Selector"><a href="#Xpath-VS-CSS-Selector" class="headerlink" title="Xpath VS. CSS Selector"></a>Xpath VS. CSS Selector</h2><p>CSS Selector和Xpath几乎可以定位到所有Web元素（HTML和XML文档元素，Android应用的层级结构使用xml编写），它们的主要差异包括：</p>
+<ol>
+<li>XPath通过遍历的方式从XML文档中选择节点，CSS Selector是一种匹配模式定位，因此CSS Selector比 XPath 执行效率更高。</li>
+<li>Xpath可以通过文本来定位，而CSS Selector不能；</li>
+<li>Xpath可以通过子节点来定位父节点，CSS Selector是前向的，不能利用子节点定位父节点。</li>
+<li>CSS Selector语法相比Xpath更加简洁</li>
+</ol>
+<h1 id="Xpath-和-CSS-Selector元素定位"><a href="#Xpath-和-CSS-Selector元素定位" class="headerlink" title="Xpath 和 CSS Selector元素定位"></a>Xpath 和 CSS Selector元素定位</h1><p>接下来对比一下这两种方法的语法差异，节点的定义我们规定如下：</p>
+<p><img src="2.png" alt="img"></p>
+<h2 id="儿子元素定位"><a href="#儿子元素定位" class="headerlink" title="儿子元素定位"></a>儿子元素定位</h2><p>xpath使用‘/’，CSS Selector使用‘&gt;’</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Xpath</th>
+<th>CSS Selector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语法</td>
+<td>//element/element</td>
+<td>element&gt;element</td>
+</tr>
+<tr>
+<td>示例</td>
+<td>//div/a</td>
+<td>div &gt; a</td>
+</tr>
+<tr>
+<td>描述</td>
+<td>选择父元素为 \<div> 元素的所有 \<a> 元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>还可以使用XPath Axes（轴）<strong>child</strong> 来定位子元素</p>
+<p>XPATH:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//div/child::*   <span class="comment"># 选择父元素为 &lt;div&gt; 元素的所有儿子元素</span></span><br><span class="line">//div/child::a  <span class="comment"># 选择父元素为 &lt;div&gt; 元素的所有&lt;a&gt;元素</span></span><br></pre></td></tr></table></figure>
+<p>CSS Selector:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div &gt; a:nth-child(<span class="number">2</span>) <span class="comment"># 选择父元素为 &lt;div&gt; 元素的第二个&lt;a&gt;元素</span></span><br><span class="line">div &gt; a:nth-last-child(<span class="number">2</span>) <span class="comment"># 选择父元素为 &lt;div&gt; 元素的倒数第二个&lt;a&gt;元素</span></span><br><span class="line">div &gt; a:last-child <span class="comment"># 选择父元素为 &lt;div&gt; 元素的最后一个&lt;a&gt;元素</span></span><br><span class="line">div &gt; a:first-child <span class="comment"># 选择父元素为 &lt;div&gt; 元素的第一个&lt;a&gt;元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="子孙元素定位"><a href="#子孙元素定位" class="headerlink" title="子孙元素定位"></a>子孙元素定位</h2><p>xpath使用‘//’，CSS Selector使用空格</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Xpath</strong></th>
+<th><strong>CSS Selector</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语法</strong></td>
+<td>//element//element</td>
+<td>element element</td>
+</tr>
+<tr>
+<td><strong>示例</strong></td>
+<td>//div//a</td>
+<td>div a</td>
+</tr>
+<tr>
+<td><strong>描述</strong></td>
+<td>选择 \<div> 元素内部的所有 \<a> 元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>还可以使用XPath Axes（轴）<strong>descendant</strong> 来定位子孙元素</p>
+<p>XPATH:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//div/descendant::*   <span class="comment"># 选择祖先元素为 &lt;div&gt; 元素的所有子孙元素</span></span><br><span class="line">//div/descendant::a  <span class="comment"># 选择祖先元素为 &lt;div&gt; 元素的所有&lt;a&gt;元素     </span></span><br></pre></td></tr></table></figure>
+<p>CSS Selector使用空格定位子孙元素后进行选择:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div a:nth-child(<span class="number">2</span>) <span class="comment"># 选择祖先元素为 &lt;div&gt; 元素的第二个&lt;a&gt;元素</span></span><br><span class="line">div a:nth-last-child(<span class="number">2</span>) <span class="comment"># 选择祖先元素为 &lt;div&gt; 元素的倒数第二个&lt;a&gt;元素</span></span><br><span class="line">div a:last-child <span class="comment"># 选择祖先元素为 &lt;div&gt; 元素的最后一个&lt;a&gt;元素</span></span><br><span class="line">div a:first-child <span class="comment"># 选择祖先元素为 &lt;div&gt; 元素的第一个&lt;a&gt;元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="邻居节点定位"><a href="#邻居节点定位" class="headerlink" title="邻居节点定位"></a>邻居节点定位</h2><p>在同一个父节点下，定位下一个相邻节点</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Xpath</strong></th>
+<th><strong>CSS Selector</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语法</strong></td>
+<td>//element/following-sibling::element</td>
+<td>element + element</td>
+</tr>
+<tr>
+<td><strong>示例</strong></td>
+<td>//div/following-sibling::a</td>
+<td>div + a</td>
+</tr>
+<tr>
+<td><strong>描述</strong></td>
+<td>选择紧接在 \<div> 元素之后的所有 \<p> 元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Xpath可以定位当前节点前面的邻居节点，CSS Selector不能</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//*element/preceding-sibling::element</span><br></pre></td></tr></table></figure>
+<h2 id="父元素、祖先元素定位"><a href="#父元素、祖先元素定位" class="headerlink" title="父元素、祖先元素定位"></a>父元素、祖先元素定位</h2><p>CSS Selector是前向的，不能利用子节点定位父节点</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>..</td>
+<td>一个点”.“表示选取当前节点，两个点”..“表示选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td>ancestor</td>
+<td>当前节点祖先元素（父、祖父…）</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>当前节点的父节点</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Id定位"><a href="#Id定位" class="headerlink" title="Id定位"></a>Id定位</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Xpath</strong></th>
+<th><strong>CSS Selector</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语法</strong></td>
+<td>//*[@id=’example’]</td>
+<td>#example</td>
+</tr>
+<tr>
+<td><strong>示例</strong></td>
+<td>//*[@id=’uesrname’]</td>
+<td>#uesrname</td>
+</tr>
+<tr>
+<td><strong>描述</strong></td>
+<td>选择id=’uesrname’的元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Class定位"><a href="#Class定位" class="headerlink" title="Class定位"></a>Class定位</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Xpath</strong></th>
+<th><strong>CSS Selector</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语法</strong></td>
+<td>//*[@class=’example’]</td>
+<td>.example</td>
+</tr>
+<tr>
+<td><strong>示例</strong></td>
+<td>//*[@class=’uesrname’]</td>
+<td>.uesrname</td>
+</tr>
+<tr>
+<td><strong>描述</strong></td>
+<td>选择class=’uesrname’的元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="属性值定位"><a href="#属性值定位" class="headerlink" title="属性值定位"></a>属性值定位</h2><p>没有Id和Class的情况下，可以使用其它属性值定位，比如name、type等。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Xpath</strong></th>
+<th><strong>CSS Selector</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语法</strong></td>
+<td>//*[@attribute=’value’]</td>
+<td>[attribute=value]</td>
+</tr>
+<tr>
+<td><strong>示例</strong></td>
+<td>//*[@name=’uesrname’]</td>
+<td>[name=’username’]</td>
+</tr>
+<tr>
+<td><strong>描述</strong></td>
+<td>选择属性值<em>name=’uesrname’的</em>元素。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>xpath可以使用 ‘and’ 或者 ‘or’ 连接两个属性：</p>
+<p>XPATH：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//<span class="built_in">input</span>[@name=<span class="string">&#x27;login&#x27;</span><span class="keyword">and</span> @<span class="built_in">type</span>=<span class="string">&#x27;submit&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>CSS Selector：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">input</span>[name=<span class="string">&#x27;login&#x27;</span>][<span class="built_in">type</span>=<span class="string">&#x27;submit&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>CSS Selector可以进行子字符串匹配进行定位:</p>
+<p>^= 匹配前缀</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">id</span>^=<span class="string">&#x27;id_prefix_&#x27;</span>] <span class="comment"># id前缀为‘id_prefix_’的元素</span></span><br></pre></td></tr></table></figure>
+<p>$= 匹配后缀</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">id</span>$=<span class="string">&#x27;_id_sufix&#x27;</span>] <span class="comment"># id后缀为‘_id_sufix’的元素</span></span><br></pre></td></tr></table></figure>
+<p>*= 包含某个字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">id</span>*=<span class="string">&#x27;id_pattern&#x27;</span>] <span class="comment"># id包含‘id_pattern’的元素</span></span><br></pre></td></tr></table></figure>
+<h2 id="Xpath-Contains-方法"><a href="#Xpath-Contains-方法" class="headerlink" title="Xpath Contains()方法"></a>Xpath Contains()方法</h2><p>Contains()方法允许通过部分文本来定位查找元素，CSS Selector不支持这种用法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Xpath = //*[contains(@<span class="built_in">type</span>,<span class="string">&#x27;partial_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[contains(@name,<span class="string">&#x27;partial_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[contains(@class,&#x27;partial_text&#x27;)]</span><br><span class="line">Xpath = //*[contains(@<span class="built_in">id</span>,<span class="string">&#x27;partial_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[contains(text(),<span class="string">&#x27;partial_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[contains(@href,<span class="string">&#x27;partial_text&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+<h2 id="Xpath-Starts-with-方法"><a href="#Xpath-Starts-with-方法" class="headerlink" title="Xpath Starts-with()方法"></a>Xpath Starts-with()方法</h2><p>查找属性值以特定文本开始的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@<span class="built_in">type</span>,<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@name,<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-with(@class,&#x27;start_text&#x27;)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@<span class="built_in">id</span>,<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(text(),<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@href,<span class="string">&#x27;start_text&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+<h2 id="Xpath-Text-方法"><a href="#Xpath-Text-方法" class="headerlink" title="Xpath Text()方法"></a>Xpath Text()方法</h2><p>Text()方法基于web元素文本来进行定位</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Xpath = //*[text()=<span class="string">&#x27;text_value&#x27;</span>]   </span><br></pre></td></tr></table></figure>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="子孙元素定位-1"><a href="#子孙元素定位-1" class="headerlink" title="子孙元素定位"></a>子孙元素定位</h2><p>百度一下”text“，点击<strong>”资讯“</strong></p>
+<p><img src="3.png" alt="img"></p>
+<p>Xpath：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//*[@<span class="built_in">id</span>=<span class="string">&quot;s_tab&quot;</span>]/descendant::a[<span class="number">1</span>]</span><br><span class="line">//*[@<span class="built_in">id</span>=<span class="string">&quot;s_tab&quot;</span>]/child::*[<span class="number">1</span>]/a[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>CSS selector：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#s_tab a:nth-child(2)</span></span><br><span class="line"><span class="comment">#s_tab a:nth-last-child(9)</span></span><br></pre></td></tr></table></figure>
+<p>python测试代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_css</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.driver.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">    self.driver.find_element_by_id(<span class="string">&quot;kw&quot;</span>).send_keys(<span class="string">&quot;test&quot;</span>)        </span><br><span class="line">    self.driver.find_element_by_id(<span class="string">&quot;su&quot;</span>).click()        </span><br><span class="line">    <span class="comment"># element = self.driver.find_element_by_css_selector(&quot;#s_tab a:nth-child(2)&quot;)</span></span><br><span class="line">    <span class="comment"># element = self.driver.find_element_by_css_selector(&#x27;#s_tab a:nth-last-child(9)&#x27;)</span></span><br><span class="line">    element = self.driver.find_element_by_xpath(<span class="string">&#x27;//*[@id=&quot;s_tab&quot;]/descendant::a[1]&#x27;</span>)        </span><br><span class="line">    element.click()</span><br><span class="line">    sleep(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="邻居节点定位-1"><a href="#邻居节点定位-1" class="headerlink" title="邻居节点定位"></a>邻居节点定位</h2><p>点击<strong>”资讯“</strong>下一个邻居节点<strong>”视频“</strong></p>
+<p>xpath</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//*[@<span class="built_in">id</span>=<span class="string">&quot;s_tab&quot;</span>]/descendant::a[<span class="number">1</span>]/following-sibling::a[<span class="number">1</span>]</span><br><span class="line">//*[@<span class="built_in">id</span>=<span class="string">&quot;s_tab&quot;</span>]/child::*[<span class="number">1</span>]/a[<span class="number">1</span>]/following-sibling::a[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>CSS selector：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#s_tab a:nth-child(2) + a</span></span><br><span class="line"><span class="comment">#s_tab a:nth-last-child(9) + a</span></span><br></pre></td></tr></table></figure>
+<p>python测试代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_css2</span>(<span class="params">self</span>):</span>   </span><br><span class="line">    self.driver.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">    self.driver.find_element_by_id(<span class="string">&quot;kw&quot;</span>).send_keys(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    self.driver.find_element_by_id(<span class="string">&quot;su&quot;</span>).click()   </span><br><span class="line">    <span class="comment"># element = self.driver.find_element_by_css_selector(&#x27;#s_tab a:nth-child(2) + a&#x27;)   </span></span><br><span class="line">    element = self.driver.find_element_by_xpath(<span class="string">&#x27;//*@id=&quot;s_tab&quot;]/descendant::a[1]/following-sibling::a[1]&#x27;</span>)   </span><br><span class="line">    element.click()   </span><br><span class="line">    sleep(<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Xpath-Contains-、Starts-with-、Text-定位"><a href="#Xpath-Contains-、Starts-with-、Text-定位" class="headerlink" title="Xpath Contains()、Starts-with()、Text()定位"></a>Xpath Contains()、Starts-with()、Text()定位</h2><p>测试页面：<a target="_blank" rel="noopener" href="http://sahitest.com/demo/linkTest.htm">http://sahitest.com/demo/linkTest.htm</a></p>
+<p>点击”<a target="_blank" rel="noopener" href="http://sahitest.com/demo/linkByContent.htm">linkByContent</a>“</p>
+<p><img src="4.png" alt="img"></p>
+<p>xpath语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//*[contains(@href,<span class="string">&quot;Content&quot;</span>)]</span><br><span class="line">//*[starts-<span class="keyword">with</span>(@href,<span class="string">&quot;linkByC&quot;</span>)]</span><br><span class="line">//*[contains(text(),<span class="string">&quot;Content&quot;</span>)]</span><br><span class="line">//*[text()=<span class="string">&quot;linkByContent&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>python测试代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_css2</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.driver.get(<span class="string">&quot;http://sahitest.com/demo/linkTest.htm&quot;</span>)</span><br><span class="line">    <span class="comment"># element = self.driver.find_element_by_xpath(&#x27;//*[contains(@href,&quot;Content&quot;)]&#x27;)</span></span><br><span class="line">    <span class="comment"># element = self.driver.find_element_by_xpath(&#x27;//*[starts-with(@href,&quot;linkByC&quot;)]&#x27;)</span></span><br><span class="line">    <span class="comment"># element = self.driver.find_element_by_xpath(&#x27;//*[contains(text(),&quot;Content&quot;)]&#x27;)</span></span><br><span class="line">    element = self.driver.find_element_by_xpath(<span class="string">&#x27;//*[text()=&quot;linkByContent&quot;]&#x27;</span>)</span><br><span class="line">    element.click()</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Xpath几乎可以定位到所有Web元素，CSS Selector效率更高，且代码简洁，但有些元素可能无法定位，特别是需要通过子元素来定位的父元素，或者需要通过文本定位的元素。</p>
+<p>在实际使用中，按照自己的实际情况来选择即可，CSS Selector理论上执行效率更高，但他们的性能差异不是很大，在几毫秒或者几十毫秒级别。这两种定位方法除了本文介绍的以外，还有更多其它高级语法，可以参考官方文档。</p>
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>Web自动化测试 | xpath & CSS Selector定位</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/selenium-xpath-and-CSS-Selector-locator/" title="Web自动化测试 | xpath & CSS Selector定位">https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" rel="tag"># 元素定位</a>
+              <a href="/tags/selenium/" rel="tag"># selenium</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/selenium-browsers/" rel="prev" title="Web自动化测试 | 多浏览器测试">
+      <i class="fa fa-chevron-left"></i> Web自动化测试 | 多浏览器测试
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/selenium-javascript/" rel="next" title="Web自动化测试 | 执行JavaScript脚本">
+      Web自动化测试 | 执行JavaScript脚本 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath-%E5%92%8C-CSS-Selector%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Xpath 和 CSS Selector简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Selector"><span class="nav-number">1.1.</span> <span class="nav-text">CSS Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath"><span class="nav-number">1.2.</span> <span class="nav-text">XPath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-VS-CSS-Selector"><span class="nav-number">1.3.</span> <span class="nav-text">Xpath VS. CSS Selector</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath-%E5%92%8C-CSS-Selector%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">Xpath 和 CSS Selector元素定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%84%BF%E5%AD%90%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.1.</span> <span class="nav-text">儿子元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.2.</span> <span class="nav-text">子孙元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.3.</span> <span class="nav-text">邻居节点定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B6%E5%85%83%E7%B4%A0%E3%80%81%E7%A5%96%E5%85%88%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.4.</span> <span class="nav-text">父元素、祖先元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Id%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.5.</span> <span class="nav-text">Id定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.6.</span> <span class="nav-text">Class定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%80%BC%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.7.</span> <span class="nav-text">属性值定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Contains-%E6%96%B9%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">Xpath Contains()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Starts-with-%E6%96%B9%E6%B3%95"><span class="nav-number">2.9.</span> <span class="nav-text">Xpath Starts-with()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Text-%E6%96%B9%E6%B3%95"><span class="nav-number">2.10.</span> <span class="nav-text">Xpath Text()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D-1"><span class="nav-number">3.1.</span> <span class="nav-text">子孙元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E5%AE%9A%E4%BD%8D-1"><span class="nav-number">3.2.</span> <span class="nav-text">邻居节点定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Contains-%E3%80%81Starts-with-%E3%80%81Text-%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.3.</span> <span class="nav-text">Xpath Contains()、Starts-with()、Text()定位</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

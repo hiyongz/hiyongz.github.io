@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Android调试桥(ADB, Android Debug Bridge)是一个Android命令行工具，包含在SDK 平台工具包中，adb可以用于连接Android设备，或者模拟器，实现对设备的控制，比如安装和调试应用。和Appium一样，adb也是基于C&#x2F;S架构实现的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App自动化测试 | Android ADB原理及常用命令">
+<meta property="og:url" content="https://hiyongz.github.io/posts/appium-adb/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="Android调试桥(ADB, Android Debug Bridge)是一个Android命令行工具，包含在SDK 平台工具包中，adb可以用于连接Android设备，或者模拟器，实现对设备的控制，比如安装和调试应用。和Appium一样，adb也是基于C&#x2F;S架构实现的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/appium-adb/adb.jpg">
+<meta property="og:image" content="https://hiyongz.github.io/posts/appium-adb/adb2.jpg">
+<meta property="og:image" content="https://hiyongz.github.io/posts/appium-adb/adb_pull.png">
+<meta property="article:published_time" content="2020-11-02T13:22:00.000Z">
+<meta property="article:modified_time" content="2021-02-15T05:58:47.924Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="adb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/appium-adb/adb.jpg">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/appium-adb/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>App自动化测试 | Android ADB原理及常用命令 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/appium-adb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          App自动化测试 | Android ADB原理及常用命令
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-02 21:22:00" itemprop="dateCreated datePublished" datetime="2020-11-02T21:22:00+08:00">2020-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">App自动化测试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/appium-adb/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/appium-adb/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Android调试桥(ADB, Android Debug Bridge)是一个Android命令行工具，包含在SDK 平台工具包中，adb可以用于连接Android设备，或者模拟器，实现对设备的控制，比如安装和调试应用。和Appium一样，adb也是基于C/S架构实现的。<br><a id="more"></a></p>
+<h1 id="一、ADB运行原理"><a href="#一、ADB运行原理" class="headerlink" title="一、ADB运行原理"></a>一、ADB运行原理</h1><p>adb分为三个部分：PC上的adb client，adb server和手机（也可能是PC上的模拟器）上的adb daemon。这是一个<strong>多多连接</strong>的设计。即一台PC可以连接多个手机，一台手机也可以连接多个PC。<br><img src="adb.jpg" alt="img"></p>
+<ol>
+<li><strong>Client本质上就是Shell</strong>，用来发送命令给<strong>Server</strong>。发送命令时，首先检测PC上有没有启动Server，如果没有Server，则自动启动一个Server，绑定 TCP 的 5037 端口，然后将命令发送到Server，并不关心命令发送过去以后会怎样。</li>
+<li><strong>ADB Server</strong>：运行在PC上的后台程序，目的是检测USB接口何时连接或者移除设备。ADB Server维护着一个“已连接的设备的链表”，并且为每一个设备标记了一个状态：<strong>offline，bootloader，recovery或者online</strong>；Server一直在做一些循环和等待，，监听从 clients 发来的命令，协调client和Server还有daemon之间的通信。</li>
+<li><strong>ADB Daemon</strong>：程序“adbd”作为一个<strong>后台进程</strong>在Android设备或模拟器系统中运行。它的作用是<u>连接ADB服务器</u>，并且为运行在主机上的客户端提供一些服务；</li>
+</ol>
+<p>Client和Server之间通过<strong>TCP/IP</strong>通信，Server侦听本机的<strong>5037端口</strong>，Client试图去连接这个端口。基于ADB的工具有 DDMS 、monkey 测试等</p>
+<ul>
+<li>adb源码：<a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/system/core/+/refs/heads/android10-c2f2-release/adb/">https://android.googlesource.com/platform/system/core/+/refs/heads/android10-c2f2-release/adb/</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nao | findstr 5037</span><br></pre></td></tr></table></figure>
+<p><img src="adb2.jpg" alt="img"></p>
+<h1 id="二、ADB常用命令"><a href="#二、ADB常用命令" class="headerlink" title="二、ADB常用命令"></a>二、ADB常用命令</h1><h2 id="1-adb-server启动和连接"><a href="#1-adb-server启动和连接" class="headerlink" title="1. adb server启动和连接"></a>1. adb server启动和连接</h2><ul>
+<li>启动 adb server  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb start-server </span><br></pre></td></tr></table></figure></li>
+<li>停止 adb server  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb kill-server</span><br></pre></td></tr></table></figure></li>
+<li><p>指定 adb server 的网络端口<adb默认端口为5037></p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb -P &lt;port&gt; start-server </span><br></pre></td></tr></table></figure>
+<p>在发送adb命令时，如果没有pc没有启动Server，则会自动启动一个Server，然后将命令发送到Server。</p>
+</li>
+<li><p>通过adb usb打开设备上的tcpip服务并绑定一个端口</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb tcpip 5555</span><br><span class="line">adb -s 611DKBQC22SH2 tcpip 5555  # 设备在 5555 端口监听 TCP/IP 连接</span><br></pre></td></tr></table></figure>
+<p>无线连接要将 Android 设备与将运行 adb 的电脑连接到<strong>同一个局域网</strong></p>
+</li>
+<li><p>ADB Client通过命令adb connect ip连接远程的终端</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb connect 127.0.0.1:62001 <span class="comment">#夜游神模拟器</span></span><br><span class="line">adb connect 127.0.0.1:7555 <span class="comment">#网易mumu模拟器</span></span><br><span class="line">adb disconnect &lt;device-ip-address&gt; <span class="comment"># 断开连接</span></span><br></pre></td></tr></table></figure>
+<p><strong>USB连接</strong><br>开启Android 设备的开发者选项和 USB 调试模式</p>
+</li>
+</ul>
+<h2 id="2-adb常用命令"><a href="#2-adb常用命令" class="headerlink" title="2. adb常用命令"></a>2. adb常用命令</h2><ul>
+<li>以 root 权限运行 adbd  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb root </span><br><span class="line">adb -s 611DKBQC22SH2 root</span><br></pre></td></tr></table></figure></li>
+<li>查看 adb 版本  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb version</span><br></pre></td></tr></table></figure></li>
+<li>查看设备名称  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure></li>
+<li>重启手机  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb reboot</span><br></pre></td></tr></table></figure></li>
+<li>查看appPackage和appActivity  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line">adb logcat | findstr -i displayed <span class="comment"># 打印手机日志</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">adb shell dumpsys activity</span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line">C:\Users\admin&gt; adb shell</span><br><span class="line">root@shamu:/ <span class="comment"># dumpsys activity | grep kaoyan</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line">adb shell dumpsys activity top</span><br><span class="line"><span class="comment"># 5</span></span><br><span class="line">adb shell dumpsys activity|findstr mFocusedActivity <span class="comment"># 进入APP，得到APP名</span></span><br><span class="line"><span class="comment"># 6</span></span><br><span class="line">adb shell dumpsys window windows|findstr <span class="string">&quot;Current&quot;</span></span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line">adb shell pm list packages <span class="comment">#所有应用列表</span></span><br><span class="line">adb shell pm list packages -s <span class="comment"># 系统应用</span></span><br><span class="line">adb shell pm list packages -3 <span class="comment"># 第三方应用</span></span><br><span class="line">adb shell pm list packages smart <span class="comment"># 包名包含smart字符串的应用</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>安装卸载apk包<br>模拟器可以直接把安装包拖入模拟器进行安装</p>
+<p>   adb安装卸载方法：</p>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">adb uninstall 包名</span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">adb install app.apk</span><br><span class="line">adb install -r app.apk <span class="comment"># 强制安装</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-adb-模拟控制手机"><a href="#3-adb-模拟控制手机" class="headerlink" title="3. adb 模拟控制手机"></a>3. adb 模拟控制手机</h2><h3 id="拉起、停止Activity"><a href="#拉起、停止Activity" class="headerlink" title="拉起、停止Activity"></a>拉起、停止Activity</h3><p>adb shell am start [options] <INTENT> ：调起 Activity<br>adb shell am force-stop <packagename> ： 强制停止应用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start -n com.tenda.smarthome.app/.activity.main.MainActivity <span class="comment"># 打开smarthome APP</span></span><br><span class="line">adb shell am force-stop com.tenda.smarthome.app <span class="comment"># 强制停止应用</span></span><br><span class="line">adb shell pm clear &lt;packagename&gt;  <span class="comment"># 清除应用数据与缓存</span></span><br><span class="line">adb shell am start -a android.intent.action.VIEW -d https://www.baidu.com <span class="comment"># 打开网页</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="模拟按键"><a href="#模拟按键" class="headerlink" title="模拟按键"></a>模拟按键</h3><p>adb shell input keyevent <keycode> 模拟按键<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">adb shell input keyevent 3 <span class="comment"># 按下HOME 键</span></span><br><span class="line">adb shell input keyevent 4 <span class="comment"># 按下返回键</span></span><br><span class="line"></span><br><span class="line">adb shell input keyevent 26 <span class="comment"># 按下电源键</span></span><br><span class="line">adb shell input keyevent 82 <span class="comment"># 按下菜单键</span></span><br><span class="line"></span><br><span class="line">adb shell input keyevent 223 <span class="comment"># 熄灭屏幕</span></span><br><span class="line">adb shell input keyevent 224 <span class="comment"># 点亮屏幕</span></span><br><span class="line"></span><br><span class="line">adb shell input keyevent 67 <span class="comment"># 删除</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="文本框输入"><a href="#文本框输入" class="headerlink" title="文本框输入"></a>文本框输入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell input text <span class="string">&quot;text&quot;</span> <span class="comment"># 向文本框中输入文字，不支持中文</span></span><br></pre></td></tr></table></figure>
+<h3 id="点击"><a href="#点击" class="headerlink" title="点击"></a>点击</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell input tap 458 573 根据坐标点击</span><br></pre></td></tr></table></figure>
+<h3 id="滑动"><a href="#滑动" class="headerlink" title="滑动"></a>滑动</h3><p>adb shell input swipe <x1> <y1> <x2> <y2> x：屏幕左到右 y：从上到下     左上角为0点-<strong>图像坐标系</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">adb shell input swipe 550 1200 550 375 <span class="comment"># 滑动解锁</span></span><br><span class="line">adb shell input swipe 700 200 100 200 <span class="comment"># 左翻页</span></span><br><span class="line">adb shell input swipe 100 200 1000 200 <span class="comment"># 右翻页</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="comment">## 4. adb文件管理（同Linux）</span></span><br><span class="line"><span class="comment">### 目录操作</span></span><br><span class="line">```bash</span><br><span class="line">C:\Users\DELL&gt;adb shell</span><br><span class="line">root@M5:/data <span class="comment"># su  提取到root权限，显示井号即可</span></span><br><span class="line">su</span><br><span class="line">root@M5:/ <span class="comment"># ls</span></span><br><span class="line">ls</span><br><span class="line">@btmtk</span><br><span class="line">acdapi</span><br><span class="line">adb</span><br><span class="line">agps_supl</span><br><span class="line">...</span><br><span class="line">root@M5:/data <span class="comment"># ls -l</span></span><br><span class="line">ls -l</span><br><span class="line">drwxrwx--- bluetooth net_bt            2019-03-01 14:26 @btmtk</span><br><span class="line">drwxrwx--- system   system            2019-03-01 14:26 acdapi</span><br><span class="line">drwx------ root     root              2019-03-01 14:26 adb</span><br><span class="line">drwxrwx--x gps      system            2019-07-19 10:49 agps_supl</span><br><span class="line">drwxrwx--- system   system            2019-03-01 14:26 amit</span><br><span class="line">drwxrwxr-x system   system            2019-07-22 09:13 anr</span><br><span class="line">drwxrwx--x system   system            2019-08-01 09:00 app</span><br><span class="line">drwx------ root     root              2019-03-01 14:26 app-asec</span><br><span class="line"></span><br><span class="line">root@M5:/data <span class="comment"># pwd   当前路径</span></span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line">/data</span><br><span class="line"></span><br><span class="line">root@M5:/data/system <span class="comment"># cd - 切换到上次目录</span></span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">/data</span><br><span class="line">root@M5:/data <span class="comment"># cd .. 切换到上级目录</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">2|root@M5:/ <span class="comment"># cd d*a </span></span><br><span class="line"><span class="built_in">cd</span> d*a</span><br><span class="line">root@M5:/data <span class="comment"># cd s*m 目录名较长时建议使用通配符&quot;*&quot;,如cd到system目录</span></span><br><span class="line"><span class="built_in">cd</span> s*m</span><br><span class="line">root@M5:/data/system <span class="comment">#</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="文件操作（同Linux）"><a href="#文件操作（同Linux）" class="headerlink" title="文件操作（同Linux）"></a>文件操作（同Linux）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rm -r crash <span class="comment"># 删除文件夹及内容</span></span><br><span class="line">rmdir <span class="comment"># 文件夹 删文件夹</span></span><br><span class="line">rm <span class="comment"># 文件 删文件</span></span><br><span class="line">cat filename <span class="comment"># cat,more less显示文件内容</span></span><br><span class="line">cp /data/data/com.android.contacts/databases/contacts_app.db /mnt/sdcard/ <span class="comment"># 复制</span></span><br><span class="line">mkdir <span class="comment"># 创建目录</span></span><br><span class="line">du <span class="comment"># 显示目录空间大小</span></span><br><span class="line">df <span class="comment"># 显示磁盘空间大小</span></span><br><span class="line">touch test.txt <span class="comment"># 创建文件</span></span><br><span class="line">ps <span class="comment"># 显示进程</span></span><br><span class="line">top <span class="comment"># 动态显示进程状态</span></span><br><span class="line">chmod 644 <span class="comment"># 改变权限</span></span><br></pre></td></tr></table></figure>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p>CTRL+C 退出shell模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@M5:/mnt/sdcard <span class="comment"># ^C</span></span><br><span class="line">C:\Users\DELL&gt;d:</span><br></pre></td></tr></table></figure></p>
+<h3 id="手机和电脑文件传输"><a href="#手机和电脑文件传输" class="headerlink" title="手机和电脑文件传输"></a>手机和电脑文件传输</h3><ul>
+<li><p>将手机文件pull到电脑</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;adb pull sdcard/cmcc_sso_config.dat  <span class="comment"># 将手机sdcard中的cmcc_sso_config.dat 文件copy到电脑D：根目录下</span></span><br><span class="line">D:\&gt;adb pull sdcard/cmcc_sso_config.dat D:\adbtest</span><br><span class="line">D:\&gt;</span><br></pre></td></tr></table></figure>
+<p>  <img src="adb_pull.png" alt="img"></p>
+<ul>
+<li>将电脑文件push到手机目录下D<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;adb push D:/adbtest/cmcc_sso_config111.dat /sdcard/ <span class="comment"># 将D:中的cmcc_sso_config111.dat copy到手机sdcard 文件夹下</span></span><br><span class="line">D:\&gt;adb shell</span><br><span class="line">root@M5:/ <span class="comment"># cd /mnt/sdcard</span></span><br><span class="line"><span class="built_in">cd</span> /mnt/sdcard</span><br><span class="line"></span><br><span class="line">root@M5:/mnt/sdcard <span class="comment"># ls *cmcc_sso_config*</span></span><br><span class="line">ls *cmcc_sso_config*</span><br><span class="line">cmcc_sso_config.dat</span><br><span class="line">cmcc_sso_config111.dat</span><br><span class="line"></span><br><span class="line">root@M5:/mnt/sdcard <span class="comment"># find /data -name &quot;cmcc_sso_config*&quot;</span></span><br><span class="line">find /data -name <span class="string">&quot;cmcc_sso_config*&quot;</span></span><br><span class="line">/data/media/0/cmcc_sso_config.dat</span><br><span class="line">/data/media/0/cmcc_sso_config111.dat</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-其它实用功能"><a href="#5-其它实用功能" class="headerlink" title="5. 其它实用功能"></a>5. 其它实用功能</h2><h3 id="屏幕截图-截图保存到SD卡里再导出"><a href="#屏幕截图-截图保存到SD卡里再导出" class="headerlink" title="屏幕截图-截图保存到SD卡里再导出"></a>屏幕截图-截图保存到SD卡里再导出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;adb shell screencap -p /sdcard/screen.png</span><br><span class="line">D:\&gt;adb pull /sdcard/screen.png</span><br><span class="line">D:\&gt;adb shell rm /sdcard/screen.png</span><br></pre></td></tr></table></figure>
+<h3 id="录制屏幕"><a href="#录制屏幕" class="headerlink" title="录制屏幕"></a>录制屏幕</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;adb shell screenrecord /sdcard/filename22.mp4</span><br><span class="line">D:\&gt;adb pull /sdcard/filename22.mp4</span><br><span class="line">D:\&gt;adb shell rm /sdcard/filename22.mp4</span><br><span class="line"></span><br><span class="line">D:\&gt;adb shell screenrecord  --time-limit 10 /sdcard/demo.mp4</span><br><span class="line">adb shell screenrecord --size 1280*720 /sdcard/demo.mp4</span><br><span class="line">adb shell screenrecord --bit-rate 6000000 /sdcard/demo.mp4</span><br></pre></td></tr></table></figure>
+<h3 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">D:\&gt;adb shell svc wifi <span class="built_in">disable</span> <span class="comment"># 关闭WiFi</span></span><br><span class="line">D:\&gt;adb shell svc wifi <span class="built_in">enable</span>  <span class="comment"># 开启WiFi</span></span><br><span class="line"></span><br><span class="line">D:\&gt;adb shell ping -w 3 8.8.8.8  <span class="comment">#  查看是否能联网</span></span><br><span class="line">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.</span><br><span class="line">--- 8.8.8.8 ping statistics ---</span><br><span class="line">1 packets transmitted, 0 received, 100% packet loss, time 0ms   </span><br><span class="line">D:\&gt;adb shell cat /data/misc/wifi/*.conf  <span class="comment"># 查看连接过的 WiFi 密码</span></span><br><span class="line">.....</span><br><span class="line">device_name=meizu_M5</span><br><span class="line">manufacturer=Meizu</span><br><span class="line">model_name=M611D</span><br><span class="line">model_number=M611D</span><br><span class="line">serial_number=611DKBQC22SH2</span><br><span class="line">device_type=10-0050F204-5</span><br><span class="line">os_version=01020300</span><br><span class="line">config_methods=physical_display virtual_push_button</span><br><span class="line">p2p_no_group_iface=1</span><br><span class="line">external_sim=1</span><br><span class="line">wowlan_triggers=disconnect</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">        ssid=<span class="string">&quot;Plug_C415&quot;</span></span><br><span class="line">        key_mgmt=NONE</span><br><span class="line">        priority=1</span><br><span class="line">        flag=1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">        ssid=<span class="string">&quot;                                &quot;</span></span><br><span class="line">        key_mgmt=NONE</span><br><span class="line">        priority=2</span><br><span class="line">        flag=1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">network=&#123;</span><br><span class="line">        ssid=<span class="string">&quot;test&quot;</span></span><br><span class="line">        psk=<span class="string">&quot;12345678&quot;</span></span><br><span class="line">        key_mgmt=WPA-PSK</span><br><span class="line">        priority=3</span><br><span class="line">        flag=1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="切换飞行模式"><a href="#切换飞行模式" class="headerlink" title="切换飞行模式"></a>切换飞行模式</h3><p>通过adb shell，输入命令，可以切换飞行模式<br>开启飞行模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global airplane_mode_on 1</span><br><span class="line">adb shell am broadcast -a android.intent.action.AIRPLANE_MODE --ez state <span class="literal">true</span></span><br></pre></td></tr></table></figure><br>关闭飞行模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell settings put global airplane_mode_on 0</span><br><span class="line">adb shell am broadcast -a android.intent.action.AIRPLANE_MODE --ez state <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="svc命令"><a href="#svc命令" class="headerlink" title="svc命令"></a>svc命令</h3><p>这个脚本在/system/bin目录下，可以用来控制电源管理，wifi开关，数据开关(就是上网流量)<br>控制usb插入的时候屏幕是否常亮<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc power stayon [<span class="literal">true</span>|<span class="literal">false</span>|usb|ac]</span><br></pre></td></tr></table></figure><br>关闭数据连接（上网流量），这个命令不会更改app的任何设置，直接在底层关闭数据连接。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc data <span class="built_in">disable</span></span><br></pre></td></tr></table></figure><br>打开上网数据连接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc data <span class="built_in">enable</span></span><br></pre></td></tr></table></figure><br>控制3g数据连接比wifi优先。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc data prefer</span><br></pre></td></tr></table></figure><br>关闭wifi 连接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc wifi <span class="built_in">disable</span></span><br></pre></td></tr></table></figure><br>开启wifi连接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc wifi <span class="built_in">enable</span></span><br></pre></td></tr></table></figure><br>设置wifi优先<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc wifi prefer</span><br></pre></td></tr></table></figure><br>上面的命令都要在shell中执行，需要root。可以用script ，然后输入这些命令做成在快捷方式放在桌面，跟那些开关软件一样方便使用。</p>
+<h3 id="安卓busybox"><a href="#安卓busybox" class="headerlink" title="安卓busybox"></a>安卓busybox</h3><p>android busybox解决adbshell命令不全</p>
+<p>安卓虽然是基于linux，但是精简了很多linux工具，很多常用的linux指令不能使用。busybox相当于一个打包的工具箱，打包了很多的常用的linux可执行文件和其依赖。安装了busybox你就可以在安卓下下载一个模拟终端然后在里面运行一些之前不能运行的指令。</p>
+<h3 id="wpa-spplicant"><a href="#wpa-spplicant" class="headerlink" title="wpa_spplicant"></a>wpa_spplicant</h3><p>wpa_supplicant本是开源项目源码，被谷歌修改后加入Android移动平台，它主要是用来支持WEP，WPA/WPA2和WAPI无线协议和加密认证的，控制漫游和无线驱动的IEEE 802.11 验证和关联。通过socket（不管是wpa_supplicant与上层还是wpa_supplicant与驱动都采用socket通讯）与驱动交互上报数据给用户，而用户可以通过socket发送命令给wpa_supplicant调动驱动来对WiFi芯片操作。 简单的说，wpa_supplicant就是WiFi驱动和用户的中转站外加对协议和加密认证的支持。</p>
+<p>wpa_supplicant工具主要包含wpa_supplicant(命令行模式，属于服务端)与wpa_cli(交互模式，属于客户端)两个程序来达到无线认证连接。通过wpa_cli来进行WiFi的配置和连接，也可以直接调用wpa_supplicant接口实现网络控制。<br>部分命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wpa_cli -i wlan0 scan   \\扫描热点</span><br><span class="line">wpa_cli -i wlan0 scan_result   \\打印热点信息</span><br><span class="line">wpa_cli -i wlan0 set_network 0 ssid  &quot;wifi_name&quot; \\配置WiFi热点的名称ssid</span><br><span class="line">wpa_cli -i wlan0 set_network 0 psk &#x27;&quot;12345678&quot;&#x27; \\配置WiFi热点的密码psk</span><br></pre></td></tr></table></figure>
+<h1 id="三、Python获取ADB返回结果"><a href="#三、Python获取ADB返回结果" class="headerlink" title="三、Python获取ADB返回结果"></a>三、Python获取ADB返回结果</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cmd = <span class="string">&quot;adb shell pm list packages smarthome&quot;</span></span><br><span class="line">result = os.popen(cmd)</span><br><span class="line">f = result.read() <span class="comment">#result只能读取一次</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;smarthome&quot;</span> <span class="keyword">in</span> f:</span><br><span class="line">    print(f)</span><br></pre></td></tr></table></figure>
+<p>ADB获取手机时间<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now_time_new</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># now_time_new = datetime.datetime.now().strftime(&#x27;%H:%M&#x27;)</span></span><br><span class="line">        <span class="comment"># print &quot;now_time_new&quot;,self.now_time_new</span></span><br><span class="line">        time_a=os.popen(<span class="string">&#x27;adb shell date &quot;+%Y-%m-%d+%H:%M:%S&quot;&#x27;</span>)</span><br><span class="line">        time_a=time_a.read()</span><br><span class="line">        time_a=time_a.strip()</span><br><span class="line">        dates=time_a.split(<span class="string">&#x27;+&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">        times=time_a.split(<span class="string">&#x27;+&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> (dates,times)</span><br></pre></td></tr></table></figure></p>
+<center><b>--THE END--<b></center>
+
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>App自动化测试 | Android ADB原理及常用命令</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/appium-adb/" title="App自动化测试 | Android ADB原理及常用命令">https://hiyongz.github.io/posts/appium-adb/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/appium-adb/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/adb/" rel="tag"># adb</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/pytest-allure-report/" rel="prev" title="Pytest测试框架（五）：pytest + allure生成测试报告">
+      <i class="fa fa-chevron-left"></i> Pytest测试框架（五）：pytest + allure生成测试报告
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/appium-locator-operate/" rel="next" title="App自动化测试 | Appium控件交互">
+      App自动化测试 | Appium控件交互 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81ADB%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">一、ADB运行原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81ADB%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">二、ADB常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-adb-server%E5%90%AF%E5%8A%A8%E5%92%8C%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">1. adb server启动和连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-adb%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">2. adb常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-adb-%E6%A8%A1%E6%8B%9F%E6%8E%A7%E5%88%B6%E6%89%8B%E6%9C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">3. adb 模拟控制手机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E8%B5%B7%E3%80%81%E5%81%9C%E6%AD%A2Activity"><span class="nav-number">2.3.1.</span> <span class="nav-text">拉起、停止Activity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%8C%89%E9%94%AE"><span class="nav-number">2.3.2.</span> <span class="nav-text">模拟按键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A1%86%E8%BE%93%E5%85%A5"><span class="nav-number">2.3.3.</span> <span class="nav-text">文本框输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E5%87%BB"><span class="nav-number">2.3.4.</span> <span class="nav-text">点击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8"><span class="nav-number">2.3.5.</span> <span class="nav-text">滑动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%EF%BC%88%E5%90%8CLinux%EF%BC%89"><span class="nav-number">2.3.6.</span> <span class="nav-text">文件操作（同Linux）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%80%E5%87%BA"><span class="nav-number">2.3.7.</span> <span class="nav-text">退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%92%8C%E7%94%B5%E8%84%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="nav-number">2.3.8.</span> <span class="nav-text">手机和电脑文件传输</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%85%B6%E5%AE%83%E5%AE%9E%E7%94%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">2.4.</span> <span class="nav-text">5. 其它实用功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE-%E6%88%AA%E5%9B%BE%E4%BF%9D%E5%AD%98%E5%88%B0SD%E5%8D%A1%E9%87%8C%E5%86%8D%E5%AF%BC%E5%87%BA"><span class="nav-number">2.4.1.</span> <span class="nav-text">屏幕截图-截图保存到SD卡里再导出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%95%E5%88%B6%E5%B1%8F%E5%B9%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">录制屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E7%BD%91"><span class="nav-number">2.4.3.</span> <span class="nav-text">联网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E9%A3%9E%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.4.4.</span> <span class="nav-text">切换飞行模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#svc%E5%91%BD%E4%BB%A4"><span class="nav-number">2.4.5.</span> <span class="nav-text">svc命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%8D%93busybox"><span class="nav-number">2.4.6.</span> <span class="nav-text">安卓busybox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wpa-spplicant"><span class="nav-number">2.4.7.</span> <span class="nav-text">wpa_spplicant</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Python%E8%8E%B7%E5%8F%96ADB%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">三、Python获取ADB返回结果</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

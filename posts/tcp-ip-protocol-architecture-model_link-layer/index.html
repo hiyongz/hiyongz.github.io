@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="TCP&#x2F;IP协议架构是通信协议的统称，常被称为TCP&#x2F;IP协议族，包括两个核心协议：TCP（传输控制协议）和IP（网际协议），TCP&#x2F;IP协议的开发始于20世纪60年代后期，早于OSI参考模型，由于TCP&#x2F;IP模型更加简洁易用，目前大多采用TCP&#x2F;IP模型。一共包括4层：应用层、传输层、网络层和网络接口层。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP协议架构介绍（一）：网络接口层">
+<meta property="og:url" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="TCP&#x2F;IP协议架构是通信协议的统称，常被称为TCP&#x2F;IP协议族，包括两个核心协议：TCP（传输控制协议）和IP（网际协议），TCP&#x2F;IP协议的开发始于20世纪60年代后期，早于OSI参考模型，由于TCP&#x2F;IP模型更加简洁易用，目前大多采用TCP&#x2F;IP模型。一共包括4层：应用层、传输层、网络层和网络接口层。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/TCP_IP.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/MAC地址.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/MAC.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/PPPoE.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/PPPoE_discovery_type.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/LCP.png">
+<meta property="article:published_time" content="2020-12-06T08:16:00.000Z">
+<meta property="article:modified_time" content="2021-02-09T09:50:34.617Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="协议">
+<meta property="article:tag" content="TCP&#x2F;IP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/TCP_IP.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>TCP/IP协议架构介绍（一）：网络接口层 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCP/IP协议架构介绍（一）：网络接口层
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-06 16:16:00" itemprop="dateCreated datePublished" datetime="2020-12-06T16:16:00+08:00">2020-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/tcp-ip-protocol-architecture-model_link-layer/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/tcp-ip-protocol-architecture-model_link-layer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>TCP/IP协议架构是通信协议的统称，常被称为<strong>TCP/IP协议族</strong>，包括两个核心协议：<strong>TCP（传输控制协议）</strong>和<strong>IP（网际协议）</strong>，TCP/IP协议的开发始于20世纪60年代后期，早于OSI参考模型，由于TCP/IP模型更加简洁易用，目前大多采用TCP/IP模型。一共包括4层：应用层、传输层、网络层和网络接口层。</p>
+<a id="more"></a>
+<p>OSI模型与TCP/IP模型：</p>
+<p><img src="TCP_IP.png" width="60%" height="60%" /></p>
+<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><p>负责0、1 比特流（0/1序列）与电压的高低之间的转换</p>
+<p>数据的单位称为<strong>比特（bit）</strong></p>
+<p>属于物理层定义的典型规范代表包括：EIA/TIA RS-232、EIA/TIA RS-449、V.35、RJ-45、fddi令牌环网等<br>OSI采纳了各种现成的协议，其中有RS-232、RS-449、X.21、V.35、ISDN、以及FDDI、IEEE802.3、IEEE802.4、和IEEE802.5的物理层协议</p>
+<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><p>负责物理层面上的互联的、节点间的通信传输（例如一个以太网项链的2个节点之间的通信）；</p>
+<p>该层的作用包括：物理地址寻址、数据的成帧、流量控制、数据的检错、重发等。在这一层，数据的单位称为<strong>帧（frame）</strong></p>
+<ul>
+<li><p><strong>封装成帧</strong>: 把网络层数据报加头和尾，封装成帧,帧头中包括源<strong>MAC地址</strong>和目的MAC地址。</p>
+</li>
+<li><p><strong>透明传输</strong>：零比特填充、转义字符。</p>
+</li>
+<li><p><strong>可靠传输</strong>：在出错率很低的链路上很少用，但是无线链路WLAN会保证可靠传输。</p>
+</li>
+<li><p><strong>差错检测(</strong>CRC)：接收者检测错误,如果发现差错，丢弃该帧。</p>
+</li>
+</ul>
+<h2 id="主要协议"><a href="#主要协议" class="headerlink" title="主要协议"></a>主要协议</h2><p>①点对点协议PPP（Point to Point Protocol）<br>②以太网（Ethernet)<br>③高级数据链路控制协议HDLC(High-Level Data Link Control)<br>④ 帧中继（Frame Relay)<br>⑤异步传输模式ATM(Asynchronous Transfer Mode)</p>
+<h2 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h2><p>MAC(Medium/Media Access Control)地址，媒体访问控制,或称为物理地址、硬件地址，48位</p>
+<p>MAC地址</p>
+<p><img src="MAC地址.png" width="60%" height="60%" /></p>
+<ul>
+<li>组织唯一标识符（OUI）由IEEE（电气和电子工程师协会）分配给厂商</li>
+<li>I/G（Individual/Group）位，如果I/G=0，则是某台设备的MAC地址，即<strong>单播地址</strong>；如果I/G=1，则是<strong>多播地址</strong>（组播+广播=多播）。</li>
+<li>G/L（Global/Local，也称为U/L位，其中U表示Universal）位，如果G/L=0，则是全局管理地址，由IEEE分配；如果G/L=1，则是本地管理地址，是网络管理员为了加强自己对网络管理而指定的地址。</li>
+</ul>
+<p>MAC帧</p>
+<p><img src="MAC.png" width="60%" height="60%" /></p>
+<blockquote>
+<p>IP地址负责表示计算机的网络层地址，网络层设备（如路由器）根据IP地址来进行操作；<br>MAC地址负责表示计算机的数据链路层地址<br>IP和MAC地址这种映射关系由<strong>ARP</strong>（Address Resolution Protocol，地址解析协议）协议完成。</p>
+</blockquote>
+<h2 id="PPPoE-协议"><a href="#PPPoE-协议" class="headerlink" title="PPPoE 协议"></a>PPPoE 协议</h2><p>基于以太网的点对点通讯协议PPPOE(Point to Point Protocol over Ethernet)</p>
+<ul>
+<li>单纯的以太网没有验证功能，也没有建立和断开连接的处理，因此无法按时计费。</li>
+<li>如果采用PPPoE管理以太网连接，就可以利用PPP的验证等功能使各家ISP可以有效地管理终端用户的使用。</li>
+<li>分成发现阶段(Discorvery)和PPP会话阶段（Session）</li>
+</ul>
+<p>报文的以太网类型:</p>
+<ul>
+<li>当值为0x8863时表示Discovery阶段或Terminate阶段。</li>
+<li>当值为0x8864时表示Session阶段。</li>
+</ul>
+<p><strong>PPPoE拨号过程</strong><br><img src="PPPoE.png" width="60%" height="60%" /></p>
+<h3 id="PPPoE-Discovery发现阶段"><a href="#PPPoE-Discovery发现阶段" class="headerlink" title="PPPoE Discovery发现阶段"></a>PPPoE Discovery发现阶段</h3><ol>
+<li>用户主机用<strong>广播</strong>的方式发出<strong>PADI </strong>(PPPOE Active Discovery Initiatio) 包，准备去获得所有可连接的接入设备（获得其MAC地址）；</li>
+<li><strong>PPPoE服务器</strong>收到PADI包后，返回<strong>PADO</strong> (PPPOE Active Discovery Offer) 作为回应；</li>
+<li>用户主机从收到的多个PADO包中，根据其名称类型名或者服务名，<strong>选择一个合适的接入设备</strong>，然后发送<strong>PADR</strong> (PPPOE Active Discovery Request) 包，<u>另外如果一个用户主机在发出PADI后在规定时间内没有收到PADO，则会重发PADI,并且加倍等待时间</u>；</li>
+<li><strong>PPPoE服务器</strong>收到PADR包后，返回<strong>PADS </strong>(PPPOE Active Discovery Session-confirmation) 包，其中包含了一个<strong>唯一session ID</strong>，双方进入PPP会话阶段。</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>报文</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x09</td>
+<td>PADI</td>
+<td>PPPoE Active Discovery Initiation</td>
+<td>PPPoE发现初始报文</td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>PADO</td>
+<td>PPPoE Active Discovery Offer</td>
+<td>PPPoE发现提供报文</td>
+</tr>
+<tr>
+<td>0x19</td>
+<td>PADR</td>
+<td>PPPoE Active Discovery Request</td>
+<td>PPPoE发现请求报文</td>
+</tr>
+<tr>
+<td>0x65</td>
+<td>PADS</td>
+<td>PPPoE Active Discovery Sessionconfirmation</td>
+<td>PPPoE发现会话确认报文</td>
+</tr>
+<tr>
+<td>0xa7</td>
+<td>PADT</td>
+<td>PPPoE Active Discovery Terminate</td>
+<td>PPPoE发现终止报文</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Discovery阶段：以太网帧的ETHER_TYPE域都设置为 <strong>0x8863</strong><br><img src="PPPoE_discovery_type.png" width="60%" height="60%" /></p>
+<h3 id="PPPoE-Session-会话阶段"><a href="#PPPoE-Session-会话阶段" class="headerlink" title="PPPoE Session 会话阶段"></a>PPPoE Session 会话阶段</h3><p><strong>1 LCP协商阶段（Link Control Protocol）</strong><br>链路协商</p>
+<ul>
+<li>LCP用于建立、拆除和监控PPP数据链路</li>
+<li>还用于链路层参数的协商，如MRU、验证方式</li>
+</ul>
+<p>协商双方互相发送一个<strong>LCP Config-Request报文</strong>，确认收到的Config-Request报文中的协商选项，根据这些选项的支持与接受情况，做出适当的<strong>回应</strong>。若<strong>两端都回应了Config-ACK</strong>，则标志LCP链路建立成功，否则会继续发送Request报文，直到对端回应了ACK报文为止。</p>
+<p><img src="LCP.png" width="60%" height="60%" /></p>
+<p><strong>2 认证阶段</strong></p>
+<p>会话双方通过<strong>LCP协商好的认证方法</strong>进行认证，如果认证通过了，才可以进行下面的网络层的协商。认证过程在链路协商结束后就进行。</p>
+<ul>
+<li><p><strong>PAP</strong>（Password Authentication Protocol，口令认证协议）</p>
+<p>PAP为两次握手协议，它通过用户名及口令来对用户进行验证。</p>
+</li>
+<li><p><strong>CHAP</strong>（Challenge Handshake Authentication Protocol，质询握手认证协议）</p>
+<p>CHAP为三次握手协议。只在网络上传输用户名，并不传输用户口令，因此它的安全性要比PAP高。</p>
+<p>Md5算法</p>
+</li>
+</ul>
+<p><strong>3 NCP协商阶段</strong></p>
+<p><strong>网络层协商：IPCP、BCP、IPv6CP等</strong></p>
+<ul>
+<li>协商PPP报文的网络层参数，如IP地址，DNS Server IP等。</li>
+<li>PPPoE用户主要通过<strong>IPCP</strong>来获取访问网络的IP地址或IP地址段，网关，DNS等。</li>
+<li>用户和接入设备对IP服务阶段的一些要求进行多次协商，以决定双方都能够接收的约定。如：IP业务阶段使用的IP压缩协议等。</li>
+<li><p>双方的协议是通过报文中包含的<strong>Option项</strong>进行协商的，每一个Option都是一个需要协商的问题。最后双方都需要对方答复Configure_Ack的同意报文。</p>
+</li>
+<li><p>IPCP的协商过程是基于<strong>PPP状态机</strong>进行协商的。</p>
+</li>
+<li>经过双方协商，通过配置请求、配置确认、配置否认等包文交换配置信息，<strong>最终由initial (或closed)状态变为Opened状态</strong>。</li>
+<li>IPCP状态变为Opened的条件必须是<strong>发送方和接收方都发送和接收过确认报文</strong>。</li>
+<li>IPCP协商过程中，协商报文可包含多个选项，即参数。</li>
+<li>各个选项的拒绝或否认都不能影响IPCP的UP，IPCP可以无选项协商，<strong>无选项协商也同样能够UP</strong>。选项有<strong>IP Address、网关、掩码</strong>等，其中IP Address是最重要的一个选项，有些厂家的实现必须这个选项得到确认，大多数厂家的实现允许这个选项为空。</li>
+</ul>
+<h3 id="PPPoE-Terminate阶段"><a href="#PPPoE-Terminate阶段" class="headerlink" title="PPPoE Terminate阶段"></a>PPPoE Terminate阶段</h3><ul>
+<li>PPP通信双方可以使用<strong>PPP协议自身</strong>来结束PPPoE会话</li>
+<li>当无法使用PPP协议结束会话时可以使用<strong>PADT</strong>（PPPoE Active Discovery Terminate）报文。</li>
+<li>进入PPPoE Session阶段后，PPPoE Client和PPPoE Server<strong>都可以通过发送PADT报文的方式来结束PPPoE连接</strong>。</li>
+<li>PADT数据包可以在会话建立以后的任意时刻单播发送。在发送或接收到PADT后，就不允许再使用该会话发送PPP流量了。</li>
+</ul>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>TCP/IP协议架构介绍（一）：网络接口层</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/tcp-ip-protocol-architecture-model_link-layer/" title="TCP/IP协议架构介绍（一）：网络接口层">https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%8F%E8%AE%AE/" rel="tag"># 协议</a>
+              <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/tcp-ip-protocol-architecture-model_transport-layer/" rel="prev" title="TCP/IP协议架构介绍（三）：传输层">
+      <i class="fa fa-chevron-left"></i> TCP/IP协议架构介绍（三）：传输层
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/tcp-ip-protocol-architecture-model%20_internet-layer/" rel="next" title="TCP/IP协议架构介绍（二）：网络层">
+      TCP/IP协议架构介绍（二）：网络层 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E5%B1%82"><span class="nav-number">1.</span> <span class="nav-text">物理层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="nav-number">2.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.1.</span> <span class="nav-text">主要协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="nav-number">2.2.</span> <span class="nav-text">MAC地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PPPoE-%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.3.</span> <span class="nav-text">PPPoE 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PPPoE-Discovery%E5%8F%91%E7%8E%B0%E9%98%B6%E6%AE%B5"><span class="nav-number">2.3.1.</span> <span class="nav-text">PPPoE Discovery发现阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPPoE-Session-%E4%BC%9A%E8%AF%9D%E9%98%B6%E6%AE%B5"><span class="nav-number">2.3.2.</span> <span class="nav-text">PPPoE Session 会话阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPPoE-Terminate%E9%98%B6%E6%AE%B5"><span class="nav-number">2.3.3.</span> <span class="nav-text">PPPoE Terminate阶段</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="UiAutomator定位用于Android APP的元素定位，使用UI Automator API（UISelector类）来搜索特定元素。 Appium将Java代码作为字符串发送到服务器实现对应用程序的交互。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App自动化测试 | Appium元素定位（二）">
+<meta property="og:url" content="https://hiyongz.github.io/posts/appium-locator-uiautomator/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="UiAutomator定位用于Android APP的元素定位，使用UI Automator API（UISelector类）来搜索特定元素。 Appium将Java代码作为字符串发送到服务器实现对应用程序的交互。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/appium-locator-uiautomator/test_uiautomator.png">
+<meta property="article:published_time" content="2020-11-27T10:06:00.000Z">
+<meta property="article:modified_time" content="2021-01-31T14:50:52.615Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="appium">
+<meta property="article:tag" content="元素定位">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/appium-locator-uiautomator/test_uiautomator.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/appium-locator-uiautomator/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>App自动化测试 | Appium元素定位（二） | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/appium-locator-uiautomator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          App自动化测试 | Appium元素定位（二）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-27 18:06:00" itemprop="dateCreated datePublished" datetime="2020-11-27T18:06:00+08:00">2020-11-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">App自动化测试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/appium-locator-uiautomator/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/appium-locator-uiautomator/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>UiAutomator定位用于Android APP的元素定位，使用UI Automator API（UISelector类）来搜索特定元素。 Appium将Java代码作为字符串发送到服务器实现对应用程序的交互。<br><a id="more"></a><br>UiAutomator是android的工作引擎，所以定位速度快。缺点是语法表达式复杂，容易写错。</p>
+<p>可参考官方文档：<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/support/test/uiautomator/UiSelector">https://developer.android.com/reference/android/support/test/uiautomator/UiSelector</a></p>
+<p>下面将介绍UiSelector类一些常用接口使用方法。</p>
+<h1 id="uiautomator定位方式"><a href="#uiautomator定位方式" class="headerlink" title="uiautomator定位方式"></a>uiautomator定位方式</h1><h2 id="通过-resource-id定位"><a href="#通过-resource-id定位" class="headerlink" title="通过 resource-id定位"></a>通过 resource-id定位</h2><ul>
+<li><code>new UiSelector().resourceld(&quot;id&quot;)</code><h2 id="通过-classname定位"><a href="#通过-classname定位" class="headerlink" title="通过 classname定位"></a>通过 classname定位</h2></li>
+<li><code>new UiSelector().className(&quot;className&quot;)</code><h2 id="通过-content-desc定位"><a href="#通过-content-desc定位" class="headerlink" title="通过 content-desc定位"></a>通过 content-desc定位</h2></li>
+<li><code>new UiSelector().description(&quot;contenet-desc属性&quot;)</code><h2 id="通过文本定位"><a href="#通过文本定位" class="headerlink" title="通过文本定位"></a>通过文本定位</h2></li>
+<li>text文本定位<ul>
+<li><code>new UiSelector().text(&quot;text文本&quot;)</code></li>
+</ul>
+</li>
+<li>textContains 模糊匹配<ul>
+<li><code>new UiSelector().textContains(&quot;包含text文本&quot;)</code></li>
+</ul>
+</li>
+<li>textStartsWith，以某个文本开头来匹配<ul>
+<li><code>new UiSelector().textStartsWith(&quot;以text文本开头&quot;)</code></li>
+</ul>
+</li>
+<li>正则表达式 textMatches 匹配<ul>
+<li><code>new UiSelector().textMatches(&quot;正则表达式&quot;)</code><h2 id="组合定位"><a href="#组合定位" class="headerlink" title="组合定位"></a>组合定位</h2></li>
+</ul>
+</li>
+<li>id与text属性组合      <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id_text = <span class="string">&#x27;resourceld(&quot;com.baidu.yuedu:id/webbooktitle&quot;).text(&quot;textname&quot;)&#x27;</span></span><br><span class="line">driver.find_element_by_android_uiautomator(id_text).click()</span><br></pre></td></tr></table></figure></li>
+<li>class与text属性组合  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class_text=<span class="string">&#x27;className(&quot;android.widget.TextView&quot;).text(&quot;textname&quot;)&#x27;</span></span><br><span class="line">driver.find_element_by_android_uiautomator(class_text).click()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="父子元素、兄弟元素定位"><a href="#父子元素、兄弟元素定位" class="headerlink" title="父子元素、兄弟元素定位"></a>父子元素、兄弟元素定位</h2><h3 id="父子关系定位-childSelector"><a href="#父子关系定位-childSelector" class="headerlink" title="父子关系定位 childSelector"></a>父子关系定位 childSelector</h3><p>通过父元素找儿子元素<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">son = <span class="string">&#x27;resourceld(&quot;com.baidu.yuedu:id/rl_tabs&quot;).childSelector(text(&quot;股票&quot;))&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="兄弟定位-fromParent"><a href="#兄弟定位-fromParent" class="headerlink" title="兄弟定位 fromParent"></a>兄弟定位 fromParent</h3><p>通过相邻的兄弟元素定位，通过兄弟元素，找到同一父级元素下的子元素<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brother = <span class="string">&#x27;resourceld(&quot;com.baidu.yuedu:id/lefttitle&quot;).fromParent(text(&quot;用户&quot;))&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="滚动查找元素"><a href="#滚动查找元素" class="headerlink" title="滚动查找元素"></a>滚动查找元素</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(newUiSelector().text(&quot;查找的文本&quot;).instance(0));&#x27;</span></span><br></pre></td></tr></table></figure>
+<h1 id="uiautomator定位实例"><a href="#uiautomator定位实例" class="headerlink" title="uiautomator定位实例"></a>uiautomator定位实例</h1><p>跟 App自动化测试 | Appium元素定位（一）的测试过程一样，判断股票价格<br>测试过程：</p>
+<ol>
+<li>打开雪球app</li>
+<li>点击搜索框</li>
+<li>输入”招商银行”</li>
+<li>选择</li>
+<li>获取股价，并判断</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">from</span> appium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestUiautomator</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup</span>(<span class="params">self</span>):</span></span><br><span class="line">        desired_caps = &#123;&#125;</span><br><span class="line">        desired_caps[<span class="string">&#x27;platformName&#x27;</span>] = <span class="string">&#x27;Android&#x27;</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;platformVersion&#x27;</span>] = <span class="string">&#x27;6.0.1&#x27;</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;deviceName&#x27;</span>] = <span class="string">&#x27;127.0.0.1:7555&#x27;</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;appPackage&#x27;</span>] = <span class="string">&#x27;com.xueqiu.android&#x27;</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;automationName&#x27;</span>] = <span class="string">&#x27;Uiautomator2&#x27;</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;appActivity&#x27;</span>] = <span class="string">&#x27;com.xueqiu.android.common.MainActivity&#x27;</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;newCommandTimeout&#x27;</span>] = <span class="number">3000</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;noReset&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;dontStopAppOnReset&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;skipDeviceInitialization&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;unicodeKeyboard&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        desired_caps[<span class="string">&#x27;resetKeybBoard&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">        self.driver = webdriver.Remote(<span class="string">&#x27;http://127.0.0.1:4723/wd/hub&#x27;</span>, desired_caps)</span><br><span class="line">        self.driver.implicitly_wait(<span class="number">15</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">teardown_method</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.quit()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_search</span>(<span class="params">self, searchkey, <span class="built_in">type</span>, price</span>):</span></span><br><span class="line">        self.driver.find_element_by_android_uiautomator(</span><br><span class="line">            <span class="string">&#x27;new UiSelector().resourceId(&quot;com.xueqiu.android:id/tv_search&quot;)&#x27;</span>).click()</span><br><span class="line">        self.driver.find_element_by_android_uiautomator(</span><br><span class="line">            <span class="string">&#x27;new UiSelector().resourceId(&quot;com.xueqiu.android:id/search_input_text&quot;)&#x27;</span>).send_keys(<span class="string">&quot;招商银行&quot;</span>)</span><br><span class="line">        self.driver.find_element_by_android_uiautomator(<span class="string">&#x27;new UiSelector().text(&quot;SH600036&quot;)&#x27;</span>).click()</span><br><span class="line">        self.driver.find_element_by_android_uiautomator(<span class="string">&#x27;new UiSelector().text(&quot;SH600036&quot;)&#x27;</span>).click()</span><br><span class="line">        current_price = self.driver.find_element_by_android_uiautomator(</span><br><span class="line">            <span class="string">&#x27;new UiSelector().resourceId(&quot;com.xueqiu.android:id/stock_current_price&quot;)&#x27;</span>).text</span><br><span class="line">        print(current_price)</span><br><span class="line">        <span class="keyword">assert</span> <span class="built_in">float</span>(current_price) &gt; <span class="number">40</span></span><br></pre></td></tr></table></figure>
+<p>执行结果：<br><img src="test_uiautomator.png" alt="img"></p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>App自动化测试 | Appium元素定位（二）</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/appium-locator-uiautomator/" title="App自动化测试 | Appium元素定位（二）">https://hiyongz.github.io/posts/appium-locator-uiautomator/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/appium-locator-uiautomator/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/appium/" rel="tag"># appium</a>
+              <a href="/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/" rel="tag"># 元素定位</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/appium-locator/" rel="prev" title="App自动化测试 | Appium元素定位（一）">
+      <i class="fa fa-chevron-left"></i> App自动化测试 | Appium元素定位（一）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/appium-android-webview/" rel="next" title="App自动化测试 | Android WebView测试">
+      App自动化测试 | Android WebView测试 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#uiautomator%E5%AE%9A%E4%BD%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">uiautomator定位方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-resource-id%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.1.</span> <span class="nav-text">通过 resource-id定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-classname%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.2.</span> <span class="nav-text">通过 classname定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-content-desc%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.3.</span> <span class="nav-text">通过 content-desc定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%96%87%E6%9C%AC%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.4.</span> <span class="nav-text">通过文本定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.5.</span> <span class="nav-text">组合定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B6%E5%AD%90%E5%85%83%E7%B4%A0%E3%80%81%E5%85%84%E5%BC%9F%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.6.</span> <span class="nav-text">父子元素、兄弟元素定位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%B6%E5%AD%90%E5%85%B3%E7%B3%BB%E5%AE%9A%E4%BD%8D-childSelector"><span class="nav-number">1.6.1.</span> <span class="nav-text">父子关系定位 childSelector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%84%E5%BC%9F%E5%AE%9A%E4%BD%8D-fromParent"><span class="nav-number">1.6.2.</span> <span class="nav-text">兄弟定位 fromParent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0"><span class="nav-number">1.7.</span> <span class="nav-text">滚动查找元素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uiautomator%E5%AE%9A%E4%BD%8D%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">uiautomator定位实例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

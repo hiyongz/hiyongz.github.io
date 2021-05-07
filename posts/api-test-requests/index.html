@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="python内置了HTTP库 urllib，可以用于发送http请求。基于Python的第三方库Requests是对urllib的再次封装，相比urllib更加简洁易用。Requests库不仅用于接口测试，还用在Python爬虫、量化交易等。本文介绍Requests库的使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="接口测试框架Requests">
+<meta property="og:url" content="https://hiyongz.github.io/posts/api-test-requests/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="python内置了HTTP库 urllib，可以用于发送http请求。基于Python的第三方库Requests是对urllib的再次封装，相比urllib更加简洁易用。Requests库不仅用于接口测试，还用在Python爬虫、量化交易等。本文介绍Requests库的使用方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/api-test-requests/requests.png">
+<meta property="article:published_time" content="2021-02-05T04:02:00.000Z">
+<meta property="article:modified_time" content="2021-02-15T05:00:59.864Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="Requests">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/api-test-requests/requests.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/api-test-requests/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>接口测试框架Requests | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/api-test-requests/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          接口测试框架Requests
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-05 12:02:00" itemprop="dateCreated datePublished" datetime="2021-02-05T12:02:00+08:00">2021-02-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">接口测试</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/api-test-requests/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/api-test-requests/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>python内置了HTTP库 urllib，可以用于发送http请求。基于Python的第三方库Requests是对urllib的再次封装，相比urllib更加简洁易用。Requests库不仅用于接口测试，还用在Python爬虫、量化交易等。本文介绍Requests库的使用方法。<br><a id="more"></a></p>
+<h1 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h1><p>HTTP接口测试涉及到以下几个方面：</p>
+<ul>
+<li>构造请求方法：get、post、put、 delete、head ……</li>
+<li>构造请求体：form、json、xml、 binary</li>
+<li>分析响应结果：status code、 response body、 json path、 xpath</li>
+</ul>
+<p>下面介绍使用Requests怎么实现这些步骤。</p>
+<h2 id="Requests安装"><a href="#Requests安装" class="headerlink" title="Requests安装"></a>Requests安装</h2><p>Github地址：<a target="_blank" rel="noopener" href="https://github.com/psf/requests">Python HTTP Requests for Humans</a><br>requests官方文档: <a target="_blank" rel="noopener" href="https://requests.readthedocs.io/zh_CN/latest/index.html">https://requests.readthedocs.io/zh_CN/latest/index.html</a></p>
+<p><img src="requests.png" alt="png"></p>
+<p>安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure></p>
+<p>http请求响应测试接口：<a target="_blank" rel="noopener" href="https://httpbin.testing-studio.com/">https://httpbin.testing-studio.com/</a><br>也可以自己本地搭建，GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/postmanlabs/httpbin">https://github.com/postmanlabs/httpbin</a></p>
+<h1 id="Requests常见接口请求方法构造"><a href="#Requests常见接口请求方法构造" class="headerlink" title="Requests常见接口请求方法构造"></a>Requests常见接口请求方法构造</h1><p>常见接口请求方法：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(<span class="string">&#x27;https://api.github.com/events&#x27;</span>) <span class="comment">#get请求</span></span><br><span class="line">r = requests.post(<span class="string">&#x27;http://httpbin.org/post&#x27;</span>, data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;) <span class="comment">#post请求</span></span><br><span class="line">r = requests.put(<span class="string">&#x27;http://httpbin.org/put&#x27;</span>, data = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;value&#x27;</span>&#125;)</span><br><span class="line">r = requests.delete(<span class="string">&#x27;http://httpbin.org/delete&#x27;</span>)</span><br><span class="line">r = requests.head(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br><span class="line">r = requests.options(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="请求目标构造"><a href="#请求目标构造" class="headerlink" title="请求目标构造"></a>请求目标构造</h2><p>请求URL<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(<span class="string">&#x27;https://api.github.com/events&#x27;</span>) <span class="comment">#get请求</span></span><br><span class="line">print(r.status_code)</span><br></pre></td></tr></table></figure><br>输出：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">200</span><br></pre></td></tr></table></figure></p>
+<h2 id="header构造"><a href="#header构造" class="headerlink" title="header构造"></a>header构造</h2><p>普通的 header<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&#x27;https://api.github.com/some/endpoint&#x27;</span></span><br><span class="line">headers =&#123;user-agent<span class="string">&#x27;: &#x27;</span>my-app/<span class="number">0.0</span><span class="number">.1</span><span class="string">&#x27;&#125;</span></span><br><span class="line"><span class="string">r= requests.get(url, headers=headers)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&#x27;http://httpbin.org/cookies&#x27;</span></span><br><span class="line">cookies = <span class="built_in">dict</span>(cookies_are=<span class="string">&#x27;working&#x27;</span>)</span><br><span class="line">r = requests.get(url, cookies=cookies)</span><br></pre></td></tr></table></figure>
+<h1 id="构造请求体"><a href="#构造请求体" class="headerlink" title="构造请求体"></a>构造请求体</h1><p>请求体通过键值对的形式编码，有多种形式的请求体，比如query参数、form请求、binary请求（上传文件）以及结构化请求：json、xml、 json rpc等。</p>
+<h2 id="Get-Query请求"><a href="#Get-Query请求" class="headerlink" title="Get Query请求"></a>Get Query请求</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload= &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;valuel&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;value2&#x27;</span>&#125;</span><br><span class="line">r = requests.get(<span class="string">&#x27;https://httpbin.org/get&#x27;</span>, params=payload)</span><br></pre></td></tr></table></figure>
+<h2 id="Form请求参数"><a href="#Form请求参数" class="headerlink" title="Form请求参数"></a>Form请求参数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = &#123;<span class="string">&#x27;key&#x27;</span>:<span class="string">&#x27;valuel&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;value2&#x27;</span>&#125;</span><br><span class="line">r = requests.post(<span class="string">&quot;https://httpbin.org/post&quot;</span>, data=payload)</span><br></pre></td></tr></table></figure>
+<h2 id="JSON请求体构造"><a href="#JSON请求体构造" class="headerlink" title="JSON请求体构造"></a>JSON请求体构造</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&#x27;https://api.github.com/some/endpoint&#x27;</span></span><br><span class="line">payload = &#123;<span class="string">&#x27;some&#x27;</span>: <span class="string">&#x27;data&#x27;</span>&#125;</span><br><span class="line">r = requests.post(url, json=payload)</span><br></pre></td></tr></table></figure>
+<h2 id="xml请求"><a href="#xml请求" class="headerlink" title="xml请求"></a>xml请求</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line">xml =<span class="string">&quot;&quot;&quot;&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;utf-8&#x27;?&gt;&lt;a&gt;6&lt;/a&gt;&quot;&quot;&quot;</span> </span><br><span class="line">headers=&#123;<span class="string">&#x27;Content-type&#x27;</span>:<span class="string">&#x27;application/xml&#x27;</span>&#125; </span><br><span class="line">r = requests.post(<span class="string">&#x27;http://httpbin.org/post&#x27;</span>, data=xml, headers=headers).text</span><br></pre></td></tr></table></figure>
+<h2 id="binary请求"><a href="#binary请求" class="headerlink" title="binary请求"></a>binary请求</h2><p>上传文件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&#x27;http://httpbin.org/post&#x27;</span></span><br><span class="line">files = &#123;<span class="string">&#x27;file&#x27;</span>: <span class="built_in">open</span>(<span class="string">&#x27;report.xls&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)&#125;</span><br><span class="line">r = requests.post(url, files=files)</span><br></pre></td></tr></table></figure></p>
+<h1 id="接口测试断言"><a href="#接口测试断言" class="headerlink" title="接口测试断言"></a>接口测试断言</h1><p>接口测试中需要通过检查响应是否符合预期来测试接口有效性，也就是对接口响应进行断言。</p>
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><ul>
+<li>r.url：</li>
+<li>r.status_code</li>
+<li>r.headers</li>
+<li>r.cookies</li>
+<li>r.encoding</li>
+<li>r.content</li>
+<li>r.text</li>
+<li>r.json()</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRequest</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_get</span>(<span class="params">self</span>):</span></span><br><span class="line">        r = requests.get(<span class="string">&#x27;https://api.github.com/events&#x27;</span>) <span class="comment">#get请求</span></span><br><span class="line">        <span class="keyword">assert</span> r.status_code == <span class="number">200</span>        </span><br></pre></td></tr></table></figure>
+<h2 id="结构化响应断言"><a href="#结构化响应断言" class="headerlink" title="结构化响应断言"></a>结构化响应断言</h2><p>下面是请求Github项目仓库API，GitHub API可参考：<a target="_blank" rel="noopener" href="https://docs.github.com/cn/rest/overview">https://docs.github.com/cn/rest/overview</a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">r = requests.get(<span class="string">&#x27;https://api.github.com/repos/hiyongz/DjangoDemo&#x27;</span>)</span><br><span class="line">json_data = r.json()</span><br><span class="line">print(json.dumps(json_data, indent=<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>响应的部分json数据如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;id&quot;</span>: <span class="number">272401302</span>,</span><br><span class="line">    <span class="attr">&quot;node_id&quot;</span>: <span class="string">&quot;MDEwOlJlcG9zaXRvcnkyNzI0MDEzMDI=&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;DjangoDemo&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;full_name&quot;</span>: <span class="string">&quot;hiyongz/DjangoDemo&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;private&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">&quot;owner&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;login&quot;</span>: <span class="string">&quot;hiyongz&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;id&quot;</span>: <span class="number">20513021</span>,</span><br><span class="line">        <span class="attr">&quot;node_id&quot;</span>: <span class="string">&quot;MDQ6VXNlcjIwNTEzMDIx&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;avatar_url&quot;</span>: <span class="string">&quot;https://avatars0.githubusercontent.com/u/20513021?v=4&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;gravatar_id&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        ...................</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>接下来介绍不同方法对这个json响应进行断言。</p>
+<h3 id="json断言"><a href="#json断言" class="headerlink" title="json断言"></a>json断言</h3><p>json断言<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_json</span>(<span class="params">self</span>):</span></span><br><span class="line">    r = requests.get(<span class="string">&#x27;https://api.github.com/repos/hiyongz/DjangoDemo&#x27;</span>)</span><br><span class="line">    <span class="keyword">assert</span> r.json()[<span class="string">&#x27;owner&#x27;</span>][<span class="string">&#x27;login&#x27;</span>] == <span class="string">&quot;hiyongz&quot;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="JSONPath断言"><a href="#JSONPath断言" class="headerlink" title="JSONPath断言"></a>JSONPath断言</h3><p>JSONPath文档：<a target="_blank" rel="noopener" href="https://goessner.net/articles/JsonPath/">https://goessner.net/articles/JsonPath/</a><br>JSONPath表达式与XPath类似，是XPath在json中的应用，全称XPath for JSON，用于从JSON文档中提取数据。</p>
+<p>JSONPath表达式和XPath语法对比如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>XPath</strong></th>
+<th><strong>JSONPath</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/</td>
+<td>$</td>
+<td>跟节点</td>
+</tr>
+<tr>
+<td>.</td>
+<td>@</td>
+<td>当前节点</td>
+</tr>
+<tr>
+<td>/</td>
+<td>. or []</td>
+<td>儿子节点</td>
+</tr>
+<tr>
+<td>..</td>
+<td>N/A</td>
+<td>父节点</td>
+</tr>
+<tr>
+<td>//</td>
+<td>..</td>
+<td>子孙节点</td>
+</tr>
+<tr>
+<td>*</td>
+<td>*</td>
+<td>匹配所有节点</td>
+</tr>
+<tr>
+<td>@</td>
+<td>N/A</td>
+<td>属性</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>[]</td>
+<td>下标操作符</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>[,]</td>
+<td>多选</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>[start​ : end : ​step]</td>
+<td>切片</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>?()</td>
+<td>过滤表达式</td>
+</tr>
+<tr>
+<td>N/A</td>
+<td>()</td>
+<td>script 表达式</td>
+</tr>
+<tr>
+<td>()</td>
+<td>N/A</td>
+<td>分组</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Python中有个jsonpath库可用于处理json数据：<a target="_blank" rel="noopener" href="https://pypi.org/project/jsonpath/">https://pypi.org/project/jsonpath/</a><br>安装：<br><code>pip install jsonpath</code></p>
+<p>和前面一样，断言登录名：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> jsonpath <span class="keyword">import</span> jsonpath</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_json</span>(<span class="params">self</span>):</span></span><br><span class="line">    r = requests.get(<span class="string">&#x27;https://api.github.com/repos/hiyongz/DjangoDemo&#x27;</span>)</span><br><span class="line">    <span class="keyword">assert</span> jsonpath(r.json(), <span class="string">&#x27;$..login&#x27;</span>)[<span class="number">0</span>] == <span class="string">&quot;hiyongz&quot;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="schema断言"><a href="#schema断言" class="headerlink" title="schema断言"></a>schema断言</h2><p>JSON Schema可以用来注释和验证 JSON 文档，官网：<a target="_blank" rel="noopener" href="http://json-schema.org/">http://json-schema.org/</a>。</p>
+<p>JSON Schema可用来添加自定义规则，可以自定义数据类型：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">schema = &#123;</span><br><span class="line">    &quot;type&quot; : &quot;object&quot;,</span><br><span class="line">    &quot;properties&quot; : &#123;</span><br><span class="line">        &quot;price&quot; : &#123;&quot;type&quot; : &quot;number&quot;&#125;,</span><br><span class="line">        &quot;name&quot; : &#123;&quot;type&quot; : &quot;string&quot;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>可以看到，除了字段值断言外，可以使用JSON Schema来断言接口返回值的类型。</p>
+<p>把json格式转成schema，在线生成schema网址：<a target="_blank" rel="noopener" href="https://jsonschema.net/">https://jsonschema.net/</a></p>
+<p>jsonschema是使用JSON Schema的Python库，通过 <code>pip install jsonschema</code> 命令安装。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> jsonschema <span class="keyword">import</span> validate</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_get_login_jsonschema</span>(<span class="params">self</span>):</span></span><br><span class="line">    url = <span class="string">&quot;https://api.github.com/repos/hiyongz/DjangoDemo&quot;</span></span><br><span class="line">    r = requests.get(url)</span><br><span class="line">    data = r.json()</span><br><span class="line">    schema = &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span> : <span class="string">&quot;DjangoDemo&quot;</span>,</span><br><span class="line">        <span class="string">&quot;owner&quot;</span> : &#123;</span><br><span class="line">        	<span class="string">&quot;login&quot;</span> : <span class="string">&quot;hiyongz&quot;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    validate(data, schema=schema)</span><br></pre></td></tr></table></figure></p>
+<p>JSON Schema可以用来进行自动校验：在接口测试中，每次运行的时候自动保存当前的 schema，下次运行对比上次的 schema，如果发现变更就报错</p>
+<h3 id="xml解析断言"><a href="#xml解析断言" class="headerlink" title="xml解析断言"></a>xml解析断言</h3><p>xml文件解析可以使用requests_xml，参考：<a target="_blank" rel="noopener" href="https://github.com/erinxocon/requests-xml">https://github.com/erinxocon/requests-xml</a></p>
+<p>也可以使用Python xml.etree.ElementTree模块解析xml数据，可以使用Xpath定位，使用方法参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/111415888">Web自动化测试：xpath &amp; CSS Selector定位</a></p>
+<p>xml.etree.ElementTree模块xml解析举例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line">root = ET.fromstring(countrydata)</span><br><span class="line">root.findall(<span class="string">&quot;.&quot;</span>)</span><br><span class="line">root.findall(<span class="string">&quot;./country/neighbor&quot;</span>)</span><br><span class="line">root.findall(<span class="string">&quot;.//year/..[@name=&#x27;Singapore&#x27;]&quot;</span>)</span><br><span class="line">root.findall(<span class="string">&quot;.//*[@name=&#x27;Singapore&#x27;]/year&quot;</span>)</span><br><span class="line">root.findall(<span class="string">&quot;.//neighbor[2]&quot;</span>)</span><br></pre></td></tr></table></figure></p>
+<p>和JSON Schema一样，也有一个XML Schema，用于解析xml文档，文档参考：<a target="_blank" rel="noopener" href="https://www.w3.org/2001/XMLSchema">https://www.w3.org/2001/XMLSchema</a></p>
+<p>Python库安装： <code>pip install xmlschema</code></p>
+<h2 id="hamcrest断言"><a href="#hamcrest断言" class="headerlink" title="hamcrest断言"></a>hamcrest断言</h2><p>除了常用的Assert断言以外，有一个功能更加强大的断言方法叫Hamcrest 断言，具有丰富的断言匹配器，支持多种语言，官网地址：<a target="_blank" rel="noopener" href="http://hamcrest.org/">http://hamcrest.org/</a></p>
+<p>下面简单介绍一下Python中的hamcrest断言使用方法</p>
+<p>PyHamcrest GitHub仓库地址：<a target="_blank" rel="noopener" href="https://github.com/hamcrest/PyHamcrest">https://github.com/hamcrest/PyHamcrest</a><br>文档：<a target="_blank" rel="noopener" href="https://pyhamcrest.readthedocs.io/en/v2.0.2/tutorial/">https://pyhamcrest.readthedocs.io/en/v2.0.2/tutorial/</a></p>
+<p>安装PyHamcrest：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install PyHamcrest</span><br></pre></td></tr></table></figure><br>断言登录名：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> hamcrest <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_hamcrest</span>(<span class="params">self</span>):</span></span><br><span class="line">    r = requests.get(<span class="string">&#x27;https://api.github.com/repos/hiyongz/DjangoDemo&#x27;</span>)</span><br><span class="line">    data = r.json()</span><br><span class="line">    assert_that(data[<span class="string">&#x27;owner&#x27;</span>][<span class="string">&#x27;login&#x27;</span>], equal_to(<span class="string">&quot;hiyongz&quot;</span>))</span><br></pre></td></tr></table></figure></p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>接口测试框架Requests</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/api-test-requests/" title="接口测试框架Requests">https://hiyongz.github.io/posts/api-test-requests/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/api-test-requests/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Requests/" rel="tag"># Requests</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/Python-Enhancement-Proposals/" rel="prev" title="Python PEP—Python增强提案">
+      <i class="fa fa-chevron-left"></i> Python PEP—Python增强提案
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/personal-blog-hexo-construction-guide2/" rel="next" title="Hexo个人博客主题配置">
+      Hexo个人博客主题配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Requests"><span class="nav-number">1.</span> <span class="nav-text">Requests</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Requests%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">Requests安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Requests%E5%B8%B8%E8%A7%81%E6%8E%A5%E5%8F%A3%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E6%9E%84%E9%80%A0"><span class="nav-number">2.</span> <span class="nav-text">Requests常见接口请求方法构造</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%9B%AE%E6%A0%87%E6%9E%84%E9%80%A0"><span class="nav-number">2.1.</span> <span class="nav-text">请求目标构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#header%E6%9E%84%E9%80%A0"><span class="nav-number">2.2.</span> <span class="nav-text">header构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">2.3.</span> <span class="nav-text">cookie</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E8%AF%B7%E6%B1%82%E4%BD%93"><span class="nav-number">3.</span> <span class="nav-text">构造请求体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-Query%E8%AF%B7%E6%B1%82"><span class="nav-number">3.1.</span> <span class="nav-text">Get Query请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Form%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">Form请求参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON%E8%AF%B7%E6%B1%82%E4%BD%93%E6%9E%84%E9%80%A0"><span class="nav-number">3.3.</span> <span class="nav-text">JSON请求体构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xml%E8%AF%B7%E6%B1%82"><span class="nav-number">3.4.</span> <span class="nav-text">xml请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary%E8%AF%B7%E6%B1%82"><span class="nav-number">3.5.</span> <span class="nav-text">binary请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95%E6%96%AD%E8%A8%80"><span class="nav-number">4.</span> <span class="nav-text">接口测试断言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94"><span class="nav-number">4.1.</span> <span class="nav-text">响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E5%93%8D%E5%BA%94%E6%96%AD%E8%A8%80"><span class="nav-number">4.2.</span> <span class="nav-text">结构化响应断言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#json%E6%96%AD%E8%A8%80"><span class="nav-number">4.2.1.</span> <span class="nav-text">json断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONPath%E6%96%AD%E8%A8%80"><span class="nav-number">4.2.2.</span> <span class="nav-text">JSONPath断言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#schema%E6%96%AD%E8%A8%80"><span class="nav-number">4.3.</span> <span class="nav-text">schema断言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xml%E8%A7%A3%E6%9E%90%E6%96%AD%E8%A8%80"><span class="nav-number">4.3.1.</span> <span class="nav-text">xml解析断言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hamcrest%E6%96%AD%E8%A8%80"><span class="nav-number">4.4.</span> <span class="nav-text">hamcrest断言</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

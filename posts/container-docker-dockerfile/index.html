@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在工作中，通常会根据项目需要制作镜像，Docker可以通过读取Dockerfile文件中的指令来自动构建镜像，Dockerfile文本文件包含镜像构建的命令，通过 docker build 执行 Dockerfile中的一系列指令来自动构建镜像。除了Dockerfile的方式外，也可以使用Docker commit来制作镜像，本文将介绍Dockerfile语法Docker镜像的构建方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容器技术介绍：Dockerfile语法指令及Docker镜像构建">
+<meta property="og:url" content="https://hiyongz.github.io/posts/container-docker-dockerfile/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="在工作中，通常会根据项目需要制作镜像，Docker可以通过读取Dockerfile文件中的指令来自动构建镜像，Dockerfile文本文件包含镜像构建的命令，通过 docker build 执行 Dockerfile中的一系列指令来自动构建镜像。除了Dockerfile的方式外，也可以使用Docker commit来制作镜像，本文将介绍Dockerfile语法Docker镜像的构建方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/container-docker-dockerfile/dockerfile-nginx-test.png">
+<meta property="article:published_time" content="2021-03-17T04:12:00.000Z">
+<meta property="article:modified_time" content="2021-04-12T14:33:58.082Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Dockerfile">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/container-docker-dockerfile/dockerfile-nginx-test.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/container-docker-dockerfile/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>容器技术介绍：Dockerfile语法指令及Docker镜像构建 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/container-docker-dockerfile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          容器技术介绍：Dockerfile语法指令及Docker镜像构建
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-17 12:12:00" itemprop="dateCreated datePublished" datetime="2021-03-17T12:12:00+08:00">2021-03-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">测试开发</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/container-docker-dockerfile/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/container-docker-dockerfile/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在工作中，通常会根据项目需要制作镜像，Docker可以通过读取Dockerfile文件中的指令来自动构建镜像，Dockerfile文本文件包含镜像构建的命令，通过 <code>docker build</code> 执行 Dockerfile中的一系列指令来自动构建镜像。除了Dockerfile的方式外，也可以使用Docker commit来制作镜像，本文将介绍Dockerfile语法Docker镜像的构建方法。</p>
+<a id="more"></a>
+<h1 id="常用Dockerfile指令"><a href="#常用Dockerfile指令" class="headerlink" title="常用Dockerfile指令"></a>常用Dockerfile指令</h1><p>Dockerfile官方文档：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a></p>
+<p>Docker 顺序执行Dockerfile文件中的指令，指令不区分大小写，为了区分，建议都大写。Dockerfile以 <code>FROM</code> 指令开始，FROM指令指定了构建的父镜像（基础镜像），Dockerfile使用 <code>#</code> 注释行，下面列出其它常用指令：</p>
+<ul>
+<li>COPY：复制文件，复制文件或者目录到容器里指定路径</li>
+<li>LABEL：为镜像生成元数据标签信息</li>
+<li>WORKDIR：指定工作目录，为后续的RUN、CMD、 ENTRYPOINT、ADD指令配置工作目录。</li>
+<li>USER：指定运行容器时的用户名或UID，后续命令执行也会使用指定用户。</li>
+<li>RUN：Dockerfile RUN命令是执行命令的核心部分，在<code>docker build</code>时执行。它接受命令作为参数并用于创建镜像。每条RUN命令在当前基础镜像上执行，并且会提交一个新镜像层：<code>RUN pip install flask</code></li>
+<li>CMD：容器运行 <code>docker run</code> 时执行的默认命令。</li>
+<li>ENV：容器启动的环境变量。</li>
+<li>ARG：构建环境的环境变量。</li>
+<li>ENTRYPOINT：指定容器的“入口”。</li>
+<li>HEALTHCHECK：用于指定某个程序或者指令来监控 docker 容器服务的运行状态</li>
+</ul>
+<h1 id="Dockerfile构建容器"><a href="#Dockerfile构建容器" class="headerlink" title="Dockerfile构建容器"></a>Dockerfile构建容器</h1><p>常用文件、命令：</p>
+<ul>
+<li>.dockerignore：设置希望构建时需要忽略的文件，过滤指定文件</li>
+<li><code>docker build -f Dockerfile文件名</code>：指定Dockerfile文件</li>
+<li><code>docker build -t 标签</code>：添加标签</li>
+<li><code>docker build --no-cache</code>：不使用缓存，也就是每次构建时，不管有没有安装过都进行重新构建</li>
+<li><code>docker build --build-arg</code>：传递ARG指令变量</li>
+</ul>
+<h2 id="1-创建Dockerfile文件"><a href="#1-创建Dockerfile文件" class="headerlink" title="1. 创建Dockerfile文件"></a>1. 创建Dockerfile文件</h2><p>构建一个dockerfile文件，定制一个Nginx镜像，添加容器健康检查。<br>Dockerfile：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 基于 nginx:latest 镜像构建</span></span><br><span class="line">FROM nginx:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定信息</span></span><br><span class="line">LABEL maintainer=&quot;test_dockerfile&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置环境变量</span></span><br><span class="line">ENV NGINX_VERSION latest</span><br><span class="line">ARG workpath=/data/html/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换root用户</span></span><br><span class="line">USER root</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行命令，安装cur软件，设置软链接把ngin服务的日志显示到终端</span></span><br><span class="line">RUN apt-get -yq update &amp;&amp; apt-get install -y curl &amp;&amp; \</span><br><span class="line">ln -sf /dev/stdout /var/log/nginx/access.log &amp;&amp; \</span><br><span class="line">ln -sf /dev/stderr /var/log/nginx/error.log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 挂载卷</span></span><br><span class="line">VOLUME [&quot;/data&quot;]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置工作目录</span></span><br><span class="line">WORKDIR $workpath</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制 index.html 文件到nginx的html目录下</span></span><br><span class="line">COPY index.html /usr/share/nginx/html</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 映射80端口</span></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此处CMD作为 ENTRYPOINT的参数。</span></span><br><span class="line">CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</span><br><span class="line"><span class="meta">#</span><span class="bash"> CMD [<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> CMD nginx -g daemon off</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置容器启动的命令</span></span><br><span class="line">ENTRYPOINT [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</span><br><span class="line"></span><br><span class="line">STOPSIGNAL SIGRTMAX</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查容器健康，通过访问 Nginx服务80端口，来判断容器服务是否健康</span></span><br><span class="line">HEALTHCHECK --interval=5s --timeout=3s \</span><br><span class="line">  CMD curl -fs http://localhost/ || exit 1</span><br></pre></td></tr></table></figure></p>
+<p>index.html文件内容：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="2-构建镜像：docker-build"><a href="#2-构建镜像：docker-build" class="headerlink" title="2. 构建镜像：docker build"></a>2. 构建镜像：docker build</h2><p>在Dockerfile 文件目录下执行构建：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t nginx:testv1 -f Dockerfile .</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>nginx:testv1：镜像名称:镜像标签</li>
+<li>Dockerfile：Dockerfile 文件名，默认文件名为Dockerfile</li>
+<li><code>.</code> 表示当前目录，代表本次执行的上下文路径</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">[root@server test_dockerfile]<span class="comment"># pwd</span></span><br><span class="line">/root/docker/test_dockerfile</span><br><span class="line">[root@server test_dockerfile]<span class="comment"># ls</span></span><br><span class="line">Dockerfile  index.html</span><br><span class="line">[root@server test_dockerfile]<span class="comment"># docker build -t nginx_demo:v1 .</span></span><br><span class="line">Sending build context to Docker daemon  4.096kB</span><br><span class="line">Step 1/13 : FROM nginx:latest</span><br><span class="line"> ---&gt; f6d0b4767a6c</span><br><span class="line">Step 2/13 : LABEL maintainer=<span class="string">&quot;test_dockerfile&quot;</span></span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 6c4b611a19e9</span><br><span class="line">Removing intermediate container 6c4b611a19e9</span><br><span class="line"> ---&gt; 6a6f12ed39ad</span><br><span class="line">Step 3/13 : ENV NGINX_VERSION latest</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> e9cfc405af5a</span><br><span class="line">Removing intermediate container e9cfc405af5a</span><br><span class="line"> ---&gt; 6608a514dc4a</span><br><span class="line">Step 4/13 : ARG workpath=/data/html/</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 31ec17310301</span><br><span class="line">Removing intermediate container 31ec17310301</span><br><span class="line"> ---&gt; 04b7f5b51c63</span><br><span class="line">Step 5/13 : USER root</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 1d6aaf7f9d13</span><br><span class="line">Removing intermediate container 1d6aaf7f9d13</span><br><span class="line"> ---&gt; 3568d2cf3a36</span><br><span class="line">Step 6/13 : RUN apt-get install -y curl &amp;&amp; ln -sf /dev/stdout /var/<span class="built_in">log</span>/nginx/access.log &amp;&amp; ln -sf /dev/stderr /var/<span class="built_in">log</span>/nginx/error.log</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> fcf7a55bbb4a</span><br><span class="line">Reading package lists...</span><br><span class="line">Building dependency tree...</span><br><span class="line">Reading state information...</span><br><span class="line">curl is already the newest version (7.64.0-4+deb10u1).</span><br><span class="line">0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.</span><br><span class="line">Removing intermediate container fcf7a55bbb4a</span><br><span class="line"> ---&gt; 20cb644a11c3</span><br><span class="line">Step 7/13 : VOLUME [<span class="string">&quot;/data&quot;</span>]</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> ebaa3b7e6dbf</span><br><span class="line">Removing intermediate container ebaa3b7e6dbf</span><br><span class="line"> ---&gt; 246093dbcc45</span><br><span class="line">Step 8/13 : WORKDIR <span class="variable">$workpath</span></span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 494a62d4166b</span><br><span class="line">Removing intermediate container 494a62d4166b</span><br><span class="line"> ---&gt; 2afb818a2a35</span><br><span class="line">Step 9/13 : COPY index.html /usr/share/nginx/html</span><br><span class="line"> ---&gt; 1fee5e32c1fc</span><br><span class="line">Step 10/13 : EXPOSE 80</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 2a80075b76f3</span><br><span class="line">Removing intermediate container 2a80075b76f3</span><br><span class="line"> ---&gt; 3ef9846b592e</span><br><span class="line">Step 11/13 : CMD [<span class="string">&quot;nginx&quot;</span>,<span class="string">&quot;-g&quot;</span>,<span class="string">&quot;daemon off;&quot;</span>]</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> db5ab895a85b</span><br><span class="line">Removing intermediate container db5ab895a85b</span><br><span class="line"> ---&gt; 4e70e4e4ef95</span><br><span class="line">Step 12/13 : STOPSIGNAL SIGRTMAX</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> d7ceb8fdbd59</span><br><span class="line">Removing intermediate container d7ceb8fdbd59</span><br><span class="line"> ---&gt; 68c8bb3b43f9</span><br><span class="line">Step 13/13 : HEALTHCHECK --interval=5s --timeout=3s   CMD curl -fs http://localhost/ || <span class="built_in">exit</span> 1</span><br><span class="line"> ---&gt; Running <span class="keyword">in</span> 3cb2690c7c13</span><br><span class="line">Removing intermediate container 3cb2690c7c13</span><br><span class="line"> ---&gt; e20cc62ae3e5</span><br><span class="line">Successfully built e20cc62ae3e5</span><br><span class="line">Successfully tagged nginx_demo:v1</span><br></pre></td></tr></table></figure>
+<p>查看镜像：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server test_dockerfile]<span class="comment"># docker images | grep nginx_demo</span></span><br><span class="line">nginx_demo                   v1                adfe6b7f7297   5 minutes ago   133MB</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-运行镜像：docker-run"><a href="#3-运行镜像：docker-run" class="headerlink" title="3. 运行镜像：docker run"></a>3. 运行镜像：docker run</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server test_dockerfile]<span class="comment"># docker run -d --name=nginx-test -p 8080:80 nginx_demo:v1</span></span><br><span class="line">b0bd21087663   nginx_demo:v1   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   6 minutes ago    Up 6 minutes (unhealthy)   80/tcp                   admiring_swanson</span><br><span class="line">[root@server test_dockerfile]<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<p>docker ps 查看容器<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server test_dockerfile]<span class="comment"># docker ps | grep nginx_demo</span></span><br><span class="line">710628d0ad55   nginx_demo:v1   <span class="string">&quot;/docker-entrypoint.…&quot;</span>   2 minutes ago       Up 2 minutes (unhealthy)   0.0.0.0:8080-&gt;80/tcp     nginx-test</span><br><span class="line">[root@server test_dockerfile]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<p>浏览器输入：192.168.30.8:8080<br><img src="dockerfile-nginx-test.png" width="80%" height="80%" /></p>
+<p>可以进入容器查看设置的环境变量<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@server test_dockerfile]<span class="comment"># docker exec -it 710628d0ad55 bash</span></span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># </span></span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># </span></span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># pwd</span></span><br><span class="line">/data/html</span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># ls</span></span><br><span class="line">index.html</span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># env</span></span><br><span class="line">HOSTNAME=b0bd21087663</span><br><span class="line">PWD=/data/html</span><br><span class="line">PKG_RELEASE=1~buster</span><br><span class="line">HOME=/root</span><br><span class="line">NJS_VERSION=0.5.0</span><br><span class="line">TERM=xterm</span><br><span class="line">SHLVL=1</span><br><span class="line">PATH=/usr/<span class="built_in">local</span>/sbin:/usr/<span class="built_in">local</span>/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line">NGINX_VERSION=latest</span><br><span class="line">_=/usr/bin/env</span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># id</span></span><br><span class="line">uid=0(root) gid=0(root) groups=0(root)</span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># df -h</span></span><br><span class="line">Filesystem               Size  Used Avail Use% Mounted on</span><br><span class="line">overlay                   45G   22G   24G  48% /</span><br><span class="line">tmpfs                     64M     0   64M   0% /dev</span><br><span class="line">tmpfs                    910M     0  910M   0% /sys/fs/cgroup</span><br><span class="line">shm                       64M     0   64M   0% /dev/shm</span><br><span class="line">/dev/mapper/centos-root   45G   22G   24G  48% /data</span><br><span class="line">tmpfs                    910M     0  910M   0% /proc/asound</span><br><span class="line">tmpfs                    910M     0  910M   0% /proc/acpi</span><br><span class="line">tmpfs                    910M     0  910M   0% /proc/scsi</span><br><span class="line">tmpfs                    910M     0  910M   0% /sys/firmware</span><br><span class="line">root@b0bd21087663:/data/html<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Docker-commit"><a href="#Docker-commit" class="headerlink" title="Docker commit"></a>Docker commit</h1><p>Docker commit一般用做从一个运行状态的容器来创建一个新的镜像，对外不可解释，不知道容器有什么应用，不方便排查问题，可维护性差。Dockerfile的方式更容易排查问题。</p>
+<p>Docker commit构建命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker commit 容器名 新镜像名:tag</span><br></pre></td></tr></table></figure><br>对于上面构建的镜像，如果对index.html文件内容修改后重新打包一个镜像，我们可以使用Docker commit来构建：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># docker commit nginx-test nginx_demo:v2</span></span><br></pre></td></tr></table></figure><br>启动：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># docker run -d --name=nginx-test2 -p 8080:80 nginx_demo:v2</span></span><br></pre></td></tr></table></figure></p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>容器技术介绍：Dockerfile语法指令及Docker镜像构建</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/container-docker-dockerfile/" title="容器技术介绍：Dockerfile语法指令及Docker镜像构建">https://hiyongz.github.io/posts/container-docker-dockerfile/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/container-docker-dockerfile/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Dockerfile/" rel="tag"># Dockerfile</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/mysql-database-operate/" rel="prev" title="MySQL数据库基础入门">
+      <i class="fa fa-chevron-left"></i> MySQL数据库基础入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/python-notes-for-datetime/" rel="next" title="Python笔记：日期时间获取与转换">
+      Python笔记：日期时间获取与转换 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8Dockerfile%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">常用Dockerfile指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockerfile%E6%9E%84%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">Dockerfile构建容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BADockerfile%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">1. 创建Dockerfile文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%EF%BC%9Adocker-build"><span class="nav-number">2.2.</span> <span class="nav-text">2. 构建镜像：docker build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BF%90%E8%A1%8C%E9%95%9C%E5%83%8F%EF%BC%9Adocker-run"><span class="nav-number">2.3.</span> <span class="nav-text">3. 运行镜像：docker run</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-commit"><span class="nav-number">3.</span> <span class="nav-text">Docker commit</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">350k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

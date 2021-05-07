@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HiYong</title>
+  <icon>https://hiyongz.github.io/icon.png</icon>
+  <subtitle>此时 此地 此身</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://hiyongz.github.io/"/>
+  <updated>2021-05-05T07:55:43.753Z</updated>
+  <id>https://hiyongz.github.io/</id>
+  
+  <author>
+    <name>HiYo</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python笔记：命令行参数解析</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-getopt/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-getopt/</id>
+    <published>2021-05-05T04:12:00.000Z</published>
+    <updated>2021-05-05T07:55:43.753Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有些时候我们需要通过命令行将参数传递给脚本，C语言中有个getopt()方法，python中也有个类似的命令行参数解析方法getopt()。python也提供了比getopt()更简洁的argparse方法。另外，sys模块也可以实现简单的参数解析，本文将对这3种命令行参数解析方法简要介绍。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
+    
+      <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
+    
+      <category term="命令行参数" scheme="https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用Windows 快捷键</title>
+    <link href="https://hiyongz.github.io/posts/windows-shortcuts/"/>
+    <id>https://hiyongz.github.io/posts/windows-shortcuts/</id>
+    <published>2021-04-30T04:22:00.000Z</published>
+    <updated>2021-05-02T00:16:27.458Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;windows 快捷键&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Windows" scheme="https://hiyongz.github.io/categories/Windows/"/>
+    
+    
+      <category term="Windows" scheme="https://hiyongz.github.io/tags/Windows/"/>
+    
+      <category term="快捷键" scheme="https://hiyongz.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用Windows cmd命令</title>
+    <link href="https://hiyongz.github.io/posts/windows-shell-command/"/>
+    <id>https://hiyongz.github.io/posts/windows-shell-command/</id>
+    <published>2021-04-30T04:12:00.000Z</published>
+    <updated>2021-05-02T00:07:52.174Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文列出一些常用的 windows cmd命令，使用&lt;code&gt;windows + r&lt;/code&gt;键后输入命令或者打开cmd.exe命令提示符输入，其中cmd命令提示符可以通过使用&lt;code&gt;windows + r&lt;/code&gt;键后输入cmd打开&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Windows" scheme="https://hiyongz.github.io/categories/Windows/"/>
+    
+    
+      <category term="Windows" scheme="https://hiyongz.github.io/tags/Windows/"/>
+    
+      <category term="cmd" scheme="https://hiyongz.github.io/tags/cmd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows 网络管理命令</title>
+    <link href="https://hiyongz.github.io/posts/windows-shell-for-networking-management/"/>
+    <id>https://hiyongz.github.io/posts/windows-shell-for-networking-management/</id>
+    <published>2021-04-30T04:05:00.000Z</published>
+    <updated>2021-05-02T00:08:12.420Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文列出一些常用的 Windows 网络管理命令。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Windows" scheme="https://hiyongz.github.io/categories/Windows/"/>
+    
+    
+      <category term="Windows" scheme="https://hiyongz.github.io/tags/Windows/"/>
+    
+      <category term="cmd" scheme="https://hiyongz.github.io/tags/cmd/"/>
+    
+      <category term="wmic" scheme="https://hiyongz.github.io/tags/wmic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法笔记：数组、链表、栈和队列</title>
+    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/"/>
+    <id>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</id>
+    <published>2021-04-28T04:12:00.000Z</published>
+    <updated>2021-04-29T15:27:16.111Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从逻辑结构上来说，数组和链表这两种数据结构都属于线性表，从物理存储来看，数组占用一块连续的内存区，而链表在内存中是分散的，由于这种物理结构差异，在对数组和链表进行增删改查操作的时间复杂度不同。栈和队列是特殊的线性表，数组和链表都可以用来实现栈和队列，本文将简要介绍这几种数据结构。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="线性表" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/%E7%BA%BF%E6%80%A7%E8%A1%A8/"/>
+    
+    
+      <category term="数组" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="链表" scheme="https://hiyongz.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+      <category term="栈" scheme="https://hiyongz.github.io/tags/%E6%A0%88/"/>
+    
+      <category term="队列" scheme="https://hiyongz.github.io/tags/%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法笔记：时间复杂度和空间复杂度</title>
+    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-algorithmic-complexity/"/>
+    <id>https://hiyongz.github.io/posts/algorithm-notes-for-algorithmic-complexity/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-04-28T12:27:58.416Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;算法复杂度包括空间复杂度和时间复杂度，是衡量算法执行效率的重要指标。为了充分利用计算资源，提高业务处理效率，最有效的一种解决方式就是优化算法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="算法复杂度" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
+    
+    
+      <category term="时间复杂度" scheme="https://hiyongz.github.io/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
+    
+      <category term="空间复杂度" scheme="https://hiyongz.github.io/tags/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用jenkins实现hexo博客自动发布</title>
+    <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/"/>
+    <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/</id>
+    <published>2021-04-24T04:12:00.000Z</published>
+    <updated>2021-04-24T23:01:09.094Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍使用jenkins来进行自动发送博客，检测博客项目是否有文件增加或者修改，如果有改动就执行本地构建和发布。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+      <category term="个人博客" scheme="https://hiyongz.github.io/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+      <category term="Hexo" scheme="https://hiyongz.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Session、Cookie和Token介绍</title>
+    <link href="https://hiyongz.github.io/posts/network-cookies-session-and-token/"/>
+    <id>https://hiyongz.github.io/posts/network-cookies-session-and-token/</id>
+    <published>2021-04-15T04:12:00.000Z</published>
+    <updated>2021-04-14T13:14:35.111Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;HTTP是一个无状态的面向连接的协议，服务器不知道客户端的状态，比如使用用户名密码认证成功后，在下一次的请求中，服务器不知道用户是谁，如果需要后续服务，需要进行重新认证。然而，在某些场景，我们需要保存某些状态，比如在购物网站进行商品购买时，在某个域名下浏览多个网页，选择多个商品，这种情况下需要保存已加入购物车的商品信息，在需要支付时，也要保存用户认证信息。为了实现保存用户登录状态，可以使用session或者token解决HTTP协议的无状态特性。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="计算机网络" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="HTTP" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/"/>
+    
+    
+      <category term="HTTP" scheme="https://hiyongz.github.io/tags/HTTP/"/>
+    
+      <category term="协议" scheme="https://hiyongz.github.io/tags/%E5%8D%8F%E8%AE%AE/"/>
+    
+      <category term="Session" scheme="https://hiyongz.github.io/tags/Session/"/>
+    
+      <category term="Cookie" scheme="https://hiyongz.github.io/tags/Cookie/"/>
+    
+      <category term="Token" scheme="https://hiyongz.github.io/tags/Token/"/>
+    
+      <category term="keep-alive" scheme="https://hiyongz.github.io/tags/keep-alive/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UI自动化测试：键盘输入之Android keycode</title>
+    <link href="https://hiyongz.github.io/posts/selenium-appium-keycode/"/>
+    <id>https://hiyongz.github.io/posts/selenium-appium-keycode/</id>
+    <published>2021-04-11T04:12:00.000Z</published>
+    <updated>2021-04-11T14:17:57.480Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;列出UI自动化测试中用到的keycode&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
+    
+      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
+    
+      <category term="keycode" scheme="https://hiyongz.github.io/tags/keycode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Selenium Grid：在多个主机上并行执行自动化脚本</title>
+    <link href="https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/"/>
+    <id>https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/</id>
+    <published>2021-04-09T04:12:00.000Z</published>
+    <updated>2021-04-22T03:04:55.525Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Selenium Grid是selenium提供的一个分布式测试工具，将自动化脚本发布到多个物理机或者虚拟机（跨平台、跨浏览器）上执行，通过一个中心节点来控制多个设备，也就是在中心节点（hub）上运行测试，在其它节点（node）上执行，实现selenium的并行执行。除了可以在多个设备上运行测试脚本以外，也可以实现多浏览器兼容性测试。它本身不提供多线程并发执行，需要结合多进程技术实现并行执行用例。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Netdiscover网络扫描工具</title>
+    <link href="https://hiyongz.github.io/posts/api-test-security-testing-netdiscover-tool/"/>
+    <id>https://hiyongz.github.io/posts/api-test-security-testing-netdiscover-tool/</id>
+    <published>2021-04-06T04:02:00.000Z</published>
+    <updated>2021-04-10T02:43:02.433Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Netdiscover是一种网络扫描工具，通过ARP扫描发现活动主机，可以通过主动和被动两种模式进行ARP扫描。通过主动发送ARP请求检查网络ARP流量，通过自动扫描模式扫描网络地址。本文介绍Netdiscover的安装和使用方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="渗透测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="计算机网络" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="Netdiscover" scheme="https://hiyongz.github.io/tags/Netdiscover/"/>
+    
+      <category term="网络扫描" scheme="https://hiyongz.github.io/tags/%E7%BD%91%E7%BB%9C%E6%89%AB%E6%8F%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pytest插件开发</title>
+    <link href="https://hiyongz.github.io/posts/pytest-plugin/"/>
+    <id>https://hiyongz.github.io/posts/pytest-plugin/</id>
+    <published>2021-04-03T14:02:00.000Z</published>
+    <updated>2021-04-24T02:59:29.218Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Pytest测试框架功能非常多，它其实就是由一组插件组成的，具有大量的插件，可以通过插件来扩展、定制功能，能满足大部分的测试需求。本文介绍pytest插件的开发方法，帮助更好的理解pytest测试框架。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试框架" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
+    
+    
+      <category term="pytest" scheme="https://hiyongz.github.io/tags/pytest/"/>
+    
+      <category term="pytest插件" scheme="https://hiyongz.github.io/tags/pytest%E6%8F%92%E4%BB%B6/"/>
+    
+      <category term="hook函数" scheme="https://hiyongz.github.io/tags/hook%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法笔记：递归、动态规划</title>
+    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/"/>
+    <id>https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/</id>
+    <published>2021-04-02T04:12:00.000Z</published>
+    <updated>2021-04-24T23:08:35.391Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;动态规划是求解决策过程最优化的过程，可以高效求解那些可以分解为高度重复子问题的问题，应用非常广泛，比如解决最短路线、NLP等实际问题。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="动态规划" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    
+      <category term="动态规划" scheme="https://hiyongz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="递归" scheme="https://hiyongz.github.io/tags/%E9%80%92%E5%BD%92/"/>
+    
+      <category term="fibonacci" scheme="https://hiyongz.github.io/tags/fibonacci/"/>
+    
+      <category term="斐波那契数" scheme="https://hiyongz.github.io/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hydra暴力破解工具</title>
+    <link href="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/"/>
+    <id>https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/</id>
+    <published>2021-03-31T04:12:00.000Z</published>
+    <updated>2021-04-03T08:34:26.992Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Hydra是一款暴力破解工具，进行并行登录破解，破解远程服务的用户名密码，由黑客组织&lt;a href=&quot;https://www.thc.org/&quot;&gt;THC&lt;/a&gt;开发，它可以对超过50个协议进行快速字典攻击，包括telnet、ftp、http(s)、smb、MySQL、SMTP等。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="渗透测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="暴力破解" scheme="https://hiyongz.github.io/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
+    
+      <category term="hydra" scheme="https://hiyongz.github.io/tags/hydra/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>系统性能监控：Prometheus + Grafana 监控服务器性能</title>
+    <link href="https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/"/>
+    <id>https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/</id>
+    <published>2021-03-29T04:16:00.000Z</published>
+    <updated>2021-04-03T08:32:16.744Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Prometheus 是一个开源的服务监控系统和时间序列数据库，是一款开源系统监控和警报工具，在测试领域中，我们可以使用Promethues来监控压力测试时服务端的性能。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="性能测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
+    
+      <category term="性能监控" scheme="https://hiyongz.github.io/tags/%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/"/>
+    
+      <category term="Prometheus" scheme="https://hiyongz.github.io/tags/Prometheus/"/>
+    
+      <category term="Grafana" scheme="https://hiyongz.github.io/tags/Grafana/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nmap扫描工具介绍</title>
+    <link href="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/"/>
+    <id>https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/</id>
+    <published>2021-03-27T04:02:00.000Z</published>
+    <updated>2021-03-26T14:27:34.886Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Nmap (Network Mapper) 是在渗透测试中常用的扫描工具，可用于扫描网络中的 IP 地址和端口，并检测已安装的应用程序。无论是作为网络安全工具还是黑客工具，Nmap 是一个很强大的工具，在《黑客帝国2》电影中就有出现，用于入侵发电站的能源管理系统。本文将介绍 Nmap 的安装和常用命令。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="渗透测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="nmap" scheme="https://hiyongz.github.io/tags/nmap/"/>
+    
+      <category term="NSE" scheme="https://hiyongz.github.io/tags/NSE/"/>
+    
+      <category term="Zenmap" scheme="https://hiyongz.github.io/tags/Zenmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>持续集成：Jenkins API简单使用</title>
+    <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/"/>
+    <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</id>
+    <published>2021-03-23T04:16:00.000Z</published>
+    <updated>2021-03-28T14:12:28.552Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Jenkins具有丰富的API接口，可以通过调用API接口实现对Job的触发、删除、查看任务状态等操作，支持HTTP协议，支持用户名、密码认证，提供的这些接口可以实现对 Jenkins 的控制。下面介绍Jenkins API的使用实例。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+    
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>持续集成：jenkins + pytest + selenium + Git + Allure自动化测试</title>
+    <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/"/>
+    <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</id>
+    <published>2021-03-21T04:16:00.000Z</published>
+    <updated>2021-03-20T11:30:18.555Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍jenkins， pytest ，selenium，Git，Allure的自动化测试实现方法，使用jenkins实现web自动化测试，并生成报告，自动发送邮件。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+    
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python笔记：日期时间获取与转换</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-datetime/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-datetime/</id>
+    <published>2021-03-19T04:12:00.000Z</published>
+    <updated>2021-04-24T22:57:38.274Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;python 日期时间获取与转换&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="datetime" scheme="https://hiyongz.github.io/tags/datetime/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>容器技术介绍：Dockerfile语法指令及Docker镜像构建</title>
+    <link href="https://hiyongz.github.io/posts/container-docker-dockerfile/"/>
+    <id>https://hiyongz.github.io/posts/container-docker-dockerfile/</id>
+    <published>2021-03-17T04:12:00.000Z</published>
+    <updated>2021-04-12T14:33:58.082Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在工作中，通常会根据项目需要制作镜像，Docker可以通过读取Dockerfile文件中的指令来自动构建镜像，Dockerfile文本文件包含镜像构建的命令，通过 &lt;code&gt;docker build&lt;/code&gt; 执行 Dockerfile中的一系列指令来自动构建镜像。除了Dockerfile的方式外，也可以使用Docker commit来制作镜像，本文将介绍Dockerfile语法Docker镜像的构建方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
+    
+      <category term="Dockerfile" scheme="https://hiyongz.github.io/tags/Dockerfile/"/>
+    
+  </entry>
+  
+</feed>
