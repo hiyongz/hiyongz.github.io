@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-05T07:55:43.753Z</updated>
+  <updated>2021-05-09T13:21:57.881Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通货膨胀</title>
+    <link href="https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/"/>
+    <id>https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/</id>
+    <published>2021-05-05T14:26:00.000Z</published>
+    <updated>2021-05-09T13:21:57.881Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通货膨胀指整体物价水平上升，货币贬值、购买力下降。通货膨胀率一般通过&lt;strong&gt;居民消费价格指数CPI&lt;/strong&gt;来反映，今年三月我国的CPI同比上涨0.4%，由于疫情原因，去年3月CPI上涨达到了4.3%，物价飞涨。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="通货膨胀" scheme="https://hiyongz.github.io/tags/%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/"/>
+    
+      <category term="投资理财" scheme="https://hiyongz.github.io/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>时间简史</title>
+    <link href="https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%93%88%E5%8B%83%E7%BA%A2%E7%A7%BB/"/>
+    <id>https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%93%88%E5%8B%83%E7%BA%A2%E7%A7%BB/</id>
+    <published>2021-05-05T14:22:00.000Z</published>
+    <updated>2021-05-09T13:20:24.809Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《时间简史》 - 哈勃红移&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="时间简史" scheme="https://hiyongz.github.io/tags/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>Python笔记：命令行参数解析</title>
@@ -40,6 +84,31 @@
       <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
     
       <category term="命令行参数" scheme="https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构与算法-LeetCode</title>
+    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-leetcode/"/>
+    <id>https://hiyongz.github.io/posts/algorithm-notes-for-leetcode/</id>
+    <published>2021-05-02T14:22:00.000Z</published>
+    <updated>2021-05-09T13:18:23.333Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="数据结构" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="算法" scheme="https://hiyongz.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://hiyongz.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -466,81 +535,6 @@
     
     
       <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>持续集成：jenkins + pytest + selenium + Git + Allure自动化测试</title>
-    <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/"/>
-    <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</id>
-    <published>2021-03-21T04:16:00.000Z</published>
-    <updated>2021-03-20T11:30:18.555Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文介绍jenkins， pytest ，selenium，Git，Allure的自动化测试实现方法，使用jenkins实现web自动化测试，并生成报告，自动发送邮件。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python笔记：日期时间获取与转换</title>
-    <link href="https://hiyongz.github.io/posts/python-notes-for-datetime/"/>
-    <id>https://hiyongz.github.io/posts/python-notes-for-datetime/</id>
-    <published>2021-03-19T04:12:00.000Z</published>
-    <updated>2021-04-24T22:57:38.274Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;python 日期时间获取与转换&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="datetime" scheme="https://hiyongz.github.io/tags/datetime/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>容器技术介绍：Dockerfile语法指令及Docker镜像构建</title>
-    <link href="https://hiyongz.github.io/posts/container-docker-dockerfile/"/>
-    <id>https://hiyongz.github.io/posts/container-docker-dockerfile/</id>
-    <published>2021-03-17T04:12:00.000Z</published>
-    <updated>2021-04-12T14:33:58.082Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在工作中，通常会根据项目需要制作镜像，Docker可以通过读取Dockerfile文件中的指令来自动构建镜像，Dockerfile文本文件包含镜像构建的命令，通过 &lt;code&gt;docker build&lt;/code&gt; 执行 Dockerfile中的一系列指令来自动构建镜像。除了Dockerfile的方式外，也可以使用Docker commit来制作镜像，本文将介绍Dockerfile语法Docker镜像的构建方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
-    
-      <category term="Dockerfile" scheme="https://hiyongz.github.io/tags/Dockerfile/"/>
     
   </entry>
   
