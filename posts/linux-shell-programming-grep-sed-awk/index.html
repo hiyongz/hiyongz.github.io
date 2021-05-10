@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/pipe.png">
 <meta property="article:published_time" content="2021-01-06T04:02:00.000Z">
-<meta property="article:modified_time" content="2021-04-19T11:23:03.735Z">
+<meta property="article:modified_time" content="2021-05-10T11:10:50.519Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="shell">
 <meta property="article:tag" content="Linux三剑客">
@@ -229,6 +229,10 @@
         </h1>
 
         <div class="post-meta">
+          
+          
+
+            <span class="post-time">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
@@ -294,7 +298,7 @@
 
       
         <p>grep，sed 和 awk是Linux/Unix 系统中常用的三个文本处理的命令行工具，称为文本处理三剑客。本文将简要介绍这三个命令并给出基本用法。<a id="more"></a></p>
-<h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><p>在介绍这两个命令之前，有必要介绍一下Unix/Linux中管道（pipe）的概念。管道将一个命令/程序/进程的输出发送到另一个命令/程序/进程，以进行进一步处理。是一种进程间通信机制，使用管道符”|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。<br><img src="pipe.png" width="100%" height="100%" /></p>
+<h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><p>在介绍这两个命令之前，有必要介绍一下Unix/Linux中管道（pipe）的概念。管道将一个命令/程序/进程的输出发送到另一个命令/程序/进程，以进行进一步处理。是一种进程间通信机制，使用管道符”|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。<br><img src="pipe.png" width="60%" height="60%" /></p>
 <p>管道实现了数据在多个命令之间传递，不需要创建临时文件来传递，它是单向的，数据通过管道从左向右流动。</p>
 <p>实例1：<br><code>cat test.txt | grep test1</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cat test.txt | grep test1</span><br><span class="line">test1</span><br><span class="line">test111</span><br><span class="line">test3 test1</span><br><span class="line">test111</span><br><span class="line">$ cat test.txt | grep test1 | grep test3</span><br><span class="line">test3 test1</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
@@ -567,20 +571,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">112</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -628,12 +632,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">357k</span>
+    <span title="站点总字数">361k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:24</span>
+    <span title="站点阅读时长">5:28</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

@@ -92,7 +92,7 @@
     <link href="https://hiyongz.github.io/posts/algorithm-notes-for-leetcode/"/>
     <id>https://hiyongz.github.io/posts/algorithm-notes-for-leetcode/</id>
     <published>2021-05-02T14:22:00.000Z</published>
-    <updated>2021-05-09T13:18:23.333Z</updated>
+    <updated>2021-05-10T11:16:04.963Z</updated>
     
     <summary type="html">
     
@@ -244,6 +244,83 @@
   </entry>
   
   <entry>
+    <title>测试题库：持续集成</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T13:15:45.928Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库：docker容器</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-docker/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-docker/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T13:18:42.245Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库：Linux、Shell</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T11:10:50.519Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>测试题库之app自动化测试</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
@@ -269,6 +346,56 @@
   </entry>
   
   <entry>
+    <title>测试题库：MySQL数据库</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-mysql/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T13:46:52.629Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库：性能测试</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-performance-testing/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-performance-testing/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T14:01:27.229Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="性能测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>测试题库之Python</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-python/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-python/</id>
@@ -290,6 +417,56 @@
     
     
       <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库之接口自动化测试</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-requests/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-requests/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T11:10:50.519Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+      <category term="接口自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="requests" scheme="https://hiyongz.github.io/tags/requests/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库之Web自动化测试</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-web-testing/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-web-testing/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T11:10:50.519Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
     
   </entry>
   
@@ -350,197 +527,6 @@
       <category term="Token" scheme="https://hiyongz.github.io/tags/Token/"/>
     
       <category term="keep-alive" scheme="https://hiyongz.github.io/tags/keep-alive/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UI自动化测试：键盘输入之Android keycode</title>
-    <link href="https://hiyongz.github.io/posts/selenium-appium-keycode/"/>
-    <id>https://hiyongz.github.io/posts/selenium-appium-keycode/</id>
-    <published>2021-04-11T04:12:00.000Z</published>
-    <updated>2021-04-11T14:17:57.480Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;列出UI自动化测试中用到的keycode&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
-    
-      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
-    
-      <category term="keycode" scheme="https://hiyongz.github.io/tags/keycode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Selenium Grid：在多个主机上并行执行自动化脚本</title>
-    <link href="https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/"/>
-    <id>https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/</id>
-    <published>2021-04-09T04:12:00.000Z</published>
-    <updated>2021-04-22T03:04:55.525Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Selenium Grid是selenium提供的一个分布式测试工具，将自动化脚本发布到多个物理机或者虚拟机（跨平台、跨浏览器）上执行，通过一个中心节点来控制多个设备，也就是在中心节点（hub）上运行测试，在其它节点（node）上执行，实现selenium的并行执行。除了可以在多个设备上运行测试脚本以外，也可以实现多浏览器兼容性测试。它本身不提供多线程并发执行，需要结合多进程技术实现并行执行用例。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Netdiscover网络扫描工具</title>
-    <link href="https://hiyongz.github.io/posts/api-test-security-testing-netdiscover-tool/"/>
-    <id>https://hiyongz.github.io/posts/api-test-security-testing-netdiscover-tool/</id>
-    <published>2021-04-06T04:02:00.000Z</published>
-    <updated>2021-04-10T02:43:02.433Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Netdiscover是一种网络扫描工具，通过ARP扫描发现活动主机，可以通过主动和被动两种模式进行ARP扫描。通过主动发送ARP请求检查网络ARP流量，通过自动扫描模式扫描网络地址。本文介绍Netdiscover的安装和使用方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="渗透测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="计算机网络" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="Netdiscover" scheme="https://hiyongz.github.io/tags/Netdiscover/"/>
-    
-      <category term="网络扫描" scheme="https://hiyongz.github.io/tags/%E7%BD%91%E7%BB%9C%E6%89%AB%E6%8F%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pytest插件开发</title>
-    <link href="https://hiyongz.github.io/posts/pytest-plugin/"/>
-    <id>https://hiyongz.github.io/posts/pytest-plugin/</id>
-    <published>2021-04-03T14:02:00.000Z</published>
-    <updated>2021-04-24T02:59:29.218Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Pytest测试框架功能非常多，它其实就是由一组插件组成的，具有大量的插件，可以通过插件来扩展、定制功能，能满足大部分的测试需求。本文介绍pytest插件的开发方法，帮助更好的理解pytest测试框架。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试框架" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
-    
-    
-      <category term="pytest" scheme="https://hiyongz.github.io/tags/pytest/"/>
-    
-      <category term="pytest插件" scheme="https://hiyongz.github.io/tags/pytest%E6%8F%92%E4%BB%B6/"/>
-    
-      <category term="hook函数" scheme="https://hiyongz.github.io/tags/hook%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法笔记：递归、动态规划</title>
-    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/"/>
-    <id>https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/</id>
-    <published>2021-04-02T04:12:00.000Z</published>
-    <updated>2021-05-09T23:25:24.690Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;动态规划是求解决策过程最优化的过程，可以高效求解那些可以分解为高度重复子问题的问题，应用非常广泛，比如解决最短路线、NLP等实际问题。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="动态规划" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-    
-      <category term="算法" scheme="https://hiyongz.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="动态规划" scheme="https://hiyongz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-      <category term="递归" scheme="https://hiyongz.github.io/tags/%E9%80%92%E5%BD%92/"/>
-    
-      <category term="fibonacci" scheme="https://hiyongz.github.io/tags/fibonacci/"/>
-    
-      <category term="斐波那契数" scheme="https://hiyongz.github.io/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hydra暴力破解工具</title>
-    <link href="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/"/>
-    <id>https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/</id>
-    <published>2021-03-31T04:12:00.000Z</published>
-    <updated>2021-04-03T08:34:26.992Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Hydra是一款暴力破解工具，进行并行登录破解，破解远程服务的用户名密码，由黑客组织&lt;a href=&quot;https://www.thc.org/&quot;&gt;THC&lt;/a&gt;开发，它可以对超过50个协议进行快速字典攻击，包括telnet、ftp、http(s)、smb、MySQL、SMTP等。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="渗透测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="暴力破解" scheme="https://hiyongz.github.io/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
-    
-      <category term="hydra" scheme="https://hiyongz.github.io/tags/hydra/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>系统性能监控：Prometheus + Grafana 监控服务器性能</title>
-    <link href="https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/"/>
-    <id>https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/</id>
-    <published>2021-03-29T04:16:00.000Z</published>
-    <updated>2021-04-03T08:32:16.744Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Prometheus 是一个开源的服务监控系统和时间序列数据库，是一款开源系统监控和警报工具，在测试领域中，我们可以使用Promethues来监控压力测试时服务端的性能。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="性能测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
-    
-      <category term="性能监控" scheme="https://hiyongz.github.io/tags/%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/"/>
-    
-      <category term="Prometheus" scheme="https://hiyongz.github.io/tags/Prometheus/"/>
-    
-      <category term="Grafana" scheme="https://hiyongz.github.io/tags/Grafana/"/>
     
   </entry>
   
