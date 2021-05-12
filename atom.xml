@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-09T13:31:18.894Z</updated>
+  <updated>2021-05-12T14:15:14.770Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux Bash之getopt命令行参数解析</title>
+    <link href="https://hiyongz.github.io/posts/linux-shell-for-getopt/"/>
+    <id>https://hiyongz.github.io/posts/linux-shell-for-getopt/</id>
+    <published>2021-05-11T04:12:00.000Z</published>
+    <updated>2021-05-12T14:15:14.770Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Unix shell 中内置了命令行参数解析函数getopts，但它仅支持简单的参数解析，不支持长参数，getopt是getopts的增强版，支持长参数。在&lt;a href=&quot;https://hiyongz.github.io/posts/python-notes-for-getopt/&quot;&gt;Python笔记：命令行参数解析&lt;/a&gt;中介绍了Python中的命令行参数解析方法getopt()，本文介绍shell中如何使用getopt进行命令行参数解析。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>金融小知识：通货膨胀</title>
@@ -65,7 +88,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-getopt/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-getopt/</id>
     <published>2021-05-05T04:12:00.000Z</published>
-    <updated>2021-05-05T07:55:43.753Z</updated>
+    <updated>2021-05-12T13:09:55.926Z</updated>
     
     <summary type="html">
     
@@ -76,7 +99,7 @@
     
       <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
       <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
@@ -321,11 +344,11 @@
   </entry>
   
   <entry>
-    <title>测试题库之app自动化测试</title>
+    <title>测试题库：app自动化测试</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-09T23:38:46.750Z</updated>
+    <updated>2021-05-12T13:40:08.241Z</updated>
     
     <summary type="html">
     
@@ -350,7 +373,7 @@
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-mysql/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T13:46:52.629Z</updated>
+    <updated>2021-05-12T13:38:46.860Z</updated>
     
     <summary type="html">
     
@@ -367,6 +390,31 @@
     
     
       <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库：计算机网络</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-network/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-network/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-12T13:39:24.646Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="计算机网络" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="HTTP" scheme="https://hiyongz.github.io/tags/HTTP/"/>
+    
+      <category term="协议" scheme="https://hiyongz.github.io/tags/%E5%8D%8F%E8%AE%AE/"/>
     
   </entry>
   
@@ -396,11 +444,11 @@
   </entry>
   
   <entry>
-    <title>测试题库之Python</title>
+    <title>测试题库：Python</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-python/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-python/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-09T23:38:57.266Z</updated>
+    <updated>2021-05-12T14:27:10.885Z</updated>
     
     <summary type="html">
     
@@ -411,7 +459,7 @@
     
       <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
       <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
     
@@ -446,11 +494,11 @@
   </entry>
   
   <entry>
-    <title>测试题库之Web自动化测试</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-web-testing/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-web-testing/</id>
+    <title>测试题库：软技能问题</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-soft-skills-question/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-soft-skills-question/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T11:10:50.519Z</updated>
+    <updated>2021-05-12T13:59:06.965Z</updated>
     
     <summary type="html">
     
@@ -459,74 +507,10 @@
     </summary>
     
     
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
       <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
     
     
-      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用jenkins实现hexo博客自动发布</title>
-    <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/"/>
-    <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/</id>
-    <published>2021-04-24T04:12:00.000Z</published>
-    <updated>2021-04-24T23:01:09.094Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文介绍使用jenkins来进行自动发送博客，检测博客项目是否有文件增加或者修改，如果有改动就执行本地构建和发布。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-      <category term="个人博客" scheme="https://hiyongz.github.io/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-      <category term="Hexo" scheme="https://hiyongz.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Session、Cookie和Token介绍</title>
-    <link href="https://hiyongz.github.io/posts/network-cookies-session-and-token/"/>
-    <id>https://hiyongz.github.io/posts/network-cookies-session-and-token/</id>
-    <published>2021-04-15T04:12:00.000Z</published>
-    <updated>2021-04-14T13:14:35.111Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;HTTP是一个无状态的面向连接的协议，服务器不知道客户端的状态，比如使用用户名密码认证成功后，在下一次的请求中，服务器不知道用户是谁，如果需要后续服务，需要进行重新认证。然而，在某些场景，我们需要保存某些状态，比如在购物网站进行商品购买时，在某个域名下浏览多个网页，选择多个商品，这种情况下需要保存已加入购物车的商品信息，在需要支付时，也要保存用户认证信息。为了实现保存用户登录状态，可以使用session或者token解决HTTP协议的无状态特性。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="计算机网络" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    
-      <category term="HTTP" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/"/>
-    
-    
-      <category term="HTTP" scheme="https://hiyongz.github.io/tags/HTTP/"/>
-    
-      <category term="协议" scheme="https://hiyongz.github.io/tags/%E5%8D%8F%E8%AE%AE/"/>
-    
-      <category term="Session" scheme="https://hiyongz.github.io/tags/Session/"/>
-    
-      <category term="Cookie" scheme="https://hiyongz.github.io/tags/Cookie/"/>
-    
-      <category term="Token" scheme="https://hiyongz.github.io/tags/Token/"/>
-    
-      <category term="keep-alive" scheme="https://hiyongz.github.io/tags/keep-alive/"/>
+      <category term="软技能" scheme="https://hiyongz.github.io/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/"/>
     
   </entry>
   
