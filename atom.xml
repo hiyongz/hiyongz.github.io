@@ -348,31 +348,6 @@
   </entry>
   
   <entry>
-    <title>测试题库：app自动化测试</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-12T23:41:02.808Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
-    
-  </entry>
-  
-  <entry>
     <title>测试题库：Linux、Shell</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/</id>
@@ -394,6 +369,31 @@
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
       <category term="Linux" scheme="https://hiyongz.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试题库：app自动化测试</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-12T23:41:02.808Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
     
   </entry>
   
