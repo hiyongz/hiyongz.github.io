@@ -502,7 +502,7 @@
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-requests/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-requests/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-13T14:28:57.341Z</updated>
+    <updated>2021-05-13T15:08:00.942Z</updated>
     
     <summary type="html">
     
@@ -513,9 +513,9 @@
     
       <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+      <category term="接口测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="接口自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
     
     
       <category term="requests" scheme="https://hiyongz.github.io/tags/requests/"/>
