@@ -31,10 +31,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/1.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/hao123-xpaths.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/3.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/4.png">
 <meta property="article:published_time" content="2020-09-16T11:30:36.000Z">
-<meta property="article:modified_time" content="2021-02-23T12:13:44.641Z">
+<meta property="article:modified_time" content="2021-05-14T12:03:40.880Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="元素定位">
 <meta property="article:tag" content="selenium">
@@ -285,7 +286,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
+              <span>6.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -549,7 +550,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@<span class="built_in">type</span>,<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@name,<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-with(@class,&#x27;start_text&#x27;)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@<span class="built_in">id</span>,<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(text(),<span class="string">&#x27;start_text&#x27;</span>)]</span><br><span class="line">Xpath = //*[starts-<span class="keyword">with</span>(@href,<span class="string">&#x27;start_text&#x27;</span>)]</span><br></pre></td></tr></table></figure>
 <h2 id="Xpath-Text-方法"><a href="#Xpath-Text-方法" class="headerlink" title="Xpath Text()方法"></a>Xpath Text()方法</h2><p>Text()方法基于web元素文本来进行定位</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Xpath = //*[text()=<span class="string">&#x27;text_value&#x27;</span>]   </span><br></pre></td></tr></table></figure>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="子孙元素定位-1"><a href="#子孙元素定位-1" class="headerlink" title="子孙元素定位"></a>子孙元素定位</h2><p>百度一下”text“，点击<strong>”资讯“</strong></p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="定位第n个元素"><a href="#定位第n个元素" class="headerlink" title="定位第n个元素"></a>定位第n个元素</h2><p>如果某个XPath表达式可以定位到多个元素标签，可以通过<code>(xpath表达式)[index]</code> 定位第<code>index</code>个元素，index索引从<code>1</code>开始。<br><img src="hao123-xpaths.png" width="60%" height="60%" /><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 点击百度页面 hao123 </span></span><br><span class="line">self.driver.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">self.driver.find_element_by_xpath(<span class="string">&#x27;(//*[@id=&quot;s-top-left&quot;]/a)[2]&#x27;</span>).click()</span><br></pre></td></tr></table></figure></p>
+<h2 id="子孙元素定位-1"><a href="#子孙元素定位-1" class="headerlink" title="子孙元素定位"></a>子孙元素定位</h2><p>百度一下”text“，点击<strong>”资讯“</strong></p>
 <p><img src="3.png" alt="img"></p>
 <p>Xpath：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//*[@<span class="built_in">id</span>=<span class="string">&quot;s_tab&quot;</span>]/descendant::a[<span class="number">1</span>]</span><br><span class="line">//*[@<span class="built_in">id</span>=<span class="string">&quot;s_tab&quot;</span>]/child::*[<span class="number">1</span>]/a[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
@@ -697,7 +699,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath-%E5%92%8C-CSS-Selector%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Xpath 和 CSS Selector简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Selector"><span class="nav-number">1.1.</span> <span class="nav-text">CSS Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath"><span class="nav-number">1.2.</span> <span class="nav-text">XPath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-VS-CSS-Selector"><span class="nav-number">1.3.</span> <span class="nav-text">Xpath VS. CSS Selector</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath-%E5%92%8C-CSS-Selector%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">Xpath 和 CSS Selector元素定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%84%BF%E5%AD%90%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.1.</span> <span class="nav-text">儿子元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.2.</span> <span class="nav-text">子孙元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.3.</span> <span class="nav-text">邻居节点定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B6%E5%85%83%E7%B4%A0%E3%80%81%E7%A5%96%E5%85%88%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.4.</span> <span class="nav-text">父元素、祖先元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Id%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.5.</span> <span class="nav-text">Id定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.6.</span> <span class="nav-text">Class定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%80%BC%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.7.</span> <span class="nav-text">属性值定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Contains-%E6%96%B9%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">Xpath Contains()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Starts-with-%E6%96%B9%E6%B3%95"><span class="nav-number">2.9.</span> <span class="nav-text">Xpath Starts-with()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Text-%E6%96%B9%E6%B3%95"><span class="nav-number">2.10.</span> <span class="nav-text">Xpath Text()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D-1"><span class="nav-number">3.1.</span> <span class="nav-text">子孙元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E5%AE%9A%E4%BD%8D-1"><span class="nav-number">3.2.</span> <span class="nav-text">邻居节点定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Contains-%E3%80%81Starts-with-%E3%80%81Text-%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.3.</span> <span class="nav-text">Xpath Contains()、Starts-with()、Text()定位</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath-%E5%92%8C-CSS-Selector%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Xpath 和 CSS Selector简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-Selector"><span class="nav-number">1.1.</span> <span class="nav-text">CSS Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPath"><span class="nav-number">1.2.</span> <span class="nav-text">XPath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-VS-CSS-Selector"><span class="nav-number">1.3.</span> <span class="nav-text">Xpath VS. CSS Selector</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xpath-%E5%92%8C-CSS-Selector%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.</span> <span class="nav-text">Xpath 和 CSS Selector元素定位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%84%BF%E5%AD%90%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.1.</span> <span class="nav-text">儿子元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.2.</span> <span class="nav-text">子孙元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.3.</span> <span class="nav-text">邻居节点定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%B6%E5%85%83%E7%B4%A0%E3%80%81%E7%A5%96%E5%85%88%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.4.</span> <span class="nav-text">父元素、祖先元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Id%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.5.</span> <span class="nav-text">Id定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.6.</span> <span class="nav-text">Class定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E5%80%BC%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.7.</span> <span class="nav-text">属性值定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Contains-%E6%96%B9%E6%B3%95"><span class="nav-number">2.8.</span> <span class="nav-text">Xpath Contains()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Starts-with-%E6%96%B9%E6%B3%95"><span class="nav-number">2.9.</span> <span class="nav-text">Xpath Starts-with()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Text-%E6%96%B9%E6%B3%95"><span class="nav-number">2.10.</span> <span class="nav-text">Xpath Text()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D%E7%AC%ACn%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="nav-number">3.1.</span> <span class="nav-text">定位第n个元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E5%AD%99%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D-1"><span class="nav-number">3.2.</span> <span class="nav-text">子孙元素定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%BB%E5%B1%85%E8%8A%82%E7%82%B9%E5%AE%9A%E4%BD%8D-1"><span class="nav-number">3.3.</span> <span class="nav-text">邻居节点定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xpath-Contains-%E3%80%81Starts-with-%E3%80%81Text-%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.4.</span> <span class="nav-text">Xpath Contains()、Starts-with()、Text()定位</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -713,20 +715,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">119</span>
+        <span class="site-state-item-count">121</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -774,12 +776,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">383k</span>
+    <span title="站点总字数">391k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:49</span>
+    <span title="站点阅读时长">5:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
