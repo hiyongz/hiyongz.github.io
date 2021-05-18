@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-17T13:14:12.153Z</updated>
+  <updated>2021-05-16T14:20:55.535Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>typora主题配置：公众号一键排版</title>
+    <link href="https://hiyongz.github.io/posts/front-end-for-typora-css/"/>
+    <id>https://hiyongz.github.io/posts/front-end-for-typora-css/</id>
+    <published>2021-05-18T04:12:00.000Z</published>
+    <updated>2021-05-16T14:20:55.535Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;typora是一个非常易用且免费的markdown编辑器，是我最常用的文档编辑器。它支持实时渲染，不用打开两个窗口（源码窗口和预览窗口），真正实现了沉浸式写作，所谓所见即所得。它的界面简洁，操作简单，非常容易上手，这里就不介绍了。本文主要介绍Typora的主题配置，实现公众号一键排版。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="个人博客" scheme="https://hiyongz.github.io/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="typora" scheme="https://hiyongz.github.io/tags/typora/"/>
+    
+      <category term="markdown" scheme="https://hiyongz.github.io/tags/markdown/"/>
+    
+      <category term="CSS" scheme="https://hiyongz.github.io/tags/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title>算法笔记：哈希表、映射和集合</title>
@@ -359,6 +384,31 @@
   </entry>
   
   <entry>
+    <title>测试题库：docker容器</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-docker/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-docker/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T13:18:42.245Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>测试题库：持续集成</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/</id>
@@ -382,31 +432,6 @@
       <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
     
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试题库：docker容器</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-docker/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-docker/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T13:18:42.245Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
     
   </entry>
   
@@ -436,31 +461,6 @@
   </entry>
   
   <entry>
-    <title>测试题库：app自动化测试</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-12T23:41:02.808Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
-    
-  </entry>
-  
-  <entry>
     <title>测试题库：MySQL数据库</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-mysql/</id>
@@ -486,11 +486,11 @@
   </entry>
   
   <entry>
-    <title>测试题库：计算机网络</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-network/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-network/</id>
+    <title>测试题库：app自动化测试</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-17T13:51:05.271Z</updated>
+    <updated>2021-05-12T23:41:02.808Z</updated>
     
     <summary type="html">
     
@@ -499,14 +499,14 @@
     </summary>
     
     
-      <category term="计算机网络" scheme="https://hiyongz.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
       <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
     
     
-      <category term="HTTP" scheme="https://hiyongz.github.io/tags/HTTP/"/>
-    
-      <category term="协议" scheme="https://hiyongz.github.io/tags/%E5%8D%8F%E8%AE%AE/"/>
+      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
     
   </entry>
   

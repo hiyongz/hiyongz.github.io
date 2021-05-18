@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-network/</loc>
-    <lastmod>2021-05-17</lastmod>
+    <lastmod>2021-05-18</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mayijinfu/</loc>
+    <lastmod>2021-05-18</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/</loc>
@@ -34,6 +38,10 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E5%95%86%E8%AA%89/</loc>
+    <lastmod>2021-05-16</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/front-end-for-typora-css/</loc>
     <lastmod>2021-05-16</lastmod>
   </url>
   <url>
