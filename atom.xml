@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-16T14:20:55.535Z</updated>
+  <updated>2021-05-20T13:14:01.500Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法笔记：树、堆和图</title>
+    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/"/>
+    <id>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</id>
+    <published>2021-05-20T04:12:00.000Z</published>
+    <updated>2021-05-20T13:14:01.500Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面的文章介绍过链表，它其实就是特殊化的树，而树是特殊化的图，堆是一种特殊的树。本文将介绍这几种数据结构。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+      <category term="树" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/%E6%A0%91/"/>
+    
+    
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
+    
+      <category term="树" scheme="https://hiyongz.github.io/tags/%E6%A0%91/"/>
+    
+      <category term="二叉树" scheme="https://hiyongz.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    
+      <category term="堆" scheme="https://hiyongz.github.io/tags/%E5%A0%86/"/>
+    
+      <category term="图" scheme="https://hiyongz.github.io/tags/%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>typora主题配置：公众号一键排版</title>
@@ -457,31 +492,6 @@
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
       <category term="Linux" scheme="https://hiyongz.github.io/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试题库：MySQL数据库</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-mysql/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-17T13:26:26.101Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
     
   </entry>
   
