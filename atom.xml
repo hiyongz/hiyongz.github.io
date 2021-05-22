@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-20T23:42:47.879Z</updated>
+  <updated>2021-05-22T06:54:01.921Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux Bash编程二：文本处理</title>
+    <link href="https://hiyongz.github.io/posts/linux-shell-bash-programing2/"/>
+    <id>https://hiyongz.github.io/posts/linux-shell-bash-programing2/</id>
+    <published>2021-05-22T04:02:00.000Z</published>
+    <updated>2021-05-22T06:54:01.921Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/112254528&quot;&gt;Linux Bash编程&lt;/a&gt;中，介绍了Bash编程基本语法，本文记录一下文本处理使用到的相关shell 语法。
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
     <title>算法笔记：树、堆和图</title>
     <link href="https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/"/>
     <id>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</id>
     <published>2021-05-20T04:12:00.000Z</published>
-    <updated>2021-05-20T23:42:47.879Z</updated>
+    <updated>2021-05-22T02:39:45.404Z</updated>
     
     <summary type="html">
     
@@ -38,8 +59,6 @@
     
       <category term="树" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/%E6%A0%91/"/>
     
-    
-      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
     
       <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
@@ -258,7 +277,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-getopt/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-getopt/</id>
     <published>2021-05-05T04:12:00.000Z</published>
-    <updated>2021-05-12T13:09:55.926Z</updated>
+    <updated>2021-05-22T02:37:28.175Z</updated>
     
     <summary type="html">
     
@@ -272,7 +291,7 @@
       <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
-      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
     
       <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
     
@@ -297,9 +316,9 @@
       <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="LeetCode" scheme="https://hiyongz.github.io/tags/LeetCode/"/>
-    
       <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="LeetCode" scheme="https://hiyongz.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -391,9 +410,9 @@
       <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="数据结构" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数据结构" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="数组" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E7%BB%84/"/>
     
@@ -431,31 +450,6 @@
   </entry>
   
   <entry>
-    <title>测试题库：docker容器</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-docker/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-docker/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T13:18:42.245Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
-    
-  </entry>
-  
-  <entry>
     <title>测试题库：持续集成</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/</id>
@@ -483,6 +477,31 @@
   </entry>
   
   <entry>
+    <title>测试题库：docker容器</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-docker/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-docker/</id>
+    <published>2021-04-26T04:12:00.000Z</published>
+    <updated>2021-05-10T13:18:42.245Z</updated>
+    
+    <summary type="html">
+    
+      Here&#39;s something encrypted, password is required to continue reading.
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
+    
+    
+      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
     <title>测试题库：Linux、Shell</title>
     <link href="https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/"/>
     <id>https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/</id>
@@ -504,31 +523,6 @@
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
       <category term="Linux" scheme="https://hiyongz.github.io/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试题库：app自动化测试</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-12T23:41:02.808Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="appium" scheme="https://hiyongz.github.io/tags/appium/"/>
     
   </entry>
   

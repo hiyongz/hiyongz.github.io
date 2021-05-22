@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-bash-programing2/</loc>
+    <lastmod>2021-05-22</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</loc>
+    <lastmod>2021-05-22</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-getopt/</loc>
+    <lastmod>2021-05-22</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
+    <lastmod>2021-05-22</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-bash-programing/</loc>
+    <lastmod>2021-05-21</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/</loc>
     <lastmod>2021-05-20</lastmod>
   </url>
@@ -10,10 +30,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-leetcode/</loc>
-    <lastmod>2021-05-20</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</loc>
     <lastmod>2021-05-20</lastmod>
   </url>
   <url>
@@ -126,10 +142,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-web-testing/</loc>
-    <lastmod>2021-05-12</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-getopt/</loc>
     <lastmod>2021-05-12</lastmod>
   </url>
   <url>
@@ -373,10 +385,6 @@
     <lastmod>2021-02-02</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/regular-expression-and-python-regex/</loc>
-    <lastmod>2021-01-31</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/selenium-switch_to/</loc>
     <lastmod>2021-01-31</lastmod>
   </url>
@@ -443,10 +451,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/api-test-charles-ca-certificate-install/</loc>
     <lastmod>2021-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-bash-programing/</loc>
-    <lastmod>2021-01-11</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-performance-command-guide/</loc>
