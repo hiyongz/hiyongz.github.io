@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-22T06:54:01.921Z</updated>
+  <updated>2021-05-23T13:40:05.204Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL数据库进阶知识点</title>
+    <link href="https://hiyongz.github.io/posts/database-for-mysql-advance/"/>
+    <id>https://hiyongz.github.io/posts/database-for-mysql-advance/</id>
+    <published>2021-05-23T04:12:00.000Z</published>
+    <updated>2021-05-23T13:40:05.204Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MySQL数据库进阶知识点&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发，数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux Bash编程二：文本处理</title>
@@ -475,31 +496,6 @@
       <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
     
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试题库：Linux、Shell</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-linux-shell/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-17T13:48:20.327Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
-    
-      <category term="Linux" scheme="https://hiyongz.github.io/tags/Linux/"/>
     
   </entry>
   

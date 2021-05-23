@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MySQL数据库进阶知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库进阶知识点">
+<meta property="og:url" content="https://hiyongz.github.io/posts/database-for-mysql-advance/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="MySQL数据库进阶知识点">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/database-for-mysql-advance/pymysql">
+<meta property="og:image" content="https://hiyongz.github.io/posts/database-for-mysql-advance/pymysql2">
+<meta property="article:published_time" content="2021-05-23T04:12:00.000Z">
+<meta property="article:modified_time" content="2021-05-23T13:40:05.204Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/database-for-mysql-advance/pymysql">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/database-for-mysql-advance/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL数据库进阶知识点 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/database-for-mysql-advance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL数据库进阶知识点
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-23 12:12:00" itemprop="dateCreated datePublished" datetime="2021-05-23T12:12:00+08:00">2021-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">测试开发，数据库</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/database-for-mysql-advance/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/database-for-mysql-advance/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>MySQL数据库进阶知识点</p>
+<a id="more"></a>
+<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h1><p>sys数据库<br>processlist表记录进程</p>
+<p>show log<br>查询数据库日志，定位查询慢的原因<br><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/log-destinations.html">https://dev.mysql.com/doc/refman/8.0/en/log-destinations.html</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> general_log = <span class="string">&#x27;ON&#x27;</span>;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">&quot;general_log%&quot;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> mysql.general_log;</span><br><span class="line"><span class="comment"># 连接用户</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> sys.session;</span><br></pre></td></tr></table></figure>
+<p>sql语句执行日志保存路径：<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">general_log	ON</span><br><span class="line">general_log_file	D:\tools\mysql-8.0.16-winx64\data\DESKTOP-EHODIV3.log</span><br></pre></td></tr></table></figure></p>
+<p>bin  log</p>
+<h1 id="数据库备份"><a href="#数据库备份" class="headerlink" title="数据库备份"></a>数据库备份</h1><p>mysqldump文档：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mysqldump -h 127.0.0.1 -u root -p1223456 --databases testdb &gt; /tmp/testdb2.sql</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>-C</code>：压缩</li>
+</ul>
+<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>注意：需要先登录到mysql数据库服务器上。<br>然后创建数据库：create database testdb2;<br>使用数据库：use testdb2<br>然后初始化数据库：source D:\testdb2.sql</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; source testdb2.sql</span><br></pre></td></tr></table></figure>
+<h1 id="python操作数据库"><a href="#python操作数据库" class="headerlink" title="python操作数据库"></a>python操作数据库</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mysql-connector-python</span><br></pre></td></tr></table></figure>
+<p><img src="pymysql" width="60%" height="60%" /><br><img src="pymysql2" width="60%" height="60%" /></p>
+<h1 id="数据库面试题"><a href="#数据库面试题" class="headerlink" title="数据库面试题"></a>数据库面试题</h1><p>数据库面试知识点结构<br>数据定义：DDL<br>sql基本查询知识：DML<br>sql的知识进阶：DML<br>数据库实操经验：自身机制与性能</p>
+<h2 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h2><p>数据类型：常见数字类型、字符串类型(varchar)等<br>关系定义：主键、外键、索引<br>表结构修改： alter</p>
+<h2 id="sql基本查询"><a href="#sql基本查询" class="headerlink" title="sql基本查询"></a>sql基本查询</h2><p>条件查询<br>分页查询<br>聚合查询<br>更新符合条件数据<br>删除符合条件数据</p>
+<h2 id="sql进阶"><a href="#sql进阶" class="headerlink" title="sql进阶"></a>sql进阶</h2><p>连接(Join)查询： inner、left、 right、full、 cross<br>事务：定义与语法<br>索引：价值与用途<br>存储过程：如何对存储过程进行测试</p>
+<h2 id="数据库使用经验"><a href="#数据库使用经验" class="headerlink" title="数据库使用经验"></a>数据库使用经验</h2><p>常见数据库：mysql、 oracle、 mongodb、 redis<br>数据库的部署：docker、开放端口、连接方式<br>数据库备份与恢复：mysqldump、 mysql<br>性能统计：连接数、 slow sql<br>加锁机制：悲观锁、乐观锁、行锁、表锁</p>
+<h2 id="推荐书籍与学习建议"><a href="#推荐书籍与学习建议" class="headerlink" title="推荐书籍与学习建议"></a>推荐书籍与学习建议</h2><ul>
+<li>SQL必知必会(第4版)</li>
+<li>高性能 MySQL(最新版)</li>
+</ul>
+<p>MySQL官方文档</p>
+<p>熟悉 MySQL，不要学习 SQL Server等边缘数据库<br>学好SQL，RDBMS与NoSQL产品多数也都支持SQL<br>NoSQL数据库多数应用于大数据，可以用于拔高了解<br>使用 Python Flask编写一个小网站熟悉下SQL的应用场景</p>
+<h1 id="事务-transaction"><a href="#事务-transaction" class="headerlink" title="事务-transaction"></a>事务-transaction</h1><h2 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h2><p>一个事务其实就是一个完整的业务逻辑。是一个最小的工作单元，不可再分。<br>只有DML语句才会有事务，只有insert，delete，update三个语句和事务有关，因为三个语句涉及到对数据库表的增、删、改。一个事务其实就是多条DML语句同时成功，或者同时失败！</p>
+<p>InnoDB存储引擎：提供一组用来记录事务性活动的日志文件。</p>
+<ul>
+<li>在事务的执行过程中，每一条DML的操作都会记录到“事务性活动的日志文件”中。</li>
+<li>在事务的执行过程中，我们可以提交事务，也可以回滚事务。</li>
+</ul>
+<p>提交事务？</p>
+<ul>
+<li>清空事务性活动的日志文件，将数据全部彻底持久化到数据库表中。</li>
+<li>提交事务标志着，事务的结束。并且是一种全部成功的结束。</li>
+<li>commit; 语句</li>
+</ul>
+<p>回滚事务？</p>
+<ul>
+<li>将之前所有的DML操作全部撤销，并且清空事务性活动的日志文件</li>
+<li>回滚事务标志着，事务的结束。并且是一种全部失败的结束。</li>
+<li>rollback; 语句（回滚永远都是只能回滚到上一次的提交点！）</li>
+</ul>
+<p>mysql默认情况下是支持自动提交事务的。（自动提交：每执行一条DML语句，则提交一次）<br>怎么将mysql的自动提交机制关闭掉呢？</p>
+<ul>
+<li>先执行这个命令：start transaction;</li>
+</ul>
+<h2 id="事务的4个特性"><a href="#事务的4个特性" class="headerlink" title="事务的4个特性"></a>事务的4个特性</h2><p>A：原子性</p>
+<ul>
+<li>说明事务是最小的工作单元。不可再分。</li>
+</ul>
+<p>C：一致性</p>
+<ul>
+<li>所有事务要求，在同一个事务当中，所有操作必须同时成功，或者同时失败，以保证数据的一致性。</li>
+</ul>
+<p>I：隔离性</p>
+<ul>
+<li>A事务和B事务之间具有一定的隔离。</li>
+<li>A事务在操作一张表的时候，另一个事务B也操作这张表会那样？？？</li>
+</ul>
+<p>D：持久性</p>
+<ul>
+<li>事务最终结束的一个保障。事务提交，就相当于将没有保存到硬盘上的数据保存到硬盘上！</li>
+</ul>
+<h2 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h2><p>事务和事务之间的4种隔离级别<br>1、读未提交：read uncommitted（最低的隔离级别）《没有提交就读到了》</p>
+<ul>
+<li>什么是读未提交？事务A可以读取到事务B未提交的数据。</li>
+<li>这种隔离级别存在的问题就是：脏读现象！(Dirty Read)，我们称读到了脏数据。</li>
+<li>这种隔离级别一般都是理论上的，大多数的数据库隔离级别都是二档起步！</li>
+</ul>
+<p>2、读已提交：read committed《提交之后才能读到》</p>
+<ul>
+<li>什么是读已提交？事务A只能读取到事务B提交之后的数据。</li>
+<li>这种隔离级别解决解决了脏读的现象。</li>
+<li>存在的问题： 不可重复读取数据。</li>
+<li>什么是不可重复读取数据呢？在事务开启之后，第一次读到的数据是3条，当前事务还没有结束，可能第二次再读取的时候，读到的数据是4条，3不等于4称为不可重复读取。</li>
+<li>这种隔离级别是比较真实的数据，每一次读到的数据是绝对的真实。</li>
+<li>oracle数据库默认的隔离级别是：read committed</li>
+</ul>
+<p>3、可重复读：repeatable read《提交之后也读不到，永远读取的都是刚开启事务时的数据》</p>
+<ul>
+<li>什么是可重复读取？事务A开启之后，不管是多久，每一次在事务A中读取到的数据都是一致的。即使事务B将数— 据已经修改，并且提交了，事务A读取到的数据还是没有发生改变，这就是可重复读。</li>
+<li>可重复读解决了不可重复读取数据。</li>
+<li>可重复读存在的问题是可能会出现幻影读。每一次读取到的数据都是幻象。不够真实！</li>
+</ul>
+<p>早晨9点开始开启了事务，只要事务不结束，到晚上9点，读到的数据还是那样！<br>读到的是假象。不够绝对的真实。</p>
+<p>mysql中默认的事务隔离级别就是这个！！！！！！！！！！！</p>
+<p>4、序列化/串行化：serializable（最高的隔离级别）</p>
+<ul>
+<li>这是最高隔离级别，效率最低。解决了所有的问题。</li>
+<li>这种隔离级别表示事务排队，不能并发！</li>
+<li>synchronized，线程同步（事务同步）</li>
+<li>每一次读取到的数据都是最真实的，并且效率是最低的。</li>
+</ul>
+<h1 id="索引-index"><a href="#索引-index" class="headerlink" title="索引-index"></a>索引-index</h1><h2 id="什么是索引？"><a href="#什么是索引？" class="headerlink" title="什么是索引？"></a>什么是索引？</h2><p>索引是在数据库表的字段上添加的，是为了提高查询效率（缩小扫描范围）存在的一种机制。<br>一张表的一个字段可以添加一个索引，当然，多个字段联合起来也可以添加索引。</p>
+<p>MySQL在查询方面主要就是两种方式：</p>
+<ul>
+<li>第一种方式：全表扫描</li>
+<li>第二种方式：根据索引检索。</li>
+</ul>
+<p>在mysql数据库当中索引是需要排序的，并且这个所以的排序和TreeSet数据结构相同。TreeSet（TreeMap）底层是一个自平衡的二叉树！在mysql当中索引是一个B-Tree数据结构。遵循左小又大原则存放。采用中序遍历方式遍历取数据。</p>
+<p>注意：</p>
+<ul>
+<li>在任何数据库当中<strong>主键</strong>上都会自动添加索引对象，id字段上自动有索引，因为id是PK。另外在mysql当中，一个字段上如果有<strong>unique</strong>约束的话，也会自动创建索引对象。</li>
+<li>在任何数据库当中，任何一张表的任何一条记录在硬盘存储上都有一个硬盘的物理存储编号。</li>
+<li>在mysql当中，索引是一个单独的对象，不同的存储引擎以不同的形式    存在，在MyISAM存储引擎中，索引存储在一个.MYI文件中。在InnoDB存储引擎中索引存储在一个逻辑名称叫做tablespace的当中。在MEMORY存储引擎当中索引被存储在内存当中。不管索引存储在哪里，索引在mysql当中都是一个树的形式存在。（自平衡二叉树：B-Tree）</li>
+</ul>
+<p>什么条件下，我们会考虑给字段添加索引呢？</p>
+<ul>
+<li>条件1：数据量庞大（到底有多么庞大算庞大，这个需要测试，因为每一个硬件环境不同）</li>
+<li>条件2：该字段经常出现在where的后面，以条件的形式存在，也就是说这个字段总是被扫描。</li>
+<li>条件3：该字段很少的DML(insert delete update)操作。（因为DML之后，索引需要重新排序。）</li>
+</ul>
+<p>建议不要随意添加索引，因为索引也是需要维护的，太多的话反而会降低系统的性能。<br>建议通过主键查询，建议通过unique约束的字段进行查询，效率是比较高的。</p>
+<h2 id="索引创建和删除"><a href="#索引创建和删除" class="headerlink" title="索引创建和删除"></a>索引创建和删除</h2><p>创建索引：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create index emp_ename_index on emp(ename);</span><br></pre></td></tr></table></figure><br>给emp表的ename字段添加索引，起名：emp_ename_index</p>
+<p>删除索引：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; drop index emp_ename_index on emp;</span><br></pre></td></tr></table></figure><br>将emp表上的emp_ename_index索引对象删除。</p>
+<p>查看一个SQL语句是否使用了索引进行检索<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; explain select * from emp where ename = &#x27;KING&#x27;;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ALL  | NULL          | NULL | NULL    | NULL |   14 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br></pre></td></tr></table></figure><br>扫描14条记录：说明没有使用索引。type=ALL<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create index emp_ename_index on emp(ename);</span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from emp where ename = &#x27;KING&#x27;;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-----------------+-----------------+---------+-------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys   | key             | key_len | ref   | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-----------------+-----------------+---------+-------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ref  | emp_ename_index | emp_ename_index | 33      | const |    1 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-----------------+-----------------+---------+-------+------+-------------+</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="索引有失效"><a href="#索引有失效" class="headerlink" title="索引有失效"></a>索引有失效</h2><p>索引有失效的时候，什么时候索引失效呢？</p>
+<h3 id="失效的第1种情况："><a href="#失效的第1种情况：" class="headerlink" title="失效的第1种情况："></a>失效的第1种情况：</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> ename <span class="keyword">like</span> <span class="string">&#x27;%T&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>ename上即使添加了索引，也不会走索引，为什么？<br>原因是因为模糊匹配当中以“%”开头了！尽量避免模糊查询的时候以“%”开始。这是一种优化的手段/策略。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; explain select * from emp where ename like &#x27;%T&#x27;;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ALL  | NULL          | NULL | NULL    | NULL |   14 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="失效的第2种情况："><a href="#失效的第2种情况：" class="headerlink" title="失效的第2种情况："></a>失效的第2种情况：</h3><p>使用or的时候会失效，如果使用or那么要求or两边的条件字段都要有索引，才会走索引，如果其中一边有一个字段没有索引，那么另一个字段上的索引也会失效。所以这就是为什么不建议使用or的原因。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; explain select * from emp where ename = &#x27;KING&#x27; or job = &#x27;MANAGER&#x27;;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-----------------+------+---------+------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys   | key  | key_len | ref  | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-----------------+------+---------+------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ALL  | emp_ename_index | NULL | NULL    | NULL |   14 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-----------------+------+---------+------+------+-------------+</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="失效的第3种情况："><a href="#失效的第3种情况：" class="headerlink" title="失效的第3种情况："></a>失效的第3种情况：</h3><p>使用复合索引的时候，没有使用左侧的列查找，索引失效<br>什么是复合索引？</p>
+<ul>
+<li>两个字段，或者更多的字段联合起来添加一个索引，叫做复合索引。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create index emp_job_sal_index on emp(job,sal);</span><br><span class="line">mysql&gt; explain select * from emp where job = &#x27;MANAGER&#x27;;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-------------------+-------------------+---------+-------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys     | key               | key_len | ref   | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-------------------+-------------------+---------+-------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ref  | emp_job_sal_index | emp_job_sal_index | 30      | const |    3 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+-------------------+-------------------+---------+-------+------+-------------+</span></span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from emp where sal = 800;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ALL  | NULL          | NULL | NULL    | NULL |   14 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br></pre></td></tr></table></figure>
+<h3 id="失效的第4种情况："><a href="#失效的第4种情况：" class="headerlink" title="失效的第4种情况："></a>失效的第4种情况：</h3>在where当中索引列参加了运算，索引失效。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create index emp_sal_index on emp(sal);</span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from emp where sal = 800;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+---------------+---------+-------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys | key           | key_len | ref   | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+---------------+---------+-------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ref  | emp_sal_index | emp_sal_index | 9       | const |    1 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+---------------+---------+-------+------+-------------+</span></span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from emp where sal+1 = 800;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ALL  | NULL          | NULL | NULL    | NULL |   14 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br></pre></td></tr></table></figure>
+<h3 id="失效的第5种情况："><a href="#失效的第5种情况：" class="headerlink" title="失效的第5种情况："></a>失效的第5种情况：</h3>在where当中索引列使用了函数<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; explain select * from emp where lower(ename) = &#x27;smith&#x27;;</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | emp   | ALL  | NULL          | NULL | NULL    | NULL |   14 | Using where |</span><br><span class="line">+<span class="comment">----+-------------+-------+------+---------------+------+---------+------+------+-------------+</span></span><br></pre></td></tr></table></figure>
+<h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2>索引是各种数据库进行优化的重要手段。优化的时候优先考虑的因素就是索引。<br>索引在数据库当中分了很多类？</li>
+<li>单一索引：一个字段上添加索引。</li>
+<li><p>复合索引：两个字段或者更多的字段上添加索引。</p>
+</li>
+<li><p>主键索引：主键上添加索引。</p>
+</li>
+<li>唯一性索引：具有unique约束的字段上添加索引。</li>
+</ul>
+<p>注意：唯一性比较弱的字段上添加索引用处不大。</p>
+<h1 id="视图-view"><a href="#视图-view" class="headerlink" title="视图-view"></a>视图-view</h1><p>view:站在不同的角度去看待同一份数据。</p>
+<h2 id="创建和删除视图"><a href="#创建和删除视图" class="headerlink" title="创建和删除视图"></a>创建和删除视图</h2><p>表复制：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create table dept2 as select * from dept;</span><br></pre></td></tr></table></figure><br>dept2表中的数据：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from dept2;</span><br><span class="line">+<span class="comment">--------+------------+----------+</span></span><br><span class="line">| DEPTNO | DNAME      | LOC      |</span><br><span class="line">+<span class="comment">--------+------------+----------+</span></span><br><span class="line">|     10 | ACCOUNTING | NEW YORK |</span><br><span class="line">|     20 | RESEARCH   | DALLAS   |</span><br><span class="line">|     30 | SALES      | CHICAGO  |</span><br><span class="line">|     40 | OPERATIONS | BOSTON   |</span><br><span class="line">+<span class="comment">--------+------------+----------+</span></span><br></pre></td></tr></table></figure><br>创建视图对象：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> dept2_view <span class="keyword">as</span> <span class="keyword">select</span> * <span class="keyword">from</span> dept2;</span><br></pre></td></tr></table></figure><br>删除视图对象：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> dept2_view;</span><br></pre></td></tr></table></figure><br>注意：</p>
+<ul>
+<li>只有DQL语句才能以view的形式创建。</li>
+<li>create view view_name as 这里的语句必须是DQL语句;</li>
+</ul>
+<h2 id="用视图做什么？"><a href="#用视图做什么？" class="headerlink" title="用视图做什么？"></a>用视图做什么？</h2><p>我们可以面向视图对象进行增删改查，对视图对象的增删改查，会导致原表被操作！（视图的特点：通过对视图的操作，会影响到原表数据。）</p>
+<p>视图对象在实际开发中方便，简化开发，利于维护</p>
+<p>假设有一条非常复杂的SQL语句，而这条SQL语句需要在不同的位置上反复使用。</p>
+<ul>
+<li>每一次使用这个sql语句的时候都需要重新编写，很长，很麻烦，怎么办？</li>
+<li>可以把这条复杂的SQL语句以视图对象的形式新建。</li>
+<li>在需要编写这条SQL语句的位置直接使用视图对象，可以大大简化开发。</li>
+<li>并且利于后期的维护，因为修改的时候也只需要修改一个位置就行，只需要修改视图对象所映射的SQL语句。</li>
+</ul>
+<p>我们以后面向视图开发的时候，使用视图的时候可以像使用table一样。可以对视图进行增删改查等操作。视图不是在内存当中，视图对象也是存储在硬盘上的，不会消失。</p>
+<p>再提醒一下：</p>
+<ul>
+<li>视图对应的语句只能是DQL语句。</li>
+<li>但是视图对象创建完成之后，可以对视图进行增删改查等操作。</li>
+</ul>
+<p>小插曲：</p>
+<ul>
+<li>增删改查，又叫做：CRUD。</li>
+<li>CRUD是在公司中程序员之间沟通的术语。一般我们很少说增删改查。一般都说CRUD。</li>
+</ul>
+<p>C:Create（增）<br>R:Retrive（查：检索）<br>U:Update（改）<br>D:Delete（删）</p>
+<h1 id="数据库设计三范式"><a href="#数据库设计三范式" class="headerlink" title="数据库设计三范式"></a>数据库设计三范式</h1><h2 id="什么是数据库设计范式？"><a href="#什么是数据库设计范式？" class="headerlink" title="什么是数据库设计范式？"></a>什么是数据库设计范式？</h2><ul>
+<li>数据库表的设计依据。教你怎么进行数据库表的设计。</li>
+</ul>
+<h2 id="数据库设计范式"><a href="#数据库设计范式" class="headerlink" title="数据库设计范式"></a>数据库设计范式</h2><p>第一范式：要求任何一张表必须有主键，每一个字段原子性不可再分。<br>第二范式：建立在第一范式的基础之上，要求所有非主键字段完全依赖主键，不要产生部分依赖。<br>第三范式：建立在第二范式的基础之上，要求所有非主键字段直接依赖主键，不要产生传递依赖。</p>
+<p>声明：三范式是面试官经常问的，所以一定要熟记在心！</p>
+<p>设计数据库表的时候，按照以上的范式进行，可以避免表中数据的冗余，空间的浪费。</p>
+<h3 id="第一范式"><a href="#第一范式" class="headerlink" title="第一范式"></a>第一范式</h3><p>最核心，最重要的范式，所有表的设计都需要满足。</p>
+<ul>
+<li>必须有主键，并且每一个字段都是原子性不可再分。</li>
+</ul>
+<h3 id="第二范式："><a href="#第二范式：" class="headerlink" title="第二范式："></a>第二范式：</h3><p>建立在第一范式的基础之上，<br>要求所有非主键字段必须完全依赖主键，不要产生部分依赖。</p>
+<p>多对多怎么设计？</p>
+<ul>
+<li>多对多，三张表，关系表两个外键</li>
+</ul>
+<h3 id="第三范式"><a href="#第三范式" class="headerlink" title="第三范式"></a>第三范式</h3><p>第三范式建立在第二范式的基础之上<br>要求所有非主键字典必须直接依赖主键，不要产生传递依赖。</p>
+<p>一对多:</p>
+<ul>
+<li>一对多，两张表，多的表加外键</li>
+</ul>
+<p>一对一：<br>一对一放到一张表中不就行了吗？为啥还要拆分表？<br>在实际的开发中，可能存在一张表字段太多，太庞大。这个时候要拆分表。<br>一对一怎么设计？</p>
+<ul>
+<li>口诀：一对一，外键唯一</li>
+</ul>
+<p>数据库设计三范式是理论上的。</p>
+<p>实践和理论有的时候有偏差。</p>
+<p>最终的目的都是为了满足客户的需求，有的时候会拿冗余换执行速度。</p>
+<p>因为在sql当中，表和表之间连接次数越多，效率越低。（笛卡尔积）</p>
+<p>有的时候可能会存在冗余，但是为了减少表的连接次数，这样做也是合理的，<br>并且对于开发人员来说，sql语句的编写难度也会降低。</p>
+<p>面试的时候把这句话说上：他就不会认为你是初级程序员了！</p>
+<h1 id="加锁机制"><a href="#加锁机制" class="headerlink" title="加锁机制"></a>加锁机制</h1><p>加锁机制：悲观锁、乐观锁、行锁、表锁</p>
+<p>不同的存储引擎支持不同的锁机制</p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>MySQL数据库进阶知识点</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/database-for-mysql-advance/" title="MySQL数据库进阶知识点">https://hiyongz.github.io/posts/database-for-mysql-advance/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/database-for-mysql-advance/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/linux-shell-bash-programing2/" rel="prev" title="Linux Bash编程二：文本处理">
+      <i class="fa fa-chevron-left"></i> Linux Bash编程二：文本处理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BD"><span class="nav-number">2.</span> <span class="nav-text">数据库备份</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5"><span class="nav-number">2.1.</span> <span class="nav-text">导入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">python操作数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">数据库面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">数据定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.2.</span> <span class="nav-text">sql基本查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql%E8%BF%9B%E9%98%B6"><span class="nav-number">4.3.</span> <span class="nav-text">sql进阶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E7%BB%8F%E9%AA%8C"><span class="nav-number">4.4.</span> <span class="nav-text">数据库使用经验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E4%B9%A6%E7%B1%8D%E4%B8%8E%E5%AD%A6%E4%B9%A0%E5%BB%BA%E8%AE%AE"><span class="nav-number">4.5.</span> <span class="nav-text">推荐书籍与学习建议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1-transaction"><span class="nav-number">5.</span> <span class="nav-text">事务-transaction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%EF%BC%9F"><span class="nav-number">5.1.</span> <span class="nav-text">什么是事务？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%844%E4%B8%AA%E7%89%B9%E6%80%A7"><span class="nav-number">5.2.</span> <span class="nav-text">事务的4个特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="nav-number">5.3.</span> <span class="nav-text">隔离性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95-index"><span class="nav-number">6.</span> <span class="nav-text">索引-index</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">什么是索引？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4"><span class="nav-number">6.2.</span> <span class="nav-text">索引创建和删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E6%9C%89%E5%A4%B1%E6%95%88"><span class="nav-number">6.3.</span> <span class="nav-text">索引有失效</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E6%95%88%E7%9A%84%E7%AC%AC1%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">6.3.1.</span> <span class="nav-text">失效的第1种情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E6%95%88%E7%9A%84%E7%AC%AC2%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">6.3.2.</span> <span class="nav-text">失效的第2种情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E6%95%88%E7%9A%84%E7%AC%AC3%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">6.3.3.</span> <span class="nav-text">失效的第3种情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E6%95%88%E7%9A%84%E7%AC%AC4%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">6.3.4.</span> <span class="nav-text">失效的第4种情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B1%E6%95%88%E7%9A%84%E7%AC%AC5%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">6.3.5.</span> <span class="nav-text">失效的第5种情况：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="nav-number">6.4.</span> <span class="nav-text">索引分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE-view"><span class="nav-number">7.</span> <span class="nav-text">视图-view</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E8%A7%86%E5%9B%BE"><span class="nav-number">7.1.</span> <span class="nav-text">创建和删除视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E8%A7%86%E5%9B%BE%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">7.2.</span> <span class="nav-text">用视图做什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">数据库设计三范式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">什么是数据库设计范式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F"><span class="nav-number">8.2.</span> <span class="nav-text">数据库设计范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8C%83%E5%BC%8F"><span class="nav-number">8.2.1.</span> <span class="nav-text">第一范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8C%83%E5%BC%8F%EF%BC%9A"><span class="nav-number">8.2.2.</span> <span class="nav-text">第二范式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8C%83%E5%BC%8F"><span class="nav-number">8.2.3.</span> <span class="nav-text">第三范式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E9%94%81%E6%9C%BA%E5%88%B6"><span class="nav-number">9.</span> <span class="nav-text">加锁机制</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">117</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">126</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">427k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:28</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
