@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-23T23:37:19.682Z</updated>
+  <updated>2021-05-25T13:55:47.506Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python多线程与多进程</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-multi-process/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-multi-process/</id>
+    <published>2021-05-25T04:12:00.000Z</published>
+    <updated>2021-05-25T13:55:47.506Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;进程(process)和线程(thread)是操作系统的基本概念，是操作系统程序运行的基本单元，本文简要介绍进程和线程的概念以及Python中的多进程和多线程。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/categories/Python/"/>
+    
+    
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
+    
+      <category term="多线程" scheme="https://hiyongz.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="多进程" scheme="https://hiyongz.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MySQL数据库进阶知识点</title>
     <link href="https://hiyongz.github.io/posts/database-for-mysql-advance/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-advance/</id>
     <published>2021-05-23T04:12:00.000Z</published>
-    <updated>2021-05-23T23:37:19.682Z</updated>
+    <updated>2021-05-25T14:55:36.925Z</updated>
     
     <summary type="html">
     
@@ -471,33 +496,6 @@
       <category term="空间复杂度" scheme="https://hiyongz.github.io/tags/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
     
       <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试题库：持续集成</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T13:15:45.928Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
   </entry>
   
