@@ -46,7 +46,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-advance/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-advance/</id>
     <published>2021-05-23T04:12:00.000Z</published>
-    <updated>2021-05-25T14:55:36.925Z</updated>
+    <updated>2021-05-25T23:35:30.510Z</updated>
     
     <summary type="html">
     
@@ -500,11 +500,11 @@
   </entry>
   
   <entry>
-    <title>测试题库：docker容器</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-docker/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-docker/</id>
+    <title>测试题库：持续集成</title>
+    <link href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/"/>
+    <id>https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/</id>
     <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T13:18:42.245Z</updated>
+    <updated>2021-05-10T13:15:45.928Z</updated>
     
     <summary type="html">
     
@@ -515,12 +515,14 @@
     
       <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
     
-      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
     
       <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
     
     
-      <category term="Docker" scheme="https://hiyongz.github.io/tags/Docker/"/>
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
   </entry>
   
