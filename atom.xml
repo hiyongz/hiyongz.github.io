@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-25T13:55:47.506Z</updated>
+  <updated>2021-05-27T23:40:25.315Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>常见搜索算法（一）：深度优先和广度优先搜索</title>
+    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/"/>
+    <id>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</id>
+    <published>2021-05-27T04:12:00.000Z</published>
+    <updated>2021-05-27T23:40:25.315Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;搜索算法是非常常用的算法，用于检索存储在某些数据结构中的信息。最简单直接的就是暴力搜索，也就是线性搜索，但它的时间复杂度较高，在实际工程应用中很少使用，需要对它进行优化。&lt;/p&gt;
+&lt;p&gt;比如二分查找，贪心算法等搜索算法，在&lt;a href=&quot;&quot;&gt;算法笔记：树、堆和图&lt;/a&gt;中，提到了对图和二叉树的搜索算法：深度优先搜索（DFS）和广度优先搜索（BFS），如果知道起点和终点状态的情况下，还可以使用双向BFS。DFS和BFS根据特定的顺序进行依次搜索，效率也不高，启发式搜索（heuristic search）也就是A*算法引入估价函数进一步提升了搜索效率，这些算法应用于各种场景中，本文介绍在树和图中常用的深度优先和广度优先搜索算法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="DFS" scheme="https://hiyongz.github.io/tags/DFS/"/>
+    
+      <category term="BFS" scheme="https://hiyongz.github.io/tags/BFS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python多线程与多进程</title>
     <link href="https://hiyongz.github.io/posts/python-notes-for-multi-process/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-multi-process/</id>
     <published>2021-05-25T04:12:00.000Z</published>
-    <updated>2021-05-25T13:55:47.506Z</updated>
+    <updated>2021-05-27T14:03:37.839Z</updated>
     
     <summary type="html">
     
@@ -30,10 +60,12 @@
     </summary>
     
     
-      <category term="Python" scheme="https://hiyongz.github.io/categories/Python/"/>
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
-      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
     
       <category term="多线程" scheme="https://hiyongz.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
@@ -496,33 +528,6 @@
       <category term="空间复杂度" scheme="https://hiyongz.github.io/tags/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
     
       <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试题库：持续集成</title>
-    <link href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/"/>
-    <id>https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/</id>
-    <published>2021-04-26T04:12:00.000Z</published>
-    <updated>2021-05-10T13:15:45.928Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-      <category term="测试题库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
   </entry>
   
