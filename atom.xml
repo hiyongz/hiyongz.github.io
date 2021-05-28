@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-05-27T23:40:25.315Z</updated>
+  <updated>2021-05-28T05:52:00.208Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/"/>
     <id>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</id>
     <published>2021-05-27T04:12:00.000Z</published>
-    <updated>2021-05-27T23:40:25.315Z</updated>
+    <updated>2021-05-28T05:52:00.208Z</updated>
     
     <summary type="html">
     
@@ -38,7 +38,7 @@
       <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
     
       <category term="DFS" scheme="https://hiyongz.github.io/tags/DFS/"/>
     
@@ -51,7 +51,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-multi-process/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-multi-process/</id>
     <published>2021-05-25T04:12:00.000Z</published>
-    <updated>2021-05-27T14:03:37.839Z</updated>
+    <updated>2021-05-28T05:52:00.230Z</updated>
     
     <summary type="html">
     
@@ -65,7 +65,7 @@
       <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
     
       <category term="多线程" scheme="https://hiyongz.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
@@ -180,7 +180,7 @@
     <link href="https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/"/>
     <id>https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/</id>
     <published>2021-05-13T04:12:00.000Z</published>
-    <updated>2021-05-22T08:25:40.181Z</updated>
+    <updated>2021-05-28T05:52:00.224Z</updated>
     
     <summary type="html">
     
@@ -196,8 +196,6 @@
       <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
       <category term="哈希表" scheme="https://hiyongz.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/"/>
     
       <category term="映射" scheme="https://hiyongz.github.io/tags/%E6%98%A0%E5%B0%84/"/>
@@ -205,6 +203,8 @@
       <category term="集合" scheme="https://hiyongz.github.io/tags/%E9%9B%86%E5%90%88/"/>
     
       <category term="Hash table" scheme="https://hiyongz.github.io/tags/Hash-table/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
     
       <category term="字典" scheme="https://hiyongz.github.io/tags/%E5%AD%97%E5%85%B8/"/>
     
@@ -355,7 +355,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-getopt/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-getopt/</id>
     <published>2021-05-05T04:12:00.000Z</published>
-    <updated>2021-05-22T02:37:28.175Z</updated>
+    <updated>2021-05-28T05:52:00.228Z</updated>
     
     <summary type="html">
     
@@ -369,7 +369,7 @@
       <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
     
     
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+      <category term="python" scheme="https://hiyongz.github.io/tags/python/"/>
     
       <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
     
@@ -476,7 +476,7 @@
     <link href="https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/"/>
     <id>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</id>
     <published>2021-04-28T04:12:00.000Z</published>
-    <updated>2021-05-22T08:26:01.718Z</updated>
+    <updated>2021-05-28T05:52:00.225Z</updated>
     
     <summary type="html">
     
@@ -494,8 +494,6 @@
     
       <category term="数据结构" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
       <category term="数组" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E7%BB%84/"/>
     
       <category term="链表" scheme="https://hiyongz.github.io/tags/%E9%93%BE%E8%A1%A8/"/>
@@ -503,6 +501,8 @@
       <category term="栈" scheme="https://hiyongz.github.io/tags/%E6%A0%88/"/>
     
       <category term="队列" scheme="https://hiyongz.github.io/tags/%E9%98%9F%E5%88%97/"/>
+    
+      <category term="数据结构与算法 - python" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-python/"/>
     
   </entry>
   
