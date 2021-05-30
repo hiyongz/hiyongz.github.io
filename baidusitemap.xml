@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/container-docker-dockerfile/</loc>
+    <lastmod>2021-05-30</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-software-testing/</loc>
+    <lastmod>2021-05-30</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
@@ -267,10 +275,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins/</loc>
     <lastmod>2021-04-19</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/container-docker-dockerfile/</loc>
-    <lastmod>2021-04-12</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/selenium-appium-keycode/</loc>
