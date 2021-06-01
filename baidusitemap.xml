@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-python/</loc>
+    <lastmod>2021-06-01</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mayijinfu/</loc>
+    <lastmod>2021-05-31</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/container-docker-dockerfile/</loc>
     <lastmod>2021-05-30</lastmod>
   </url>
@@ -18,10 +26,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/</loc>
-    <lastmod>2021-05-28</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-python/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
@@ -87,10 +91,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/appium-adb/</loc>
     <lastmod>2021-05-28</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mayijinfu/</loc>
-    <lastmod>2021-05-26</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/database-for-mysql-advance/</loc>
