@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-06-02T23:39:49.522Z</updated>
+  <updated>2021-06-02T23:44:28.432Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-object-and-copy/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-object-and-copy/</id>
     <published>2021-06-01T04:12:00.000Z</published>
-    <updated>2021-06-02T23:39:49.522Z</updated>
+    <updated>2021-06-02T23:44:28.432Z</updated>
     
     <summary type="html">
     
@@ -32,7 +32,7 @@
     
       <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="Python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/"/>
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
     
     
       <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
