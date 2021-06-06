@@ -1089,34 +1089,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/%E6%A0%91/</loc>
-    <lastmod>2021-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-    <lastmod>2021-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/tags/%E5%A0%86/</loc>
-    <lastmod>2021-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/tags/%E5%9B%BE/</loc>
-    <lastmod>2021-06-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
     <lastmod>2021-06-06</lastmod>
     <changefreq>daily</changefreq>
@@ -1139,6 +1111,34 @@
   
   <url>
     <loc>https://hiyongz.github.io/tags/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0/</loc>
+    <lastmod>2021-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/tags/%E6%A0%91/</loc>
+    <lastmod>2021-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <lastmod>2021-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/tags/%E5%A0%86/</loc>
+    <lastmod>2021-06-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/tags/%E5%9B%BE/</loc>
     <lastmod>2021-06-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1551,14 +1551,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</loc>
+    <loc>https://hiyongz.github.io/tags/list/</loc>
     <lastmod>2021-06-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/list/</loc>
+    <loc>https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</loc>
     <lastmod>2021-06-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1768,14 +1768,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/</loc>
+    <loc>https://hiyongz.github.io/tags/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/</loc>
     <lastmod>2021-06-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/</loc>
+    <loc>https://hiyongz.github.io/tags/%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2021-06-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
