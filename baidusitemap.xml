@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/pytest-fixture/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/api-test-mitmproxy-guide/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/performance-testing-for-performance-monitoring-system/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/markdown-basic-syntax/</loc>
+    <lastmod>2021-06-12</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-binary-search/</loc>
     <lastmod>2021-06-07</lastmod>
   </url>
@@ -78,10 +98,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/performance-testing-jmeter-concurrency/</loc>
-    <lastmod>2021-05-28</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/performance-testing-for-performance-monitoring-system/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
@@ -186,18 +202,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-requests/</loc>
-    <lastmod>2021-05-13</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/api-test-mitmproxy-guide/</loc>
-    <lastmod>2021-05-13</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/pytest-fixture/</loc>
-    <lastmod>2021-05-13</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
     <lastmod>2021-05-13</lastmod>
   </url>
   <url>
