@@ -12,6 +12,33 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Python中的闭包]]></title>
+    <url>%2Fposts%2Fpython-notes-for-function-closures%2F</url>
+    <content type="text"><![CDATA[闭包 (closure) 是函数式编程中的一个概念，Python虽然不是纯粹的是函数式编程语言，但它仍然具有函数式编程的一些特性。在以前的文章Python笔记：Python装饰器中介绍的装饰器其实就使用了闭包，本文来介绍一下Python中的闭包。 目录 [toc] 嵌套函数和变量作用域介绍闭包之前，先理解什么是嵌套函数和变量作用域。 嵌套函数函数嵌套就是在一个函数内部又定义函数: 1234567891011def TestFunc(val1): val = val1 def innerFunc(): print(val) innerFunc()if __name__ == &#x27;__main__&#x27;: TestFunc(&#x27;Hello world&#x27;) 在TestFunc()内部又定义了innerFunc()函数，函数的嵌套主要两个方面的作用。 函数的嵌套能够保证内部函数的隐私，内部函数只能在外部函数作用域内访问。 合理的使用函数嵌套，能够提高程序的运行效率。 局部变量和全局变量在函数内部定义的变量称为局部变量，只在函数内部有效。一旦函数执行完毕，局部变量就会被回收。全局变量是定义在函数外的变量，作用域范围为全局，函数内部和外部都可以访问它。 一般情况下，不能在函数内部改变全局变量的值。如果想要在函数内部改变全局变量的值，需要加上 global 关键字： 123456789VALUE1 = 666def TestFunc2(): global VALUE1 VALUE1 = VALUE1 + 1 print(VALUE1)TestFunc2()print(VALUE1) 执行结果： 12667667 如果函数内部局部变量和全局变量同名，那么在函数内部，局部变量会覆盖全局变量： 12345678VALUE1 = 666def TestFunc3(): VALUE1 = 2 print(VALUE1)TestFunc3()print(VALUE1) 执行结果： 122666 嵌套函数的变量作用域类似的，对于嵌套函数，内部函数可以访问外部函数定义的变量，但是无法修改，如果要修改，需要加上 nonlocal 关键字： 12345678910def TestFunc(): val = 1 def innerFunc(): nonlocal val val = 2 print(&quot;inner:&quot;,val) innerFunc() print(&quot;outer:&quot;, val)TestFunc() 执行结果： 12inner: 2outer: 2 同样，如果内部函数的变量和外部函数变量同名，内部函数变量会覆盖外部函数的变量。 闭包闭包和嵌套函数类似，不同之处在于外部函数返回的是一个函数，而不是一个具体的值。下面用闭包实现计算一个数的 n 次幂： 123456789101112def nth_power(exponent): def exponent_of(base): return base ** exponent return exponent_ofsquare = nth_power(2) # 平方cube = nth_power(3) # 立方print(square)print(cube)print(square(2)) # 2的平方print(cube(2)) # 2的立方 执行结果： 1234&lt;function nth_power.&lt;locals&gt;.exponent_of at 0x000001E9629C04C8&gt;&lt;function nth_power.&lt;locals&gt;.exponent_of at 0x000001E9629C0708&gt;48 外部函数 nth_power() 返回的是函数 exponent_of()函数，闭包是一个函数对象，它记住了封闭作用域中的值，也就是记住了外部函数 nth_power() 的参数 exponent。 函数exponent_of()的作用域只在nth_power()内部，通过使用闭包，扩展了它的作用域，使能够在其作用域之外调用内部函数。即使函数本身从当前命名空间中删除，闭包作用域中的这个值也会被记住： 12345678910def nth_power(exponent): def exponent_of(base): return base ** exponent return exponent_ofsquare = nth_power(2) # 平方print(square(2)) # 2的平方del nth_powerprint(square(3)) # 3的平方 执行结果： 1249 闭包函数对象有一个__closure__属性，返回cell 对象的元组，而cell 对象中保存闭包的变量（例子中的exponent值）： 123456print(square)print(cube)print(square.__closure__)print(square.__closure__[0].cell_contents)print(cube.__closure__[0].cell_contents) 执行结果： 12345&lt;function nth_power.&lt;locals&gt;.exponent_of at 0x000001DC127D04C8&gt;&lt;function nth_power.&lt;locals&gt;.exponent_of at 0x000001DC127D0708&gt;(&lt;cell at 0x000001DC124401F8: int object at 0x00007FFFA7FAA1B0&gt;,)23 总结和嵌套函数返回一个值不同，闭包返回的是一个函数对象。闭包和嵌套函数的优点是可以让程序变得更简洁易读。python装饰器（decorator）中也使用闭包，可参考：Python笔记：Python装饰器。 --THE END--]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>闭包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[算法笔记：位运算]]></title>
+    <url>%2Fposts%2Falgorithm-notes-for-bitwise-operation%2F</url>
+    <content type="text"><![CDATA[计算机中的数据都是以二进制的形式存储在设备中，虽然十进制比二进制所需要的存储空间少，但二进制在硬件实现上要简单很多，而且在数模转换上也更加容易，因为只需要两种状态，所以计算机的底层运算都采用二进制。位运算就是对二进制数据进行的运算。使用合理的位运算可以提高代码在机器上的执行效率，本文将介绍常见的位运算以及Python中的位运算。 位运算符常见位操作符如下表：| 运算符 | 含义 | Python示例 || :——: | :————: | :——————————————————: || &amp; | AND 与 | x &amp; y || | | OR 或 | x | y || ~ | NOT 非 | ~x || ^ | XOR 异或 | x ^ y || &lt;&lt; | 左移 | x &lt;&lt; 1(相当于x*2) || &gt;&gt; | 右移 | x &gt;&gt; 1(相当于x/2) || >&gt;&gt; | 无符号右移 | Python没有符号位，Java中可以使用此符号 | 上表列出的位运算符也可以进行复合赋值运算：| 运算符 | Python示例 | 等价于 || :——: | :————: | :————: || &amp; | x &amp;= y | x = x &amp; y || | | x |= y | x = x | y || ^ | x ^= y | x = x ^ y || &lt;&lt; | x &lt;&lt;= 1 | x = x &lt;&lt; 1 || &gt;&gt; | x &gt;&gt;= 1 | x = x &gt;&gt; 1 || >&gt;&gt; | x &gt;&gt;&gt;= 1 | / | 注意与逻辑运算符的区别，逻辑与&amp;&amp;和逻辑或||具有短路求值特性，比如x &amp;&amp; y运算，如果x为false，则不会计算y；x || y运算中，如果x为true，则不会运算y。 下面介绍这些位运算符的使用方法。 Python位运算与 - &amp;按位与操作符就是按二进制位进行”与”运算，两位同时为1，结果为1，否则为012345678910&gt;&gt;&gt; x = 6&gt;&gt;&gt; y = 12&gt;&gt;&gt; x &amp; y4&gt;&gt;&gt; bin(x)&#x27;0b110&#x27;&gt;&gt;&gt; bin(y)&#x27;0b1100&#x27;&gt;&gt;&gt; bin(x &amp; y)&#x27;0b100&#x27; 或 - |或操作符进行按位或，只要其中一个为1，结果为1。12345678910&gt;&gt;&gt; x = 6&gt;&gt;&gt; y = 12&gt;&gt;&gt; x | y14&gt;&gt;&gt; bin(x)&#x27;0b110&#x27;&gt;&gt;&gt; bin(y)&#x27;0b1100&#x27;&gt;&gt;&gt; bin(x | y)&#x27;0b1110&#x27; 非 - ~非操作符就是取反操作：~x = -(x+1)123&gt;&gt;&gt; x = 6&gt;&gt;&gt; ~6-7 异或 - ^异或也就是相同为0，不同为1：12345678910&gt;&gt;&gt; x = 6&gt;&gt;&gt; y = 12&gt;&gt;&gt; x ^ y10&gt;&gt;&gt; bin(x)&#x27;0b110&#x27;&gt;&gt;&gt; bin(y)&#x27;0b1100&#x27;&gt;&gt;&gt; bin(x ^ y)&#x27;0b1010&#x27; 异或操作的一些特点：1、x ^ 0 = x123&gt;&gt;&gt; x = 6&gt;&gt;&gt; x ^ 06 2、x ^ (-1) = ~x12345&gt;&gt;&gt; x = 6&gt;&gt;&gt; x ^ -1-7&gt;&gt;&gt; ~x-7 3、x ^ (~x) = -1123&gt;&gt;&gt; x = 6&gt;&gt;&gt; x ^ (~x)-14、x ^ x = 0123&gt;&gt;&gt; x = 6&gt;&gt;&gt; x ^ x05、交换两个数1234567&gt;&gt;&gt; x = 6&gt;&gt;&gt; y = 12&gt;&gt;&gt; z = x ^ y&gt;&gt;&gt; x ^ z12&gt;&gt;&gt; y ^ z66、结合律x ^ y ^ z = x ^ (y ^ z) = (x ^ y) ^z 左移 - &lt;&lt;按位左移操作符(&lt;&lt;)将其第一位向左移，在右边补零。对于左移操作相当于将数字乘以2的n次幂：x &lt;&lt; n = x * 2^n。1234567&gt;&gt;&gt; x = 6&gt;&gt;&gt; x &lt;&lt; 112&gt;&gt;&gt; x &lt;&lt; 224&gt;&gt;&gt; x &lt;&lt; 348注意在Python编程中，没有必要使用移位操作来提高执行效率，因为Python编译器已经优化了，使用移位操作反而降低了代码的可读性。 右移 - &gt;&gt;按位右移操作符(&gt;&gt;)和左移相反，它是向右移动，左边补0。右移等价于：x &gt;&gt; n = floor(x / 2^n)1234567&gt;&gt;&gt; x = 10&gt;&gt;&gt; x &gt;&gt; 15&gt;&gt;&gt; x &gt;&gt; 22&gt;&gt;&gt; x // 42 位运算其它应用指定位置的位运算 将x 最右边的n 位清零：x&amp; (~0 &lt;&lt; n) 获取x 的第n 位值（0 或者1）：(x &gt;&gt; n) &amp; 1 获取x 的第n 位的幂值：x&amp; (1 &lt;&lt;n) 仅将第n 位置为1：x | (1 &lt;&lt; n) 第n位取反：x ^ (1 &lt;&lt; n) 仅将第n 位置为0：x &amp; (~ (1 &lt;&lt; n)) 将x 最高位至第n 位（含）清零：x&amp; ((1 &lt;&lt; n) -1) 判断奇偶x % 2 == 1 —&gt; (x &amp; 1) == 1x % 2 == 0 —&gt; (x &amp; 1) == 0 123456&gt;&gt;&gt; x = 10&gt;&gt;&gt; x &amp; 10&gt;&gt;&gt; x= 11&gt;&gt;&gt; x &amp; 11 将最低位的1清零12345678&gt;&gt;&gt; x = 10&gt;&gt;&gt; bin(x)&#x27;0b1010&#x27;&gt;&gt;&gt; x &amp; (x - 1)8&gt;&gt;&gt; bin(8)&#x27;0b1000&#x27;&gt;&gt;&gt;得到最低位的112345&gt;&gt;&gt; x = 10&gt;&gt;&gt; bin(x)&#x27;0b1010&#x27;&gt;&gt;&gt; x &amp; -x2清0123&gt;&gt;&gt; x = 10&gt;&gt;&gt; x &amp; ~x0 如果x和y是集合，Python中，位运算符可用于集合的运算，详见算法笔记：哈希表、映射和集合。 --THE END--]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>算法</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[常见搜索算法（二）：二分查找]]></title>
     <url>%2Fposts%2Falgorithm-notes-for-binary-search%2F</url>
     <content type="text"><![CDATA[搜索具有n个元素有序数组的某个元素时，最直接的方法就是对每个元素进行遍历，也就是线性搜索，时间复杂度为O(n)。 还有一种更高效的搜索方法就是本文要介绍的二分查找，时间复杂度为O(logn)，本文介绍使用Python实现二分查找。 二分查找二分查找要求查找数组是有序的，将有序的数组分成两半， 如果搜索值小于中间位置记录的值，则进一步查找前一个子表。 否则查找后一个子表。 重复上面的步骤，直到找到该值或不存在（间隔为0）。使用二分查找算法的前提： 查找数组是升序或者降序的 存在上下边界 元素可以通过索引访问 在升序排列数组：[2, 8, 10, 20, 30, 35, 42, 50, 52, 60] 中查找元素50. python实现二分查找下面使用Python实现二分查找12345678910111213141516171819from typing import Listclass Solution: def binarySearch(self, arr: List[int], target:int): left, right = 0, len(arr) - 1 while left &lt;= right: mid = (left + right) // 2 if arr[mid] == target: # find the target!! return mid elif arr[mid] &lt; target: left = mid + 1 else: right = mid - 1 if __name__ == &quot;__main__&quot;: Solu = Solution() result = Solu.binarySearch([2, 8, 10, 20, 30, 35, 42, 50, 52, 60],50) print(result)执行结果：17 时间复杂度在算法笔记：时间复杂度和空间复杂度中介绍了二分查找的时间复杂度一般使用主定理（The Master Theorem）来计算，时间复杂度可表示为：T(n) = T(n/2) + f(n) 下面推导一下二分查找时间复杂度的计算过程。 假设数组长度为n，且是有序的，迭代次数用k表示。 第一次迭代数组长度为n 第二次迭代数组长度为n/2 第三次迭代数组长度为(n/2)/2=n/(2^2) 第k次迭代数组长度为n/(2^k)=1 根据n/(2^k)=1可得n = 2^k 两边取对数：log2(n) = log2(2^k)可得出：k = log2(n) 所以二分查找的时间复杂度为log2(n) 总结本文介绍了对有序数组的二分查找算法，相对于线性搜索它的效率更高。对于搜索无序的数组，一种方法是先对它进行排序，然后用二分查找的方法，但排序的最优复杂度也是O(nlogn)，使用线性搜索效率可能更高。还有一种提高无序数组搜索效率的解决方案是使用多线程的方法。 --THE END--]]></content>
@@ -1246,8 +1273,8 @@
         <category>App自动化测试</category>
       </categories>
       <tags>
-        <tag>appium</tag>
         <tag>WebView</tag>
+        <tag>appium</tag>
       </tags>
   </entry>
   <entry>
