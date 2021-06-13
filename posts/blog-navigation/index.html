@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="文章导航">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文章导航">
+<meta property="og:url" content="https://hiyongz.github.io/posts/blog-navigation/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="文章导航">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-13T04:12:00.000Z">
+<meta property="article:modified_time" content="2021-06-13T14:28:18.752Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="“技术分享，计算机网络，自动化测试，测试开发，python，Java，机器学习”">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/blog-navigation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>文章导航 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/blog-navigation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          文章导航
+        </h1>
+
+        <div class="post-meta">
+          
+          
+              <i class="fa fa-thumbtack"></i>
+              <font color=#f05050>&nbsp;置顶</font>
+              <span class="post-meta-divider">|</span>
+            
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-13 12:12:00" itemprop="dateCreated datePublished" datetime="2021-06-13T12:12:00+08:00">2021-06-13</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/blog-navigation/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/blog-navigation/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>文章导航</p>
+<a id="more"></a>
+<h2 id="App自动化测试"><a href="#App自动化测试" class="headerlink" title="App自动化测试:"></a>App自动化测试:</h2><p><a href="https://hiyongz.github.io/posts/selenium-appium-keycode/">UI自动化测试：键盘输入之Android keycode</a><br><a href="https://hiyongz.github.io/posts/selenium-appium-webdriver-wait/">selenium/appium 等待方式介绍</a><br><a href="https://hiyongz.github.io/posts/appium-automatic-traversal-test-appcrawler/">App自动化测试 | AppCrawler自动遍历测试</a><br><a href="https://hiyongz.github.io/posts/appium-automatic-traversal-test-monkey/">App自动化测试 | 自动遍历测试之Monkey工具</a><br><a href="https://hiyongz.github.io/posts/android-mumu-emulator-pin-code/">解决网易mumu模拟器忘记PIN码</a><br><a href="https://hiyongz.github.io/posts/appium-android-webview/">App自动化测试 | Android WebView测试</a><br><a href="https://hiyongz.github.io/posts/appium-locator-uiautomator/">App自动化测试 | Appium元素定位（二）</a><br><a href="https://hiyongz.github.io/posts/appium-locator/">App自动化测试 | Appium元素定位（一）</a><br><a href="https://hiyongz.github.io/posts/appium-android-controls/">App自动化测试 | App控件定位</a><br><a href="https://hiyongz.github.io/posts/appium-install-and-architecture/">App自动化测试 | Appium 介绍及环境安装</a><br><a href="https://hiyongz.github.io/posts/appium-locator-operate/">App自动化测试 | Appium控件交互</a><br><a href="https://hiyongz.github.io/posts/appium-adb/">App自动化测试 | Android ADB原理及常用命令</a></p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux:"></a>Linux:</h2><p><a href="https://hiyongz.github.io/posts/linux-shell-for-getopt/">Linux Bash之getopt命令行参数解析</a><br><a href="https://hiyongz.github.io/posts/linux-shell-bash-programing/">Linux Bash编程</a><br><a href="https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/">Linux三剑客grep、awk和sed介绍</a><br><a href="https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/">Python正则表达式</a><br><a href="https://hiyongz.github.io/posts/linux-shell-performance-command-guide/">Linux常用命令：性能命令</a><br><a href="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/">克隆虚拟机后设置静态IP无效的解决方法</a><br><a href="https://hiyongz.github.io/posts/linux-shell-networking-management-guide/">Linux常用命令：网络命令</a><br><a href="https://hiyongz.github.io/posts/linux-shell-file-command-guide/">Linux常用命令：文件操作命令</a><br><a href="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/">Linux系统介绍</a></p>
+<h2 id="Web自动化测试"><a href="#Web自动化测试" class="headerlink" title="Web自动化测试:"></a>Web自动化测试:</h2><p><a href="https://hiyongz.github.io/posts/selenium-appium-keycode/">UI自动化测试：键盘输入之Android keycode</a><br><a href="https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/">Selenium Grid：在多个主机上并行执行自动化脚本</a><br><a href="https://hiyongz.github.io/posts/selenium-architecture-introduce/">Selenium自动化测试框架介绍</a><br><a href="https://hiyongz.github.io/posts/selenium-appium-webdriver-wait/">selenium/appium 等待方式介绍</a><br><a href="https://hiyongz.github.io/posts/selenium-javascript/">Web自动化测试 | 执行JavaScript脚本</a><br><a href="https://hiyongz.github.io/posts/selenium-xpath-and-CSS-Selector-locator/">Web自动化测试 | xpath &amp; CSS Selector定位</a><br><a href="https://hiyongz.github.io/posts/selenium-browsers/">Web自动化测试 | 多浏览器测试</a><br><a href="https://hiyongz.github.io/posts/selenium-select/">Web自动化测试 | Select下拉框</a><br><a href="https://hiyongz.github.io/posts/selenium-switch_to/">Web自动化测试 | switch_to</a><br><a href="https://hiyongz.github.io/posts/selenium-actionchains-touchaction/">Web自动化测试 | ActionChains、TouchAction</a><br><a href="https://hiyongz.github.io/posts/selenium-webelement-operate/">Web自动化测试 | 元素操作</a><br><a href="https://hiyongz.github.io/posts/selenium_webelement_locator/">Web自动化测试 | Web元素定位</a></p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows:"></a>Windows:</h2><p><a href="https://hiyongz.github.io/posts/windows-shortcuts/">常用Windows 快捷键</a><br><a href="https://hiyongz.github.io/posts/windows-shell-command/">常用Windows cmd命令</a><br><a href="https://hiyongz.github.io/posts/windows-shell-for-networking-management/">Windows 网络管理命令</a></p>
+<h2 id="python"><a href="#python" class="headerlink" title="python:"></a>python:</h2><p><a href="https://hiyongz.github.io/posts/python-notes-for-function-closures/">Python中的闭包</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-bitwise-operation/">算法笔记：位运算</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-binary-search/">常见搜索算法（二）：二分查找</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-object-and-copy/">Python对象及内存管理机制</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/">常见搜索算法（一）：深度优先和广度优先搜索</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-multi-process/">Python多线程与多进程</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/">算法笔记：树、堆和图</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/">算法笔记：哈希表、映射和集合</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-getopt/">Python笔记：命令行参数解析</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/">算法笔记：数组、链表、栈和队列</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/">算法笔记：排序算法</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-datetime/">Python笔记：日期时间获取与转换</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-decorator/">Python笔记：Python装饰器</a><br><a href="https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/">Python Scapy 报文构造和解析</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/">Python笔记：属性值设置和判断变量是否存在</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-string/">Python笔记：字符串操作</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-list/">Python笔记：List相关操作</a><br><a href="https://hiyongz.github.io/posts/Python-Enhancement-Proposals/">Python PEP—Python增强提案</a><br><a href="https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/">VSCode + Python环境配置</a><br><a href="https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/">Python正则表达式</a></p>
+<h2 id="个人博客"><a href="#个人博客" class="headerlink" title="个人博客:"></a>个人博客:</h2><p><a href="https://hiyongz.github.io/posts/front-end-for-typora-css/">typora主题配置：公众号一键排版</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/">使用jenkins实现hexo博客自动发布</a><br><a href="https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide/">Hexo+Github/Gitee 搭建个人博客</a><br><a href="https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/">Hexo个人博客主题配置</a></p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它:"></a>其它:</h2><p><a href="https://hiyongz.github.io/posts/markdown-basic-syntax/">markdown基本语法介绍</a></p>
+<h2 id="容器技术"><a href="#容器技术" class="headerlink" title="容器技术:"></a>容器技术:</h2><p><a href="https://hiyongz.github.io/posts/container-docker-dockerfile/">容器技术介绍：Dockerfile语法指令及Docker镜像构建</a><br><a href="https://hiyongz.github.io/posts/container-docker-command/">容器技术介绍：Docker常用命令</a><br><a href="https://hiyongz.github.io/posts/container-docker-guide/">容器技术介绍：Docker简介及安装</a></p>
+<h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试:"></a>性能测试:</h2><p><a href="https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/">系统性能监控：Prometheus + Grafana 监控服务器性能</a><br><a href="https://hiyongz.github.io/posts/performance-testing-for-performance-monitoring-system/">JMeter性能监控系统：Jmeter + InfluxDB + Grafana</a><br><a href="https://hiyongz.github.io/posts/performance-testing-jmeter-concurrency/">JMeter性能测试：JMeter多用户并发模拟及压测结果分析</a><br><a href="https://hiyongz.github.io/posts/performance-testing-using-jmeter/">JMeter性能测试：JMeter安装及脚本录制回放</a></p>
+<h2 id="投资理财"><a href="#投资理财" class="headerlink" title="投资理财:"></a>投资理财:</h2><p><a href="https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E5%95%86%E8%AA%89/">投资理财-商誉</a></p>
+<h2 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成:"></a>持续集成:</h2><p><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/">使用jenkins实现hexo博客自动发布</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/">持续集成：Jenkins API简单使用</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/">持续集成：jenkins + pytest + selenium + Git + Allure自动化测试</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/">持续集成平台Jenkins介绍</a><br><a href="https://hiyongz.github.io/posts/container-docker-for-jenkins-install/">Docker搭建持续集成平台Jenkins</a></p>
+<h2 id="接口测试"><a href="#接口测试" class="headerlink" title="接口测试:"></a>接口测试:</h2><p><a href="https://hiyongz.github.io/posts/api-test-mitmproxy-guide/">mitmproxy 代理工具介绍：rewrite和map local实现</a><br><a href="https://hiyongz.github.io/posts/api-test-charles-guide/">接口测试代理工具charles mock测试</a><br><a href="https://hiyongz.github.io/posts/api-test-requests/">接口测试框架Requests</a><br><a href="https://hiyongz.github.io/posts/api-test-charles-ca-certificate-install/">charles SSL证书安装</a><br><a href="https://hiyongz.github.io/posts/api-test-and-web-protocol/">接口测试简介及 Web 服务架构</a><br><a href="https://hiyongz.github.io/posts/api-test-curl-guide/">cURL工具介绍及简单使用</a><br><a href="https://hiyongz.github.io/posts/api-test-postman-guide/">Postman安装与使用</a></p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库:"></a>数据库:</h2><p><a href="https://hiyongz.github.io/posts/database-for-mysql-advance/">MySQL数据库进阶知识点</a><br><a href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/">测试题库：MySQL数据库</a><br><a href="https://hiyongz.github.io/posts/database-for-mysql-operate/">MySQL数据库基础入门</a><br><a href="https://hiyongz.github.io/posts/database-for-mysql-install-on-linux-and-windows/">MySQL数据库安装配置详细教程</a></p>
+<h2 id="测试开发"><a href="#测试开发" class="headerlink" title="测试开发:"></a>测试开发:</h2><p><a href="https://hiyongz.github.io/posts/database-for-mysql-advance/">MySQL数据库进阶知识点</a><br><a href="https://hiyongz.github.io/posts/software-testing-points-for-continuous-integration/">测试题库：持续集成</a><br><a href="https://hiyongz.github.io/posts/software-testing-points-for-docker/">测试题库：docker容器</a><br><a href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/">测试题库：MySQL数据库</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/">使用jenkins实现hexo博客自动发布</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/">持续集成：Jenkins API简单使用</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/">持续集成：jenkins + pytest + selenium + Git + Allure自动化测试</a><br><a href="https://hiyongz.github.io/posts/container-docker-dockerfile/">容器技术介绍：Dockerfile语法指令及Docker镜像构建</a><br><a href="https://hiyongz.github.io/posts/database-for-mysql-operate/">MySQL数据库基础入门</a><br><a href="https://hiyongz.github.io/posts/database-for-mysql-install-on-linux-and-windows/">MySQL数据库安装配置详细教程</a><br><a href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/">持续集成平台Jenkins介绍</a><br><a href="https://hiyongz.github.io/posts/container-docker-for-jenkins-install/">Docker搭建持续集成平台Jenkins</a><br><a href="https://hiyongz.github.io/posts/container-docker-command/">容器技术介绍：Docker常用命令</a><br><a href="https://hiyongz.github.io/posts/container-docker-guide/">容器技术介绍：Docker简介及安装</a></p>
+<h2 id="测试框架"><a href="#测试框架" class="headerlink" title="测试框架:"></a>测试框架:</h2><p><a href="https://hiyongz.github.io/posts/pytest-plugin/">Pytest插件开发</a><br><a href="https://hiyongz.github.io/posts/pytest-parametrize/">Pytest测试框架（四）：pytest 参数化用例</a><br><a href="https://hiyongz.github.io/posts/pytest-allure-report/">Pytest测试框架（五）：pytest + allure生成测试报告</a><br><a href="https://hiyongz.github.io/posts/pytest-fixture/">Pytest测试框架（三）：pytest fixture 用法</a><br><a href="https://hiyongz.github.io/posts/pytest-xunit-style-of-setup-teardown/">Pytest测试框架（二）：pytest 的setup/teardown方法</a><br><a href="https://hiyongz.github.io/posts/install-pytest-and-run-test/">Pytest测试框架（一）：pytest安装及用例执行</a></p>
+<h2 id="测试理论"><a href="#测试理论" class="headerlink" title="测试理论:"></a>测试理论:</h2><p><a href="https://hiyongz.github.io/posts/software-testing-points-for-test-theory/">测试题库：测试理论</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-software-testing/">软件测试理论</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-white-box-testing/">白盒测试方法介绍</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-black-box-testing/">黑盒测试方法介绍</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-testing-platform/">常用测试平台</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-testing-technology/">测试技术介绍</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-testing-process/">测试流程介绍</a><br><a href="https://hiyongz.github.io/posts/test-theory-for-software-develop-management/">软件开发流程与项目管理</a></p>
+<h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试:"></a>渗透测试:</h2><p><a href="https://hiyongz.github.io/posts/api-test-security-testing-netdiscover-tool/">Netdiscover网络扫描工具</a><br><a href="https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/">hydra暴力破解工具</a><br><a href="https://hiyongz.github.io/posts/api-test-security-testing-nmap-tool/">Nmap扫描工具介绍</a></p>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理:"></a>版本管理:</h2><p><a href="https://hiyongz.github.io/posts/git-generate-ssh-public-key-guide/">同一台电脑配置Gitee、Github 的 Git SSH公钥</a><br><a href="https://hiyongz.github.io/posts/git-install-and-guide/">Git简易教程-安装及简单使用</a></p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法:"></a>算法:</h2><p><a href="https://hiyongz.github.io/posts/algorithm-notes-for-bitwise-operation/">算法笔记：位运算</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-binary-search/">常见搜索算法（二）：二分查找</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/">常见搜索算法（一）：深度优先和广度优先搜索</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/">算法笔记：树、堆和图</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/">算法笔记：哈希表、映射和集合</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-leetcode/">数据结构与算法-LeetCode</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/">算法笔记：数组、链表、栈和队列</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-algorithmic-complexity/">算法笔记：时间复杂度和空间复杂度</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/">算法笔记：排序算法</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/">算法笔记：递归、动态规划</a></p>
+<h2 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言:"></a>编程语言:</h2><p><a href="https://hiyongz.github.io/posts/python-notes-for-function-closures/">Python中的闭包</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-bitwise-operation/">算法笔记：位运算</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-binary-search/">常见搜索算法（二）：二分查找</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-object-and-copy/">Python对象及内存管理机制</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/">常见搜索算法（一）：深度优先和广度优先搜索</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-multi-process/">Python多线程与多进程</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/">算法笔记：树、堆和图</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/">算法笔记：哈希表、映射和集合</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-getopt/">Python笔记：命令行参数解析</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/">算法笔记：数组、链表、栈和队列</a><br><a href="https://hiyongz.github.io/posts/software-testing-points-for-python/">测试题库：Python</a><br><a href="https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/">算法笔记：排序算法</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-datetime/">Python笔记：日期时间获取与转换</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-decorator/">Python笔记：Python装饰器</a><br><a href="https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/">Python Scapy 报文构造和解析</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/">Python笔记：属性值设置和判断变量是否存在</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-string/">Python笔记：字符串操作</a><br><a href="https://hiyongz.github.io/posts/python-notes-for-list/">Python笔记：List相关操作</a><br><a href="https://hiyongz.github.io/posts/Python-Enhancement-Proposals/">Python PEP—Python增强提案</a><br><a href="https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/">VSCode + Python环境配置</a><br><a href="https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/">Python正则表达式</a></p>
+<h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络:"></a>计算机网络:</h2><p><a href="https://hiyongz.github.io/posts/software-testing-points-for-network/">测试题库：计算机网络</a><br><a href="https://hiyongz.github.io/posts/network-cookies-session-and-token/">Session、Cookie和Token介绍</a><br><a href="https://hiyongz.github.io/posts/api-test-security-testing-netdiscover-tool/">Netdiscover网络扫描工具</a><br><a href="https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/">Python Scapy 报文构造和解析</a><br><a href="https://hiyongz.github.io/posts/api-test-mitmproxy-guide/">mitmproxy 代理工具介绍：rewrite和map local实现</a><br><a href="https://hiyongz.github.io/posts/api-test-charles-guide/">接口测试代理工具charles mock测试</a><br><a href="https://hiyongz.github.io/posts/api-test-and-web-protocol/">接口测试简介及 Web 服务架构</a><br><a href="https://hiyongz.github.io/posts/network-tcpdump-and-wireshark/">使用tshark命令解析tcpdump抓取的数据包</a><br><a href="https://hiyongz.github.io/posts/api-test-curl-guide/">cURL工具介绍及简单使用</a><br><a href="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model%20_internet-layer/">TCP/IP协议架构介绍（二）：网络层</a><br><a href="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/">TCP/IP协议架构介绍（一）：网络接口层</a><br><a href="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_transport-layer/">TCP/IP协议架构介绍（三）：传输层</a><br><a href="https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_application-layer/">TCP/IP协议架构介绍（四）：应用层</a></p>
+<h2 id="阅读"><a href="#阅读" class="headerlink" title="阅读:"></a>阅读:</h2><p><a href="https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%B9%BF%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA/">《时间简史》广义相对论</a><br><a href="https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E7%A9%BA%E9%97%B4%E5%92%8C%E6%97%B6%E9%97%B4/">《时间简史》空间和时间</a><br><a href="https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/">金融小知识：通货膨胀</a><br><a href="https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%93%88%E5%8B%83%E7%BA%A2%E7%A7%BB/">读书笔记：《时间简史》哈勃红移</a></p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>文章导航</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/blog-navigation/" title="文章导航">https://hiyongz.github.io/posts/blog-navigation/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/blog-navigation/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/markdown-basic-syntax/" rel="prev" title="markdown基本语法介绍">
+      <i class="fa fa-chevron-left"></i> markdown基本语法介绍
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">App自动化测试:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">2.</span> <span class="nav-text">Linux:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">Web自动化测试:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">4.</span> <span class="nav-text">Windows:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">5.</span> <span class="nav-text">python:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2"><span class="nav-number">6.</span> <span class="nav-text">个人博客:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">7.</span> <span class="nav-text">其它:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF"><span class="nav-number">8.</span> <span class="nav-text">容器技术:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">9.</span> <span class="nav-text">性能测试:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2"><span class="nav-number">10.</span> <span class="nav-text">投资理财:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="nav-number">11.</span> <span class="nav-text">持续集成:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95"><span class="nav-number">12.</span> <span class="nav-text">接口测试:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">13.</span> <span class="nav-text">数据库:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91"><span class="nav-number">14.</span> <span class="nav-text">测试开发:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="nav-number">15.</span> <span class="nav-text">测试框架:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%90%86%E8%AE%BA"><span class="nav-number">16.</span> <span class="nav-text">测试理论:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="nav-number">17.</span> <span class="nav-text">渗透测试:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">18.</span> <span class="nav-text">版本管理:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">19.</span> <span class="nav-text">算法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="nav-number">20.</span> <span class="nav-text">编程语言:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="nav-number">21.</span> <span class="nav-text">计算机网络:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB"><span class="nav-number">22.</span> <span class="nav-text">阅读:</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">136</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">469k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

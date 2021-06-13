@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-06-12T11:24:01.436Z</updated>
+  <updated>2021-06-13T14:28:18.752Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文章导航</title>
+    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
+    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
+    <published>2021-06-13T04:12:00.000Z</published>
+    <updated>2021-06-13T14:28:18.752Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章导航&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>markdown基本语法介绍</title>
@@ -499,29 +516,6 @@
       <category term="LeetCode" scheme="https://hiyongz.github.io/tags/LeetCode/"/>
     
       <category term="数据结构与算法" scheme="https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用Windows 快捷键</title>
-    <link href="https://hiyongz.github.io/posts/windows-shortcuts/"/>
-    <id>https://hiyongz.github.io/posts/windows-shortcuts/</id>
-    <published>2021-04-30T04:22:00.000Z</published>
-    <updated>2021-05-02T00:16:27.458Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;windows 快捷键&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Windows" scheme="https://hiyongz.github.io/categories/Windows/"/>
-    
-    
-      <category term="Windows" scheme="https://hiyongz.github.io/tags/Windows/"/>
-    
-      <category term="快捷键" scheme="https://hiyongz.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
