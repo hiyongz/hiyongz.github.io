@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-coroutines/</loc>
+    <lastmod>2021-06-16</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/</loc>
+    <lastmod>2021-06-15</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-question-bank/</loc>
     <lastmod>2021-06-14</lastmod>
   </url>
@@ -106,10 +114,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
-    <lastmod>2021-05-28</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
