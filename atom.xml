@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-06-16T15:07:57.243Z</updated>
+  <updated>2021-06-17T14:22:03.329Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python反射介绍</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-reflection/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-reflection/</id>
+    <published>2021-06-17T04:12:00.000Z</published>
+    <updated>2021-06-17T14:22:03.329Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;反射机制是面向对象编程语言中比较重要的功能，可以动态获取对象信息以及动态调用对象，Python作为一门动态编程语言，当然也有反射机制，本文介绍Python反射函数使用方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="反射机制" scheme="https://hiyongz.github.io/tags/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>Python协程</title>
@@ -495,33 +520,6 @@
       <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="时间简史" scheme="https://hiyongz.github.io/tags/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python笔记：命令行参数解析</title>
-    <link href="https://hiyongz.github.io/posts/python-notes-for-getopt/"/>
-    <id>https://hiyongz.github.io/posts/python-notes-for-getopt/</id>
-    <published>2021-05-05T04:12:00.000Z</published>
-    <updated>2021-05-28T06:59:30.655Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有些时候我们需要通过命令行将参数传递给脚本，C语言中有个getopt()方法，python中也有个类似的命令行参数解析方法getopt()。python也提供了比getopt()更简洁的argparse方法。另外，sys模块也可以实现简单的参数解析，本文将对这3种命令行参数解析方法简要介绍。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
-    
-      <category term="命令行参数" scheme="https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
     
   </entry>
   
