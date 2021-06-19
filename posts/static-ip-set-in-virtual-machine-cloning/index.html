@@ -22,18 +22,19 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="克隆虚拟机后设置静态IP无效的解决方法">
+  <meta name="description" content="Centos 虚拟机配置及相关报错信息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="克隆虚拟机后设置静态IP无效的解决方法">
+<meta property="og:title" content="Centos 虚拟机配置">
 <meta property="og:url" content="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="克隆虚拟机后设置静态IP无效的解决方法">
+<meta property="og:description" content="Centos 虚拟机配置及相关报错信息">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/ip_link.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/persistent.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/ifcfg-eth0.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/ntp.png">
 <meta property="article:published_time" content="2020-12-27T14:02:00.000Z">
-<meta property="article:modified_time" content="2020-12-27T15:03:22.104Z">
+<meta property="article:modified_time" content="2021-06-19T08:51:23.042Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="虚拟机克隆">
 <meta property="article:tag" content="网卡配置">
@@ -53,7 +54,7 @@
   };
 </script>
 
-  <title>克隆虚拟机后设置静态IP无效的解决方法 | HiYong</title>
+  <title>Centos 虚拟机配置 | HiYong</title>
   
 
 
@@ -227,7 +228,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          克隆虚拟机后设置静态IP无效的解决方法
+          Centos 虚拟机配置
         </h1>
 
         <div class="post-meta">
@@ -280,14 +281,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>320</span>
+              <span>5.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -299,11 +300,61 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>克隆虚拟机后设置静态IP无效的解决方法<br><a id="more"></a></p>
-<h1 id="1-获取虚拟机网卡的MAC地址"><a href="#1-获取虚拟机网卡的MAC地址" class="headerlink" title="1. 获取虚拟机网卡的MAC地址"></a>1. 获取虚拟机网卡的MAC地址</h1><p>通过下面的其中一个命令获取要设置的网卡MAC地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip link show</span><br><span class="line">ifconfig -a</span><br><span class="line">ip address show</span><br></pre></td></tr></table></figure><br><img src="ip_link.png" alt="img"></p>
-<h1 id="2-修改70-persistent-ipoib-rules-文件"><a href="#2-修改70-persistent-ipoib-rules-文件" class="headerlink" title="2. 修改70-persistent-ipoib.rules 文件"></a>2. 修改70-persistent-ipoib.rules 文件</h1><p>将eth0的MAC地址改为第一步获取到的地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/udev/rules.d/70-persistent-ipoib.rules</span><br></pre></td></tr></table></figure><br><img src="persistent.png" alt="img"></p>
-<h1 id="3-修改网卡配置文件"><a href="#3-修改网卡配置文件" class="headerlink" title="3. 修改网卡配置文件"></a>3. 修改网卡配置文件</h1><p>将对于网卡配置文件的MAC地址也改为第一步获取到的地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure><br><img src="ifcfg-eth0.png" alt="img"></p>
-<h1 id="4-重启"><a href="#4-重启" class="headerlink" title="4. 重启"></a>4. 重启</h1><p>重启网络服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure></p>
+        <p>Centos 虚拟机配置及相关报错信息<br><a id="more"></a></p>
+<h1 id="克隆虚拟机后设置静态IP"><a href="#克隆虚拟机后设置静态IP" class="headerlink" title="克隆虚拟机后设置静态IP"></a>克隆虚拟机后设置静态IP</h1><p>克隆虚拟机后设置静态IP无效的解决方法</p>
+<h2 id="1-获取虚拟机网卡的MAC地址"><a href="#1-获取虚拟机网卡的MAC地址" class="headerlink" title="1. 获取虚拟机网卡的MAC地址"></a>1. 获取虚拟机网卡的MAC地址</h2><p>通过下面的其中一个命令获取要设置的网卡MAC地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip link show</span><br><span class="line">ifconfig -a</span><br><span class="line">ip address show</span><br></pre></td></tr></table></figure><br><img src="ip_link.png" alt="img"></p>
+<h2 id="2-修改70-persistent-ipoib-rules-文件"><a href="#2-修改70-persistent-ipoib-rules-文件" class="headerlink" title="2. 修改70-persistent-ipoib.rules 文件"></a>2. 修改70-persistent-ipoib.rules 文件</h2><p>将eth0的MAC地址改为第一步获取到的地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/udev/rules.d/70-persistent-ipoib.rules</span><br></pre></td></tr></table></figure><br><img src="persistent.png" alt="img"></p>
+<h2 id="3-修改网卡配置文件"><a href="#3-修改网卡配置文件" class="headerlink" title="3. 修改网卡配置文件"></a>3. 修改网卡配置文件</h2><p>将对于网卡配置文件的MAC地址也改为第一步获取到的地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure><br><img src="ifcfg-eth0.png" alt="img"></p>
+<h2 id="4-重启"><a href="#4-重启" class="headerlink" title="4. 重启"></a>4. 重启</h2><p>重启网络服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure></p>
+<h1 id="systemctl-restart-network失败"><a href="#systemctl-restart-network失败" class="headerlink" title="systemctl restart network失败"></a>systemctl restart network失败</h1><p>systemctl restart network 重启网络失败</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">[root@haiyong rules.d]<span class="comment"># systemctl restart network</span></span><br><span class="line">Job <span class="keyword">for</span> network.service failed because the control process exited with error code. See <span class="string">&quot;systemctl status network.service&quot;</span> and <span class="string">&quot;journalctl -xe&quot;</span> <span class="keyword">for</span> details.</span><br><span class="line">[root@haiyong rules.d]<span class="comment"># journalctl -xe</span></span><br><span class="line">-- </span><br><span class="line">-- The start-up result is <span class="keyword">done</span>.</span><br><span class="line">Jun 19 12:10:01 haiyong CROND[5949]: (root) CMD (/usr/lib64/sa/sa1 1 1)</span><br><span class="line">Jun 19 12:10:10 haiyong polkitd[754]: Registered Authentication Agent <span class="keyword">for</span> unix-process:</span><br><span class="line">Jun 19 12:10:10 haiyong systemd[1]: Starting LSB: Bring up/down networking...</span><br><span class="line">-- Subject: Unit network.service has begun start-up</span><br><span class="line">-- Defined-By: systemd</span><br><span class="line">-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel</span><br><span class="line">-- </span><br><span class="line">-- Unit network.service has begun starting up.</span><br><span class="line">Jun 19 12:10:10 haiyong NetworkManager[939]: &lt;warn&gt;  [1624075810.7721] ifcfg-rh:     mi</span><br><span class="line">Jun 19 12:10:10 haiyong network[5992]: Bringing up loopback interface:  [  OK  ]</span><br><span class="line">Jun 19 12:10:10 haiyong NetworkManager[939]: &lt;warn&gt;  [1624075810.8999] ifcfg-rh:     mi</span><br><span class="line">Jun 19 12:10:10 haiyong NetworkManager[939]: &lt;info&gt;  [1624075810.9472] agent-manager: r</span><br><span class="line">Jun 19 12:10:10 haiyong NetworkManager[939]: &lt;info&gt;  [1624075810.9481] audit: op=<span class="string">&quot;conne</span></span><br><span class="line"><span class="string">Jun 19 12:10:10 haiyong network[5992]: Bringing up interface ens33:  Error: Connection </span></span><br><span class="line"><span class="string">Jun 19 12:10:10 haiyong network[5992]: [FAILED]</span></span><br><span class="line"><span class="string">Jun 19 12:10:11 haiyong NetworkManager[939]: &lt;info&gt;  [1624075811.0139] agent-manager: r</span></span><br><span class="line"><span class="string">Jun 19 12:10:11 haiyong NetworkManager[939]: &lt;info&gt;  [1624075811.0152] audit: op=&quot;</span>conne</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: Bringing up interface ens37:  Error: Connection </span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: [FAILED]</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong network[5992]: RTNETLINK answers: File exists</span><br><span class="line">Jun 19 12:10:11 haiyong systemd[1]: network.service: control process exited, code=exite</span><br><span class="line">Jun 19 12:10:11 haiyong systemd[1]: Failed to start LSB: Bring up/down networking.</span><br><span class="line">-- Subject: Unit network.service has failed</span><br><span class="line">-- Defined-By: systemd</span><br><span class="line">-- Support: http://lists.freedesktop.org/mailman/listinfo/systemd-devel</span><br><span class="line">-- </span><br><span class="line">-- Unit network.service has failed.</span><br><span class="line">-- </span><br><span class="line">-- The result is failed.</span><br><span class="line">Jun 19 12:10:11 haiyong systemd[1]: Unit network.service entered failed state.</span><br><span class="line">Jun 19 12:10:11 haiyong systemd[1]: network.service failed.</span><br><span class="line">Jun 19 12:10:11 haiyong polkitd[754]: Unregistered Authentication Agent <span class="keyword">for</span> unix-proces</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>解决方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@haiyong rules.d]<span class="comment"># systemctl stop NetworkManager</span></span><br><span class="line">[root@haiyong rules.d]<span class="comment"># systemctl disable NetworkManager</span></span><br><span class="line">Removed symlink /etc/systemd/system/multi-user.target.wants/NetworkManager.service.</span><br><span class="line">Removed symlink /etc/systemd/system/dbus-org.freedesktop.nm-dispatcher.service.</span><br><span class="line">Removed symlink /etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service.</span><br><span class="line">[root@haiyong rules.d]<span class="comment"># systemctl restart network</span></span><br></pre></td></tr></table></figure>
+<h1 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h1><p>vi /etc/selinux/config</p>
+<p>注释SELINUX=enforcing，添加SELINUX=disabled</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This file controls the state of SELinux on the system.</span></span><br><span class="line"><span class="comment"># SELINUX= can take one of these three values:</span></span><br><span class="line"><span class="comment">#     enforcing - SELinux security policy is enforced.</span></span><br><span class="line"><span class="comment">#     permissive - SELinux prints warnings instead of enforcing.</span></span><br><span class="line"><span class="comment">#     disabled - No SELinux policy is loaded.</span></span><br><span class="line"><span class="comment"># SELINUX=enforcing</span></span><br><span class="line">SELINUX=disabled</span><br><span class="line"><span class="comment"># SELINUXTYPE= can take one of three values:</span></span><br><span class="line"><span class="comment">#     targeted - Targeted processes are protected,</span></span><br><span class="line"><span class="comment">#     minimum - Modification of targeted policy. Only selected processes are protected.</span></span><br><span class="line"><span class="comment">#     mls - Multi Level Security protection.</span></span><br><span class="line">SELINUXTYPE=targeted</span><br></pre></td></tr></table></figure>
+<h1 id="时钟同步"><a href="#时钟同步" class="headerlink" title="时钟同步"></a>时钟同步</h1><p>ntpdate是一个linux时间同步服务软件，一般默认情况下是未安装。</p>
+<h2 id="1-配置时间服务器"><a href="#1-配置时间服务器" class="headerlink" title="1. 配置时间服务器"></a>1. 配置时间服务器</h2><p>使用root⽤户</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@linux .ssh]<span class="comment"># ntpdate</span></span><br><span class="line">-bash: ntpdate: <span class="built_in">command</span> not found</span><br></pre></td></tr></table></figure>
+<p>安装ntpdate：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ntpdate</span><br><span class="line">yum -y install ntp</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@linux ~]<span class="comment"># systemctl status ntpd.service</span></span><br><span class="line">● ntpd.service - Network Time Service</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/ntpd.service; disabled; vendor preset: disabled)</span><br><span class="line">   Active: inactive (dead)</span><br><span class="line">[root@linux ~]<span class="comment"># rpm -qa | grep ntp</span></span><br><span class="line">ntpdate-4.2.6p5-29.el7.centos.2.x86_64</span><br><span class="line">ntp-4.2.6p5-29.el7.centos.2.x86_64</span><br></pre></td></tr></table></figure>
+<p>编辑/etc/ntp.conf</p>
+<p><code>vim /etc/ntp.conf</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">restrict 127.0.0.1</span><br><span class="line">restrict ::1</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hosts on local network are less restricted.</span></span><br><span class="line">restrict 192.168.183.0 mask 255.255.255.0 nomodify notrap</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use public servers from the pool.ntp.org project.</span></span><br><span class="line"><span class="comment"># Please consider joining the pool (http://www.pool.ntp.org/join.html).</span></span><br><span class="line"><span class="comment"># server 0.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="comment"># server 1.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="comment"># server 2.centos.pool.ntp.org iburst</span></span><br><span class="line"><span class="comment"># server 3.centos.pool.ntp.org iburst</span></span><br><span class="line"></span><br><span class="line">server 127.127.1.0 <span class="comment"># local clock</span></span><br><span class="line">fudge 127.127.1.0 stratum 10</span><br></pre></td></tr></table></figure>
+<p><img src="ntp.png" width="60%" height="60%" /></p>
+<p>保证BIOS与系统时间同步</p>
+<p>vim /etc/sysconfig/ntpd ,添加：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Command line options for ntpd</span></span><br><span class="line">OPTIONS=<span class="string">&quot;-g&quot;</span></span><br><span class="line">SYNC_HWLOCK=yes</span><br></pre></td></tr></table></figure>
+<p>启动ntpd服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start ntpd.service</span><br></pre></td></tr></table></figure>
+<p>设置ntpd的服务开机启动</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig ntpd on</span><br><span class="line">systemctl <span class="built_in">enable</span> ntpd.service</span><br></pre></td></tr></table></figure>
+<p>设置时间同步：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过⽹络连接外⽹进⾏时钟同步</span></span><br><span class="line">ntpdate us.pool.ntp.org;</span><br><span class="line"><span class="comment"># 阿⾥云时钟同步服务器</span></span><br><span class="line">ntpdate ntp4.aliyun.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2-其他机器配置"><a href="#2-其他机器配置" class="headerlink" title="2. 其他机器配置"></a>2. 其他机器配置</h2><p>使用root⽤户</p>
+<p>安装ntpdate：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ntpdate</span><br></pre></td></tr></table></figure></p>
+<p>在其他机器配置10分钟与时间服务器同步⼀次<br>编写脚本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+<p>输入如下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/10 * * * * /usr/sbin/ntpdate 192.168.183.121</span><br></pre></td></tr></table></figure>
+<p>修改任意机器时间</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date -s <span class="string">&quot;2020-06-20 11:11:11&quot;</span></span><br></pre></td></tr></table></figure>
+<p>查看crontab任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
+<p>查看crontab的执行日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -n 30 -f &#x2F;var&#x2F;log&#x2F;cron</span><br></pre></td></tr></table></figure>
+<h1 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h1><p>查看系统⾃带的openjdk，如果有，卸载系统⾃带的openjdk</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@linux ~]<span class="comment"># rpm -qa | grep java</span></span><br><span class="line">[root@linux ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure>
+<p>使用rz命令上传jdk-8u231-linux-x64.tar.gz文件，注意不要勾选<strong>Upload files as ASCII</strong></p>
+<p>解压jdk</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u231-linux-x64.tar.gz -C ../servers/</span><br></pre></td></tr></table></figure>
+<p>配置环境变量</p>
+<p>vi /etc/profile</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/opt/bigdata/servers/jdk1.8.0_231</span><br><span class="line"><span class="built_in">export</span> PATH=:<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p>使配置文件生效</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@linux software]<span class="comment"># java -version</span></span><br><span class="line">java version <span class="string">&quot;1.8.0_231&quot;</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_231-b11)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.231-b11, mixed mode)</span><br></pre></td></tr></table></figure>
 <center><b>--THE END--<b></center>
 
 
@@ -328,9 +379,9 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>克隆虚拟机后设置静态IP无效的解决方法</a></p>
+  <p><span>本文标题:</span>Centos 虚拟机配置</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/static-ip-set-in-virtual-machine-cloning/" title="克隆虚拟机后设置静态IP无效的解决方法">https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/</a>
+  <p><span>文章链接:</span><a href="/posts/static-ip-set-in-virtual-machine-cloning/" title="Centos 虚拟机配置">https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
@@ -431,7 +482,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E5%8D%A1%E7%9A%84MAC%E5%9C%B0%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">1. 获取虚拟机网卡的MAC地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B970-persistent-ipoib-rules-%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">2. 修改70-persistent-ipoib.rules 文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">3. 修改网卡配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E9%87%8D%E5%90%AF"><span class="nav-number">4.</span> <span class="nav-text">4. 重启</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%8E%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81IP"><span class="nav-number">1.</span> <span class="nav-text">克隆虚拟机后设置静态IP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E5%8D%A1%E7%9A%84MAC%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.</span> <span class="nav-text">1. 获取虚拟机网卡的MAC地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B970-persistent-ipoib-rules-%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">2. 修改70-persistent-ipoib.rules 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E7%BD%91%E5%8D%A1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">3. 修改网卡配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%87%8D%E5%90%AF"><span class="nav-number">1.4.</span> <span class="nav-text">4. 重启</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#systemctl-restart-network%E5%A4%B1%E8%B4%A5"><span class="nav-number">2.</span> <span class="nav-text">systemctl restart network失败</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%97%ADselinux"><span class="nav-number">3.</span> <span class="nav-text">关闭selinux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5"><span class="nav-number">4.</span> <span class="nav-text">时钟同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E6%97%B6%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">1. 配置时间服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%85%B6%E4%BB%96%E6%9C%BA%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">2. 其他机器配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jdk"><span class="nav-number">5.</span> <span class="nav-text">安装jdk</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -508,12 +559,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">491k</span>
+    <span title="站点总字数">497k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7:26</span>
+    <span title="站点阅读时长">7:31</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
