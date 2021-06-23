@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-function-closures/</loc>
+    <lastmod>2021-06-23</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/database-for-mysql-operate/</loc>
+    <lastmod>2021-06-23</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-new-and-init/</loc>
+    <lastmod>2021-06-23</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
+    <lastmod>2021-06-23</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/</loc>
     <lastmod>2021-06-19</lastmod>
   </url>
@@ -66,10 +82,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-bitwise-operation/</loc>
-    <lastmod>2021-06-12</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-function-closures/</loc>
     <lastmod>2021-06-12</lastmod>
   </url>
   <url>
@@ -183,10 +195,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/appium-adb/</loc>
     <lastmod>2021-05-28</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/database-for-mysql-operate/</loc>
-    <lastmod>2021-05-23</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/network-cookies-session-and-token/</loc>
@@ -331,10 +339,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/selenium-browsers/</loc>
     <lastmod>2021-04-06</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
-    <lastmod>2021-04-03</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/api-test-security-testing-hydra-tool/</loc>
