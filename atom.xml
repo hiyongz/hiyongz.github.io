@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-06-23T13:02:35.435Z</updated>
+  <updated>2021-06-30T13:58:41.556Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python 命令行参数解析之 Click</title>
+    <link href="https://hiyongz.github.io/posts/python-library-for-click/"/>
+    <id>https://hiyongz.github.io/posts/python-library-for-click/</id>
+    <published>2021-06-29T04:12:00.000Z</published>
+    <updated>2021-06-30T13:58:41.556Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/116346563&quot;&gt;Python笔记：命令行参数解析&lt;/a&gt;中介绍了sys.argv、getopt 和 argparse三种命令行参数解析方法，今天来分享另外一个python命令行工具click，它是用来支持 Web开发框架 Flask的，都由&lt;a href=&quot;https://palletsprojects.com/&quot;&gt;Pallets 项目&lt;/a&gt;组织开发。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="click" scheme="https://hiyongz.github.io/tags/click/"/>
+    
+      <category term="命令行参数" scheme="https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python笔记：lambda匿名函数</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-anonymous-function/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-anonymous-function/</id>
+    <published>2021-06-24T04:12:00.000Z</published>
+    <updated>2021-06-30T13:58:05.103Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在Python中，一般使用def关键字来定义普通函数。顾名思义，匿名函数意味着函数没有名称，Python使用lambda关键字定义匿名函数。在某些情况下，使用匿名函数可以简化代码，提高代码的可读性。本文介绍python匿名函数的使用方法。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="匿名函数" scheme="https://hiyongz.github.io/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Python中的__new__、__init__以及metaclass</title>
@@ -478,52 +530,6 @@
       <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
       <category term="时间简史" scheme="https://hiyongz.github.io/tags/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux Bash之getopt命令行参数解析</title>
-    <link href="https://hiyongz.github.io/posts/linux-shell-for-getopt/"/>
-    <id>https://hiyongz.github.io/posts/linux-shell-for-getopt/</id>
-    <published>2021-05-11T04:12:00.000Z</published>
-    <updated>2021-05-12T14:15:14.770Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Unix shell 中内置了命令行参数解析函数getopts，但它仅支持简单的参数解析，不支持长参数，getopt是getopts的增强版，支持长参数。在&lt;a href=&quot;https://hiyongz.github.io/posts/python-notes-for-getopt/&quot;&gt;Python笔记：命令行参数解析&lt;/a&gt;中介绍了Python中的命令行参数解析方法getopt()，本文介绍shell中如何使用getopt进行命令行参数解析。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
-    
-    
-      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
-    
-      <category term="getopt" scheme="https://hiyongz.github.io/tags/getopt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>金融小知识：通货膨胀</title>
-    <link href="https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/"/>
-    <id>https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/</id>
-    <published>2021-05-05T14:26:00.000Z</published>
-    <updated>2021-05-20T23:40:07.101Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;通货膨胀指整体物价水平上升，货币贬值、购买力下降。通货膨胀率一般通过&lt;strong&gt;居民消费价格指数CPI&lt;/strong&gt;来反映，今年三月我国的CPI同比上涨0.4%，由于疫情原因，去年3月CPI上涨达到了4.3%，物价飞涨。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="金融小知识" scheme="https://hiyongz.github.io/tags/%E9%87%91%E8%9E%8D%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="投资理财" scheme="https://hiyongz.github.io/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/"/>
     
   </entry>
   

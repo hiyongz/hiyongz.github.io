@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/python-library-for-click/</loc>
+    <lastmod>2021-06-30</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-anonymous-function/</loc>
+    <lastmod>2021-06-30</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
+    <lastmod>2021-06-30</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-centos-configure-tutorials/</loc>
+    <lastmod>2021-06-27</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-function-closures/</loc>
     <lastmod>2021-06-23</lastmod>
   </url>
@@ -15,10 +31,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
     <lastmod>2021-06-23</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/static-ip-set-in-virtual-machine-cloning/</loc>
-    <lastmod>2021-06-19</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-reflection/</loc>
@@ -494,10 +506,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/appium-android-webview/</loc>
-    <lastmod>2021-01-31</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
     <lastmod>2021-01-31</lastmod>
   </url>
   <url>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在Python中，一般使用def关键字来定义普通函数。顾名思义，匿名函数意味着函数没有名称，Python使用lambda关键字定义匿名函数。在某些情况下，使用匿名函数可以简化代码，提高代码的可读性。本文介绍python匿名函数的使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python笔记：lambda匿名函数">
+<meta property="og:url" content="https://hiyongz.github.io/posts/python-notes-for-anonymous-function/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="在Python中，一般使用def关键字来定义普通函数。顾名思义，匿名函数意味着函数没有名称，Python使用lambda关键字定义匿名函数。在某些情况下，使用匿名函数可以简化代码，提高代码的可读性。本文介绍python匿名函数的使用方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-24T04:12:00.000Z">
+<meta property="article:modified_time" content="2021-06-30T13:58:05.103Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="匿名函数">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/python-notes-for-anonymous-function/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python笔记：lambda匿名函数 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/python-notes-for-anonymous-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python笔记：lambda匿名函数
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-24 12:12:00" itemprop="dateCreated datePublished" datetime="2021-06-24T12:12:00+08:00">2021-06-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/python-notes-for-anonymous-function/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/python-notes-for-anonymous-function/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在Python中，一般使用def关键字来定义普通函数。顾名思义，匿名函数意味着函数没有名称，Python使用lambda关键字定义匿名函数。在某些情况下，使用匿名函数可以简化代码，提高代码的可读性。本文介绍python匿名函数的使用方法。<br><a id="more"></a></p>
+<h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><p>Python匿名函数的语法格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> argument1, argument2,... argumentN: expression</span><br></pre></td></tr></table></figure>
+<p>匿名函数可以有多个参数，只有一个表达式。下面来看一下普通def函数和lambda函数的区别：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cube</span>(<span class="params">y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> y*y*y</span><br><span class="line"></span><br><span class="line">lambda_cube = <span class="keyword">lambda</span> y: y*y*y</span><br><span class="line"></span><br><span class="line">print(cube(<span class="number">3</span>))</span><br><span class="line">print(lambda_cube(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">27</span></span><br><span class="line"><span class="number">27</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，lambda函数更加简洁，不包含“return”语句，返回的是一个函数对象。与常规函数还有以下区别：</p>
+<p><strong>1、lambda 是一个表达式，不是一个语句</strong></p>
+<ul>
+<li><p>表达式（expression）是用“公式”去表达一个东西，比如<code>y*y*y</code>就是一个表达式</p>
+</li>
+<li><p>语句（statement）是完成了某些功能，比如赋值语句，条件语句等</p>
+</li>
+<li><p>由于lambda 是表达式，它可以用在一些常规函数 def 不能用的地方，比如，可以用在列表内部，可以作为某些函数的参数。</p>
+</li>
+</ul>
+<p>lambda 函数在列表推导式中使用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list_num = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line">list_square = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> list_num <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">list_square2 = [(<span class="keyword">lambda</span> x: x** <span class="number">2</span>)(x) <span class="keyword">for</span> x <span class="keyword">in</span> list_num <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">print(list_square)</span><br><span class="line">print(list_square2)</span><br></pre></td></tr></table></figure><br>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">16</span>, <span class="number">36</span>, <span class="number">4</span>, <span class="number">64</span>]</span><br><span class="line">[<span class="number">16</span>, <span class="number">36</span>, <span class="number">4</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
+<p>作为函数的参数：根据字典值降序排序<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mydict = &#123;<span class="number">1</span>:<span class="string">&quot;apple&quot;</span>,<span class="number">3</span>:<span class="string">&quot;banana&quot;</span>,<span class="number">2</span>:<span class="string">&quot;orange&quot;</span>&#125;</span><br><span class="line">mydict = <span class="built_in">sorted</span>(mydict.items(), key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">print(mydict)</span><br></pre></td></tr></table></figure><br>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(<span class="number">3</span>, <span class="string">&#x27;banana&#x27;</span>), (<span class="number">2</span>, <span class="string">&#x27;orange&#x27;</span>), (<span class="number">1</span>, <span class="string">&#x27;apple&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+<p><strong>2、lambda表达式只有一行，不能写成多行的代码块。</strong></p>
+<p>lambda 用于快速编写简单函数，对于更复杂的多行逻辑使用常规函数来实现。关于这点，Python 之父 Guido van Rossum 曾发了一篇文章解释：<a target="_blank" rel="noopener" href="https://www.artima.com/weblogs/viewpost.jsp?thread=147358">Language Design Is Not Just Solving Puzzles</a></p>
+<p>Lambda函数具有函数式编程的特性，关于函数式编程这里不做介绍，后面有时间单独写一篇文章。Lambda函数可以与filter()、map()和reduce()等内置函数一起使用，下面介绍使用方法。</p>
+<h1 id="filter-函数"><a href="#filter-函数" class="headerlink" title="filter()函数"></a>filter()函数</h1><p>Python中的filter()函数接受一个函数对象和一个可迭代对象作为参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">filter</span>(function <span class="keyword">or</span> <span class="literal">None</span>, iterable)</span><br></pre></td></tr></table></figure>
+<p>filter()函数对iterable中的每个元素都进行 function 判断，并返回 True 或者 False，最后将返回 True 的元素组成一个新的可遍历的集合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">list_num = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line"></span><br><span class="line">list_even = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, list_num))</span><br><span class="line">print(list_even)</span><br><span class="line"></span><br><span class="line">list_even2 = [i <span class="keyword">for</span> i <span class="keyword">in</span> list_num <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">print(list_even2)</span><br><span class="line"></span><br><span class="line">list_even3 = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> list_num:</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        list_even3.append(i)</span><br><span class="line">print(list_even3)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">8</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">8</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+<p>如果是None，可用于过滤空格，返回为true的可遍历集合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="string">&#x27;&#x27;</span>, <span class="literal">None</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="literal">False</span>, <span class="number">8</span>, <span class="literal">True</span>]</span><br><span class="line">list1 = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="literal">None</span>, list1))</span><br><span class="line">print(list1)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">6</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="literal">True</span>]</span><br></pre></td></tr></table></figure>
+<h1 id="map-函数"><a href="#map-函数" class="headerlink" title="map() 函数"></a>map() 函数</h1><p>和filter()类似，<code>map(function, iterable)</code> 函数表示对 iterable 中的每个元素，都运用 function 这个函数，最后返回一个新的可遍历的集合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">list_num = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line">list_square = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x: x**<span class="number">2</span>, list_num))</span><br><span class="line">print(list_square)</span><br><span class="line"></span><br><span class="line">list_num = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line">list_square2 = [(<span class="keyword">lambda</span> x: x** <span class="number">2</span>)(x) <span class="keyword">for</span> x <span class="keyword">in</span> list_num]</span><br><span class="line">print(list_square2)</span><br><span class="line"></span><br><span class="line">list_square3 = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> list_num]</span><br><span class="line">print(list_square3)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">9</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">64</span>]</span><br><span class="line">[<span class="number">9</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">64</span>]</span><br><span class="line">[<span class="number">9</span>, <span class="number">16</span>, <span class="number">36</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">64</span>]</span><br></pre></td></tr></table></figure>
+<h1 id="reduce-函数"><a href="#reduce-函数" class="headerlink" title="reduce() 函数"></a>reduce() 函数</h1><p>reduce(function, iterable)函数同样接收一个函数和一个列表作为参数，reduce()函数属于functools模块，通常用来对一个集合做一些累积操作。function 对象有两个参数，表示对 iterable 中的每个元素以及上一次调用后的结果，运用 function 进行计算，也就是执行重复操作，最终返回一个数值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> reduce</span><br><span class="line"></span><br><span class="line">list_num = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">8</span>]</span><br><span class="line"><span class="built_in">sum</span> = reduce(<span class="keyword">lambda</span> x, y: x + y, list_num)</span><br><span class="line">print(<span class="built_in">sum</span>) <span class="comment"># 输出：28 = 3 + 4 + 6 + 2 + 5 + 8</span></span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了lambda函数和常见的 map()，fiilter() 和 reduce() 三个函数，匿名函数通常用于实现一个简单功能，并且该函数只调用一次。</p>
+<p>map()，fiilter() 和 reduce() 三个函数通常与lambda函数结合使用，它们的功能也可以使用列表推导式 (List Comprehension)来实现。它们的性能差异不大，可以根据自己习惯使用。</p>
+<center><b>--THE END--<b></center>
+
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>              
+		  <a href="/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 匿名函数</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>Python笔记：lambda匿名函数</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/python-notes-for-anonymous-function/" title="Python笔记：lambda匿名函数">https://hiyongz.github.io/posts/python-notes-for-anonymous-function/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/python-notes-for-anonymous-function/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/python-notes-for-new-and-init/" rel="prev" title="Python中的__new__、__init__以及metaclass">
+      <i class="fa fa-chevron-left"></i> Python中的__new__、__init__以及metaclass
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/python-library-for-click/" rel="next" title="Python 命令行参数解析之 Click">
+      Python 命令行参数解析之 Click <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filter-%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">filter()函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map-%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">map() 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reduce-%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">reduce() 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">146</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/" title="GitHub → https://github.com/hiyongz/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">509k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7:43</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
