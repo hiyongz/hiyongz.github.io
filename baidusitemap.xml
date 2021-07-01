@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-passing-arguments-in-function/</loc>
+    <lastmod>2021-07-01</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/python-library-for-click/</loc>
     <lastmod>2021-06-30</lastmod>
   </url>
@@ -197,11 +201,11 @@
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/Python-Enhancement-Proposals/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
+    <loc>https://hiyongz.github.io/posts/Python-Enhancement-Proposals/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
