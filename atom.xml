@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-07-01T23:36:43.699Z</updated>
+  <updated>2021-07-06T14:23:02.398Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>App自动化测试工具Airtest</title>
+    <link href="https://hiyongz.github.io/posts/app-testing-tools-for-airtestproject/"/>
+    <id>https://hiyongz.github.io/posts/app-testing-tools-for-airtestproject/</id>
+    <published>2021-07-06T04:12:00.000Z</published>
+    <updated>2021-07-06T14:23:02.398Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;AirtestProject是由网易游戏推出的一款跨平台的UI自动化测试框架，主要是面向游戏的UI自动化测试，比如Unity3D、cocos2dx-*游戏框架，也支持Android原生app、iOS app、微信小程序的UI测试。本文主要介绍如何使用AirtestProject进行Android APP自动化测试。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="Airtest" scheme="https://hiyongz.github.io/tags/Airtest/"/>
+    
+  </entry>
   
   <entry>
     <title>Python函数的参数类型</title>
@@ -509,29 +532,6 @@
       <category term="金融小知识" scheme="https://hiyongz.github.io/tags/%E9%87%91%E8%9E%8D%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
     
       <category term="投资理财" scheme="https://hiyongz.github.io/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《时间简史》- 广义相对论</title>
-    <link href="https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%B9%BF%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA/"/>
-    <id>https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%B9%BF%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA/</id>
-    <published>2021-05-11T14:22:00.000Z</published>
-    <updated>2021-05-20T23:39:00.857Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;广义相对论&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="时间简史" scheme="https://hiyongz.github.io/tags/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2/"/>
     
   </entry>
   

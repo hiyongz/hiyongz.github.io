@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-airtestproject/</loc>
+    <lastmod>2021-07-06</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
+    <lastmod>2021-07-06</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-passing-arguments-in-function/</loc>
     <lastmod>2021-07-01</lastmod>
   </url>
@@ -201,11 +209,11 @@
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
+    <loc>https://hiyongz.github.io/posts/Python-Enhancement-Proposals/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/Python-Enhancement-Proposals/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
     <lastmod>2021-05-28</lastmod>
   </url>
   <url>
@@ -398,10 +406,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/selenium-appium-webdriver-wait/</loc>
-    <lastmod>2021-02-23</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
     <lastmod>2021-02-23</lastmod>
   </url>
   <url>
