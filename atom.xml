@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-07-06T14:23:02.398Z</updated>
+  <updated>2021-07-08T13:39:14.115Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python json文件读写</title>
+    <link href="https://hiyongz.github.io/posts/python-library-for-json/"/>
+    <id>https://hiyongz.github.io/posts/python-library-for-json/</id>
+    <published>2021-07-08T04:12:00.000Z</published>
+    <updated>2021-07-08T13:39:14.115Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JSON (JavaScript Object Notation)是一个受 JavaScript 的对象字面量语法启发的轻量级数据交换格式，本文介绍Python json库的使用，也就是json的序列化和反序列化方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="yaml" scheme="https://hiyongz.github.io/tags/yaml/"/>
+    
+  </entry>
   
   <entry>
     <title>App自动化测试工具Airtest</title>
@@ -509,29 +534,6 @@
       <category term="Hash table" scheme="https://hiyongz.github.io/tags/Hash-table/"/>
     
       <category term="字典" scheme="https://hiyongz.github.io/tags/%E5%AD%97%E5%85%B8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>投资理财-商誉</title>
-    <link href="https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E5%95%86%E8%AA%89/"/>
-    <id>https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E5%95%86%E8%AA%89/</id>
-    <published>2021-05-11T14:22:00.000Z</published>
-    <updated>2021-05-20T23:39:55.377Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近，文化产业又引来一次税务风暴，记得上一次还是2018年的范冰冰事件，导致华谊兄弟市值大幅缩水，当时作为一个吃瓜群众，倒是喜闻乐见。这次由郑爽引起的税务风暴让我无法淡定了，先来回顾一下这个所谓的“郑爽天价片酬事件”。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="投资理财" scheme="https://hiyongz.github.io/categories/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/"/>
-    
-    
-      <category term="金融小知识" scheme="https://hiyongz.github.io/tags/%E9%87%91%E8%9E%8D%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
-    
-      <category term="投资理财" scheme="https://hiyongz.github.io/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/"/>
     
   </entry>
   
