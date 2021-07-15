@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
+    <lastmod>2021-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/</loc>
+    <lastmod>2021-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-network/</loc>
+    <lastmod>2021-07-13</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/python-library-for-pyyaml/</loc>
     <lastmod>2021-07-13</lastmod>
   </url>
@@ -105,10 +117,6 @@
     <lastmod>2021-06-14</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-network/</loc>
-    <lastmod>2021-06-14</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-test-theory/</loc>
     <lastmod>2021-06-14</lastmod>
   </url>
@@ -147,10 +155,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/</loc>
     <lastmod>2021-06-06</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-hash-table/</loc>
-    <lastmod>2021-06-03</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-object-and-copy/</loc>

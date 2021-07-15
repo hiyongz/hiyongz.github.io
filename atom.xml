@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-07-13T12:28:13.391Z</updated>
+  <updated>2021-07-15T14:13:24.944Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>App�Զ������Թ���Uiautomator2</title>
+    <link href="https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/"/>
+    <id>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</id>
+    <published>2021-07-15T04:12:00.000Z</published>
+    <updated>2021-07-15T14:13:24.944Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����&lt;a href=&quot;https://developer.android.com/training/testing/ui-automator.html&quot;&gt;Google UiAutomator&lt;/a&gt;��Java�⣩��python UIAutomator2ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣���ļ�¼һ������ʹ�÷�����&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="�Զ�������" scheme="https://hiyongz.github.io/categories/%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/"/>
+    
+      <category term="App�Զ�������" scheme="https://hiyongz.github.io/categories/%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/App%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/"/>
+    
+    
+      <category term="Uiautomator2" scheme="https://hiyongz.github.io/tags/Uiautomator2/"/>
+    
+  </entry>
   
   <entry>
     <title>Python yaml文件读写</title>
@@ -497,31 +520,6 @@
       <category term="堆" scheme="https://hiyongz.github.io/tags/%E5%A0%86/"/>
     
       <category term="图" scheme="https://hiyongz.github.io/tags/%E5%9B%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>typora主题配置：公众号一键排版</title>
-    <link href="https://hiyongz.github.io/posts/front-end-for-typora-css/"/>
-    <id>https://hiyongz.github.io/posts/front-end-for-typora-css/</id>
-    <published>2021-05-18T04:12:00.000Z</published>
-    <updated>2021-05-16T14:20:55.535Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;typora是一个非常易用且免费的markdown编辑器，是我最常用的文档编辑器。它支持实时渲染，不用打开两个窗口（源码窗口和预览窗口），真正实现了沉浸式写作，所谓所见即所得。它的界面简洁，操作简单，非常容易上手，这里就不介绍了。本文主要介绍Typora的主题配置，实现公众号一键排版。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="个人博客" scheme="https://hiyongz.github.io/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-      <category term="typora" scheme="https://hiyongz.github.io/tags/typora/"/>
-    
-      <category term="markdown" scheme="https://hiyongz.github.io/tags/markdown/"/>
-    
-      <category term="CSS" scheme="https://hiyongz.github.io/tags/CSS/"/>
     
   </entry>
   
