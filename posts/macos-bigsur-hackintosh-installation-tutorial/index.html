@@ -30,7 +30,7 @@
 <meta property="og:description" content="本文记录黑苹果安装过程">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-17T04:12:00.000Z">
-<meta property="article:modified_time" content="2021-07-18T14:43:02.604Z">
+<meta property="article:modified_time" content="2021-07-21T14:18:09.787Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="黑苹果">
 <meta name="twitter:card" content="summary">
@@ -320,7 +320,7 @@
 <h2 id="分配磁盘空间"><a href="#分配磁盘空间" class="headerlink" title="分配磁盘空间"></a>分配磁盘空间</h2><p>分配磁盘空间用于安装macOS系统。</p>
 <p>打开window自带的磁盘管理，如果没有空闲的磁盘分区，可以选择一个剩余空间大的磁盘，右键选择的磁盘选择【压缩卷】，单独分配部分空间出来，我分配了120G。</p>
 <p>获取了单独的分区后，右键选择【删除卷】，得到120G的【空闲】分区</p>
-<p>打开磁盘分区工具Disk Genuis，找到刚才删除的卷，右键单击选择【建立新分区】，主要用于分配EFI空间。EFI系统分区(ESP)用于存放可供引导启动系统的文件，将EFI文件存放在EFI系统分区中，这样黑苹果不用使用U盘来引导了。</p>
+<p>打开磁盘分区工具Disk Genuis，找到刚才删除的卷，右键单击选择【建立新分区】，文件系统类型选择【EFI system partition】主要用于分配EFI空间。EFI系统分区(ESP)用于存放可供引导启动系统的文件，将EFI文件存放在EFI系统分区中，这样黑苹果不用使用U盘来引导了。</p>
 <p>分区大小必须大于300Mb，我设置的大小为500Mb。</p>
 <p>EFI分区设置完成后回到磁盘管理，选择剩下的未分配空间，右键选择【新建简单卷】，分配驱动器号，注意<strong>不要格式化</strong>。</p>
 <h2 id="U盘制作安装镜像"><a href="#U盘制作安装镜像" class="headerlink" title="U盘制作安装镜像"></a>U盘制作安装镜像</h2><p>将macOS系统镜像写到U盘上</p>
@@ -432,7 +432,10 @@
     <a href="/posts/app-testing-tools-for-uiautomator2/" rel="prev" title="App�Զ������Թ���Uiautomator2">
       <i class="fa fa-chevron-left"></i> App�Զ������Թ���Uiautomator2
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/posts/linux-and-windows-create-files-certain-size/" rel="next" title="Linux和Windows创建指定大小文件方法">
+      Linux和Windows创建指定大小文件方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -508,7 +511,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">138</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -521,7 +524,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">151</span>
+        <span class="site-state-item-count">152</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -569,12 +572,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">543k</span>
+    <span title="站点总字数">549k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8:14</span>
+    <span title="站点阅读时长">8:19</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

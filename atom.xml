@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-07-18T14:43:02.604Z</updated>
+  <updated>2021-07-22T14:10:10.077Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python内存驻留机制</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-string-interning/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-string-interning/</id>
+    <published>2021-07-22T04:12:00.000Z</published>
+    <updated>2021-07-22T14:10:10.077Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;字符串驻留机制在许多面向对象编程语言中都支持，比如Java、python、Ruby、PHP等，它是一种数据缓存机制，对不可变数据类型使用同一个内存地址，有效的节省了空间，本文主要介绍Python的内存驻留机制。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="内存驻留" scheme="https://hiyongz.github.io/tags/%E5%86%85%E5%AD%98%E9%A9%BB%E7%95%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux和Windows创建指定大小文件方法</title>
+    <link href="https://hiyongz.github.io/posts/linux-and-windows-create-files-certain-size/"/>
+    <id>https://hiyongz.github.io/posts/linux-and-windows-create-files-certain-size/</id>
+    <published>2021-07-20T04:02:00.000Z</published>
+    <updated>2021-07-22T14:09:24.129Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在测试中有时需要创建不同大小的测试文件，用于测试上传下载性能以及以及其它文件传输功能，本文介绍几种Liunx和Windows系统下创建指定大小文件的方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
     <title>黑苹果安装笔记</title>
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-07-17T04:12:00.000Z</published>
-    <updated>2021-07-18T14:43:02.604Z</updated>
+    <updated>2021-07-21T14:18:09.787Z</updated>
     
     <summary type="html">
     
@@ -458,56 +504,6 @@
       <category term="DFS" scheme="https://hiyongz.github.io/tags/DFS/"/>
     
       <category term="BFS" scheme="https://hiyongz.github.io/tags/BFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python多线程与多进程</title>
-    <link href="https://hiyongz.github.io/posts/python-notes-for-multi-process/"/>
-    <id>https://hiyongz.github.io/posts/python-notes-for-multi-process/</id>
-    <published>2021-05-25T04:12:00.000Z</published>
-    <updated>2021-05-28T06:59:30.658Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;进程(process)和线程(thread)是操作系统的基本概念，是操作系统程序运行的基本单元，本文简要介绍进程和线程的概念以及Python中的多进程和多线程。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="多线程" scheme="https://hiyongz.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-      <category term="多进程" scheme="https://hiyongz.github.io/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL数据库进阶知识点</title>
-    <link href="https://hiyongz.github.io/posts/database-for-mysql-advance/"/>
-    <id>https://hiyongz.github.io/posts/database-for-mysql-advance/</id>
-    <published>2021-05-23T04:12:00.000Z</published>
-    <updated>2021-06-06T14:31:15.474Z</updated>
-    
-    <summary type="html">
-    
-      Here&#39;s something encrypted, password is required to continue reading.
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
     
   </entry>
   
