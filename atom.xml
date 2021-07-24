@@ -88,11 +88,17 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</id>
     <published>2021-07-15T04:12:00.000Z</published>
-    <updated>2021-07-18T13:10:55.588Z</updated>
+    <updated>2021-07-24T01:40:34.321Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����&lt;a href=&quot;https://developer.android.com/training/testing/ui-automator.html&quot;&gt;Google UiAutomator&lt;/a&gt;��Java�⣩��python UIAutomator2ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣���ļ�¼һ������ʹ�÷�����&lt;/p&gt;
+      &lt;p&gt;&lt;a href=&quot;https://developer.android.com/training/testing/ui-automator.html&quot;&gt;UI Automator&lt;/a&gt;�� google �� Android4.1 �汾����ʱ�Ƴ���һ����Java��д��Android UI �Զ������Թ��ߣ�����Android Accessibility ����Accessibility �������ڰ����м��û�ʹ��Android�豸��Ӧ�á��ں�̨���У�����accesbilityevents����ʱ����ϵͳ�ص���&lt;/p&gt;
+&lt;p&gt;UI Automator���Կ���̲���������Ӧ�ú�UiAutomator�����������Ľ��̣������ԶԵ�����App���в��ԣ���ȡ��Ļ������һ��APP������һ���ؼ����ԣ�������������������&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;���Խű�ֻ��ʹ��Java����&lt;/li&gt;
+&lt;li&gt;ִ��ʱ��Ҫ���ű������jar����apk���ϴ����豸�ϲ�������&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����Google Ui Automator����ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣���ĵ�����UIAutomator2��ʹ�÷�����&lt;/p&gt;
     
     </summary>
     

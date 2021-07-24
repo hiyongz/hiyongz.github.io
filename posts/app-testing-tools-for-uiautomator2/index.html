@@ -22,16 +22,16 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����Google UiAutomator��Java�⣩��python UIAutomator2ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣�">
+  <meta name="description" content="UI Automator�� google �� Android4.1 �汾����ʱ�Ƴ���һ����Java��д��Android UI �Զ������Թ��ߣ�����Android Accessibility ����Accessibility �������ڰ����м��û�ʹ��Android�豸��Ӧ�á��ں�̨���У�����accesbilityevents����ʱ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="App�Զ������Թ���Uiautomator2">
 <meta property="og:url" content="https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����Google UiAutomator��Java�⣩��python UIAutomator2ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣�">
+<meta property="og:description" content="UI Automator�� google �� Android4.1 �汾����ʱ�Ƴ���һ����Java��д��Android UI �Զ������Թ��ߣ�����Android Accessibility ����Accessibility �������ڰ����м��û�ʹ��Android�豸��Ӧ�á��ں�̨���У�����accesbilityevents����ʱ">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/uiautomator2-xueqiu.png">
 <meta property="article:published_time" content="2021-07-15T04:12:00.000Z">
-<meta property="article:modified_time" content="2021-07-18T13:10:55.588Z">
+<meta property="article:modified_time" content="2021-07-24T01:40:34.321Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Uiautomator2">
 <meta name="twitter:card" content="summary">
@@ -281,7 +281,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
+              <span>13k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -300,7 +300,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����<a target="_blank" rel="noopener" href="https://developer.android.com/training/testing/ui-automator.html">Google UiAutomator</a>��Java�⣩��python UIAutomator2ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣���ļ�¼һ������ʹ�÷�����</p>
+        <p><a target="_blank" rel="noopener" href="https://developer.android.com/training/testing/ui-automator.html">UI Automator</a>�� google �� Android4.1 �汾����ʱ�Ƴ���һ����Java��д��Android UI �Զ������Թ��ߣ�����Android Accessibility ����Accessibility �������ڰ����м��û�ʹ��Android�豸��Ӧ�á��ں�̨���У�����accesbilityevents����ʱ����ϵͳ�ص���</p>
+<p>UI Automator���Կ���̲���������Ӧ�ú�UiAutomator�����������Ľ��̣������ԶԵ�����App���в��ԣ���ȡ��Ļ������һ��APP������һ���ؼ����ԣ�������������������</p>
+<ol>
+<li>���Խű�ֻ��ʹ��Java����</li>
+<li>ִ��ʱ��Ҫ���ű������jar����apk���ϴ����豸�ϲ�������</li>
+</ol>
+<p>python UIAutomator2��һ������ʹ��Python��Android�豸����UI�Զ��������Ŀ⣬�ײ����Google Ui Automator����ԭ�������ֻ���ʹ��http rpc����UiAutomator�еĹ��ܿ��ų�����Ȼ���ٽ���Щhttp�ӿڷ�װ��Python�⡣���ĵ�����UIAutomator2��ʹ�÷�����</p>
 <a id="more"></a>
 <h1 id="uiautomator2��װ"><a href="#uiautomator2��װ" class="headerlink" title="uiautomator2��װ"></a>uiautomator2��װ</h1><p>uiautomator2��GitHub�ֿ��ַΪ��<a target="_blank" rel="noopener" href="https://github.com/openatx/uiautomator2">https://github.com/openatx/uiautomator2</a></p>
 <p>python��װ��</p>
@@ -319,7 +325,6 @@
 <p>��ȡ�ֻ�IP��ַ<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d.wlan_ip</span><br><span class="line">u<span class="string">&#x27;192.168.0.191&#x27;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="����"><a href="#����" class="headerlink" title="����"></a>����</h2><p>�г����������е�APP��<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.app_list_running() <span class="comment"># adb shell pm list packages</span></span><br></pre></td></tr></table></figure></p>
 <p>����ҳ<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.open_url(<span class="string">&quot;https://www.baidu.com&quot;</span>) <span class="comment"># adb shell am start -a android.intent.action.VIEW -d https://www.baidu.com </span></span><br></pre></td></tr></table></figure></p>
-<p>�ȴ�appActivity����<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d.wait_activity(<span class="string">&quot;.HWSettings&quot;</span>, timeout=10)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
 <h1 id="UIԪ�ض�λ"><a href="#UIԪ�ض�λ" class="headerlink" title="UIԪ�ض�λ"></a>UIԪ�ض�λ</h1><h2 id="����ѡ����"><a href="#����ѡ����" class="headerlink" title="����ѡ����"></a>����ѡ����</h2><p>ͨ������ֵ��λ��֧������Ĳ�����</p>
 <ul>
 <li><code>text</code>, <code>textContains</code>, <code>textMatches</code>, <code>textStartsWith</code></li>
@@ -344,13 +349,13 @@
 <li><code>d(A).down(B)</code>��A���±�Ԫ��B</li>
 </ul>
 <p><img src="uiautomator2-xueqiu.png" width="80%" height="80%" /></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;ѩ��&quot;</span>).right(text=<span class="string">&quot;����&quot;</span>)</span><br><span class="line">d(text=<span class="string">&quot;����&quot;</span>).left(text=<span class="string">&quot;����&quot;</span>)</span><br><span class="line"></span><br><span class="line">d(resourceId=<span class="string">&quot;com.xueqiu.android:id/tab_name&quot;</span>, instance=<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;ѩ��&quot;</span>).right(text=<span class="string">&quot;����&quot;</span>)</span><br><span class="line">d(text=<span class="string">&quot;����&quot;</span>).left(text=<span class="string">&quot;����&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="���ʵ��"><a href="#���ʵ��" class="headerlink" title="���ʵ��"></a>���ʵ��</h2><p>�鿴��ѡ��ʵ��</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(d(resourceId=<span class="string">&quot;com.xueqiu.android:id/tab_name&quot;</span>).count)</span><br><span class="line">print(<span class="built_in">len</span>(d(resourceId=<span class="string">&quot;com.xueqiu.android:id/tab_name&quot;</span>)))</span><br><span class="line">d(resourceId=<span class="string">&quot;com.xueqiu.android:id/tab_name&quot;</span>)[<span class="number">1</span>].click() <span class="comment"># ���ƥ�䵽�ĵڶ���Ԫ��</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(d(className=<span class="string">&quot;android.widget.RadioButton&quot;</span>).count)</span><br><span class="line">print(<span class="built_in">len</span>(d(className=<span class="string">&quot;android.widget.RadioButton&quot;</span>)))</span><br><span class="line">d(className=<span class="string">&quot;android.widget.RadioButton&quot;</span>)[<span class="number">0</span>].click() <span class="comment"># ���ƥ�䵽�ĵڶ���Ԫ��</span></span><br></pre></td></tr></table></figure>
 <p>ִ�н����</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
 <p>Ҳ����ʹ��instance����ѡ��</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d(resourceId=<span class="string">&quot;com.xueqiu.android:id/tab_name&quot;</span>, instance=<span class="number">1</span>) <span class="comment"># ʹ��ƥ�䵽�ĵ�2��Ԫ��</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d(className=<span class="string">&quot;android.widget.RadioButton&quot;</span>, instance=<span class="number">1</span>).click() <span class="comment"># ʹ��ƥ�䵽�ĵ�2��Ԫ��</span></span><br></pre></td></tr></table></figure>
 <h2 id="XPath��λ"><a href="#XPath��λ" class="headerlink" title="XPath��λ"></a>XPath��λ</h2><p>Java uiautoamtorĬ�ϲ�֧��xpath��xpath��λ��UIAutomator2��չ��һ�����ܡ�</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d.xpath(<span class="string">&#x27;//*[@text=&quot;����&quot;]&#x27;</span>).wait(<span class="number">10.0</span>).click()</span><br><span class="line">d.xpath(<span class="string">&#x27;//*[@text=&quot;����&quot;]&#x27;</span>).click()</span><br><span class="line">d.xpath(<span class="string">&#x27;//*[@text=&quot;����&quot;]&#x27;</span>).exists</span><br><span class="line">d.xpath(<span class="string">&#x27;//*[@text=&quot;����&quot;]&#x27;</span>).<span class="built_in">all</span>()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>xpath�﷨�ɲο�<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/111415888">Web�Զ������ԣ�xpath &amp; CSS Selector��λ</a></p>
@@ -358,7 +363,8 @@
 <p>�����������<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d.click(x,y) <span class="comment"># �����������</span></span><br><span class="line">d.double_click(x, y, duration=<span class="number">0.1</span>) <span class="comment"># ˫����������</span></span><br><span class="line">d.long_click(x, y, duration=<span class="number">0.5</span>) <span class="comment"># ����</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="�i�����"><a href="#�i�����" class="headerlink" title="�ı�����"></a>�ı�����</h2><p>�ı�ֵ��ȡ�����������</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;����&quot;</span>).get_text() <span class="comment"># ��ȡԪ���ı�</span></span><br><span class="line"></span><br><span class="line">d(resourceId=<span class="string">&quot;com.xueqiu.android:id/action_search&quot;</span>).click() <span class="comment"># �������</span></span><br><span class="line">d(resourceId=<span class="string">&quot;com.xueqiu.android:id/search_input_text&quot;</span>).set_text(<span class="string">&quot;��������&quot;</span>)  <span class="comment"># �����ı�</span></span><br><span class="line">d(resourceId=<span class="string">&quot;com.xueqiu.android:id/search_input_text&quot;</span>).clear_text()  <span class="comment"># ����ı�������ı�</span></span><br></pre></td></tr></table></figure>
-<h2 id="�ȴ�wait"><a href="#�ȴ�wait" class="headerlink" title="�ȴ�wait"></a>�ȴ�wait</h2><p>�ȴ�Ԫ��</p>
+<h2 id="�ȴ�wait"><a href="#�ȴ�wait" class="headerlink" title="�ȴ�wait"></a>�ȴ�wait</h2><p>�ȴ�appActivity����<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d.wait_activity(<span class="string">&quot;.HWSettings&quot;</span>, timeout=10)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>�ȴ�Ԫ��</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).wait(timeout=<span class="number">3.0</span>) <span class="comment"># �ȴ�Ԫ�س���</span></span><br><span class="line">d(text=<span class="string">&quot;Settings&quot;</span>).wait_gone(timeout=<span class="number">1.0</span>) <span class="comment"># �ȴ�Ԫ����ʧ</span></span><br></pre></td></tr></table></figure>
 <h2 id="WatchContext"><a href="#WatchContext" class="headerlink" title="WatchContext"></a>WatchContext</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> d.watch_context() <span class="keyword">as</span> ctx:</span><br><span class="line">    ctx.when(<span class="string">&quot;^����(����|����)&quot;</span>).when(<span class="string">&quot;ȡ��&quot;</span>).click() <span class="comment"># ��ͬʱ���� ��������װ �� ����ȡ������ ȡ�� ��ť��ʱ�򣬵��ȡ��</span></span><br><span class="line">    ctx.when(<span class="string">&quot;ͬ��&quot;</span>).click()</span><br><span class="line">    ctx.when(<span class="string">&quot;ȷ��&quot;</span>).click()</span><br><span class="line">    <span class="comment"># �������д���������ִ����ģ�������ʲô�ȴ�</span></span><br><span class="line">    </span><br><span class="line">    ctx.wait_stable() <span class="comment"># ����������أ����ȴ������ȶ��������������������û�е��������ȶ���</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ʹ��call���������������ص�</span></span><br><span class="line">    <span class="comment"># call ֧������������d��el�������ֲ���λ�ã����Բ����Σ�������α���������д��</span></span><br><span class="line">    <span class="comment"># eg: ����Ԫ��ƥ������֮ҹ��������ذ�ť</span></span><br><span class="line">    ctx.when(<span class="string">&quot;����֮ҹ&quot;</span>).call(<span class="keyword">lambda</span> d: d.press(<span class="string">&quot;back&quot;</span>))</span><br><span class="line">    ctx.when(<span class="string">&quot;ȷ��&quot;</span>).call(<span class="keyword">lambda</span> el: el.click())</span><br></pre></td></tr></table></figure>
 <h2 id="Toast����"><a href="#Toast����" class="headerlink" title="Toast����"></a>Toast����</h2><p>�ֻ�ҳ����ʾtoast</p>
@@ -596,12 +602,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">549k</span>
+    <span title="站点总字数">550k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8:19</span>
+    <span title="站点阅读时长">8:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
