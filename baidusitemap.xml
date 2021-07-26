@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/appium-install-and-architecture/</loc>
+    <lastmod>2021-07-26</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
+    <lastmod>2021-07-26</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
     <lastmod>2021-07-24</lastmod>
   </url>
@@ -183,10 +191,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/test-theory-for-software-testing/</loc>
     <lastmod>2021-05-30</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
-    <lastmod>2021-05-28</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/</loc>
@@ -395,10 +399,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/</loc>
     <lastmod>2021-04-03</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/appium-install-and-architecture/</loc>
-    <lastmod>2021-03-31</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</loc>

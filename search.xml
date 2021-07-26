@@ -6466,7 +6466,8 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
   <entry>
     <title>Python正则表达式</title>
     <url>/posts/linux-regular-expression-and-python-regex/</url>
-    <content><![CDATA[<p>正则表达式（Regular expression）是组成搜索模式的一组字符序列，是<strong>记录文本规则</strong>的代码，用来检查文本中是否包含指定模式的字符串，通过定义一个规则来匹配字符串。正则表达式广泛应用于在字符串查找和处理中，大多文本编辑器基本都支持正则表达式查找。本文将简要介绍正则表达式语法，然后介绍Python语言中正则表达式使用方法。<a id="more"></a></p>
+    <content><![CDATA[<p>正则表达式（Regular expression）是组成搜索模式的一组字符序列，是<strong>记录文本规则</strong>的代码，用来检查文本中是否包含指定模式的字符串，通过定义一个规则来匹配字符串。正则表达式广泛应用于在字符串查找和处理中，大多文本编辑器基本都支持正则表达式查找。本文将简要介绍正则表达式语法，然后介绍Python语言中正则表达式使用方法。</p>
+<a id="more"></a>
 <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p>Unix之父Ken Tompson将正则表达式引入Unix，后面发展成了grep（Global Regular Expression Print）命令，由于grep不支持<code>+</code>、<code>|</code>与<code>?</code> ，且分组比较麻烦，AT&amp;T的Alfred Aho开发了egrep命令。随着Unix的版本不断演化，Unix中的程序（比如Linux三剑客中的awk、sed）所支持的正则表达式有差异，比较混乱。在1986年制定了POSIX（Portable Operating System Interface）标准，其中统一了正则表达式的语法。</p>
 <p>POSIX标准把正则表达式分为两种：BRE（Basic Regular Expressions）和ERE（Extended Regular Expressions ）。BRE就是unix系统使用的grep命令，ERE对应egrep命令，是BRE的扩展。而linux系统使用的是GNU标准，linux发行版集成了GNU（Gnu’s Not Unix）套件，GNU在实现了POXIS标准的同时，做了一定的扩展。也包括GNU Basic Regular Expressions 和GNU Extends Regular Expressions。</p>
 <p>正则表达式除了POSIX标准之外还有一个Perl分支，Perl与sed和awk兼容，后来演化成为PCRE（Perl Compatible Regular Expressions），是一个用C语言编写的正则表达式函数库，功能很强大，性能比POSIX正则表达式好。PCRE被引入了其他语言中，比如PHP, Tcl, Python, Ruby, C++, Java, R语言等等。</p>
@@ -6599,6 +6600,7 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <h3 id="6-只匹配3位数字"><a href="#6-只匹配3位数字" class="headerlink" title="6. 只匹配3位数字"></a>6. 只匹配3位数字</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep -P <span class="string">&#x27;^\d&#123;3&#125;$&#x27;</span> test.txt</span></span><br><span class="line">123</span><br></pre></td></tr></table></figure>
 <h3 id="7-查找单词‘GET’"><a href="#7-查找单词‘GET’" class="headerlink" title="7. 查找单词‘GET’"></a>7. 查找单词‘GET’</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep <span class="string">&#x27;\bGET\b&#x27;</span> test.txt</span></span><br><span class="line">GET 1</span><br><span class="line">GET</span><br><span class="line"><span class="meta">$</span><span class="bash"> grep <span class="string">&#x27;^GET$&#x27;</span> test.txt</span></span><br><span class="line">GET</span><br></pre></td></tr></table></figure>
 <h3 id="8-匹配两个字符之间的内容"><a href="#8-匹配两个字符之间的内容" class="headerlink" title="8. 匹配两个字符之间的内容"></a>8. 匹配两个字符之间的内容</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep -Eo <span class="string">&quot;test(.+?)test&quot;</span> test.txt</span></span><br><span class="line">test123test</span><br><span class="line"><span class="meta">$</span><span class="bash"> grep -Po <span class="string">&quot;(?&lt;=test).*?(?=test)&quot;</span> test.txt</span></span><br><span class="line">123</span><br></pre></td></tr></table></figure>
+<h3 id="9-和-的使用方法"><a href="#9-和-的使用方法" class="headerlink" title="9. .*和.+的使用方法"></a>9. <code>.*</code>和<code>.+</code>的使用方法</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ text1=<span class="string">&quot;fn()&quot;</span></span><br><span class="line">$ text2=<span class="string">&quot;fn(6)&quot;</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$text1</span> | grep <span class="string">&quot;fn\(.*\)&quot;</span></span><br><span class="line">fn()</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$text2</span> | grep <span class="string">&quot;fn\(.*\)&quot;</span></span><br><span class="line">fn(6)</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$text1</span> | grep -E <span class="string">&quot;fn\(.+\)&quot;</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$text2</span> | grep -E <span class="string">&quot;fn\(.+\)&quot;</span></span><br><span class="line">fn(6)</span><br></pre></td></tr></table></figure>
 <h1 id="Python正则表达式"><a href="#Python正则表达式" class="headerlink" title="Python正则表达式"></a>Python正则表达式</h1><p>Python有一个内置正则表达式模块 <code>re</code> ，可以使用它来进行字符串操作：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br></pre></td></tr></table></figure><br><code>re</code>模块提供了以下4种方法：</p>
 <ul>
 <li>findall：返回所有匹配项</li>
@@ -8610,17 +8612,24 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <p><img src="android_app.jpg" alt="img"></p>
 <p>Appium 跨语言支持：Java、 Python、 Ruby、JavaScript (Node.js)、PHP、C# (.NET)、RobotFramework等，Appium是跨平台的，可以用在OSX，Windows以及Linux桌面系统上运行。</p>
 <h1 id="Appium架构"><a href="#Appium架构" class="headerlink" title="Appium架构"></a>Appium架构</h1><p><img src="appium_server.png" alt="img"></p>
-<h2 id="WebDriver"><a href="#WebDriver" class="headerlink" title="WebDriver"></a>WebDriver</h2><p>Selenium Webdriver API实现脚本语言与浏览器之间的通信，可参考<a href="https://blog.csdn.net/u010698107/article/details/114681384">Selenium Webdriver 架构</a>。 Webdriver定义的JSON Wire Protocol（JSON有线协议）实现selenium客户端与remote server（浏览器驱动的HTTP服务器）的交互，remote server将命令发送给浏览器，实现浏览器的native调用。</p>
+<h2 id="WebDriver"><a href="#WebDriver" class="headerlink" title="WebDriver"></a>WebDriver</h2><p>Selenium Webdriver API实现脚本语言与浏览器之间的通信，是一个远程控制接口，可参考<a href="https://blog.csdn.net/u010698107/article/details/114681384">Selenium Webdriver 架构</a>。 Webdriver定义的JSON Wire Protocol（JSON有线协议）实现selenium客户端与remote server（浏览器驱动的HTTP服务器）的交互，remote server将命令发送给浏览器，实现浏览器的native调用。</p>
+<p>WebDriver协议可参考官方文档：<a href="https://w3c.github.io/webdriver/">https://w3c.github.io/webdriver/</a></p>
 <p>Appium WebDriver对Selenium Webdriver协议进行了扩展（<a href="https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md">Mobile JSON Wire Protocol</a>），Appium 客户端通过Webdriver协议与Appium Server进行交互。</p>
 <h2 id="Appium引擎列表"><a href="#Appium引擎列表" class="headerlink" title="Appium引擎列表"></a>Appium引擎列表</h2><p>为了不重新编译或修改应用，Appium 使用系统自带的自动化框架：<br><strong>Android 4.3+</strong></p>
-<pre><code>* UIAutomator
-* UIAutomator2[推荐]
-</code></pre><p><strong>iOS</strong></p>
-<pre><code>* UIAutomation (iOS ≤ 9.3) 
-* XCUITest[推荐] (iOS ≥ 9.3) 
-</code></pre><p><strong>Windows: </strong></p>
-<pre><code>* WinAppDriver
-</code></pre><h2 id="Appium的设计理念"><a href="#Appium的设计理念" class="headerlink" title="Appium的设计理念"></a>Appium的设计理念</h2><h3 id="Client-Server设计模式"><a href="#Client-Server设计模式" class="headerlink" title="Client/Server设计模式"></a>Client/Server设计模式</h3><p>Appium采用 C/S架构，Appium与客户端建立连接并监听命令，然后在移动设备上执行这些命令，命令执行结果通过 HTTP 响应的方式返回。客户端通过 WebDriver json wire协议与服务端通讯。由于Appium的这种特性，我们可以将Appium server放在与测试机不同的机器上。Appium Server是使用 Node.js 编写的HTTP服务。</p>
+<ul>
+<li>UIAutomator</li>
+<li>UIAutomator2[推荐]</li>
+</ul>
+<p><strong>iOS</strong></p>
+<ul>
+<li>UIAutomation (iOS ≤ 9.3) </li>
+<li>XCUITest[推荐] (iOS ≥ 9.3) </li>
+</ul>
+<p><strong>Windows: </strong></p>
+<ul>
+<li>WinAppDriver</li>
+</ul>
+<h2 id="Appium的设计理念"><a href="#Appium的设计理念" class="headerlink" title="Appium的设计理念"></a>Appium的设计理念</h2><h3 id="Client-Server设计模式"><a href="#Client-Server设计模式" class="headerlink" title="Client/Server设计模式"></a>Client/Server设计模式</h3><p>Appium采用 C/S架构，Appium与客户端建立连接并监听命令，然后在移动设备上执行这些命令，命令执行结果通过 HTTP 响应的方式返回。客户端通过 WebDriver json wire协议与服务端通讯。由于Appium的这种特性，我们可以将Appium server放在与测试机不同的机器上。Appium Server是使用 Node.js 编写的HTTP服务。</p>
 <p><img src="appium_architecture.png" alt="img"></p>
 <h3 id="session-会话"><a href="#session-会话" class="headerlink" title="session 会话"></a>session 会话</h3><p>Appium自动化执行时会首先拉起一个session会话，客户端和服务器之间初始化一个session，通过发送一个<code>POST /session</code>建立连接，客户端的post请求中携带一个称为 ‘desired capabilities‘ 的JSON对象，定义设备平台（iOS或Android）、版本、server地址等请求字段，后面的文章将详细介绍。服务器接收到请求后会建立一个session并回应一个session ID，建立好连接后就可以发送命令了。</p>
 <h3 id="Appium-Clients"><a href="#Appium-Clients" class="headerlink" title="Appium Clients"></a>Appium Clients</h3><p>Appium支持多语言，包括Java, Ruby, Python, PHP, JavaScript, 和 C#，这些客户端库支持WebDriver 协议扩展。</p>
@@ -8732,12 +8741,9 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 </ul>
 <p>找到环境变量path—&gt;“编辑”添加：</p>
 <ul>
-<li><p>变量名：PATH</p>
-<ul>
-<li><p>变量值：;% ANDROID_HOME%\platform-tools;</p>
-</li>
-<li><p>变量值：% ANDROID_HOME%\build-tools;</p>
-</li>
+<li>变量名：PATH<ul>
+<li>变量值：;% ANDROID_HOME%\platform-tools;</li>
+<li>变量值：% ANDROID_HOME%\build-tools;</li>
 <li>变量值：% ANDROID_HOME%\tools;  </li>
 </ul>
 </li>
@@ -8753,6 +8759,23 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <h2 id="5-安装appium-desktop"><a href="#5-安装appium-desktop" class="headerlink" title="5. 安装appium-desktop"></a>5. 安装appium-desktop</h2><p>下载地址：<a href="https://github.com/appium/appium-desktop/releases/tag/v1.15.1">https://github.com/appium/appium-desktop/releases/tag/v1.15.1</a></p>
 <h2 id="6-下载Appium-Python-Client"><a href="#6-下载Appium-Python-Client" class="headerlink" title="6. 下载Appium-Python-Client"></a>6. 下载Appium-Python-Client</h2><p>下载链接：<a href="https://pypi.org/project/Appium-Python-Client/">https://pypi.org/project/Appium-Python-Client/</a><br>运行<code>python setup.py install</code>安装<br><img src="appium_python_client.png" alt="img"></p>
 <p>或者运行 <code>pip install Appium-Python-Client</code> 安装。</p>
+<h1 id="appium测试"><a href="#appium测试" class="headerlink" title="appium测试"></a>appium测试</h1><p>下面来测试一下是否能够进行 Android APP自动化测试</p>
+<p>测试APP使用appium提供的测试APP: <a href="https://github.com/appium/android-apidemos/releases/tag/v3.1.0">android-apidemos</a>，它是从Google的Android ApiDemos fork过来的。</p>
+<p>下载成功后安装到测试机：<code>adb install ApiDemos-debug.apk</code></p>
+<h2 id="1-打开appium"><a href="#1-打开appium" class="headerlink" title="1. 打开appium"></a>1. 打开appium</h2><p>IP和端口号默认就行（如果你的appium server不在本地，IP地址需要填写appium所在的主机IP地址），点击Start Server：<br><img src="appium-server.png" alt="img"></p>
+<p><img src="appium-server2.png" alt="img"></p>
+<p>可以看到appium server已经启动，这个窗口会显示appium server运行日志。</p>
+<p>手动打开appium比较麻烦，可以使用命令行的方式启动appium：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 2. 手机USB连接电脑</span></span><br><span class="line">`adb devices`命令查看手机是否连接成功</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line">$ adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">SNHVB20C18002195        device</span><br></pre></td></tr></table></figure>
+<h2 id="3-编写测试脚本"><a href="#3-编写测试脚本" class="headerlink" title="3. 编写测试脚本"></a>3. 编写测试脚本</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> appium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestApidemos</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup</span>(<span class="params">self</span>):</span></span><br><span class="line">        desired_caps = &#123;</span><br><span class="line">            <span class="string">&#x27;platformName&#x27;</span>: <span class="string">&#x27;Android&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;platformVersion&#x27;</span>: <span class="string">&#x27;10&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;deviceName&#x27;</span>: <span class="string">&#x27;SNHVB20C18002195&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;appPackage&#x27;</span>: <span class="string">&#x27;io.appium.android.apis&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;appActivity&#x27;</span>: <span class="string">&#x27;.ApiDemos&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;automationName&#x27;</span>: <span class="string">&#x27;Uiautomator2&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;newCommandTimeout&#x27;</span>: <span class="number">3000</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.driver = webdriver.Remote(<span class="string">&#x27;http://127.0.0.1:4723/wd/hub&#x27;</span>, desired_caps)</span><br><span class="line">        self.driver.implicitly_wait(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">teardown_method</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.driver.quit()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_appium</span>(<span class="params">self</span>):</span></span><br><span class="line">        elem = self.driver.find_element_by_xpath(<span class="string">&#x27;//*[@text=&quot;App&quot;]&#x27;</span>)</span><br><span class="line">        elem.click()</span><br><span class="line">        Alarm_exist = self.driver.find_element_by_xpath(<span class="string">&#x27;//*[@text=&quot;Alarm&quot;]&#x27;</span>).is_displayed()</span><br><span class="line">        <span class="keyword">assert</span> Alarm_exist == <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>使用pytest命令执行测试脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ pytest test_apidemos.py::TestApidemos::test_appium</span><br></pre></td></tr></table></figure>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><p>WebDriver协议：<a href="https://w3c.github.io/webdriver/">https://w3c.github.io/webdriver/</a></p>
+</li>
+<li><p>Mobile JSON Wire Protocol：<a href="https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md">https://github.com/SeleniumHQ/mobile-spec/blob/master/spec-draft.md</a></p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>自动化测试</category>
