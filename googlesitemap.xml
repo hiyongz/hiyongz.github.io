@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hiyongz.github.io/posts/%E4%BD%A0%E6%98%AF%E4%BD%A0%E8%87%AA%E5%B7%B1%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E4%B8%BB%E4%BA%BA%E5%90%97%EF%BC%9F/</loc>
+    <loc>https://hiyongz.github.io/books/index.html</loc>
+    
+    <lastmod>2021-08-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
     
     <lastmod>2021-08-02</lastmod>
     
@@ -353,13 +360,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/</loc>
-    
-    <lastmod>2021-06-06</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/books/index.html</loc>
     
     <lastmod>2021-06-06</lastmod>
     
@@ -1215,6 +1215,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1230,13 +1237,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1516,6 +1516,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/tags/WebView/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/tags/AppCrawler/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
@@ -1531,13 +1538,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/tags/Monkey/</loc>
-    <lastmod>2021-08-02</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/tags/WebView/</loc>
     <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
