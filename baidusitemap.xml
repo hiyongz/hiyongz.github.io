@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/%E4%BD%A0%E6%98%AF%E4%BD%A0%E8%87%AA%E5%B7%B1%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%9A%84%E4%B8%BB%E4%BA%BA%E5%90%97%EF%BC%9F/</loc>
+    <lastmod>2021-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
+    <lastmod>2021-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/</loc>
+    <lastmod>2021-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/</loc>
+    <lastmod>2021-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide/</loc>
+    <lastmod>2021-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-password-less-ssh-login-for-multiple-remote-servers/</loc>
+    <lastmod>2021-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/container-docker-guide/</loc>
+    <lastmod>2021-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/appium-install-and-architecture/</loc>
-    <lastmod>2021-07-26</lastmod>
+    <lastmod>2021-07-28</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
@@ -10,10 +38,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
-    <lastmod>2021-07-24</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
     <lastmod>2021-07-24</lastmod>
   </url>
   <url>
@@ -437,10 +461,6 @@
     <lastmod>2021-02-23</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/container-docker-guide/</loc>
-    <lastmod>2021-02-21</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/selenium-webelement-operate/</loc>
     <lastmod>2021-02-15</lastmod>
   </url>
@@ -455,14 +475,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/api-test-charles-guide/</loc>
     <lastmod>2021-02-14</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/</loc>
-    <lastmod>2021-02-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide/</loc>
-    <lastmod>2021-02-10</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/api-test-and-web-protocol/</loc>
