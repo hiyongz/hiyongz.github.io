@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-08-02T12:48:47.705Z</updated>
+  <updated>2021-08-02T23:36:05.474Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文章导航</title>
+    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
+    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
+    <published>2021-08-03T04:12:00.000Z</published>
+    <updated>2021-08-02T23:36:05.474Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章导航&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android手机管理平台搭建：STF和atxserver2</title>
+    <link href="https://hiyongz.github.io/posts/app-testing-for-stf-platform/"/>
+    <id>https://hiyongz.github.io/posts/app-testing-for-stf-platform/</id>
+    <published>2021-08-02T11:44:03.367Z</published>
+    <updated>2021-08-04T13:15:28.883Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;STF（Smartphone Test Farm）是一个Android手机设备管理平台，通过在浏览器上远程调试智能手机、手表和其它设备，一般用于远程管理、调试、监控多个设备。atxserver2移动设备管理平台支持支持Android和iOS，它也使用到了STF。本文介绍如何使用两个工具来搭建Android手机管理平台。&lt;br&gt;目录&lt;br&gt;[toc]&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="stf" scheme="https://hiyongz.github.io/tags/stf/"/>
+    
+  </entry>
   
   <entry>
     <title>读书笔记 | 你是你自己注意力的主人吗？</title>
@@ -402,23 +442,6 @@
   </entry>
   
   <entry>
-    <title>文章导航</title>
-    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
-    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
-    <published>2021-06-13T04:12:00.000Z</published>
-    <updated>2021-08-02T14:01:19.116Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;文章导航&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>markdown基本语法介绍</title>
     <link href="https://hiyongz.github.io/posts/markdown-basic-syntax/"/>
     <id>https://hiyongz.github.io/posts/markdown-basic-syntax/</id>
@@ -461,33 +484,6 @@
       <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
     
       <category term="闭包" scheme="https://hiyongz.github.io/tags/%E9%97%AD%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>算法笔记：位运算</title>
-    <link href="https://hiyongz.github.io/posts/algorithm-notes-for-bitwise-operation/"/>
-    <id>https://hiyongz.github.io/posts/algorithm-notes-for-bitwise-operation/</id>
-    <published>2021-06-08T00:06:00.000Z</published>
-    <updated>2021-06-12T11:37:39.419Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;计算机中的数据都是以二进制的形式存储在设备中，虽然十进制比二进制所需要的存储空间少，但二进制在硬件实现上要简单很多，而且在数模转换上也更加容易，因为只需要两种状态，所以计算机的底层运算都采用二进制。位运算就是对二进制数据进行的运算。使用合理的位运算可以提高代码在机器上的执行效率，本文将介绍常见的位运算以及Python中的位运算。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="算法" scheme="https://hiyongz.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="位运算" scheme="https://hiyongz.github.io/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
     
   </entry>
   
