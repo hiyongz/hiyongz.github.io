@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-08-02T23:36:05.474Z</updated>
+  <updated>2021-08-04T13:22:13.499Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android手机管理平台搭建：STF和atxserver2</title>
+    <link href="https://hiyongz.github.io/posts/app-testing-for-stf-platform/"/>
+    <id>https://hiyongz.github.io/posts/app-testing-for-stf-platform/</id>
+    <published>2021-08-03T04:12:00.000Z</published>
+    <updated>2021-08-04T13:22:13.499Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;STF（Smartphone Test Farm）是一个Android手机设备管理平台，通过在浏览器上远程调试智能手机、手表和其它设备，一般用于远程管理、调试、监控多个设备。atxserver2移动设备管理平台支持支持Android和iOS，它也使用到了STF。本文介绍如何使用两个工具来搭建Android手机管理平台。&lt;br&gt;目录&lt;br&gt;[toc]&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="stf" scheme="https://hiyongz.github.io/tags/stf/"/>
+    
+  </entry>
   
   <entry>
     <title>文章导航</title>
@@ -30,29 +53,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Android手机管理平台搭建：STF和atxserver2</title>
-    <link href="https://hiyongz.github.io/posts/app-testing-for-stf-platform/"/>
-    <id>https://hiyongz.github.io/posts/app-testing-for-stf-platform/</id>
-    <published>2021-08-02T11:44:03.367Z</published>
-    <updated>2021-08-04T13:15:28.883Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;STF（Smartphone Test Farm）是一个Android手机设备管理平台，通过在浏览器上远程调试智能手机、手表和其它设备，一般用于远程管理、调试、监控多个设备。atxserver2移动设备管理平台支持支持Android和iOS，它也使用到了STF。本文介绍如何使用两个工具来搭建Android手机管理平台。&lt;br&gt;目录&lt;br&gt;[toc]&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="stf" scheme="https://hiyongz.github.io/tags/stf/"/>
     
   </entry>
   
