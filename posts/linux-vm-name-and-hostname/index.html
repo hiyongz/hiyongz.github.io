@@ -22,21 +22,20 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Unix shell 中内置了命令行参数解析函数getopts，但它仅支持简单的参数解析，不支持长参数，getopt是getopts的增强版，支持长参数。在Python笔记：命令行参数解析中介绍了Python中的命令行参数解析方法getopt()，本文介绍shell中如何使用getopt进行命令行参数解析。">
+  <meta name="description" content="为了方便区分局域网中的多个Linux主机，可以为每台机器设置主机名，本文介绍hostname配置方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux Bash之getopt命令行参数解析">
-<meta property="og:url" content="https://hiyongz.github.io/posts/linux-shell-for-getopt/index.html">
+<meta property="og:title" content="配置Linux主机名">
+<meta property="og:url" content="https://hiyongz.github.io/posts/linux-vm-name-and-hostname/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="Unix shell 中内置了命令行参数解析函数getopts，但它仅支持简单的参数解析，不支持长参数，getopt是getopts的增强版，支持长参数。在Python笔记：命令行参数解析中介绍了Python中的命令行参数解析方法getopt()，本文介绍shell中如何使用getopt进行命令行参数解析。">
+<meta property="og:description" content="为了方便区分局域网中的多个Linux主机，可以为每台机器设置主机名，本文介绍hostname配置方法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-11T04:12:00.000Z">
-<meta property="article:modified_time" content="2021-07-09T11:11:31.222Z">
+<meta property="article:published_time" content="2021-08-05T04:02:00.000Z">
+<meta property="article:modified_time" content="2021-08-07T08:05:52.333Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="shell">
-<meta property="article:tag" content="getopt">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hiyongz.github.io/posts/linux-shell-for-getopt/">
+<link rel="canonical" href="https://hiyongz.github.io/posts/linux-vm-name-and-hostname/">
 
 
 <script id="page-configurations">
@@ -49,7 +48,7 @@
   };
 </script>
 
-  <title>Linux Bash之getopt命令行参数解析 | HiYong</title>
+  <title>配置Linux主机名 | HiYong</title>
   
 
 
@@ -210,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/linux-shell-for-getopt/">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/linux-vm-name-and-hostname/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
@@ -223,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux Bash之getopt命令行参数解析
+          配置Linux主机名
         </h1>
 
         <div class="post-meta">
@@ -237,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-05-11 12:12:00" itemprop="dateCreated datePublished" datetime="2021-05-11T12:12:00+08:00">2021-05-11</time>
+              <time title="创建时间：2021-08-05 12:02:00" itemprop="dateCreated datePublished" datetime="2021-08-05T12:02:00+08:00">2021-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,8 +264,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/linux-shell-for-getopt/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/linux-shell-for-getopt/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/linux-vm-name-and-hostname/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/linux-vm-name-and-hostname/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -295,40 +294,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Unix shell 中内置了命令行参数解析函数getopts，但它仅支持简单的参数解析，不支持长参数，getopt是getopts的增强版，支持长参数。在<a href="https://hiyongz.github.io/posts/python-notes-for-getopt/">Python笔记：命令行参数解析</a>中介绍了Python中的命令行参数解析方法getopt()，本文介绍shell中如何使用getopt进行命令行参数解析。</p>
+        <p>为了方便区分局域网中的多个Linux主机，可以为每台机器设置主机名，本文介绍hostname配置方法。</p>
 <a id="more"></a>
-<p>先看下面脚本(test_getopt.sh)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">FIELD=<span class="built_in">unset</span></span><br><span class="line">DF=<span class="built_in">unset</span></span><br><span class="line">COUNT=<span class="built_in">unset</span></span><br><span class="line">green=<span class="string">&#x27;\033[32m&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">help</span>()</span><br><span class="line">&#123;</span><br><span class="line">  Usage=<span class="string">&quot;Usage: sh test_getopt.sh [OPTION]  \n\</span></span><br><span class="line"><span class="string">  Options:\n\</span></span><br><span class="line"><span class="string">        [ -f | --field FIELD]  \t\t-- 字段 \n \</span></span><br><span class="line"><span class="string">        [ -Y | --display-filter DF] \t-- 条件 \n \</span></span><br><span class="line"><span class="string">        [ -c | --count COUNT ]  \t-- 计数 \n \</span></span><br><span class="line"><span class="string">        [ -h | --help ]  \t\t-- 帮助信息  \n \</span></span><br><span class="line"><span class="string">        &quot;</span></span><br><span class="line">  <span class="built_in">echo</span> -e <span class="variable">$&#123;green&#125;</span> <span class="variable">$Usage</span></span><br><span class="line">  <span class="built_in">exit</span> 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ARGS=$(getopt -a -n test_getopt.sh -o f:Y:ch --long field:,display-filter:,count,<span class="built_in">help</span> -- <span class="string">&quot;<span class="variable">$@</span>&quot;</span>)</span><br><span class="line">VALID_ARGS=$?</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$VALID_ARGS</span>&quot;</span> != <span class="string">&quot;0&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">help</span>  </span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span> <span class="built_in">set</span> -- <span class="string">&quot;<span class="variable">$ARGS</span>&quot;</span></span><br><span class="line"><span class="keyword">while</span> :</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">    -f | --field)            FIELD=<span class="string">&quot;<span class="variable">$2</span>&quot;</span>   ; <span class="built_in">shift</span> 2  ;;</span><br><span class="line">    -Y | --display-filter)   DF=<span class="string">&quot;<span class="variable">$2</span>&quot;</span>      ; <span class="built_in">shift</span> 2  ;;</span><br><span class="line">    -c | --count)            COUNT=2      ; <span class="built_in">shift</span>    ;;</span><br><span class="line">    -h | --<span class="built_in">help</span>)             <span class="built_in">help</span>; <span class="built_in">exit</span> 0 ; <span class="built_in">shift</span>    ;;    </span><br><span class="line">    --) <span class="built_in">shift</span>; <span class="built_in">break</span> ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;FIELD   : <span class="variable">$FIELD</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;DF   : <span class="variable">$DF</span> &quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;COUNT : <span class="variable">$COUNT</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;其余参数: <span class="variable">$@</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure><br>下面对脚本进行简要解释：</p>
-<ol>
-<li><p>在开头可以定义脚本的全局变量，green用于设置字体颜色。</p>
-</li>
-<li><p>help()函数用于显示帮助信息，说明脚本的使用方法。</p>
-</li>
-<li><p><code>ARGS=$(getopt -a -n test_getopt.sh -o f:Y:ch --long field:,display-filter:,count,help -- &quot;$@&quot;)</code></p>
-<ul>
-<li>短参数一般在前面加单破折号(<code>-</code>)，长参数使用双破折号(<code>--</code>)，<code>-a</code>选项可以使长参数支持单破折号(<code>-</code>)</li>
-<li>如果参数必须赋值，在后面加冒号(<code>:</code>)，</li>
-<li><code>-n test_getopt.sh</code>：指定程序名为test_getopt.sh，如果不设置，默认使用getopt</li>
-<li><code>-o | --options</code>：短选项</li>
-<li><code>-l | --longoptions</code>：长选项</li>
-</ul>
-</li>
-<li><p>getopt接收所有输入后会返回一个状态码，0表示成功，其他值表示失败，状态码会传递给变量<code>$?</code>，对变量<code>$?</code>做一个判断，如果不为0则打印帮助信息。</p>
-</li>
-<li><p><code>eval set -- &quot;$ARGS&quot;</code>：</p>
-<ul>
-<li>eval 命令把字符串当做命令来执行，这里用于处理参数中的转义字符。</li>
-<li>set 命令将命令行参数替换成getopt格式化后的命令行参数，也就是将getopt格式化的参数分配至位置参数（$1,$2,…)</li>
-</ul>
-</li>
-<li><p>接下来就是对参数（$1,$2,…)进行遍历处理</p>
-<ul>
-<li>通过shift来移动获取参数，用它来实现移动一个或者多个位置（也就是弹栈）</li>
-<li>每次循环，检查<code>$1</code>参数，对于必须赋值的参数，需要移动两位，因为它后面跟了一个参数值，需要移动两位才能到下一个参数。取值为<code>$2</code>，因为第一个参数为选项名称，第二个参数才是参数值。</li>
-<li>移位到<code>--</code>后，表示所有参数解析完成，退出循环。</li>
-</ul>
-</li>
-</ol>
-<p>运行：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ sh test_getopt.sh --<span class="built_in">help</span></span><br><span class="line"> Usage: sh test_getopt.sh [OPTION]</span><br><span class="line"> Options:</span><br><span class="line"> [ -f | --field FIELD]          -- 字段</span><br><span class="line"> [ -Y | --display-filter DF]    -- 条件</span><br><span class="line"> [ -c | --count COUNT ]         -- 计数</span><br><span class="line"> [ -h | --<span class="built_in">help</span> ]                -- 帮助信息</span><br><span class="line">$ </span><br><span class="line">$ sh test_getopt.sh -c -f <span class="built_in">test</span> -Y hello test2</span><br><span class="line">FIELD   : <span class="built_in">test</span></span><br><span class="line">DF   : hello</span><br><span class="line">COUNT : 2</span><br><span class="line">其余参数: test2</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-配置Linux-hostname"><a href="#1-配置Linux-hostname" class="headerlink" title="1. 配置Linux hostname"></a>1. 配置Linux hostname</h2><p>下面配置两台centos7 虚拟机，主机名分别配置为client和server，它们主机IP 地址分别为192.168.30.8和192.168.30.9。</p>
+<h3 id="配置client主机"><a href="#配置client主机" class="headerlink" title="配置client主机"></a>配置client主机</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># vi /etc/sysconfig/network</span></span><br></pre></td></tr></table></figure>
+<p>添加如下内容，保存：<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Created by anaconda</span><br><span class="line">NETWORKING=yes</span><br><span class="line">hostname=client</span><br></pre></td></tr></table></figure><br>重启网络：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># systemctl restart network</span></span><br><span class="line">[root@client ~]<span class="comment"># hostname</span></span><br><span class="line">client</span><br><span class="line">[root@client ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure><br>如果不生效可以使用如下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># hostnamectl set-hostname client</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="配置server主机"><a href="#配置server主机" class="headerlink" title="配置server主机"></a>配置server主机</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># hostnamectl set-hostname server</span></span><br></pre></td></tr></table></figure>
+<p>重启网络：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># systemctl restart network</span></span><br><span class="line">[root@server ~]<span class="comment"># hostname</span></span><br><span class="line">server</span><br><span class="line">[root@server ~]<span class="comment"># uname -n</span></span><br><span class="line">server</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-配置hostname与IP映射"><a href="#2-配置hostname与IP映射" class="headerlink" title="2. 配置hostname与IP映射"></a>2. 配置hostname与IP映射</h2><p>配置client和server的hosts文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure><br>添加如下内容：<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.30.8 client</span><br><span class="line">192.168.30.9 server</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3. 测试"></a>3. 测试</h2><p>通过ping hostname来测试是否配置成功：</p>
+<p>client ping server：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># ping server -c 3</span></span><br><span class="line">PING server (192.168.30.9) 56(84) bytes of data.</span><br><span class="line">64 bytes from server (192.168.30.9): icmp_seq=1 ttl=64 time=0.616 ms</span><br><span class="line">64 bytes from server (192.168.30.9): icmp_seq=2 ttl=64 time=0.384 ms</span><br><span class="line">64 bytes from server (192.168.30.9): icmp_seq=3 ttl=64 time=0.566 ms</span><br><span class="line"></span><br><span class="line">--- server ping statistics ---</span><br><span class="line">3 packets transmitted, 3 received, 0% packet loss, time 2001ms</span><br><span class="line">rtt min/avg/max/mdev = 0.384/0.522/0.616/0.099 ms</span><br><span class="line">[root@client ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<p>server ping client：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@Server ~]<span class="comment"># ping client -c 3</span></span><br><span class="line">PING client (192.168.30.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from client (192.168.30.8): icmp_seq=1 ttl=64 time=0.502 ms</span><br><span class="line">64 bytes from client (192.168.30.8): icmp_seq=2 ttl=64 time=0.678 ms</span><br><span class="line">64 bytes from client (192.168.30.8): icmp_seq=3 ttl=64 time=0.323 ms</span><br><span class="line"></span><br><span class="line">--- client ping statistics ---</span><br><span class="line">3 packets transmitted, 3 received, 0% packet loss, time 2003ms</span><br><span class="line">rtt min/avg/max/mdev = 0.323/0.501/0.678/0.144 ms</span><br><span class="line">[root@Server ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<p>配置hostname与IP映射后，可以直接ping主机名而不用ping IP地址了。</p>
+<h2 id="4-配置windows-hosts"><a href="#4-配置windows-hosts" class="headerlink" title="4. 配置windows hosts"></a>4. 配置windows hosts</h2><p>配置windows hosts，以便在windows下面能通过主机名进行访问。</p>
+<p>编辑 C:\Windows\System32\drivers\etc\hosts文件，添加如下内容：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.30.8 client</span><br><span class="line">192.168.30.9 server</span><br></pre></td></tr></table></figure><br>保存</p>
+<h2 id="5-windows测试"><a href="#5-windows测试" class="headerlink" title="5. windows测试"></a>5. windows测试</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\10287&gt;ping client -n 3</span><br><span class="line"></span><br><span class="line">正在 Ping client [192.168.30.8] 具有 32 字节的数据:</span><br><span class="line">来自 192.168.30.8 的回复: 字节=32 时间&lt;1ms TTL=64</span><br><span class="line">来自 192.168.30.8 的回复: 字节=32 时间&lt;1ms TTL=64</span><br><span class="line">来自 192.168.30.8 的回复: 字节=32 时间&lt;1ms TTL=64</span><br><span class="line"></span><br><span class="line">192.168.30.8 的 Ping 统计信息:</span><br><span class="line">    数据包: 已发送 = 3，已接收 = 3，丢失 = 0 (0% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">    最短 = 0ms，最长 = 0ms，平均 = 0ms</span><br></pre></td></tr></table></figure>
 <center><b>--THE END--<b></center>
 
 
@@ -338,8 +318,7 @@
     
 	  
 	  <div class="post-tags">              
-		  <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>              
-		  <a href="/tags/getopt/" rel="tag"><i class="fa fa-tag"></i> getopt</a>
+		  <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
 	  </div>
       <br/>
       <div>
@@ -353,10 +332,10 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>Linux Bash之getopt命令行参数解析</a></p>
+  <p><span>本文标题:</span>配置Linux主机名</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/linux-shell-for-getopt/" title="Linux Bash之getopt命令行参数解析">https://hiyongz.github.io/posts/linux-shell-for-getopt/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/linux-shell-for-getopt/"  aria-label="复制成功！"></i></span>
+  <p><span>文章链接:</span><a href="/posts/linux-vm-name-and-hostname/" title="配置Linux主机名">https://hiyongz.github.io/posts/linux-vm-name-and-hostname/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/linux-vm-name-and-hostname/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
 </div>
@@ -390,13 +369,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E9%80%9A%E8%B4%A7%E8%86%A8%E8%83%80/" rel="prev" title="金融小知识：通货膨胀">
-      <i class="fa fa-chevron-left"></i> 金融小知识：通货膨胀
+    <a href="/posts/app-testing-for-stf-platform/" rel="prev" title="Android手机管理平台搭建：STF和atxserver2">
+      <i class="fa fa-chevron-left"></i> Android手机管理平台搭建：STF和atxserver2
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E7%A9%BA%E9%97%B4%E5%92%8C%E6%97%B6%E9%97%B4/" rel="next" title="《时间简史》- 空间和时间">
-      《时间简史》- 空间和时间 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -456,6 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AELinux-hostname"><span class="nav-number">1.</span> <span class="nav-text">1. 配置Linux hostname</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEclient%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">配置client主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEserver%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.2.</span> <span class="nav-text">配置server主机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AEhostname%E4%B8%8EIP%E6%98%A0%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">2. 配置hostname与IP映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">3. 测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEwindows-hosts"><span class="nav-number">4.</span> <span class="nav-text">4. 配置windows hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-windows%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">5. windows测试</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

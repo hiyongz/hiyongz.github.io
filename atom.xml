@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-08-04T13:22:13.499Z</updated>
+  <updated>2021-08-07T08:05:52.333Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>配置Linux主机名</title>
+    <link href="https://hiyongz.github.io/posts/linux-vm-name-and-hostname/"/>
+    <id>https://hiyongz.github.io/posts/linux-vm-name-and-hostname/</id>
+    <published>2021-08-05T04:02:00.000Z</published>
+    <updated>2021-08-07T08:05:52.333Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;为了方便区分局域网中的多个Linux主机，可以为每台机器设置主机名，本文介绍hostname配置方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>Android手机管理平台搭建：STF和atxserver2</title>
@@ -459,31 +480,6 @@
     
     
       <category term="markdown" scheme="https://hiyongz.github.io/tags/markdown/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python中的闭包</title>
-    <link href="https://hiyongz.github.io/posts/python-notes-for-function-closures/"/>
-    <id>https://hiyongz.github.io/posts/python-notes-for-function-closures/</id>
-    <published>2021-06-10T04:12:00.000Z</published>
-    <updated>2021-06-23T14:45:57.372Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;闭包 (closure) 是函数式编程中的一个概念，Python虽然不是纯粹的是函数式编程语言，但它仍然具有函数式编程的一些特性。在以前的文章&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/114716537&quot;&gt;Python笔记：Python装饰器&lt;/a&gt;中介绍的装饰器其实就使用了闭包，本文来介绍一下Python中的闭包。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="闭包" scheme="https://hiyongz.github.io/tags/%E9%97%AD%E5%8C%85/"/>
     
   </entry>
   
