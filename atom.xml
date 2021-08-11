@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-08-07T12:19:56.571Z</updated>
+  <updated>2021-08-11T23:13:02.309Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows上实现iOS APP自动化测试：tidevice + WDA +  facebook-wda / appium</title>
+    <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-on-windows/"/>
+    <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-on-windows/</id>
+    <published>2021-08-10T04:12:00.000Z</published>
+    <updated>2021-08-11T23:13:02.309Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍如何在Windows下构建iOS APP自动化测试环境，采用的主要工具为tidevice，WebDriverAgent，facebook-wda或者appium。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="iOS" scheme="https://hiyongz.github.io/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title>读书笔记 | 影响力</title>
@@ -59,6 +82,23 @@
   </entry>
   
   <entry>
+    <title>文章导航</title>
+    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
+    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
+    <published>2021-08-03T04:12:00.000Z</published>
+    <updated>2021-08-02T23:36:05.474Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章导航&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Android手机管理平台搭建：STF和atxserver2</title>
     <link href="https://hiyongz.github.io/posts/app-testing-for-stf-platform/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-stf-platform/</id>
@@ -78,23 +118,6 @@
     
     
       <category term="stf" scheme="https://hiyongz.github.io/tags/stf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文章导航</title>
-    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
-    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
-    <published>2021-08-03T04:12:00.000Z</published>
-    <updated>2021-08-02T23:36:05.474Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;文章导航&lt;/p&gt;
-    
-    </summary>
-    
-    
     
   </entry>
   
@@ -451,35 +474,6 @@
       <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
     
       <category term="反射机制" scheme="https://hiyongz.github.io/tags/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python协程</title>
-    <link href="https://hiyongz.github.io/posts/python-notes-for-coroutines/"/>
-    <id>https://hiyongz.github.io/posts/python-notes-for-coroutines/</id>
-    <published>2021-06-15T04:12:00.000Z</published>
-    <updated>2021-06-16T15:07:57.243Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;文章&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/117265796&quot;&gt;Python多线程与多进程&lt;/a&gt;中介绍了并行，并发，多线程和多进程的概念。多线程 / 多进程是解决并发问题的模型之一，本文要介绍的协程也是实现并发编程的一种方式。协程使用的异步IO (asynchronous IO)不是多线程或者多进程的，它是一种单线程、单进程的设计。也就是说，协程可以实现并发调度，但它本身并不是并发的（单线程下的”并发“）。相比多线程和多进程，协程没有进程上下文切换导致的资源占用，运行效率更高。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="协程" scheme="https://hiyongz.github.io/tags/%E5%8D%8F%E7%A8%8B/"/>
-    
-      <category term="asyncio" scheme="https://hiyongz.github.io/tags/asyncio/"/>
-    
-      <category term="爬虫" scheme="https://hiyongz.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
