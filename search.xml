@@ -31,6 +31,98 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Go语言开发环境安装</title>
+    <url>/posts/golang-notes-for-install-guide/</url>
+    <content><![CDATA[<p>Go语言（Golang） 由Google 的 Robert Griesemer，Rob Pike 和 Ken Thompson 推出，Go语言具有并发性，可以快速编译机器码，自动垃圾回收，是一种静态强类型、编译型语言。由于Go语言的并发特性，非常适用于Web 服务器、分布式集群计算、云计算、游戏服务端等的开发。在区块链（如以太坊，Ethereum）、容器（如Kubernetes）领域都有广泛的应用。本文介绍Go语言开发环境安装方法。</p>
+<a id="more"></a>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Go支持支持windows、linux、mac操作系统，下面介绍Windows系统安装方法：<br>下载地址：<a href="https://golang.google.cn/doc/install">https://golang.google.cn/doc/install</a></p>
+<p>go国内镜像下载地址：<a href="https://gomirrors.org/">https://gomirrors.org/</a></p>
+<p>双击msi文件安装，安装成功后会自动加入环境变量，测试是否安装成功：<code>go version</code><br>windows打开cmd<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">C:\Users\10287&gt;go version</span><br><span class="line">go version go1.15.6 windows/amd64</span><br></pre></td></tr></table></figure><br>帮助命令：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go <span class="built_in">help</span></span><br></pre></td></tr></table></figure></p>
+<p>Linux系统安装：</p>
+<p>下载安装包，使用root用户执行：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ rm -rf /usr/<span class="built_in">local</span>/go &amp;&amp; tar -C /usr/<span class="built_in">local</span> -xzf go1.16.6.linux-amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>将<code>/usr/local/go/bin</code>添加到环境变量：<code>vim /etc/profile</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/go/bin</span><br><span class="line">GOPATH=/var/GoProjects</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line">go env -w GOPROXY=https://goproxy.cn</span><br></pre></td></tr></table></figure>
+<h1 id="Go代码编写运行"><a href="#Go代码编写运行" class="headerlink" title="Go代码编写运行"></a>Go代码编写运行</h1><h2 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h2><p>配置一个变量名为<code>GOPATH</code>的系统变量 ，值为Go 项目的工作目录，可以是多个路径。<br><img src="gopath.png" width="80%" height="80%" /></p>
+<p>在工作目录<code>D:\GoProjects</code>下创建 bin、pkg、src三个目录</p>
+<ul>
+<li>bin：存放编译后可执行的文件。</li>
+<li>pkg：存放编译后的应用包。</li>
+<li>src：存放应用源代码。</li>
+</ul>
+<p>还有一个环境变量叫GOROOT，是Go的安装路径，这个可以不用配置，默认添加到了环境变量</p>
+<p>在src目录下新建一个HelloWorld的项目，新建hello.go，项目目录树如下：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">D:\GOPROJECTS</span><br><span class="line">│</span><br><span class="line">├─bin</span><br><span class="line">├─pkg</span><br><span class="line">└─src</span><br><span class="line">    └─HelloWorld</span><br><span class="line">            hello.go</span><br></pre></td></tr></table></figure></p>
+<p>编写代码如下：<br><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello, World!&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>HelloWorld目录下运行：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go run hello.go</span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure></p>
+<h2 id="go-modules依赖管理"><a href="#go-modules依赖管理" class="headerlink" title="go modules依赖管理"></a>go modules依赖管理</h2><p>Go mod是Go语言依赖库管理器，官方推荐使用这种方法来管理依赖，相比GOPATH方法更加灵活，记录和解析对其他模块的依赖性。</p>
+<p>Go mod是go1.11之后新增的功能，版本至少需要1.11。</p>
+<p>打开Go mod，在windows cmd窗口输入如下命令设置环境变量：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ setx GO111MODULE on </span><br></pre></td></tr></table></figure><br>GO111MODULE=on 表示开启模块支持，忽略 GOPATH  文件夹，根据 go.mod 下载依赖。由于国内网络问题可能无法下载go依赖包，需配置一下国内代理（七牛云提供）：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ setx GOPROXY https://goproxy.cn,direct </span><br></pre></td></tr></table></figure><br>或者直接手动添加环境变量<br><img src="go-proxy-path.png" width="80%" height="80%" /></p>
+<p>下面使用go mod来管理一个项目：</p>
+<p><strong>初始化项目</strong></p>
+<p>项目src目录下创建的项目目录，执行如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go mod init</span><br></pre></td></tr></table></figure>
+<p>目录下会生成一个go.mod文件：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">module HelloWorld</span><br><span class="line"></span><br><span class="line">go 1.16</span><br></pre></td></tr></table></figure><br>还有一个比较常用的命令是<code>go mod tidy</code>，用于安装需要的依赖包，删除多余的包。</p>
+<h2 id="运行方式"><a href="#运行方式" class="headerlink" title="运行方式"></a>运行方式</h2><p>Go是一种编译型语言，代码编写完成后，需要先进行编译后再执行。</p>
+<p><strong>1、go run</strong></p>
+<p>编译+执行，不生成其它任何文件</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go run hello.go</span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>
+<p><strong>2、go build</strong></p>
+<p>先编译，再手动执行</p>
+<ul>
+<li><code>-a</code>：强制编译，目标代码包和依赖的代码包（包括标准库中的代码包）都会被编译</li>
+<li><code>-x</code>：会打印执行日志</li>
+<li><code>-n</code>：只查看具体操作而不执行它们</li>
+<li><code>-v</code>：可以看到go build命令编译的代码包的名称</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go build hello.go</span><br><span class="line">$ hello.exe</span><br></pre></td></tr></table></figure>
+<p>执行<code>go build hello.go</code>后，在windows系统上会自动生成一个后缀为exe的可执行文件，可使用<code>-o</code>参数指定编译文件名：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go build -o hello hello.go</span><br><span class="line">$ hello</span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure><br><strong>3、go install</strong></p>
+<p>先编译，将编译好的可执行文件移动到 $GOPATH/bin目录下，将包文件放到pkg目录下。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go install hello.go</span><br></pre></td></tr></table></figure>
+<p><strong>4、go clean</strong></p>
+<p>清除执行 go 命令而遗留下来的临时目录和文件</p>
+<ul>
+<li><code>-i</code>参数：清除通过go install命令生成的文件，也就是会把bin和pkg目录下的相关文件清除</li>
+<li><code>-cache</code>参数：清除go build命令生成的文件</li>
+<li><code>-n</code>参数：打印要执行的清除命令，不执行清除</li>
+<li><code>-x</code>参数：打印要执行的清除命令，执行清除</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ go clean -i hello.go</span><br><span class="line">$ go clean -n hello.go</span><br><span class="line"><span class="built_in">cd</span> D:\GoProjects\src\HelloWorld</span><br><span class="line">rm -f HelloWorld HelloWorld.exe hello hello.exe HelloWorld.test HelloWorld.test.exe hello.test hello.test.exe hello hello.exe</span><br></pre></td></tr></table></figure>
+<h2 id="Go-源码安装：go-get"><a href="#Go-源码安装：go-get" class="headerlink" title="Go 源码安装：go get"></a>Go 源码安装：go get</h2><p>go get会自动从代码仓库（比如 GitHub.com、golang.org等）下载目标代码包，安装的路径为设置的环境变量GOPATH中。下面介绍几个常用参数：</p>
+<ul>
+<li><code>-u</code>：下载并安装代码包，不论工作区中是否已存在它们。</li>
+<li><code>-d</code>：只下载代码包，不安装代码包。</li>
+<li><code>-fix</code>：在下载代码包后先运行一个用于根据当前 Go 语言版本修正代码的工具，然后再安装代码包。</li>
+<li><code>-t</code>：同时下载测试所需的代码包。</li>
+<li><code>-insecure</code>：允许通过非安全的网络协议下载和安装代码包。比如HTTP。</li>
+</ul>
+<p>更多go get命令使用方法可参考：<a href="https://github.com/hyper0x/go_command_tutorial/blob/master/0.3.md">https://github.com/hyper0x/go_command_tutorial/blob/master/0.3.md</a></p>
+<p>其它go命令详细文档可参考Go 语言官方文档：<a href="https://golang.google.cn/cmd/go/">https://golang.google.cn/cmd/go/</a></p>
+<h1 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h1><h2 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h2><p>VSCode比较轻量级，是我比较常用的代码开发工具。</p>
+<p><strong>1、配置代理</strong></p>
+<p>按照前面的方法配置</p>
+<p><strong>2、安装go插件</strong></p>
+<p>以管理员身份启动VSCode，然后安装go插件<br><img src="go-vscode-plugin.png" width="80%" height="80%" /></p>
+<p><strong>3、安装环境依赖</strong></p>
+<p>VSCode打开前面创建的HelloWorld项目，打开hello.go，右下角会提示安装环境依赖，点击安装就行<br><img src="go-vscode-environment.png" width="80%" height="80%" /></p>
+<p><strong>4、配置调试功能</strong></p>
+<p>配置launch.json文件：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Launch file&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;go&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;mode&quot;</span>: <span class="string">&quot;debug&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;file&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;env&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;GOPATH&quot;</span>: <span class="string">&quot;D:\\GoProjects&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;GOROOT&quot;</span>: <span class="string">&quot;D:\\software\\go&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: []</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="go-vscode-debug.png" width="80%" height="80%" /><br>配置完成后在go代码文件内，按F5即可进入调试状态。</p>
+<h2 id="GoLand"><a href="#GoLand" class="headerlink" title="GoLand"></a>GoLand</h2><p>也可以使用 JetBrains 公司推出的GoLand开发，功能更全面，下载地址：<a href="https://www.jetbrains.com/go/">https://www.jetbrains.com/go/</a></p>
+<h1 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h1><p>golang国内站点：<a href="https://golang.google.cn/">https://golang.google.cn/</a><br>文档：<a href="https://golang.google.cn/doc/">https://golang.google.cn/doc/</a><br>Go语言规范文档：<a href="https://golang.google.cn/ref/spec">https://golang.google.cn/ref/spec</a><br>go语言中文网：<a href="https://studygolang.com/">https://studygolang.com/</a></p>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows上实现iOS APP自动化测试：tidevice + WDA +  facebook-wda / appium</title>
     <url>/posts/app-testing-for-ios-app-on-windows/</url>
     <content><![CDATA[<p>本文介绍如何在Windows下构建iOS APP自动化测试环境，采用的主要工具为tidevice，WebDriverAgent，facebook-wda或者appium。</p>
