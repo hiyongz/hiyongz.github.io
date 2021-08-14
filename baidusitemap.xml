@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
+    <lastmod>2021-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
+    <lastmod>2021-08-14</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</loc>
     <lastmod>2021-08-12</lastmod>
   </url>
@@ -38,10 +46,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
-    <lastmod>2021-08-02</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
     <lastmod>2021-08-02</lastmod>
   </url>
   <url>
@@ -142,10 +146,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-new-and-init/</loc>
-    <lastmod>2021-06-23</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
     <lastmod>2021-06-23</lastmod>
   </url>
   <url>
