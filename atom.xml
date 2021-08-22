@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-08-21T02:29:50.926Z</updated>
+  <updated>2021-08-22T08:53:32.972Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>读书笔记 | 神们自己</title>
+    <link href="https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/"/>
+    <id>https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/</id>
+    <published>2021-08-22T10:26:00.000Z</published>
+    <updated>2021-08-22T08:53:32.972Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《神们自己》是艾萨克·阿西莫夫（Isaac Asimov）于1972年创作的科幻小说，获得了1972年星云奖最佳小说奖和1973年雨果奖最佳小说奖。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Go语言基础语法（一）</title>
@@ -67,7 +88,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-on-windows/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-on-windows/</id>
     <published>2021-08-10T04:12:00.000Z</published>
-    <updated>2021-08-11T23:13:02.309Z</updated>
+    <updated>2021-08-22T10:29:23.002Z</updated>
     
     <summary type="html">
     
@@ -172,7 +193,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</id>
     <published>2021-08-02T04:22:00.000Z</published>
-    <updated>2021-08-14T02:37:45.999Z</updated>
+    <updated>2021-08-22T08:37:48.216Z</updated>
     
     <summary type="html">
     
@@ -185,7 +206,7 @@
       <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
     
     
-      <category term="注意力经济" scheme="https://hiyongz.github.io/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E7%BB%8F%E6%B5%8E/"/>
+      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -445,31 +466,6 @@
       <category term="click" scheme="https://hiyongz.github.io/tags/click/"/>
     
       <category term="命令行参数" scheme="https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python笔记：lambda匿名函数</title>
-    <link href="https://hiyongz.github.io/posts/python-notes-for-anonymous-function/"/>
-    <id>https://hiyongz.github.io/posts/python-notes-for-anonymous-function/</id>
-    <published>2021-06-24T04:12:00.000Z</published>
-    <updated>2021-06-30T13:58:05.103Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在Python中，一般使用def关键字来定义普通函数。顾名思义，匿名函数意味着函数没有名称，Python使用lambda关键字定义匿名函数。在某些情况下，使用匿名函数可以简化代码，提高代码的可读性。本文介绍python匿名函数的使用方法。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="匿名函数" scheme="https://hiyongz.github.io/tags/%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   

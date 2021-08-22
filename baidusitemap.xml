@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/app-testing-for-ios-app-on-windows/</loc>
+    <lastmod>2021-08-22</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/</loc>
+    <lastmod>2021-08-22</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
+    <lastmod>2021-08-22</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/golang-notes-basic-syntax/</loc>
     <lastmod>2021-08-21</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
-    <lastmod>2021-08-14</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
     <lastmod>2021-08-14</lastmod>
   </url>
   <url>
@@ -19,10 +27,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/golang-notes-for-install-guide/</loc>
     <lastmod>2021-08-12</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/app-testing-for-ios-app-on-windows/</loc>
-    <lastmod>2021-08-11</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
