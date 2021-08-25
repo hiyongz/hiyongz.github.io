@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-08-22T08:53:32.972Z</updated>
+  <updated>2021-08-25T23:12:48.726Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用samba实现linux和windows文件共享</title>
+    <link href="https://hiyongz.github.io/posts/linux-tools-for-samba/"/>
+    <id>https://hiyongz.github.io/posts/linux-tools-for-samba/</id>
+    <published>2021-08-24T04:12:00.000Z</published>
+    <updated>2021-08-25T23:12:48.726Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Samba是用于Linux/Unix系统与Windows之间共享文件的软件，本文记录一下Samba的安装及使用方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="samba" scheme="https://hiyongz.github.io/tags/samba/"/>
+    
+  </entry>
   
   <entry>
     <title>读书笔记 | 神们自己</title>
@@ -439,33 +460,6 @@
       <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
     
       <category term="参数类型" scheme="https://hiyongz.github.io/tags/%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python 命令行参数解析之 Click</title>
-    <link href="https://hiyongz.github.io/posts/python-library-for-click/"/>
-    <id>https://hiyongz.github.io/posts/python-library-for-click/</id>
-    <published>2021-06-29T04:12:00.000Z</published>
-    <updated>2021-06-30T13:58:41.556Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/116346563&quot;&gt;Python笔记：命令行参数解析&lt;/a&gt;中介绍了sys.argv、getopt 和 argparse三种命令行参数解析方法，今天来分享另外一个python命令行工具click，它是用来支持 Web开发框架 Flask的，都由&lt;a href=&quot;https://palletsprojects.com/&quot;&gt;Pallets 项目&lt;/a&gt;组织开发。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="click" scheme="https://hiyongz.github.io/tags/click/"/>
-    
-      <category term="命令行参数" scheme="https://hiyongz.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/"/>
     
   </entry>
   
