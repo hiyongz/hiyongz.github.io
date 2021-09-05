@@ -31,12 +31,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/linux-architecture.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/linux-kernel.jpg">
-<meta property="og:image" content="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/linux-maximum-memory.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/Linux-Memory-Device.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/Linux-Memory-Manufacturer.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/Linux-Memory-Size.png">
 <meta property="article:published_time" content="2020-12-22T04:02:00.000Z">
-<meta property="article:modified_time" content="2021-07-06T11:00:34.108Z">
+<meta property="article:modified_time" content="2021-09-05T02:27:45.897Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary">
@@ -282,14 +280,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.9k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -332,10 +330,11 @@
 <li><code>file /bin/ls</code></li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ8vb54310gt89j8qct198Z ~]<span class="comment"># getconf LONG_BIT</span></span><br><span class="line">64</span><br><span class="line">[root@iZ8vb54310gt89j8qct198Z ~]<span class="comment"># file /bin/ls</span></span><br><span class="line">/bin/ls: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <span class="keyword">for</span> GNU/Linux 3.2.0, BuildID[sha1]=937708964f0f7e3673465d7749d6cf6a2601dea2, stripped, too many notes (256)</span><br><span class="line">[root@iZ8vb54310gt89j8qct198Z ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure>
-<h2 id="查看内存信息"><a href="#查看内存信息" class="headerlink" title="查看内存信息"></a>查看内存信息</h2><p>Linux 查看内存支持的最大内存容量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode|grep -P <span class="string">&#x27;Maximum\s+Capacity&#x27;</span></span><br></pre></td></tr></table></figure><br><img src="linux-maximum-memory.png" alt="png"></p>
+<h2 id="查看内存信息"><a href="#查看内存信息" class="headerlink" title="查看内存信息"></a>查看内存信息</h2><p>Linux 查看内存支持的最大内存容量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ dmidecode|grep -P <span class="string">&#x27;Maximum\s+Capacity&#x27;</span></span><br><span class="line">        Maximum Capacity: 8 GB</span><br></pre></td></tr></table></figure></p>
 <p>查看槽位上内存的速率，没插就是unknown。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode|grep -A16 <span class="string">&quot;Memory Device&quot;</span>|grep <span class="string">&#x27;Speed&#x27;</span></span><br></pre></td></tr></table></figure><br><img src="Linux-Memory-Device.png" alt="png"></p>
 <p>查看内存条厂家<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t memory | grep Manufacturer</span><br></pre></td></tr></table></figure><br><img src="Linux-Memory-Manufacturer.png" alt="png"></p>
-<p>查看内存信息（显示插槽个数和每个插槽里内存条的大小）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t memory | grep Size</span><br></pre></td></tr></table></figure><br><img src="Linux-Memory-Size.png" alt="png"></p>
+<p>查看内存信息（显示插槽个数和每个插槽里内存条的大小）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ dmidecode -t memory | grep Size</span><br><span class="line">        Size: 8192 MB</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看CPU信息"><a href="#查看CPU信息" class="headerlink" title="查看CPU信息"></a>查看CPU信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CPU型号</span></span><br><span class="line">$ cat /proc/cpuinfo | grep name | sort | uniq</span><br><span class="line">model name      : Intel Xeon Processor (Skylake, IBRS)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 物理CPU个数</span></span><br><span class="line">$ cat /proc/cpuinfo | grep <span class="string">&quot;physical id&quot;</span> </span><br><span class="line">physical id     : 0</span><br><span class="line">physical id     : 1</span><br><span class="line">physical id     : 2</span><br><span class="line">physical id     : 3</span><br><span class="line">physical id     : 4</span><br><span class="line">physical id     : 5</span><br><span class="line">physical id     : 6</span><br><span class="line">physical id     : 7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个物理CPU核数</span></span><br><span class="line">$ cat /proc/cpuinfo| grep <span class="string">&quot;cpu cores&quot;</span>| uniq</span><br><span class="line">cpu cores       : 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 逻辑CPU个数</span></span><br><span class="line">$ cat /proc/cpuinfo| grep <span class="string">&quot;processor&quot;</span>| wc -l</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
 <h1 id="Linux软件包管理"><a href="#Linux软件包管理" class="headerlink" title="Linux软件包管理"></a>Linux软件包管理</h1><p>Linux软件安装可以直接通过源码编译安装，一般源码包都打包成tar.gz压缩格式。源码包安装比较麻烦，容易出错，也可以使用包管理来软件包的管理，包管理工具是对软件工具的安装、卸载及其他管理， 常见的两类软件包管理工具是RPM 和 DPKG，RPM是Red Hat软件包管理器，DPKG的是Debian的Linux系列基本的包管理系统。</p>
 <h2 id="源码编译安装"><a href="#源码编译安装" class="headerlink" title="源码编译安装"></a>源码编译安装</h2><p>源码编译安装步骤：</p>
 <ol>
@@ -371,6 +370,40 @@
 <li>n：显示最近的n条历史命令</li>
 </ul>
 <p>显示最近的5个命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># history 5</span></span><br><span class="line">  996  cat /etc/bashrc</span><br><span class="line">  997  vim /etc/bashrc</span><br><span class="line">  998  <span class="built_in">history</span> --<span class="built_in">help</span></span><br><span class="line">  999  <span class="built_in">echo</span> <span class="variable">$HISTSIZE</span></span><br><span class="line"> 1000  <span class="built_in">history</span> 5</span><br><span class="line">[root@server ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Linux-文件句柄"><a href="#Linux-文件句柄" class="headerlink" title="Linux 文件句柄"></a>Linux 文件句柄</h1><p>由于UNIX/Linux系统中的资源都是以文件的形式存在的，可以限制用户进程可使用的系统资源数量，比如一个进程可以打开的文件数，用户可以创建多大的文件，以及进程可以使用多少内存。如果Linux在进行大量并发操作的时候，可能会报 “Too many open files” 错误，这是因为并发操作的文件数超过了限制，可以使用<code>ulimit</code>命令查看：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ulimit</span> -a</span><br><span class="line">core file size          (blocks, -c) 0</span><br><span class="line">data seg size           (kbytes, -d) unlimited</span><br><span class="line">scheduling priority             (-e) 0</span><br><span class="line">file size               (blocks, -f) unlimited</span><br><span class="line">pending signals                 (-i) 7144</span><br><span class="line">max locked memory       (kbytes, -l) 64</span><br><span class="line">max memory size         (kbytes, -m) unlimited</span><br><span class="line">open files                      (-n) 1024</span><br><span class="line">pipe size            (512 bytes, -p) 8</span><br><span class="line">POSIX message queues     (bytes, -q) 819200</span><br><span class="line">real-time priority              (-r) 0</span><br><span class="line">stack size              (kbytes, -s) 8192</span><br><span class="line">cpu time               (seconds, -t) unlimited</span><br><span class="line">max user processes              (-u) 7144</span><br><span class="line">virtual memory          (kbytes, -v) unlimited</span><br><span class="line">file locks                      (-x) unlimited</span><br></pre></td></tr></table></figure></p>
+<p>open files 的最大限制为1024，可以使用ulimit命令进行修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ulimit</span> –n 10000</span><br></pre></td></tr></table></figure><br>这个命令不能保证永久生效，系统重启后会恢复原来的默认值。为了让ulimit在重启过程中持续存在，需要修改配置文件<code>/etc/security/limits.conf</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#&lt;domain&gt;      &lt;type&gt;  &lt;item&gt;         &lt;value&gt;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#*               soft    core            0</span></span><br><span class="line"><span class="comment">#*               hard    rss             10000</span></span><br><span class="line"><span class="comment">#@student        hard    nproc           20</span></span><br><span class="line"><span class="comment">#@faculty        soft    nproc           20</span></span><br><span class="line"><span class="comment">#@faculty        hard    nproc           50</span></span><br><span class="line"><span class="comment">#ftp             hard    nproc           0</span></span><br><span class="line"><span class="comment">#@student        -       maxlogins       4</span></span><br></pre></td></tr></table></figure></p>
+<p>type可以设置为soft和hard：</p>
+<ul>
+<li>soft：软件限制，用于警告</li>
+<li>hard：硬件限制，设置实际的默认值</li>
+</ul>
+<p>item选项包括：</p>
+<ul>
+<li><strong>core</strong> ：core文件大小 (KB)</li>
+<li><strong>data</strong> ：最大的数据大小 (KB)</li>
+<li><strong>fsize</strong> ：最大文件大小 (KB)</li>
+<li><strong>memlock</strong> ：最大锁定内存空间 (KB)</li>
+<li><strong>nofile</strong> ：打开文件的最大数量</li>
+<li><strong>rss</strong> ：最大Resident Set大小 (KB)</li>
+<li><strong>stack</strong> ：堆栈大小 (KB)</li>
+<li><strong>cpu</strong> ：最大CPU time (MIN)</li>
+<li><strong>nproc</strong> ：最大进程数</li>
+<li><strong>as</strong> ：最大地址空间 (KB)</li>
+<li><strong>maxlogins</strong> ：此用户的最大登录数</li>
+<li><strong>maxsyslogins</strong> ：系统的最大登录数</li>
+<li><strong>priority</strong> ：运行用户进程的优先级</li>
+<li><strong>locks</strong> ：用户最大文件锁定数</li>
+<li><strong>sigpending</strong> ：最大被挂起/阻塞 (pending) 的信号数</li>
+<li><strong>msgqueue</strong> ：POSIX消息队列使用的最大内存 (bytes)</li>
+<li><strong>nice</strong> ：最大允许的 nice 优先级: [-20, 19]</li>
+<li><strong>rtprio</strong> ：最大realtime优先级</li>
+</ul>
+<p>打开文件的最大数量设置方法如下：</p>
+<p>编辑配置文件 <code>/etc/security/limits.conf</code> 加入如下配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* soft nofile 10000</span><br><span class="line">* hard nofile 10000</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* - nofile 2000</span><br></pre></td></tr></table></figure>
+<p>保存退出。</p>
 <center><b>--THE END--<b></center>
 
 
@@ -497,7 +530,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">Linux内核版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">查看系统版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell"><span class="nav-number">2.</span> <span class="nav-text">shell</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81-shell"><span class="nav-number">2.1.</span> <span class="nav-text">常见 shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-shell"><span class="nav-number">2.2.</span> <span class="nav-text">运行 shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BLinux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">查看Linux系统信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%BD%8D%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">查看系统位数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-number">3.2.</span> <span class="nav-text">查看内存信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">Linux软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="nav-number">4.1.</span> <span class="nav-text">源码编译安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM"><span class="nav-number">4.2.</span> <span class="nav-text">RPM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RPM%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-number">4.2.1.</span> <span class="nav-text">RPM包安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm%E5%91%BD%E4%BB%A4%E5%85%B6%E5%AE%83%E7%94%A8%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">rpm命令其它用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum"><span class="nav-number">4.2.3.</span> <span class="nav-text">yum</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DPKG"><span class="nav-number">4.3.</span> <span class="nav-text">DPKG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DPKG-%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85"><span class="nav-number">4.3.1.</span> <span class="nav-text">DPKG 命令安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apt"><span class="nav-number">4.3.2.</span> <span class="nav-text">apt</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4history"><span class="nav-number">5.</span> <span class="nav-text">查看历史命令history</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E5%86%85%E6%A0%B8%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">Linux内核版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.</span> <span class="nav-text">查看系统版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell"><span class="nav-number">2.</span> <span class="nav-text">shell</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81-shell"><span class="nav-number">2.1.</span> <span class="nav-text">常见 shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-shell"><span class="nav-number">2.2.</span> <span class="nav-text">运行 shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BLinux%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">查看Linux系统信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E4%BD%8D%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">查看系统位数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF"><span class="nav-number">3.2.</span> <span class="nav-text">查看内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BCPU%E4%BF%A1%E6%81%AF"><span class="nav-number">3.3.</span> <span class="nav-text">查看CPU信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">Linux软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="nav-number">4.1.</span> <span class="nav-text">源码编译安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM"><span class="nav-number">4.2.</span> <span class="nav-text">RPM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RPM%E5%8C%85%E5%AE%89%E8%A3%85"><span class="nav-number">4.2.1.</span> <span class="nav-text">RPM包安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm%E5%91%BD%E4%BB%A4%E5%85%B6%E5%AE%83%E7%94%A8%E6%B3%95"><span class="nav-number">4.2.2.</span> <span class="nav-text">rpm命令其它用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum"><span class="nav-number">4.2.3.</span> <span class="nav-text">yum</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DPKG"><span class="nav-number">4.3.</span> <span class="nav-text">DPKG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DPKG-%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85"><span class="nav-number">4.3.1.</span> <span class="nav-text">DPKG 命令安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apt"><span class="nav-number">4.3.2.</span> <span class="nav-text">apt</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4history"><span class="nav-number">5.</span> <span class="nav-text">查看历史命令history</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-%E6%96%87%E4%BB%B6%E5%8F%A5%E6%9F%84"><span class="nav-number">6.</span> <span class="nav-text">Linux 文件句柄</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -513,7 +546,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">151</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -574,12 +607,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">606k</span>
+    <span title="站点总字数">618k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">9:11</span>
+    <span title="站点阅读时长">9:22</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
