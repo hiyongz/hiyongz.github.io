@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-09-05T07:33:29.310Z</updated>
+  <updated>2021-09-12T09:35:31.956Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux Bash编程：随机数生成、对浮点数进行四舍五入运算</title>
+    <link href="https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/"/>
+    <id>https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/</id>
+    <published>2021-09-09T04:02:00.000Z</published>
+    <updated>2021-09-12T09:35:31.956Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍使用shell实现随机数生成以及对浮点数进行四舍五入运算&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go语言中的字符串拼接方法介绍</title>
+    <link href="https://hiyongz.github.io/posts/golang-notes-for-string-concatenation/"/>
+    <id>https://hiyongz.github.io/posts/golang-notes-for-string-concatenation/</id>
+    <published>2021-09-07T04:12:00.000Z</published>
+    <updated>2021-09-12T09:36:39.323Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍Go语言中的string类型、strings包和bytes.Buffer类型，介绍几种字符串拼接方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Go" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/"/>
+    
+    
+      <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux Bash编程二：shell语法及实用技巧</title>
@@ -406,56 +450,6 @@
     
     
       <category term="Uiautomator2" scheme="https://hiyongz.github.io/tags/Uiautomator2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python yaml文件读写</title>
-    <link href="https://hiyongz.github.io/posts/python-library-for-pyyaml/"/>
-    <id>https://hiyongz.github.io/posts/python-library-for-pyyaml/</id>
-    <published>2021-07-13T04:12:00.000Z</published>
-    <updated>2021-07-13T12:28:13.391Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;yaml相比json来说数据表示更加简洁，特别适合用来读取/更新配置文件，和json一样，也是一种数据串行化格式。本文介绍在Python中PyYAML库解析、保存yaml文件的方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="yaml" scheme="https://hiyongz.github.io/tags/yaml/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python json文件读写</title>
-    <link href="https://hiyongz.github.io/posts/python-library-for-json/"/>
-    <id>https://hiyongz.github.io/posts/python-library-for-json/</id>
-    <published>2021-07-08T04:12:00.000Z</published>
-    <updated>2021-07-08T13:39:14.115Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;JSON (JavaScript Object Notation)是一个受 JavaScript 的对象字面量语法启发的轻量级数据交换格式，本文介绍Python json库的使用，也就是json的序列化和反序列化方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
-    
-    
-      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
-    
-      <category term="yaml" scheme="https://hiyongz.github.io/tags/yaml/"/>
     
   </entry>
   
