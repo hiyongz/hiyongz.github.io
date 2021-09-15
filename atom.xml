@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-09-12T09:35:31.956Z</updated>
+  <updated>2021-09-15T14:03:58.849Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Go语言中的通道</title>
+    <link href="https://hiyongz.github.io/posts/golang-notes-for-channel-sync/"/>
+    <id>https://hiyongz.github.io/posts/golang-notes-for-channel-sync/</id>
+    <published>2021-09-14T04:12:00.000Z</published>
+    <updated>2021-09-15T14:03:58.849Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通道（channel）是Go 语言中一种特殊的数据类型，通道本身就是并发安全的，可以通过它在多个 goroutine 之间传递数据。通道是Go 语言编程理念：“&lt;em&gt;Do not communicate by sharing memory; instead, share memory by communicating&lt;/em&gt;”（不要通过共享数据来通信，而应该通过通信来共享数据。）的完美实现，在并发编程中经常会遇到它。下面来介绍一下通道的使用方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Go" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/"/>
+    
+    
+      <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux Bash编程：随机数生成、对浮点数进行四舍五入运算</title>
@@ -427,29 +450,6 @@
       <category term="iOS" scheme="https://hiyongz.github.io/tags/iOS/"/>
     
       <category term="黑苹果" scheme="https://hiyongz.github.io/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>App自动化测试工具Uiautomator2</title>
-    <link href="https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/"/>
-    <id>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</id>
-    <published>2021-07-15T04:12:00.000Z</published>
-    <updated>2021-08-02T12:38:18.615Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://developer.android.com/training/testing/ui-automator.html&quot;&gt;UI Automator&lt;/a&gt;是 google 在 Android4.1 版本发布时推出的一款用Java编写的Android UI 自动化测试工具，基于Android Accessibility 服务，Accessibility 服务用于帮助残疾用户使用Android设备和应用。在后台运行，并在accesbilityevents触发时接收系统回调。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="Uiautomator2" scheme="https://hiyongz.github.io/tags/Uiautomator2/"/>
     
   </entry>
   

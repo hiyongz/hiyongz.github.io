@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/golang-notes-for-channel-sync/</loc>
+    <lastmod>2021-09-15</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins/</loc>
+    <lastmod>2021-09-13</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/golang-notes-for-string-concatenation/</loc>
     <lastmod>2021-09-12</lastmod>
   </url>
@@ -463,10 +471,6 @@
   <url>
     <loc>https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/</loc>
     <lastmod>2021-04-22</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins/</loc>
-    <lastmod>2021-04-19</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/selenium-appium-keycode/</loc>
