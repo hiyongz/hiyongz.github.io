@@ -2013,14 +2013,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/scapy/</loc>
+    <loc>https://hiyongz.github.io/tags/setattr/</loc>
     <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/setattr/</loc>
+    <loc>https://hiyongz.github.io/tags/scapy/</loc>
     <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2097,14 +2097,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/</loc>
+    <loc>https://hiyongz.github.io/tags/bug/</loc>
     <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/bug/</loc>
+    <loc>https://hiyongz.github.io/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/</loc>
     <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -2302,13 +2302,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/categories/%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/</loc>
-    <lastmod>2021-09-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
@@ -2331,13 +2324,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/</loc>
-    <lastmod>2021-09-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/categories/%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/App%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/</loc>
     <lastmod>2021-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

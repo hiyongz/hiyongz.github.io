@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-09-16T13:49:44.348Z</updated>
+  <updated>2021-09-16T13:55:58.404Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,22 +17,22 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>iOS APP�Զ�����predicate��λ</title>
+    <title>iOS APP自动化：predicate定位</title>
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-predicate-locator/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-predicate-locator/</id>
     <published>2021-09-16T04:12:00.000Z</published>
-    <updated>2021-09-16T13:49:44.348Z</updated>
+    <updated>2021-09-16T13:55:58.404Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;��iOS APP�Զ��������У�������Ĳ�������Ԫ�ض�λ�ˡ���Android APP�Զ�������һ����iOSҲ֧�� ( XCUITest �� UIAutomation���Կ��) ʹ������ֵ��λ������id��className��Ԫ�����ԣ�Ȼ������ʱ������ֵ������Ψһ�ģ�&lt;a href=&quot;http://appium.io/&quot;&gt;appium&lt;/a&gt;��&lt;a href=&quot;https://github.com/openatx/facebook-wda&quot;&gt;facebook-wda&lt;/a&gt;�ȿ��Ҳ��װ��XPath��λ������ʹ��XPath������ֵ��λ�����������Զ�λ��99%��Ԫ�ء����������ܷ��棬XPath�Ķ�λ�ٶ���Խ��������ǿ���ѡ��iOS���еĶ�λ���ԣ� predicate �� class chain��λ���������Ľ���predicate��λ������ class chain��λ������һƪ�����н��ܡ�&lt;/p&gt;
+      &lt;p&gt;在iOS APP自动化测试中，最基本的操作就是元素定位了。与Android APP自动化测试一样，iOS也支持 ( XCUITest 或 UIAutomation测试框架) 使用属性值定位，比如id、className等元素属性，然而，有时候属性值并不是唯一的，&lt;a href=&quot;http://appium.io/&quot;&gt;appium&lt;/a&gt;、&lt;a href=&quot;https://github.com/openatx/facebook-wda&quot;&gt;facebook-wda&lt;/a&gt;等框架也封装了XPath定位方法，使用XPath和属性值定位方法基本可以定位到99%的元素。但是在性能方面，XPath的定位速度相对较慢，我们可以选择iOS特有的定位策略： predicate 和 class chain定位方法。本文介绍predicate定位方法， class chain定位将在下一篇文章中介绍。&lt;/p&gt;
     
     </summary>
     
     
-      <category term="�Զ�������" scheme="https://hiyongz.github.io/categories/%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/"/>
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
-      <category term="App�Զ�������" scheme="https://hiyongz.github.io/categories/%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/App%EF%BF%BD%D4%B6%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD/"/>
+      <category term="App自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
     
       <category term="iOS" scheme="https://hiyongz.github.io/tags/iOS/"/>
