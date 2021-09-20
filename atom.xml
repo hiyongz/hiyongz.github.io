@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-09-16T13:55:58.404Z</updated>
+  <updated>2021-09-20T13:57:44.243Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux Bash编程：将整数分解为n个随机数</title>
+    <link href="https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/"/>
+    <id>https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/</id>
+    <published>2021-09-18T04:12:00.000Z</published>
+    <updated>2021-09-20T13:57:44.243Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍使用shell实现将一个整数m随机分解为n个数。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
+    
+    
+      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+      <category term="算法" scheme="https://hiyongz.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>iOS APP自动化：predicate定位</title>
@@ -429,27 +452,6 @@
       <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
     
       <category term="内存驻留" scheme="https://hiyongz.github.io/tags/%E5%86%85%E5%AD%98%E9%A9%BB%E7%95%99/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux和Windows创建指定大小文件方法</title>
-    <link href="https://hiyongz.github.io/posts/linux-and-windows-create-files-certain-size/"/>
-    <id>https://hiyongz.github.io/posts/linux-and-windows-create-files-certain-size/</id>
-    <published>2021-07-20T04:02:00.000Z</published>
-    <updated>2021-07-22T14:09:24.129Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在测试中有时需要创建不同大小的测试文件，用于测试上传下载性能以及以及其它文件传输功能，本文介绍几种Liunx和Windows系统下创建指定大小文件的方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
-    
-    
-      <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
   </entry>
   
