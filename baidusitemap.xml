@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-Winners-Curse/</loc>
+    <lastmod>2021-09-21</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/</loc>
     <lastmod>2021-09-20</lastmod>
   </url>

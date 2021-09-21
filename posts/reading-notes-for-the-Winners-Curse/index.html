@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文介绍使用shell实现随机数生成以及对浮点数进行四舍五入运算">
+  <meta name="description" content="《赢家的诅咒》是诺贝尔经济学奖得主理查德·塞勒的经典著作，副标题是“经济生活中的悖论与反常现象”，主要探讨了我们现实生活中广泛存在的一些”反常“现象，所谓”反常“是指与标准经济学理论的分析和预测不一致的现象。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux Bash编程：随机数生成、对浮点数进行四舍五入运算">
-<meta property="og:url" content="https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/index.html">
+<meta property="og:title" content="读书笔记 | 赢家的诅咒">
+<meta property="og:url" content="https://hiyongz.github.io/posts/reading-notes-for-the-Winners-Curse/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="本文介绍使用shell实现随机数生成以及对浮点数进行四舍五入运算">
+<meta property="og:description" content="《赢家的诅咒》是诺贝尔经济学奖得主理查德·塞勒的经典著作，副标题是“经济生活中的悖论与反常现象”，主要探讨了我们现实生活中广泛存在的一些”反常“现象，所谓”反常“是指与标准经济学理论的分析和预测不一致的现象。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-09T04:02:00.000Z">
-<meta property="article:modified_time" content="2021-09-12T09:35:31.956Z">
+<meta property="article:published_time" content="2021-09-21T10:26:00.000Z">
+<meta property="article:modified_time" content="2021-09-21T10:23:16.573Z">
 <meta property="article:author" content="HiYo">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="读书笔记">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/">
+<link rel="canonical" href="https://hiyongz.github.io/posts/reading-notes-for-the-Winners-Curse/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Linux Bash编程：随机数生成、对浮点数进行四舍五入运算 | HiYong</title>
+  <title>读书笔记 | 赢家的诅咒 | HiYong</title>
   
 
 
@@ -209,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/reading-notes-for-the-Winners-Curse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
@@ -222,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux Bash编程：随机数生成、对浮点数进行四舍五入运算
+          读书笔记 | 赢家的诅咒
         </h1>
 
         <div class="post-meta">
@@ -236,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-09 12:02:00" itemprop="dateCreated datePublished" datetime="2021-09-09T12:02:00+08:00">2021-09-09</time>
+              <time title="创建时间：2021-09-21 18:26:00" itemprop="dateCreated datePublished" datetime="2021-09-21T18:26:00+08:00">2021-09-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -264,8 +264,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/linux-shell-bash-generate-random-numbers/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/linux-shell-bash-generate-random-numbers/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/reading-notes-for-the-Winners-Curse/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/reading-notes-for-the-Winners-Curse/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -275,14 +275,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -294,25 +294,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文介绍使用shell实现随机数生成以及对浮点数进行四舍五入运算</p>
+        <p>《赢家的诅咒》是诺贝尔经济学奖得主理查德·塞勒的经典著作，副标题是“经济生活中的悖论与反常现象”，主要探讨了我们现实生活中广泛存在的一些”反常“现象，所谓”反常“是指与标准经济学理论的分析和预测不一致的现象。</p>
 <a id="more"></a>
-<h1 id="随机数生成"><a href="#随机数生成" class="headerlink" title="随机数生成"></a>随机数生成</h1><h2 id="生成0-1之间的随机数"><a href="#生成0-1之间的随机数" class="headerlink" title="生成0-1之间的随机数"></a>生成0-1之间的随机数</h2><p>生成0-1的随机数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">random_number=`<span class="built_in">echo</span> <span class="string">&quot;scale=4 ; <span class="variable">$&#123;RANDOM&#125;</span>/32767&quot;</span> | bc -l` <span class="comment"># 生成0-1的随机数</span></span><br><span class="line"><span class="comment"># random_number=`bc -l &lt;&lt;&lt; &quot;scale=4 ; $&#123;RANDOM&#125;/32767&quot;`</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$random_number</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure><br>执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sh random.sh </span><br><span class="line">.8696</span><br><span class="line">$ sh random.sh </span><br><span class="line">.4517</span><br><span class="line">$ sh random.sh </span><br><span class="line">.5126</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><code>$&#123;RANDOM&#125;</code>函数产生0 - 32767之间的伪随机整数。其中32767（2^15 - 1）是有符号16位整数的上限。</li>
-<li><code>scale=4</code>：保留4位小数</li>
-</ul>
-<h2 id="生成0-n之间的随机数"><a href="#生成0-n之间的随机数" class="headerlink" title="生成0-n之间的随机数"></a>生成0-n之间的随机数</h2><p>生成0-10之间的随机数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">size=10</span><br><span class="line">max=$(( <span class="number">32767</span> / size * size ))</span><br><span class="line"><span class="keyword">while</span> (( (rand=<span class="variable">$RANDOM</span>) &gt;= max )); <span class="keyword">do</span> :; <span class="keyword">done</span></span><br><span class="line">rand=$(( rand % (size+<span class="number">1</span>) )) </span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$rand</span></span><br></pre></td></tr></table></figure><br>生成1-10之间的随机数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">size=10</span><br><span class="line">max=$(( <span class="number">32767</span> / size * size ))</span><br><span class="line"><span class="keyword">while</span> (( (rand=<span class="variable">$RANDOM</span>) &gt;= max )); <span class="keyword">do</span> :; <span class="keyword">done</span></span><br><span class="line">rand=$(( rand % (size) + <span class="number">1</span> )) </span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$rand</span></span><br></pre></td></tr></table></figure></p>
-<p><code>max=$(( 32767 / size * size ))</code>语句比较关键，这么处理的原因是${RANDOM}产生的最大数是32767，如果生成1-10之间的随机数，需要去掉32761-32767之间的数，否则会导致出现9和10的概率和其它数不一样。</p>
-<h1 id="对浮点数进行四舍五入运算"><a href="#对浮点数进行四舍五入运算" class="headerlink" title="对浮点数进行四舍五入运算"></a>对浮点数进行四舍五入运算</h1><p>可以使用 <code>printf &quot;%.*f\n&quot; [精度] [浮点数]</code> 命令对浮点数进行四舍五入运算。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">printf</span> <span class="string">&quot;%.*f\n&quot;</span> 0 6.666</span><br><span class="line">7</span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">&quot;%.*f\n&quot;</span> 1 6.666</span><br><span class="line">6.7</span><br><span class="line">$ <span class="built_in">printf</span> <span class="string">&quot;%.*f\n&quot;</span> 2 6.666</span><br><span class="line">6.67</span><br></pre></td></tr></table></figure>
-<p>bash脚本示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">random_number=`<span class="built_in">echo</span> <span class="string">&quot;scale=4 ; <span class="variable">$&#123;RANDOM&#125;</span>/32767&quot;</span> | bc -l` <span class="comment"># 生成0-1的随机数</span></span><br><span class="line">number=`<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$random_number</span>*100&quot;</span> | bc`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$number</span></span><br><span class="line">number_round1=`<span class="built_in">echo</span> <span class="variable">$number</span> | xargs <span class="built_in">printf</span> <span class="string">&quot;%.*f\n&quot;</span> 0`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$number_round1</span></span><br><span class="line"></span><br><span class="line">number_round2=`<span class="built_in">echo</span> <span class="variable">$number</span> | xargs <span class="built_in">printf</span> <span class="string">&quot;%.*f\n&quot;</span> 1`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$number_round2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
-<p>执行结果如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">97.8900</span><br><span class="line">98</span><br><span class="line">97.9</span><br></pre></td></tr></table></figure>
-<p><strong>参考：</strong></p>
+<p>犹记得开始接触经济学的时候学习的就是经济学十大原理，其中一条就是”理性人考虑边际量“，他们根据机会成本，边际分析方法来做决策。最大的特点就是”自私“，“经济人”是非常理性的，他们尽量做出最优决策，实现利益最大化，但现实生活中这样的“经济人”是很少的，大多是社会人，影响我们决策的不仅有理性，还存在非理性的心理因素，这些非理性因素对社会产生了非常大的影响，下面就来介绍一下书中列出的部分反常现象。</p>
+<h2 id="1-与囚徒博弈不一致的公共产品“搭便车”"><a href="#1-与囚徒博弈不一致的公共产品“搭便车”" class="headerlink" title="1. 与囚徒博弈不一致的公共产品“搭便车”"></a>1. 与囚徒博弈不一致的公共产品“搭便车”</h2><p>公共产品具有以下两项特质：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/167058/how-to-round-floating-point-numbers-in-shell">https://unix.stackexchange.com/questions/167058/how-to-round-floating-point-numbers-in-shell</a></li>
+<li>一旦将这个产品提供给一个人，再将它提供给其他人就无须额外的成本；</li>
+<li>很难防止不付费的人使用这个产品。</li>
 </ol>
+<p>比如广播电台，电视等，你不付费也可以收听或者收看它们。经济理论预测在面对公共产品的问题时，人们都会“搭便车”，但根据实验研究，人们有合作的倾向，不是每个人每次都会选择搭便车，对这些现象的解释包括：</p>
+<ul>
+<li><p>互惠式利他主义：人们有互惠的倾向，合作的利益会更高。</p>
+</li>
+<li><p>纯粹的利他主义：被他人的利益所驱使，以他人之乐为乐。</p>
+</li>
+<li>不纯粹的利他主义：认为合作行为本身是好的，常被描述为良心的满足，或满足非工具性的道德命令。</li>
+</ul>
+<h2 id="2-行业间工资差异与流动性"><a href="#2-行业间工资差异与流动性" class="headerlink" title="2. 行业间工资差异与流动性"></a>2. 行业间工资差异与流动性</h2><p>在劳动市场上存在严重违反一价定律的情形。</p>
+<ul>
+<li>有些工作的性质看起来很类似，但是工资的差异极大。</li>
+<li>即使在（可衡量的）员工素质是一样的情况下，一些产业显然比其他产业的工资高。</li>
+<li>如果一个产业中的某个职务的工资较高，则该产业的所有职务也倾向于工资较高</li>
+</ul>
+<blockquote>
+<p><strong>一价定律</strong>（ law ofone price ）：如果市场运作良好，且没有很大的交易成本或运输成本，同样的物品无法以两种不同的价格出售，因为所有的买方都会到价格较低的市场去购买，而所有的卖方都会到较高价的市场出售。很快地，不同的价格必会趋向一致。</p>
+</blockquote>
+<p>对这个现象的一个解释是“效率工资模型”，即高于竞争性工资可能是有利润的。产出靠员工的努力，而努力与工资正相关。你付的工资越高，你得到的员工努力越多。</p>
+<p>根据努力和工资的正相关关系，提出了不同的模型：</p>
+<ul>
+<li><strong>偷懒模型：</strong>根据偷懒模型，高工资产业应该是那些有高监督成本的产业，及（或）员工偷懒会导致相对高成本的产业。</li>
+<li><strong>人员流动模型：</strong>公司可能也希望支付的工资高于市场结清工资， 以减少人员流动。人员流动模型预测，高薪产业是那些人员流动成本最高的产业。</li>
+<li><strong>逆选择模型：</strong>假设应聘者的平均素质会随着工资提高而提升。这些模型显示，对于素质差异比较敏感的产业，或是在衡量质量上比较花成本的产业，会提供较高的工资。</li>
+<li><strong>公平工资模型：</strong>前提是员工如果认为得到的是公平的工资，他们就会更努力。这个假设使得公司愿意支付高于竞争性水平的工资。公平工资模型预测，有高利润的公司就会是支付高工资的公司。模型同时也预测，高薪会出现在团队工作及员工合作特别重要的那些产业中。</li>
+</ul>
+<h2 id="3-赢家反而吃亏的“赢家的诅咒”"><a href="#3-赢家反而吃亏的“赢家的诅咒”" class="headerlink" title="3. 赢家反而吃亏的“赢家的诅咒”"></a>3. 赢家反而吃亏的“赢家的诅咒”</h2><p>“赢家的诅咒”这个概念是由大西洋富田公司的三位工程师，卡彭、克拉普和坎贝尔在1971年提出的，意思是赢得竞标的公司可能是输家，也就是说赢家受到了“诅咒”：</p>
+<ul>
+<li>中标价超过这块开发区的价值，该公司因而会蒙受损失；</li>
+<li>开发区的价值低于专家的估价，中标的公司因而感到失望，即使中标公司盈利，其利润低于投标时的预期。</li>
+</ul>
+<p>竞标的一般形式是出价高的人获胜，并支付他所出的竞标价，此处有两项作用相反的因素要考虑。其他投标人的数量增加，意味着你要赢得竞标，你的出价必须要更积极，但是如果你中标了，其他投标人数量的增加也会增加你高估标的物价格的机会—这表示你的出价不应该太积极。</p>
+<h2 id="4-禀赋效应、损失规避及现状偏见"><a href="#4-禀赋效应、损失规避及现状偏见" class="headerlink" title="4. 禀赋效应、损失规避及现状偏见"></a>4. 禀赋效应、损失规避及现状偏见</h2><p>现状偏见：对目前状态的偏好</p>
+<p>损失规避：放弃一项物品的效用损失大于得到它所获得的效用，个人有强烈的维持现状的倾向，因为失去现状的弊大于利。</p>
+<p>禀赋效应：人们在出售一样东西时的要价常常会要求远高于他们获得此物所支付的价格，人们看待机会成本不同于“从口袋中掏钱”的成本。比起感觉到的损失，你放弃掉的收益所造成的痛苦还比较少。</p>
+<h2 id="5-偏好反转"><a href="#5-偏好反转" class="headerlink" title="5. 偏好反转"></a>5. 偏好反转</h2><p>程序不变性原则认为决策者有固定的偏好次序，任何可靠的诱导程序都可以精确地获得这个次序。如果选项A的定价高于选项B，我们在直接比较时就不能假设对选项A的偏好永远高于B。证据显示，不同的诱导方法会改变选项因素的权重，从而产生不同的排序。在不同的环境下，偏好可能会发生反转而不是固定不变的。</p>
+<p>因此可以说价值或偏好是在诱导的过程中一并建立起来的，在决定之前，它们什么都不是。</p>
+<h2 id="6-跨期选择"><a href="#6-跨期选择" class="headerlink" title="6. 跨期选择"></a>6. 跨期选择</h2><p>跨期选择是指<strong>成本和利益分散在各个时期里进行的决策</strong>，比如要读几年书、跟谁结婚、要不要生小孩、要为退休存多少钱、如何投资、要不要买房子，以及如果买房子要买哪一套——所有这些极为重要的决策，都有很强的跨期因素在里面。</p>
+<p>理性消费者应该做跨期的取舍，以使他们的边际时间偏好率与利率相等，在跨期选择上应该要有一致性。此外在任何情况及全部的时间，所使用的贴现率应该是固定不变的。但研究显示个人贴现率存在动态的不一致性：</p>
+<p>第一，贴现率随着等待时间的加长而明显下降，</p>
+<p>第二，贴现率随着收益的的增加而下降。</p>
+<ul>
+<li>小额奖金（小于100美元）的贴现率非常高，而那些大金额的贴现率是比较合理的。</li>
+<li>例如，现在的100美元和一年后的150美元，两者之间在认知上的差异，似乎比现在的10美元和一年后的15美元之间的差异还要大。因此在第一个情况中，许多人愿意为额外的50美元而等待，但是在第二个情况中，却不愿意为额外的5美元等待。</li>
+</ul>
+<p>第三，收益情况的贴现率比起损失情况的贴现率高出许多。</p>
+<ul>
+<li>受试者需要得到许多补偿金才愿意晚拿到收益，但是不愿意为了延迟缴纳罚金而支付太多。</li>
+</ul>
+<p>由此可以看出，个人很难做出理性、长期的选择。</p>
+<h2 id="7-边际消费倾向"><a href="#7-边际消费倾向" class="headerlink" title="7. 边际消费倾向"></a>7. 边际消费倾向</h2><p>目前的消费水平取决于收入，心理账户对意外收益的边际消费倾向所做的预测取决于收益的大小。</p>
+<ul>
+<li>小的收益（相对于收入），会被标记为目前收入，然后被花费掉。</li>
+<li>较大的收益会归入资产账户，而资产账户的边际消费倾向是较低的。</li>
+</ul>
+<p>财富变化的来源也很重要。有些意外之财，像是未实现的资本收益，会很自然地被视为是资产账户上的改变。其他像是卖股票的收益，可能被当作是收入。</p>
+<blockquote>
+<p>边际消费倾向（marginal propensity to consume，或简称MPC）为新增的1美元所得中用于消费而非储蓄的部分。如果一个人得到100美元的意外之财，花掉其中95美元，储蓄5美元，那么MPC就是0.95。</p>
+</blockquote>
+<h2 id="8-其它"><a href="#8-其它" class="headerlink" title="8. 其它"></a>8. 其它</h2><p>作者还介绍了其它反常现象，比如</p>
+<ul>
+<li>博彩市场中的热门─冷门偏差现象和前两名及前三名市场的无效率性</li>
+<li>股票市场中的日历效应：一月效应、周末效应、月度转换效应</li>
+<li>华尔街股市上的均值回归：虽然股市中存在噪声交易者，影响股票价格，但长期是均值回归，或多或少是可以预测的</li>
+<li>封闭式共同基金的四种反常现象</li>
+<li>外汇市场上的远期贴水溢价、风险预期失误等</li>
+</ul>
+<p>作者列出了大量的“反常”现象，不是为了颠覆经济理论，标准的经济学范式研究了各种客观因素对经济的影响，提出了各种理论，但现实生活中很少有人或者公司严格按照这些方案行动，存在各种其它心理因素影响金融市场。行为经济学对决策具有非常大的指导意义。</p>
 <center><b>--THE END--<b></center>
 
 
@@ -322,7 +378,7 @@
     
 	  
 	  <div class="post-tags">              
-		  <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>
+		  <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 读书笔记</a>
 	  </div>
       <br/>
       <div>
@@ -336,10 +392,10 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>Linux Bash编程：随机数生成、对浮点数进行四舍五入运算</a></p>
+  <p><span>本文标题:</span>读书笔记 | 赢家的诅咒</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/linux-shell-bash-generate-random-numbers/" title="Linux Bash编程：随机数生成、对浮点数进行四舍五入运算">https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/"  aria-label="复制成功！"></i></span>
+  <p><span>文章链接:</span><a href="/posts/reading-notes-for-the-Winners-Curse/" title="读书笔记 | 赢家的诅咒">https://hiyongz.github.io/posts/reading-notes-for-the-Winners-Curse/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/reading-notes-for-the-Winners-Curse/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
 </div>
@@ -373,13 +429,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/golang-notes-for-string-concatenation/" rel="prev" title="Go语言中的字符串拼接方法介绍">
-      <i class="fa fa-chevron-left"></i> Go语言中的字符串拼接方法介绍
+    <a href="/posts/linux-shell-bash-splitinteger/" rel="prev" title="Linux Bash编程：将整数分解为n个随机数">
+      <i class="fa fa-chevron-left"></i> Linux Bash编程：将整数分解为n个随机数
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/golang-notes-for-channel-sync/" rel="next" title="Go语言中的通道">
-      Go语言中的通道 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -439,7 +492,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90"><span class="nav-number">1.</span> <span class="nav-text">随机数生成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%900-1%E4%B9%8B%E9%97%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">生成0-1之间的随机数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%900-n%E4%B9%8B%E9%97%B4%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">生成0-n之间的随机数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%B5%AE%E7%82%B9%E6%95%B0%E8%BF%9B%E8%A1%8C%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5%E8%BF%90%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">对浮点数进行四舍五入运算</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8E%E5%9B%9A%E5%BE%92%E5%8D%9A%E5%BC%88%E4%B8%8D%E4%B8%80%E8%87%B4%E7%9A%84%E5%85%AC%E5%85%B1%E4%BA%A7%E5%93%81%E2%80%9C%E6%90%AD%E4%BE%BF%E8%BD%A6%E2%80%9D"><span class="nav-number">1.</span> <span class="nav-text">1. 与囚徒博弈不一致的公共产品“搭便车”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%A1%8C%E4%B8%9A%E9%97%B4%E5%B7%A5%E8%B5%84%E5%B7%AE%E5%BC%82%E4%B8%8E%E6%B5%81%E5%8A%A8%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">2. 行业间工资差异与流动性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%B5%A2%E5%AE%B6%E5%8F%8D%E8%80%8C%E5%90%83%E4%BA%8F%E7%9A%84%E2%80%9C%E8%B5%A2%E5%AE%B6%E7%9A%84%E8%AF%85%E5%92%92%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">3. 赢家反而吃亏的“赢家的诅咒”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%A6%80%E8%B5%8B%E6%95%88%E5%BA%94%E3%80%81%E6%8D%9F%E5%A4%B1%E8%A7%84%E9%81%BF%E5%8F%8A%E7%8E%B0%E7%8A%B6%E5%81%8F%E8%A7%81"><span class="nav-number">4.</span> <span class="nav-text">4. 禀赋效应、损失规避及现状偏见</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%81%8F%E5%A5%BD%E5%8F%8D%E8%BD%AC"><span class="nav-number">5.</span> <span class="nav-text">5. 偏好反转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%B7%A8%E6%9C%9F%E9%80%89%E6%8B%A9"><span class="nav-number">6.</span> <span class="nav-text">6. 跨期选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%BE%B9%E9%99%85%E6%B6%88%E8%B4%B9%E5%80%BE%E5%90%91"><span class="nav-number">7.</span> <span class="nav-text">7. 边际消费倾向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%85%B6%E5%AE%83"><span class="nav-number">8.</span> <span class="nav-text">8. 其它</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
