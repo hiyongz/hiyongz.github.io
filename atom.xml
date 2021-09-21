@@ -348,23 +348,6 @@
   </entry>
   
   <entry>
-    <title>文章导航</title>
-    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
-    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
-    <published>2021-08-03T04:12:00.000Z</published>
-    <updated>2021-08-02T23:36:05.474Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;文章导航&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Android手机管理平台搭建：STF和atxserver2</title>
     <link href="https://hiyongz.github.io/posts/app-testing-for-stf-platform/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-stf-platform/</id>
@@ -384,6 +367,23 @@
     
     
       <category term="stf" scheme="https://hiyongz.github.io/tags/stf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文章导航</title>
+    <link href="https://hiyongz.github.io/posts/blog-navigation/"/>
+    <id>https://hiyongz.github.io/posts/blog-navigation/</id>
+    <published>2021-08-03T04:12:00.000Z</published>
+    <updated>2021-08-02T23:36:05.474Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章导航&lt;/p&gt;
+    
+    </summary>
+    
+    
     
   </entry>
   
