@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-09-21T10:23:16.573Z</updated>
+  <updated>2021-09-20T13:57:44.243Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>读书笔记 | 赢家的诅咒</title>
-    <link href="https://hiyongz.github.io/posts/reading-notes-for-the-winners-curse/"/>
-    <id>https://hiyongz.github.io/posts/reading-notes-for-the-winners-curse/</id>
-    <published>2021-09-21T10:26:00.000Z</published>
-    <updated>2021-09-21T10:23:16.573Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《赢家的诅咒》是诺贝尔经济学奖得主理查德·塞勒的经典著作，副标题是“经济生活中的悖论与反常现象”，主要探讨了我们现实生活中广泛存在的一些”反常“现象，所谓”反常“是指与标准经济学理论的分析和预测不一致的现象。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
   
   <entry>
     <title>Linux Bash编程：将整数分解为n个随机数</title>
@@ -448,6 +427,31 @@
     
     
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python内存驻留机制</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-string-interning/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-string-interning/</id>
+    <published>2021-07-22T04:12:00.000Z</published>
+    <updated>2021-07-22T14:10:10.077Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;字符串驻留机制在许多面向对象编程语言中都支持，比如Java、python、Ruby、PHP等，它是一种数据缓存机制，对不可变数据类型使用同一个内存地址，有效的节省了空间，本文主要介绍Python的内存驻留机制。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="内存驻留" scheme="https://hiyongz.github.io/tags/%E5%86%85%E5%AD%98%E9%A9%BB%E7%95%99/"/>
     
   </entry>
   
