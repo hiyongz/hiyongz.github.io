@@ -32,7 +32,7 @@
   </entry>
   <entry>
     <title>读书笔记 | 赢家的诅咒</title>
-    <url>/posts/reading-notes-for-the-Winners-Curse/</url>
+    <url>/posts/reading-notes-for-the-winners-curse/</url>
     <content><![CDATA[<p>《赢家的诅咒》是诺贝尔经济学奖得主理查德·塞勒的经典著作，副标题是“经济生活中的悖论与反常现象”，主要探讨了我们现实生活中广泛存在的一些”反常“现象，所谓”反常“是指与标准经济学理论的分析和预测不一致的现象。</p>
 <a id="more"></a>
 <p>犹记得开始接触经济学的时候学习的就是经济学十大原理，其中一条就是”理性人考虑边际量“，他们根据机会成本，边际分析方法来做决策。最大的特点就是”自私“，“经济人”是非常理性的，他们尽量做出最优决策，实现利益最大化，但现实生活中这样的“经济人”是很少的，大多是社会人，影响我们决策的不仅有理性，还存在非理性的心理因素，这些非理性因素对社会产生了非常大的影响，下面就来介绍一下书中列出的部分反常现象。</p>
@@ -4837,6 +4837,34 @@
       </tags>
   </entry>
   <entry>
+    <title>测试题库：docker容器</title>
+    <url>/posts/software-testing-points-for-docker/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="bdfb63e69625a46f6e74f93fdee44a090b31e5382cd34ceb181fceee787f2e2c">b63abfd0cc043585c7f59d942442ea6db36abf15959535f892fa87de01756606d5c9791752ee9190280362e37d571f03acef95b94d4115214ad9d0624a4a969fc042c946c9158f232e113b03197d65c654b39fc6539305e3ef7f76d5b2dd3b82f0393321e025e45bd119dcca05b4bd49fdd969d7f1d47703092c1dc4b070706864633dd769c88c34dc312a29c790cc3ac3a01457bb182029aed8c9a219c149b97e4507abaa61ded98ef7f0d1735eed91d60a8fbd875c23303d5c3923d58118bf4f2cd4888736e4d0d0e8e1da0c9fd0e2e5072a8956892c82c6ea1ce2ade1780f3a89259cb816c328da288d7ac8d0a2996e22642591669b3a9c018b074102c87d194b8bc99823db307d763debaf241ba02e6e967edb36be057fcd6b928354b682889e105b0c0ec08b72071448c49d13546f285858eb48d2769a5f3e03842abd7be6636084d59d273aa5beeee9fa218e2e06fe387f8e955d003d1ef18b4e78e22fc0c27939d58d907018a18bd9d22ac8f71b3d625edce224cfdf47397a55611654139cdfe138d672a8313a16397f79ec105df038e26f3aa0f307715018fd52dacb4d4c956bb63862ce571d2ad974ae50fc0b2414da4135e757900ba84ef1c389ef6d334e064107bd425335279333bd69d7cba3bb2cb79350e865e8d640bab2bfe742d5ce8162605f16dd3b8c58f58d30348d841b8f9ac98bcdeb5eafe42aca3381d2434a778172de242891bef8a76a110c30175e95014c9f69b396f9ed252d6493dc0dec3bb0881ef7c30f467cefa62dc96c36162e118df5704961a3f448790b9a207d6a246045037f017f8b59508491db5f24f8eb463f569424a9ca0ceaac66989020f4a77c088e9f3b5df74fa64424662b135bd4584217781980d71506eedbc5b687880fad6e059c7610a8ce5ed7450fb0ec3c93e270d82cb171ca1302c679011056d13967f0e6b6d5176305190570095705f5b5bcc5aeed43a3c3829eb350efe91942fd4b5a45a1844f3ec58bf1e4d9603207373ff4c6206b65e405691bf3e580e4dbfe27c2923e9069e024ecce56eca250875ed71519c35f5397fbb48611edbdf2e81fde830c78042cbf7324583825b49ce4efcb867baca94fa6e0a07455ae</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-xray">
+      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">Hey, password is required here.</span>
+      </label>
+      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
+        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>
+      </svg>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>容器技术</category>
+        <category>测试题库</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>测试题库：持续集成</title>
     <url>/posts/software-testing-points-for-continuous-integration/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -4863,34 +4891,6 @@
       <tags>
         <tag>Jenkins</tag>
         <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试题库：docker容器</title>
-    <url>/posts/software-testing-points-for-docker/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="bdfb63e69625a46f6e74f93fdee44a090b31e5382cd34ceb181fceee787f2e2c">b63abfd0cc043585c7f59d942442ea6db36abf15959535f892fa87de01756606d5c9791752ee9190280362e37d571f03acef95b94d4115214ad9d0624a4a969fc042c946c9158f232e113b03197d65c654b39fc6539305e3ef7f76d5b2dd3b82f0393321e025e45bd119dcca05b4bd49fdd969d7f1d47703092c1dc4b070706864633dd769c88c34dc312a29c790cc3ac3a01457bb182029aed8c9a219c149b97e4507abaa61ded98ef7f0d1735eed91d60a8fbd875c23303d5c3923d58118bf4f2cd4888736e4d0d0e8e1da0c9fd0e2e5072a8956892c82c6ea1ce2ade1780f3a89259cb816c328da288d7ac8d0a2996e22642591669b3a9c018b074102c87d194b8bc99823db307d763debaf241ba02e6e967edb36be057fcd6b928354b682889e105b0c0ec08b72071448c49d13546f285858eb48d2769a5f3e03842abd7be6636084d59d273aa5beeee9fa218e2e06fe387f8e955d003d1ef18b4e78e22fc0c27939d58d907018a18bd9d22ac8f71b3d625edce224cfdf47397a55611654139cdfe138d672a8313a16397f79ec105df038e26f3aa0f307715018fd52dacb4d4c956bb63862ce571d2ad974ae50fc0b2414da4135e757900ba84ef1c389ef6d334e064107bd425335279333bd69d7cba3bb2cb79350e865e8d640bab2bfe742d5ce8162605f16dd3b8c58f58d30348d841b8f9ac98bcdeb5eafe42aca3381d2434a778172de242891bef8a76a110c30175e95014c9f69b396f9ed252d6493dc0dec3bb0881ef7c30f467cefa62dc96c36162e118df5704961a3f448790b9a207d6a246045037f017f8b59508491db5f24f8eb463f569424a9ca0ceaac66989020f4a77c088e9f3b5df74fa64424662b135bd4584217781980d71506eedbc5b687880fad6e059c7610a8ce5ed7450fb0ec3c93e270d82cb171ca1302c679011056d13967f0e6b6d5176305190570095705f5b5bcc5aeed43a3c3829eb350efe91942fd4b5a45a1844f3ec58bf1e4d9603207373ff4c6206b65e405691bf3e580e4dbfe27c2923e9069e024ecce56eca250875ed71519c35f5397fbb48611edbdf2e81fde830c78042cbf7324583825b49ce4efcb867baca94fa6e0a07455ae</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-xray">
-      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">Hey, password is required here.</span>
-      </label>
-      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>
-      </svg>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>测试开发</category>
-        <category>容器技术</category>
-        <category>测试题库</category>
-      </categories>
-      <tags>
-        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
