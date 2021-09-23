@@ -2811,7 +2811,7 @@
   <entry>
     <title>markdown基本语法介绍</title>
     <url>/posts/markdown-basic-syntax/</url>
-    <content><![CDATA[<p>主要经常使用typora进行笔记整理，Hexo博客就是使用MarkDown编写的，本文整理常用的Markdown基本语法以及HTML语法。</p>
+    <content><![CDATA[<p>目前主要使用typora进行来笔记整理，使用MarkDown编辑文章非常方便简洁，我的<a href="https://hiyong.gitee.io/">Hexo博客</a>就是使用MarkDown来编写的，本文整理常用的Markdown语法以及与HTML的混用。</p>
 <a id="more"></a>
 <h1 id="MarkDown基本语法"><a href="#MarkDown基本语法" class="headerlink" title="MarkDown基本语法"></a>MarkDown基本语法</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><strong><a href="#横线">横线</a></strong></li>
