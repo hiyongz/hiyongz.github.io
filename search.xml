@@ -31,6 +31,94 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Linux Bash编程：Fisher–Yates shuffle 洗牌算法</title>
+    <url>/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</url>
+    <content><![CDATA[<p>本文介绍使用shell语法实现Fisher–Yates shuffle 洗牌算法。</p>
+<a id="more"></a>
+<h1 id="Fisher-Yates-shuffle-算法简介"><a href="#Fisher-Yates-shuffle-算法简介" class="headerlink" title="Fisher-Yates shuffle 算法简介"></a>Fisher-Yates shuffle 算法简介</h1><p>Fisher–Yates shuffle 洗牌算法可以用于对数组进行随机排列，它的时间复杂度为O(n)，伪代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">To shuffle an array a of n elements (indices 0..n-1):</span><br><span class="line"><span class="keyword">for</span> i from n - 1 downto 1 <span class="keyword">do</span></span><br><span class="line">	j = random <span class="built_in">integer</span> with 0 &lt;= j &lt;= i</span><br><span class="line">	exchange a[j] and a[i]</span><br></pre></td></tr></table></figure>
+<p>假定有一个数组a=[1, 2, 3, 4, 5, 6, 7, 8, 9]，数组长度为n，打乱a中元素的具体迭代步骤如下：</p>
+<ol>
+<li>生成一个[0, n-1]区间的随机数k；</li>
+<li>将第k个元素和第n-1个元素进行交换；</li>
+<li>进行下一轮迭代，生成一个[0, n-2]区间的随机数k，将第k个元素和第n-2个元素进行交换， 迭代次数为n-1次：从n-1取到1；</li>
+<li>最终得到一个打乱的数组。</li>
+</ol>
+<p>下表是一个数组的具体打乱过程，打乱后的数组是(9 4 8 1 2 3 5 6 7)</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>随机数</th>
+<th>原数组</th>
+<th>新数组</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-8：6</td>
+<td>a = (1 2 3 4 5 6 7 8 9)</td>
+<td>交换a[8]和a[6] ：(1 2 3 4 5 6 9 8 7)</td>
+</tr>
+<tr>
+<td>0-7：5</td>
+<td>a = (1 2 3 4 5 6 9 8 7)</td>
+<td>交换a[7]和a[5] ：(1 2 3 4 5 8 9 6 7)</td>
+</tr>
+<tr>
+<td>0-6：4</td>
+<td>a = (1 2 3 4 5 8 9 6 7)</td>
+<td>交换a[6]和a[4] ：(1 2 3 4 9 8 5 6 7)</td>
+</tr>
+<tr>
+<td>0-5：2</td>
+<td>a = (1 2 3 4 9 8 5 6 7)</td>
+<td>交换a[5]和a[2] ：(1 2 8 4 9 3 5 6 7)</td>
+</tr>
+<tr>
+<td>0-4：1</td>
+<td>a = (1 2 8 4 9 3 5 6 7)</td>
+<td>交换a[4]和a[1] ：(1 9 8 4 2 3 5 6 7)</td>
+</tr>
+<tr>
+<td>0-3：0</td>
+<td>a = (1 9 8 4 2 3 5 6 7)</td>
+<td>交换a[3]和a[0] ：(4 9 8 1 2 3 5 6 7)</td>
+</tr>
+<tr>
+<td>0-2：2</td>
+<td>a = (4 9 8 1 2 3 5 6 7)</td>
+<td>交换a[2]和a[2] ：(4 9 8 1 2 3 5 6 7)</td>
+</tr>
+<tr>
+<td>0-1：0</td>
+<td>a = (4 9 8 1 2 3 5 6 7)</td>
+<td>交换a[1]和a[0] ：(9 4 8 1 2 3 5 6 7)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="shell实现"><a href="#shell实现" class="headerlink" title="shell实现"></a>shell实现</h1><p>shuffle.sh : </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">shuffle</span></span>() &#123;</span><br><span class="line">   <span class="built_in">local</span> i tmp size max rand</span><br><span class="line">   <span class="comment"># 打乱顺序</span></span><br><span class="line">   <span class="comment"># Knuth-Fisher-Yates shuffle algorithm</span></span><br><span class="line">   size=<span class="variable">$&#123;#my_array[*]&#125;</span></span><br><span class="line">   max=$(( <span class="number">32767</span> / size * size ))</span><br><span class="line">   <span class="comment"># echo &quot;max: $max&quot;</span></span><br><span class="line">   <span class="keyword">for</span> ((i=size-1; i&gt;0; i--)); <span class="keyword">do</span></span><br><span class="line">      <span class="keyword">while</span> (( (rand=<span class="variable">$RANDOM</span>) &gt;= max )); <span class="keyword">do</span> :; <span class="keyword">done</span></span><br><span class="line">      rand=$(( rand % (i+<span class="number">1</span>) ))    </span><br><span class="line">      <span class="comment"># 交换</span></span><br><span class="line">      tmp=<span class="variable">$&#123;my_array[i]&#125;</span> </span><br><span class="line">      my_array[i]=<span class="variable">$&#123;my_array[rand]&#125;</span> </span><br><span class="line">      my_array[rand]=<span class="variable">$tmp</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="variable">$&#123;my_array[*]&#125;</span></span><br><span class="line">   <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">my_array=(1 2 3 4 5 6 7 8 9)</span><br><span class="line">shuffle</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;my_array[*]&#125;</span></span><br></pre></td></tr></table></figure>
+<p>执行效果：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sh shuffle.sh </span><br><span class="line">1 2 3 4 9 6 7 8 5</span><br><span class="line">1 8 3 4 9 6 7 2 5</span><br><span class="line">7 8 3 4 9 6 1 2 5</span><br><span class="line">7 8 6 4 9 3 1 2 5</span><br><span class="line">7 8 6 9 4 3 1 2 5</span><br><span class="line">7 9 6 8 4 3 1 2 5</span><br><span class="line">7 6 9 8 4 3 1 2 5</span><br><span class="line">7 6 9 8 4 3 1 2 5</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/">https://www.geeksforgeeks.org/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/</a></li>
+<li><a href="https://gaohaoyang.github.io/2016/10/16/shuffle-algorithm/#top">https://gaohaoyang.github.io/2016/10/16/shuffle-algorithm/#top</a></li>
+<li><a href="https://stackoverflow.com/questions/5533569/simple-method-to-shuffle-the-elements-of-an-array-in-bash-shell">https://stackoverflow.com/questions/5533569/simple-method-to-shuffle-the-elements-of-an-array-in-bash-shell</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Go语言并发编程：原子操作</title>
     <url>/posts/golang-concurrent-synchronization-for-atomic-operation/</url>
     <content><![CDATA[<p>在程序执行过程中，操作系统会进行线程调度，同一时刻能同时执行的程序数量跟CPU的内核线程数有关，比如4核CPU，同时最多只能有4个线程。Go 语言中的运行时系统也会对goroutine进行调度，调度器会频繁地让goroutine处于中断或者运行状态，这就不能保证代码执行的原子性（atomicity），即使使用互斥锁也不能保证原子性操作。Go语言中的atomic包提供了原子操作方法，下面来介绍它的使用方法。</p>
