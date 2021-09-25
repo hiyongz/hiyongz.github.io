@@ -4951,7 +4951,7 @@
 <li><a href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E5%AE%9A%E7%90%86">https://zh.wikipedia.org/wiki/%E4%B8%BB%E5%AE%9A%E7%90%86</a></li>
 </ol>
 <p>比如二分查找，二叉搜索，归并排序等算法的时间复杂度采用主定理来计算。<br><img src="master-theorem.png" width="60%" height="60%" /><br>搜索算法DFS、BFS，图的遍历时间复杂度也为O(N)</p>
-<h1 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h1><p>空间复杂度度量算法运行过程中临时占用存储空间的大小，可表示为： S(n)=O(f(n)) </p>
+<h1 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h1><p>空间复杂度用于度量算法运行过程中临时占用存储空间的大小，可表示为： S(n)=O(f(n)) </p>
 <ul>
 <li>代码的执行占用存储空间 S(n)与n成正比</li>
 <li>n表示数据规模的大小</li>
