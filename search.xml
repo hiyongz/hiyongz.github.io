@@ -33,7 +33,7 @@
   <entry>
     <title>Linux Bash编程：Fisher–Yates shuffle 洗牌算法</title>
     <url>/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</url>
-    <content><![CDATA[<p>本文介绍使用shell语法实现Fisher–Yates shuffle 洗牌算法。</p>
+    <content><![CDATA[<p>本文介绍使用shell语法来实现Fisher–Yates shuffle 洗牌算法。</p>
 <a id="more"></a>
 <h1 id="Fisher-Yates-shuffle-算法简介"><a href="#Fisher-Yates-shuffle-算法简介" class="headerlink" title="Fisher-Yates shuffle 算法简介"></a>Fisher-Yates shuffle 算法简介</h1><p>Fisher–Yates shuffle 洗牌算法可以用于对数组进行随机排列，它的时间复杂度为O(n)，伪代码如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">To shuffle an array a of n elements (indices 0..n-1):</span><br><span class="line"><span class="keyword">for</span> i from n - 1 downto 1 <span class="keyword">do</span></span><br><span class="line">	j = random <span class="built_in">integer</span> with 0 &lt;= j &lt;= i</span><br><span class="line">	exchange a[j] and a[i]</span><br></pre></td></tr></table></figure>
