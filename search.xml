@@ -10990,7 +10990,7 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <li>停止 adb server<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb kill-server</span><br></pre></td></tr></table></figure></li>
 <li><p>指定 adb server 的网络端口<adb默认端口为5037></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb -P &lt;port&gt; start-server </span><br></pre></td></tr></table></figure>
-<p>在发送adb命令时，如果没有pc没有启动Server，则会自动启动一个Server，然后将命令发送到Server。</p>
+<p>在发送adb命令时，如果pc没有启动Server，则会自动启动一个Server，然后将命令发送到Server。</p>
 </li>
 <li><p>通过adb usb打开设备上的tcpip服务并绑定一个端口</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb tcpip 5555</span><br><span class="line">adb -s 611DKBQC22SH2 tcpip 5555  # 设备在 5555 端口监听 TCP/IP 连接</span><br></pre></td></tr></table></figure>
