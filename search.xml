@@ -31,6 +31,127 @@
 ]]></content>
   </entry>
   <entry>
+    <title>使用GitHub Actions实现Hexo博客自动发布</title>
+    <url>/posts/continuous-integration-for-blog-build-with-github-actions/</url>
+    <content><![CDATA[<p>我在<a href="https://blog.csdn.net/u010698107/article/details/115888855">使用jenkins实现hexo博客自动发布</a>中介绍了可以使用jenkins实现博客自动发布，其实还有一种更简单的方法，就是GitHub提供的持续集成服务：GitHub Actions。下面就来介绍一下如何使用GitHub Actions来实现将hexo博客自动编译及发布到GitHub Pages和Gitee pages上。</p>
+<a id="more"></a>
+<h1 id="GitHub-Actions-简介"><a href="#GitHub-Actions-简介" class="headerlink" title="GitHub Actions 简介"></a>GitHub Actions 简介</h1><p>GitHub Actions把代码拉取，打包，触发测试，发布等操作当成一个个的actions，持续集成就是将这些actions组合起来，jenkins也类似。</p>
+<p>在项目的<code>.github/workflows</code> 目录中创建一个yaml格式的workflow 文件来编写GitHub Actions 工作流程，GitHub会自动运行该文件。workflow语法可参考：<a href="https://docs.github.com/cn/actions/learn-github-actions/workflow-syntax-for-github-actions">https://docs.github.com/cn/actions/learn-github-actions/workflow-syntax-for-github-actions</a></p>
+<p>开发者可以将actions放到代码仓库供其他开发者引用，可以到官网搜索开源的actions：<a href="https://github.com/marketplace?type=actions">https://github.com/marketplace?type=actions</a></p>
+<p>可以使用GitHub Actions实现博客自动发布，将静态博客页面部署到多个服务器上，比如GitHub Pages，Gitee pages以及云服务器上。本文使用GitHub Actions实现将Hexo博客自动编译并发布到GitHub Pages 和 Gitee pages上，并且实现Gitee pages自动更新。</p>
+<p>下面介绍具体的配置流程。</p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="博客仓库"><a href="#博客仓库" class="headerlink" title="博客仓库"></a>博客仓库</h2><p>我的个人博客是使用 hexo 框架搭建的，搭建方法可参考<a href="https://blog.csdn.net/u010698107/article/details/113781267">Hexo+Github/Gitee 搭建个人博客</a>。</p>
+<p>主要包括三个仓库：</p>
+<ul>
+<li>私有仓库Blog：存储 Hexo 项目文章以及源代码</li>
+<li>Github公共仓库hiyongz.github.io：存储编译之后的静态页面。</li>
+<li>Gitee公共仓库：内容和hiyongz.github.io一样，只是使用的服务不同。</li>
+</ul>
+<p>使用GitHub Actions要实现的是当Blog仓库指定目录有更新时，触发自动编译并部署博客到hiyongz.github.io仓库中，并将hiyongz.github.io仓库同步到Gitee公共仓库，同步完成后，更新Gitee Pages。</p>
+<h2 id="GitHub-Token配置"><a href="#GitHub-Token配置" class="headerlink" title="GitHub Token配置"></a>GitHub Token配置</h2><p>配置发布秘钥，用于将生成的静态博客文件 push 至 GitHub Pages 所在的仓库hiyongz.github.io：</p>
+<p><strong>1、生成秘钥</strong></p>
+<p>执行如下命令生成公钥和私钥，替换邮件地址为你的github邮箱地址，其实也可以不使用邮箱，这里只是为了便于辨识。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -f hexo-deploy-key -t rsa -C <span class="string">&quot;username@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+<p>命令执行后会生成两个文件：<code>hexo-deploy-key</code> 和 <code>hexo-deploy-key.pub</code> 。</p>
+<p><strong>2、将公钥添加到Github Pages仓库中</strong></p>
+<p>步骤：hiyongz.github.io仓库 -&gt; Settings -&gt; Deploy keys -&gt; Add deploy key</p>
+<ul>
+<li>Title设置为 <code>HEXO_DEPLOY_PUB</code> (可以根据自己喜好设置)</li>
+<li>Key填写 <code>github-deploy-key.pub</code> 文件内容</li>
+<li>勾选 <code>Allow write access</code> 选项</li>
+</ul>
+<p><img src="public-repo-keys.jpg" width="80%" height="80%" /></p>
+<p><strong>3、将私钥添加到博客源码仓库中</strong></p>
+<p>步骤：博客仓库 -&gt; Settings -&gt; Secrets -&gt; New repository secret</p>
+<ul>
+<li>Name 填写 <code>HEXO_DEPLOY_KEY</code> 。</li>
+<li>Value 填写 <code>github-deploy-key</code> 文件内容。</li>
+</ul>
+<p><img src="blog-repo-keys.jpg" width="80%" height="80%" /></p>
+<h2 id="Gitee-Token配置"><a href="#Gitee-Token配置" class="headerlink" title="Gitee Token配置"></a>Gitee Token配置</h2><p>Gitee Token配置和Github类似。</p>
+<p>秘钥不需要重新生成，直接使用前面生成的秘钥。</p>
+<p><strong>1、将公钥添加到Gitee Pages仓库中</strong></p>
+<p>步骤：gitee pages仓库 -&gt; 管理 -&gt; 公钥管理 -&gt; 添加部署公钥</p>
+<p>和github一样需要对仓库有写权限，点击【添加个人公钥】</p>
+<p><img src="gitee-pages-public-pages.jpg" width="80%" height="80%" /></p>
+<p>复制粘贴文件 <code>github-deploy-key.pub</code> 中的内容</p>
+<p><img src="gitee-pages-public-pages2.jpg" width="80%" height="80%" /></p>
+<p><strong>2、将私钥添加到Github的博客源码仓库中</strong></p>
+<p>不需要重新创建，直接使用 <code>HEXO_DEPLOY_KEY</code> 就行。</p>
+<p><strong>3、配置Gitee 帐号的密码</strong></p>
+<p>步骤：Github博客仓库 -&gt; Settings -&gt; Secrets -&gt; New repository secret</p>
+<ul>
+<li>Name 填写 <code>GITEE_PASSWORD</code> 。</li>
+<li>Value 填写Gitee 帐号的密码。</li>
+</ul>
+<p><img src="github-actions-secrets.jpg" width="80%" height="80%" /></p>
+<h1 id="配置workflow文件"><a href="#配置workflow文件" class="headerlink" title="配置workflow文件"></a>配置workflow文件</h1><p>下面来配置 Github Actions，编写workflow文件。</p>
+<p>在博客仓库根目录下创建 <code>.github/workflows/deploy.yml</code> 文件，yaml文件名可以随意设置。</p>
+<p>下面是我的workflow文件（参考了<a href="https://github.com/marketplace/actions/hexo-action#%F0%9F%8D%8Cexample-workflow---hexo-deploy">Hexo Action</a>和<a href="https://github.com/marketplace/actions/gitee-pages-action">Gitee Pages Action</a>提供的例子）：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Hexo</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span> </span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">paths-ignore:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;source/_GoNotes/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;source/_JavaNotes/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;source/_PythonNotes/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;source/_drafts/**&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;.github/**&#x27;</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">A</span> <span class="string">job</span> <span class="string">to</span> <span class="string">deploy</span> <span class="string">blog.</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/checkout@v1</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">submodules:</span> <span class="literal">true</span></span><br><span class="line">        </span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Cache</span> <span class="string">node</span> <span class="string">modules</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">actions/cache@v1</span></span><br><span class="line">      <span class="attr">id:</span> <span class="string">cache</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">path:</span> <span class="string">node_modules</span></span><br><span class="line">        <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-node-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/package-lock.json&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-node-</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Dependencies</span></span><br><span class="line">      <span class="attr">if:</span> <span class="string">steps.cache.outputs.cache-hit</span> <span class="type">!=</span> <span class="string">&#x27;true&#x27;</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">npm</span> <span class="string">ci</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># Deploy hexo blog website.</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span></span><br><span class="line">      <span class="attr">id:</span> <span class="string">deploy</span></span><br><span class="line">      <span class="attr">uses:</span> <span class="string">sma11black/hexo-action@v1.0.3</span></span><br><span class="line">      <span class="attr">with:</span></span><br><span class="line">        <span class="attr">deploy_key:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">user_name:</span> <span class="string">github用户名</span></span><br><span class="line">        <span class="attr">user_email:</span> <span class="string">github邮箱</span></span><br><span class="line">        <span class="attr">commit_msg:</span> <span class="string">$&#123;&#123;</span> <span class="string">github.event.head_commit.message</span> <span class="string">&#125;&#125;ion)</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Get</span> <span class="string">the</span> <span class="string">output</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">        <span class="string">echo</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; steps.deploy.outputs.notify &#125;&#125;</span>&quot;</span></span><br><span class="line">  <span class="attr">sync:</span></span><br><span class="line">    <span class="attr">needs:</span> <span class="string">build</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Sync</span> <span class="string">to</span> <span class="string">Gitee</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">wearerequired/git-mirror-action@master</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">SSH_PRIVATE_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_KEY</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="comment"># 源仓库</span></span><br><span class="line">          <span class="attr">source-repo:</span> <span class="string">git@github.com:hiyongz/hiyongz.github.io.git</span></span><br><span class="line">          <span class="comment"># 目标仓库</span></span><br><span class="line">          <span class="attr">destination-repo:</span> <span class="string">git@gitee.com:hiyong/hiyong.git</span></span><br><span class="line">  <span class="attr">reload-pages:</span></span><br><span class="line">    <span class="attr">needs:</span> <span class="string">sync</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">Gitee</span> <span class="string">Pages</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">yanglbme/gitee-pages-action@main</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">gitee-username:</span> <span class="string">hiyong</span></span><br><span class="line">          <span class="attr">gitee-password:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITEE_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">gitee-repo:</span> <span class="string">hiyong/hiyong</span></span><br><span class="line">          <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>部分字段解释：</p>
+<p>1、name：workflow 名称</p>
+<p>2、on：触发 workflow 的事件</p>
+<ul>
+<li><code>push</code>：push事件</li>
+<li><code>paths-ignore</code>：忽略指定的目录，也就是在忽略路径外的其它目录文件改动时才触发。</li>
+<li>还可以设置多种触发条件，比如支持cron语法实现定时触发，参考<a href="https://docs.github.com/cn/actions/reference/events-that-trigger-workflows">这里</a>。</li>
+</ul>
+<p>3、jobs：执行任务</p>
+<ul>
+<li><code>build</code>：博客编译和发布，发布到Github Pages</li>
+<li><code>sync</code>：将更新后的hiyongz.github.io仓库同步到Gitee</li>
+<li><code>reload-pages</code>：自动更新 Pages，因为Gitee Pages不像GitHub Pages 那样提交代码就自动更新。</li>
+<li><code>runs-on</code>：运行环境，支持windows，Ubuntu和macOS</li>
+<li><code>steps</code>：指定每个 Job 的运行步骤</li>
+<li><code>sma11black/hexo-action@v1.0.3</code>：博客构建发布，引用了<a href="https://github.com/marketplace/actions/hexo-action#%F0%9F%8D%8Cexample-workflow---hexo-deploy">Hexo Action</a>：</li>
+<li><code>wearerequired/git-mirror-action@master</code>：仓库同步，引用了<a href="https://github.com/marketplace/actions/git-mirror-action">git-mirror-action</a></li>
+<li><code>yanglbme/gitee-pages-action@main</code>：自动更新Gitee Pages，引用了<a href="https://github.com/marketplace/actions/gitee-pages-action">Gitee Pages Action</a></li>
+</ul>
+<p>更多workflow语法可参考 <a href="https://docs.github.com/cn/actions/learn-github-actions/workflow-syntax-for-github-actions">Workflow syntax for GitHub Actions</a> 。</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p>更新文章后push到博客仓库，如果满足条件，博客仓库中的Actions会自动触发：</p>
+<p><img src="github-actions-workflow.jpg" width="80%" height="80%" /></p>
+<p>有可能报如下错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Error: Need phone captcha validation, please follow wechat official account <span class="string">&quot;Gitee&quot;</span> to <span class="built_in">bind</span> account to turn off authentication.</span><br></pre></td></tr></table></figure>
+<p>微信公众号关注Gitee，绑定Gitee账号就可以了。</p>
+<p>查看hiyongz.github.io和Gitee仓库可以发现有新的更新，并且博客也更新了，这样实现了博客的自动发布，只要将文章写好push到博客仓库就什么也不用管了。</p>
+<p>如果Actions执行失败会收到一个邮件。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>除了GitHub Actions外，还可以使用<a href="https://travis-ci.org/">Travis CI</a>实现持续集成，它可以绑定Github 上的项目。</p>
+<p>使用这些持续集成工具能有效提升效率，比如每次文章更新上传后，GitHub Actions会自动触发编译发布操作，只专注写文章就行了。</p>
+<p><strong>参考文档：</strong></p>
+<ol>
+<li><p>GitHub Actions 快速入门：<a href="https://docs.github.com/cn/actions/quickstart">https://docs.github.com/cn/actions/quickstart</a></p>
+</li>
+<li><p>GitHub Actions：<a href="https://github.com/actions">https://github.com/actions</a></p>
+</li>
+<li><p>Gitee Pages Action：<a href="https://github.com/marketplace/actions/gitee-pages-action">https://github.com/marketplace/actions/gitee-pages-action</a></p>
+</li>
+<li><p>git-mirror-action：<a href="https://github.com/marketplace/actions/git-mirror-action">https://github.com/marketplace/actions/git-mirror-action</a></p>
+</li>
+<li><p>Hexo Action：<a href="https://github.com/marketplace/actions/hexo-action">https://github.com/marketplace/actions/hexo-action</a></p>
+</li>
+<li><p>awesome-actions：<a href="https://github.com/sdras/awesome-actions">awesome-actions</a></p>
+</li>
+<li><p><a href="https://github.com/marketplace?type=actions">https://github.com/marketplace?type=actions</a></p>
+</li>
+<li><p>workflow语法: <a href="https://docs.github.com/cn/actions/learn-github-actions/workflow-syntax-for-github-actions">https://docs.github.com/cn/actions/learn-github-actions/workflow-syntax-for-github-actions</a></p>
+</li>
+</ol>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>持续集成</category>
+        <category>其它</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>Hexo</tag>
+        <tag>GitHub Actions</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux Bash编程：Fisher–Yates shuffle 洗牌算法</title>
     <url>/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</url>
     <content><![CDATA[<p>本文介绍使用shell语法来实现Fisher–Yates shuffle 洗牌算法。</p>
