@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+  <meta name="description" content="结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试题库：算法">
-<meta property="og:url" content="https://hiyongz.github.io/posts/software-testing-points-for-algorithm/index.html">
+<meta property="og:title" content="Go语言基础语法（三）：结构体及方法">
+<meta property="og:url" content="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-26T12:12:00.000Z">
-<meta property="article:modified_time" content="2021-09-28T14:06:16.825Z">
+<meta property="article:published_time" content="2021-09-28T12:12:00.000Z">
+<meta property="article:modified_time" content="2021-09-28T14:06:16.765Z">
 <meta property="article:author" content="HiYo">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hiyongz.github.io/posts/software-testing-points-for-algorithm/">
+<link rel="canonical" href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>测试题库：算法 | HiYong</title>
+  <title>Go语言基础语法（三）：结构体及方法 | HiYong</title>
   
 
 
@@ -209,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/software-testing-points-for-algorithm/">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
@@ -222,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          测试题库：算法
+          Go语言基础语法（三）：结构体及方法
         </h1>
 
         <div class="post-meta">
@@ -236,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-26 12:12:00" itemprop="dateCreated datePublished" datetime="2021-04-26T12:12:00+00:00">2021-04-26</time>
+              <time title="创建时间：2021-09-28 12:12:00" itemprop="dateCreated datePublished" datetime="2021-09-28T12:12:00+00:00">2021-09-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +244,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">测试题库</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a>
                 </span>
             </span>
 
@@ -264,8 +268,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/software-testing-points-for-algorithm/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/software-testing-points-for-algorithm/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/golang-notes-for-struct-and-method/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/golang-notes-for-struct-and-method/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -275,14 +279,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>60</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -294,29 +298,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="bb9a2ad4a6727f7ad8cd3c123380b847d7cd6fcb2c17ab44e9a98643f19f0b3c">b63abfd0cc043585c7f59d942442ea6d35d2ba053943895347e2a5939164eb1956a80327e8cf0d0d6fff25ab98b280529ce56e1506a0f6138170807cc7d93f2b10227b6ef52ea69bcec000e25e0ea227f3b1afa8f0f2c5880bcba60be6de7020246add904e7f4fbbd40d5274bec0a06d62043300ee37d374664aa678bb88b39985f411ad363ac0a04f51073fa4a97cbfc72c18acf6e55db8b59fa1f50aeebbdfa1c5ce31e1e26e82d3f05907cda862ed3e6e7f64f59a1d4c1b867911ab3a3da6739cc896b665f0accdbba24e875ac61eef7b5c100ef8bad4e3e11d936753de352fa50af5d6f3e18e507d5aebd925834b61a542a4c7c136706803986892398ef9</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-xray">
-      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">Hey, password is required here.</span>
-      </label>
-      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>
-      </svg>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <p>结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。</p>
+<a id="more"></a>
+<h1 id="结构体类型"><a href="#结构体类型" class="headerlink" title="结构体类型"></a>结构体类型</h1><p>结构体类型（struct）在go语言中具有重要地位，它是实现go语言面向对象编程的重要工具。go语言中没有类的概念，可以使用结构体实现类似的功能，传统的OOP（Object-Oriented Programming）思想中的继承在go中可以通过嵌入字段的方式实现。</p>
+<p>结构体的声明与定义：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用关键字 type 和 struct 定义名字为Person结构体</span></span><br><span class="line"><span class="keyword">type</span> Robot <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	height <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>初始化及赋值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过var声明</span></span><br><span class="line"><span class="keyword">var</span> r1 Robot</span><br><span class="line">r1.name = <span class="string">&quot;Optimus Prime&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字面量直接赋值</span></span><br><span class="line">r2 := Robot&#123;name: <span class="string">&quot;Optimus Prime&quot;</span>&#125;</span><br><span class="line">r3 := Robot&#123;<span class="string">&quot;Optimus Prime&quot;</span>, <span class="number">100</span>&#125; <span class="comment">//如果不加字段名，值必须按定义顺序给出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new 函数</span></span><br><span class="line">r4 := <span class="built_in">new</span>(Robot)</span><br><span class="line">r4.name = <span class="string">&quot;Optimus Prime&quot;</span></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">r5 := &amp;Robot&#123;&#125;</span><br><span class="line">r5.name = r1.name</span><br></pre></td></tr></table></figure>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>go语言中的函数和方法是有区别的，方法必须有名字，必须隶属于某一个类型，这个类型通过方法声明中的接收者（receiver）声明定义。</p>
+<p>接收者声明位于关键字func和方法名称之间的圆括号中，必须包含确切的名称和类型字面量。</p>
+<ul>
+<li>类型就是当前方法所属的类型</li>
+<li>名称用于当前方法中引用它所属类型的值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Robot <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	height <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r Robot)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span>&#123;	</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;name: %s, height: %d&quot;</span>,r.name, r.height)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    r1 := Robot&#123;name: <span class="string">&quot;Optimus Prime&quot;</span>, height: <span class="number">100</span>&#125;</span><br><span class="line">	fmt.Println(r1)  <span class="comment">// 结果： name: Optimus Prime, height: 100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>从String()方法的接收者声明可以看出它隶属于Robot类型，接收者名称为r。</p>
+<h1 id="结构体内嵌：“继承”与“重写”"><a href="#结构体内嵌：“继承”与“重写”" class="headerlink" title="结构体内嵌：“继承”与“重写”"></a>结构体内嵌：“继承”与“重写”</h1><p>Go 语言中没有继承的概念，具体原因和理念可参考官网：<a target="_blank" rel="noopener" href="https://golang.org/doc/faq#inheritance">Why is there no type inheritance?</a></p>
+<p>go语言可以通过嵌入字段来实现类似继承的效果，来看下面的代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Skills <span class="keyword">struct</span> &#123;</span><br><span class="line">	speak <span class="keyword">string</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s Skills)</span> <span class="title">Speak</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(s.speak)	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Robot <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span> <span class="comment">// 姓名</span></span><br><span class="line">	height <span class="keyword">int</span> <span class="comment">// 身高</span></span><br><span class="line">	Skills</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	skill := Skills&#123;speak: <span class="string">&quot;hello !&quot;</span>&#125;</span><br><span class="line">	skill.Speak()</span><br><span class="line">	</span><br><span class="line">	robot := Robot&#123;</span><br><span class="line">		name: <span class="string">&quot;Optimus Prime&quot;</span>,</span><br><span class="line">		Skills: skill,</span><br><span class="line">	&#125;</span><br><span class="line">	robot.Speak()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>嵌入字段的方法集合会被合并到被嵌入类型的方法集合中。上面代码中，<code>robot.Speak()</code> 会调用嵌入字段Skills的Speak()方法，类似于继承了Skills的Speak()方法。执行结果如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello !</span><br><span class="line">hello !</span><br></pre></td></tr></table></figure>
+<p>下面添加一个Robot类型的Speak()方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r Robot)</span> <span class="title">Speak</span><span class="params">()</span></span> &#123;	</span><br><span class="line">	fmt.Printf(<span class="string">&quot;My name is %s, &quot;</span>,r.name)</span><br><span class="line">	r.Skills.Speak()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么再次执行，会执行哪个Speak()方法呢？答案是Robot类型的Speak()方法，嵌入字段Skills的Speak()方法被“屏蔽”了，也就是说，被嵌入类型的方法覆盖了嵌入字段的同名方法，这与方法重写类似。</p>
+<p>执行结果：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello !</span><br><span class="line">My name is Optimus Prime, hello !</span><br></pre></td></tr></table></figure>
+<p>可以通过链式的选择表达式，选择到嵌入字段的字段或方法，<code>r.Skills.Speak()</code> 就调用了嵌入字段Skills的Speak()方法。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>需要注意的是Go 语言虽然支持面向对象编程，但是它没有继承的概念，可以通过嵌入字段的方式来实现类似继承的功能，这种组合方法相比多重继承更加简洁。</p>
+<center><b>--THE END--<b></center>
+
+
+
+
 
     
     
     
 	  
 	  <div class="post-tags">              
-		  <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+		  <a href="/tags/Go/" rel="tag"><i class="fa fa-tag"></i> Go</a>
 	  </div>
       <br/>
       <div>
@@ -330,10 +350,10 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>测试题库：算法</a></p>
+  <p><span>本文标题:</span>Go语言基础语法（三）：结构体及方法</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/software-testing-points-for-algorithm/" title="测试题库：算法">https://hiyongz.github.io/posts/software-testing-points-for-algorithm/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/software-testing-points-for-algorithm/"  aria-label="复制成功！"></i></span>
+  <p><span>文章链接:</span><a href="/posts/golang-notes-for-struct-and-method/" title="Go语言基础语法（三）：结构体及方法">https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
 </div>
@@ -367,13 +387,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/software-testing-points-for-docker/" rel="prev" title="测试题库：docker容器">
-      <i class="fa fa-chevron-left"></i> 测试题库：docker容器
+    <a href="/posts/continuous-integration-for-blog-build-with-github-actions/" rel="prev" title="使用GitHub Actions实现Hexo博客自动发布">
+      <i class="fa fa-chevron-left"></i> 使用GitHub Actions实现Hexo博客自动发布
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/software-testing-points-for-continuous-integration/" rel="next" title="测试题库：持续集成">
-      测试题库：持续集成 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -433,6 +450,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">结构体类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%B5%8C%EF%BC%9A%E2%80%9C%E7%BB%A7%E6%89%BF%E2%80%9D%E4%B8%8E%E2%80%9C%E9%87%8D%E5%86%99%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">结构体内嵌：“继承”与“重写”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
