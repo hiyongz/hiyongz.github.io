@@ -31,43 +31,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>正则表达式实现跨行匹配</title>
-    <url>/posts/linux-regular-expression-for-multiple-lines/</url>
-    <content><![CDATA[<p>正则表达式（Regular expression）可用来检查文本中是否包含指定模式的字符串，通常是按行来处理（POSIX标准），因为<code>.</code>操作符通常不匹配换行符，如果要匹配多行怎么处理呢？本文介绍正则表达式跨行匹配实现方法。</p>
-<a id="more"></a>
-<h1 id="1-sed-命令删除多行"><a href="#1-sed-命令删除多行" class="headerlink" title="1. sed 命令删除多行"></a>1. sed 命令删除多行</h1><p>测试文档test.txt内容如下：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">start</span><br><span class="line">test1</span><br><span class="line">test2</span><br><span class="line">end</span><br></pre></td></tr></table></figure><br>删除 <code>start</code> 和 <code>end</code> 之间的内容<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 包括`start` 和 `end`</span></span><br><span class="line">sed -i <span class="string">&#x27;/start/,/end/d&#x27;</span> test.txt  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 不包括`start` 和 `end`</span></span><br><span class="line">sed -i <span class="string">&#x27;/start/,/end/&#123;&#123;//!d;&#125;;&#125;&#x27;</span> test.txt </span><br></pre></td></tr></table></figure></p>
-<h1 id="2-Python正则表达式匹配多行"><a href="#2-Python正则表达式匹配多行" class="headerlink" title="2. Python正则表达式匹配多行"></a>2. Python正则表达式匹配多行</h1><p>Python中匹配多行方法如下：</p>
-<h2 id="①-re-DOTALL-或者-re-S-参数"><a href="#①-re-DOTALL-或者-re-S-参数" class="headerlink" title="① re.DOTALL 或者 re.S 参数"></a>① <code>re.DOTALL</code> 或者 <code>re.S</code> 参数</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">data = <span class="string">&quot;1\nstart\ntest1\ntest2\nend\n2&quot;</span></span><br><span class="line"></span><br><span class="line">reg1 = <span class="string">r&quot;start.*end&quot;</span></span><br><span class="line">reg2 = <span class="string">r&quot;start(.*)end&quot;</span></span><br><span class="line">res1 = re.findall(reg1, data, flags=re.S)</span><br><span class="line">print(res1)</span><br><span class="line">res2 = re.findall(reg2, data, flags=re.DOTALL)</span><br><span class="line">print(res2)</span><br></pre></td></tr></table></figure>
-<p>执行结果：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="string">&#x27;start\ntest1\ntest2\nend&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;\ntest1\ntest2\n&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="②-表达式-n-r"><a href="#②-表达式-n-r" class="headerlink" title="② 表达式 (.|\n|\r)*"></a>② 表达式 <code>(.|\n|\r)*</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">data = <span class="string">&quot;1\nstart\ntest1\ntest2\nend\n2&quot;</span></span><br><span class="line"></span><br><span class="line">reg3 = <span class="string">r&quot;start((.|\n|\r)*)end&quot;</span></span><br><span class="line">res = re.findall(reg3, data)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
-<p>执行结果：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[(<span class="string">&#x27;\ntest1\ntest2\n&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>)]</span><br></pre></td></tr></table></figure>
-<h2 id="③-表达式-s-S"><a href="#③-表达式-s-S" class="headerlink" title="③ 表达式  [\s\S]*"></a>③ 表达式  <code>[\s\S]*</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">data = <span class="string">&quot;1\nstart\ntest1\ntest2\nend\n2&quot;</span></span><br><span class="line"></span><br><span class="line">reg4 = <span class="string">r&quot;start([\s\S]*)end&quot;</span></span><br><span class="line">res = re.findall(reg4, data)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
-<p>执行结果：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="string">&#x27;\ntest1\ntest2\n&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="④-表达式-s"><a href="#④-表达式-s" class="headerlink" title="④ 表达式 (?s)"></a>④ 表达式 <code>(?s)</code></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">data = <span class="string">&quot;1\nstart\ntest1\ntest2\nend\n2&quot;</span></span><br><span class="line"></span><br><span class="line">reg5 = <span class="string">r&quot;(?s)start(.*)end&quot;</span></span><br><span class="line">res = re.findall(reg5, data)</span><br><span class="line">print(res)</span><br><span class="line">reg5 = <span class="string">r&quot;(?s)start.*end&quot;</span></span><br><span class="line">res = re.findall(reg5, data)</span><br><span class="line">print(res)</span><br></pre></td></tr></table></figure>
-<p>执行结果：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="string">&#x27;\ntest1\ntest2\n&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;start\ntest1\ntest2\nend&#x27;</span>]</span><br></pre></td></tr></table></figure>
-<p><strong>参考：</strong></p>
-<ol>
-<li><a href="https://stackoverflow.com/questions/159118/how-do-i-match-any-character-across-multiple-lines-in-a-regular-expression">https://stackoverflow.com/questions/159118/how-do-i-match-any-character-across-multiple-lines-in-a-regular-expression</a></li>
-</ol>
-<center><b>--THE END--<b></center>
-
-]]></content>
-      <categories>
-        <category>编程语言</category>
-        <category>Linux</category>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>shell</tag>
-        <tag>正则表达式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Go语言基础语法（三）：结构体及方法</title>
     <url>/posts/golang-notes-for-struct-and-method/</url>
     <content><![CDATA[<p>结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。</p>
