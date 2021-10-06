@@ -9509,337 +9509,6 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
       </tags>
   </entry>
   <entry>
-    <title>TCP/IP协议架构介绍（二）：网络层</title>
-    <url>/posts/tcp-ip-protocol-architecture-model%20_internet-layer/</url>
-    <content><![CDATA[<p>网络层负责<strong>寻址</strong>和<strong>路由</strong>，还可以实现拥塞控制、网际互连等功能。数据的单位称为<strong>数据包（packet）-分组</strong>。</p>
-<p>分组指IP数据报既可以是一个IP数据报（IP datagram，也可以是IP数据报的一个片（fragment）。<strong>网络层协议</strong>的代表包括：IP、IPX、RIP、OSPF等<br><a id="more"></a></p>
-<h1 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h1><p>所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。要注意的是，IP是<strong>不可靠的协议</strong>，这是说，IP协议没有提供一种数据未传达以后的处理机制，这是上层协议（传输层）：TCP或UDP要做的事情。</p>
-<p><img src="IP及其配套协议.png" width="60%" height="60%" /></p>
-<h2 id="IP数据报首部"><a href="#IP数据报首部" class="headerlink" title="IP数据报首部"></a>IP数据报首部</h2><p><img src="IP数据报.png" width="60%" height="60%" /></p>
-<p>首部和数据报之和的长度，<strong>最大65535</strong>，不能超过MTU（即最大传送单元）   </p>
-<p><strong>版本</strong>：4位，IP协议的版本 </p>
-<p><strong>首部长度</strong>：4位（1个单位表示4个字节）  </p>
-<p><strong>区分服务</strong>：8位，报文的优先级，获得更好的服务（QoS应用）</p>
-<p><strong>总长度</strong>：16位</p>
-<p><strong>标识</strong>：计数器，产生数据报的标识（共有几个数据报）</p>
-<p><strong>标志</strong>：3位，前两位有意义（MF=1，有分片，MF=0，最后一个分片，DF=0，允许分片）</p>
-<p><strong>片偏移</strong>：13位，较长的分组在分片后，某片在原分组中的相对位置，以8个字节为偏移单位</p>
-<p><strong>生存时间</strong>：TTL，数据报在网络中可通过的路由器数的最大值（8位）</p>
-<p><strong>协议</strong>：8位，指出数据报使用何种协议</p>
-<p><strong>首部校验和</strong>：16位，只检查数据报首部，不检查数据部分</p>
-<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p><img src="IP地址分类.png" width="60%" height="60%" /></p>
-<p><strong>192.168.128.10/24</strong></p>
-<ul>
-<li><p>24表示从头数到第几为止属于网络标识（前面24位为网络标识）</p>
-<p>路由器仅根据目的主机所连接的网络号来转发分组（不考虑目的主机号）   </p>
-</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">IP地址</th>
-<th style="text-align:center">地址范围</th>
-<th style="text-align:center">私有地址</th>
-<th style="text-align:center">保留地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">A类</td>
-<td style="text-align:center">0.0.0.0 ~127.255.255.255</td>
-<td style="text-align:center">10.0.0.0~10.255.255.255</td>
-<td style="text-align:center">127.0.0.0~127.255.255.255</td>
-</tr>
-<tr>
-<td style="text-align:center">B类</td>
-<td style="text-align:center">128.0.0.0~191.255.255.255</td>
-<td style="text-align:center">172.16.0.0~172.31.255.255</td>
-<td style="text-align:center">169.254.0.0~169.254.255.255</td>
-</tr>
-<tr>
-<td style="text-align:center">C类</td>
-<td style="text-align:center">192.0.0.0~223.255.255.255</td>
-<td style="text-align:center">192.168.0.0~192.168.255.255</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">D类</td>
-<td style="text-align:center">224.0.0.0-239.255.255.255</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">E类</td>
-<td style="text-align:center">240.0.0.0~255.255.255.255</td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><p>私有地址就是在互联网上不使用，而被用在局域网络中的地址 </p>
-</li>
-<li><p><strong>单播地址</strong>：A类，B类和C类地址</p>
-</li>
-<li><p><strong>多播地址</strong>：D类地址</p>
-</li>
-<li><p>224.0.0.0代表组地址，用在IGMP查询报文中</p>
-</li>
-<li><p>224. 0.0.1 代表“该子网内的所有主机”，用在IGMP的查询报文</p>
-</li>
-<li><p>224.0.0.2 代表“该子网内的所有路由器组”</p>
-</li>
-<li><p>224.0.1.1 用作网络时间协议NTP</p>
-</li>
-<li><p>224.0.0.9 用作RIP-2</p>
-</li>
-<li><p>224.0.1.2 用作SGI公司的dogfight应用</p>
-</li>
-</ul>
-<p><strong>广播地址</strong></p>
-<ul>
-<li><p>主机地址全为1的IP地址为广播地址</p>
-</li>
-<li><p>本地广播：在本网络内的广播</p>
-</li>
-<li><p>直接广播：不同网络之间的广播</p>
-</li>
-</ul>
-<p><strong>特殊IP地址</strong></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">net-id</th>
-<th style="text-align:center">host-id</th>
-<th style="text-align:center">源地址使用</th>
-<th style="text-align:center">目的地址使用</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">可以</td>
-<td style="text-align:center">不可</td>
-<td style="text-align:center">本网络本主机(DHCP协议)</td>
-</tr>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">host-id</td>
-<td style="text-align:center">可以</td>
-<td style="text-align:center">不可</td>
-<td style="text-align:center">本网络的某个主机(host-id)</td>
-</tr>
-<tr>
-<td style="text-align:center">全1</td>
-<td style="text-align:center">全1</td>
-<td style="text-align:center">不可</td>
-<td style="text-align:center">可以</td>
-<td style="text-align:center">广播地址（在本网络广播，即路由器不转发）</td>
-</tr>
-<tr>
-<td style="text-align:center">net-id</td>
-<td style="text-align:center">全1</td>
-<td style="text-align:center">不可</td>
-<td style="text-align:center">可以</td>
-<td style="text-align:center">广播地址(对net-id上的所有主机进行广播)</td>
-</tr>
-<tr>
-<td style="text-align:center">127</td>
-<td style="text-align:center">非全0或全1的任何数</td>
-<td style="text-align:center">可以</td>
-<td style="text-align:center">可以</td>
-<td style="text-align:center">环回地址：本主机进程之间的通信</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><p>从主机号借用若干位作为子网号，两级IP地址变成了三级IP地址：网络号、子网号和主机号</p>
-<p>数据报到达路由器后，路由器通过子网掩码来确定子网，将数据转发到子网到达目的主机</p>
-<p><img src="IP地址及子网掩码.png" width="60%" height="60%" /></p>
-<p>为了便于查找路由表，不划分子网时也使用子网掩码</p>
-<ul>
-<li><p>A类地址默认子网掩码：255.0.0.0</p>
-</li>
-<li><p>B类地址默认子网掩码：255.255.0.0</p>
-</li>
-<li><p>C类地址默认子网掩码：255.255.255.0</p>
-</li>
-</ul>
-<h2 id="为什么同时需要IP地址和MAC地址？"><a href="#为什么同时需要IP地址和MAC地址？" class="headerlink" title="为什么同时需要IP地址和MAC地址？"></a>为什么同时需要IP地址和MAC地址？</h2><ul>
-<li>如果只用MAC地址，网桥在学习到MAC地址前，必须向全世界发送包，将会造成巨大的网络流量，并且表格难以维护，超过网桥所能承受的极限。</li>
-<li>如果只使用IP地址，网络中的路由器会隔断网络，在以太网发送IP包时，“下一个路由器”只能有MAC地址来确定，IP地址无法确定。</li>
-<li>IP地址的作用很重要的一部分就是<strong>屏蔽链路层的差异</strong>，因为它是一个逻辑地址，所以可以适应于多种链路；</li>
-<li>以太网这种<strong>链路层组网</strong>方式中，要通过mac地址来通信，其实ip协议完全可以运行于串口（通常运行slip或ppp等链路层协议）等其他形式的链路之上，这时并不需要一个mac地址</li>
-<li>在<strong>局域网</strong>中两台电脑之间传输数据包用MAC地址即可识别</li>
-<li>而<strong>通过路由器访问互联网</strong> ，传输数据包中的MAC地址就转成路由器的MAC地址。此时就要靠IP来识别，当我要<strong>换了一台路由器</strong>时候，只要我的IP地址不变，要跟我们传输数据的对象只要记住IP地址即可与我们通信，而不需记住我们的mac地址。</li>
-</ul>
-<h1 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h1><p>地址解析协议ARP（Address Resolution Protocol）</p>
-<p>ARP 是根据IP地址获取MAC地址的一种协议，  工作在数据链路层与网络层之间  </p>
-<p><img src="ARP.png" width="60%" height="60%" /></p>
-<ul>
-<li>IP地址和MAC地址都具有唯一性，只有IP地址具有<strong>层次性</strong>（网段）</li>
-<li>当主机要发送一个IP包的时候，会首先查一下自己的<strong>ARP高速缓存</strong>（就是一个IP-MAC地址对应表缓存）。</li>
-<li>如果查询的IP－MAC值对不存在，那么主机就向网络发送一个<strong>ARP协议广播包</strong>，这个广播包里面就有待查询的IP地址</li>
-<li>收到这份广播的包的所有主机都会<strong>查询自己的IP地址</strong></li>
-<li>如果收到广播包的某一个主机发现自己符合条件，那么就准备好一个<strong>包含自己的MAC地址</strong>的ARP包传送给发送ARP广播的主机。</li>
-</ul>
-<h2 id="ARP报文字段"><a href="#ARP报文字段" class="headerlink" title="ARP报文字段"></a>ARP报文字段</h2><p><img src="ARP字段.png" width="60%" height="60%" /></p>
-<ul>
-<li><p><strong>以太网帧类型</strong>：0x0806</p>
-</li>
-<li><p><strong>硬件类型</strong>：1表示以太网地址</p>
-</li>
-<li><p><strong>协议类型</strong>：表示要映射的协议地址类型。值为0x0800，表示IP地址</p>
-</li>
-<li><p><strong>硬件地址长度和协议地址长度</strong>分别指出硬件地址和协议地址的长度，以字节为单位。对于以太网上IP地址的ARP请求或应答来说，它们的值分别为6和4。</p>
-</li>
-<li><p><strong>操作字段：</strong>指出四种操作类型，ARP请求（值为1）、ARP应答（值为2）、RARP请求（值为3）和RARP应答（值为4）</p>
-</li>
-</ul>
-<p>以太网目的地址为全1的广播地址，以太网源地址和发送端以太网地址相同。</p>
-<h2 id="ARP请求响应报文"><a href="#ARP请求响应报文" class="headerlink" title="ARP请求响应报文"></a>ARP请求响应报文</h2><p><strong>1 ARP request(ARP请求)</strong></p>
-<p><img src="ARPrequest报文.png" width="60%" height="60%" /></p>
-<p><strong>2 ARP replay(ARP响应)</strong></p>
-<p><img src="ARPreplay报文.png" width="60%" height="60%" /></p>
-<h2 id="ARP缓存表"><a href="#ARP缓存表" class="headerlink" title="ARP缓存表"></a>ARP缓存表</h2><p>ARP是借助ARP请求与ARP响应两种类型的包确定MAC地址</p>
-<ul>
-<li>主机A为了获得主机B的MAC地址，起初要通过<strong>广播</strong>发送一个ARP请求包。这个包中包含了想要了解其MAC地址的主机IP地址。</li>
-<li>ARP的请求包会被这同一个链路上所有的主机和路由器解析。如果ARP请求包中的目标IP地址与自己的IP地址一致，那么这个节点就将自己的MAC地址塞入ARP响应包返回给主机A。</li>
-<li>由此，可以通过ARP从IP地址获得MAC地址，实现链路内的IP通信。</li>
-<li>如果每发送一个IP数据报都要进行一次ARP请求以确定MAC地址，那将会造成不必要的网络流量，因此，通常的做法是<strong>把获取到的MAC地址缓存一段时间</strong>。</li>
-<li>即把第一次通过ARP获取到的MAC地址作为IP对MAC的映射关系记忆到一个<strong>ARP缓存表</strong>中，下一次再向这个IP地址发送数据报时不需再重新发送ARP请求，而是直接使用这个缓存表当中的MAC地址进行数据报的发送。</li>
-<li>每执行一次ARP，其对应的缓存内容都会被清除。高速缓存中每一项的生存时间一般为<strong>20分钟</strong></li>
-</ul>
-<h1 id="RARP协议"><a href="#RARP协议" class="headerlink" title="RARP协议"></a>RARP协议</h1><p>逆地址解析协议PARP（Reverse Address Resolution Protocol）</p>
-<p>从MAC地址定位IP地址</p>
-<ul>
-<li>对于嵌入式设备，会遇到没有任何输入接口或无法通过DHCP动态获取IP地址的情况。需要RARP服务器来注册设备的MAC地址及其IP地址。</li>
-<li>RARP分组的格式与ARP分组基本一致。主要的差别是RARP<strong>请求或应答的帧类型代码为0x8035</strong>，<strong>而且RARP请求的操作代码为3，应答操作代码为4</strong>。</li>
-<li>ARP，RARP请求以广播方式传送，应答一般是单播(unicast)传送的</li>
-</ul>
-<h1 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h1><p>ICMP协议（Internet Control Message Protocol，网际控制报文协议）</p>
-<p>IP协议并不是一个可靠的协议，它不保证数据被送达，那么，自然的，<strong>保证数据送达</strong>的工作应该由其他的模块来完成。其中一个重要的模块就是<strong>ICMP(网络控制报文)协议</strong>。ICMP不是高层协议，而是IP层的协议。当传送IP数据包发生错误。比如主机不可达，路由不可达等等，ICMP协议将会把错误信息封包，然后传送回给主机。给主机一个处理错误的机会</p>
-<p>ICMP报文是在IP数据报内部被传输的</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ping www.baidu.com</span><br><span class="line">tracert www.baidu.com  # 侦测主机到目的主机之间所经路由情况</span><br></pre></td></tr></table></figure>
-<p>Ping发送一个ICMP，回声请求消息给目的地并报告是否收到所希望的ICMP echo （ICMP回声应答）。它是用来检查网络是否通畅或者网络连接速度的命令。<br>原理：利用网络上机器IP地址的唯一性，给目标IP地址发送一个数据包，再要求对方返回一个同样大小的数据包来确定两台网络机器是否连接相通，时延是多少。</p>
-<h2 id="ICMP报文"><a href="#ICMP报文" class="headerlink" title="ICMP报文"></a>ICMP报文</h2><p><img src="ICMP报文.png" width="60%" height="60%" /></p>
-<p>不同类型由报文中的类型字段和代码字段来共同决定</p>
-<p><strong>查询报文</strong><br>类型8 代码0：请求回显（ping请求）</p>
-<p><img src="ICMP响应报文.png" width="60%" height="60%" /></p>
-<p><strong>响应报文</strong><br>类型0 代码0：回显应答(Ping应答）<br><img src="ICMP响应报文2.png" width="60%" height="60%" /></p>
-<ul>
-<li><strong>0 回送应答（Echo Reply）</strong></li>
-<li>3 目标不可达（Destination Unreachable）</li>
-<li>4 原点抑制（Source Quench）</li>
-<li>5 重定向或改变路由（Redirect）</li>
-<li><strong>8 回送请求（Echo Request）</strong></li>
-<li>9 路由器公告（Router Advertisement）</li>
-<li>10 路由器请求（Router Solicitation）</li>
-<li><strong>11 超时（Time Exceeded）</strong></li>
-<li>17 地址子网请求（Address Mask Request）</li>
-<li>18 地址子网应答（Address Mask Reply）</li>
-</ul>
-<h1 id="IGMP协议"><a href="#IGMP协议" class="headerlink" title="IGMP协议"></a>IGMP协议</h1><p>IGMP协议（Internet Group Management Protocol，网际组管理协议），用于主机与路由器之间交互信息，IGMP有固定的报文长度，没有可选数据</p>
-<ul>
-<li>所有要加入组播组的主机和所有连接到有组播主机的子网中的路由器都需支持IGMP协议</li>
-<li>IGMP消息不能被路由器转发，只限制在本地网络内</li>
-<li>IGMP报文的TTL值始终为1</li>
-</ul>
-<h2 id="IGMP版本"><a href="#IGMP版本" class="headerlink" title="IGMP版本"></a>IGMP版本</h2><ul>
-<li>IGMP的版本目前有V1/V2/V3三种<br> RFC 1112 — IGMPv1<br> RFC 2236 — IGMPv2<br> RFC 3376 — IGMPv3</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th style="text-align:center">IGMPv1</th>
-<th style="text-align:center">IGMPv2</th>
-<th style="text-align:center">IGMPv3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>查询器选举</strong></td>
-<td style="text-align:center">依靠上层路由协议</td>
-<td style="text-align:center">自己选举</td>
-<td style="text-align:center">自己选举</td>
-</tr>
-<tr>
-<td><strong>成员离开方式</strong></td>
-<td style="text-align:center">默默离开</td>
-<td style="text-align:center">主动发出离开报文</td>
-<td style="text-align:center">主动发出离开报文</td>
-</tr>
-<tr>
-<td><strong>特定组查询</strong></td>
-<td style="text-align:center">不支持</td>
-<td style="text-align:center">支持</td>
-<td style="text-align:center">支持</td>
-</tr>
-<tr>
-<td><strong>指定源、组加入</strong></td>
-<td style="text-align:center">不支持</td>
-<td style="text-align:center">不支持</td>
-<td style="text-align:center">支持</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="多播路由器"><a href="#多播路由器" class="headerlink" title="多播路由器"></a>多播路由器</h2><p><strong>加入一个多播组</strong><br>一个主机通过组地址和接口来识别一个多播组。主机必须保留一个表，此表中包含所有至少含有一个进程的多播组以及多播组中的进程数量。</p>
-<p>多播路由器使用IGMP报文来记录与该路由器相连网络中组成员的变化情况。使用规则如下：<br>1)  当第一个进程<strong>加入一个组</strong>时，<strong>主机就发送一个IGMP报告</strong>。如果一个主机的多个进程加入同一组，只发送一个IGMP报告。这个报告被发送到进程加入组所在的同一接口上。</p>
-<p>2) 进程<strong>离开一个组</strong>时，主机<strong>不发送IGMP报告</strong>，即便是组中的最后一个进程离开。主机知道在确定的组中已不再有组成员后，在随后收到的IGMP查询中就不再发送报告报文。</p>
-<p>3) <strong>多播路由器定时发送IGMP查询</strong>来了解是否还有任何主机包含有属于多播组的进程。多播路由器必须向每个接口发送一个IGMP查询。因为路由器希望主机对它加入的每个多播组均发回一个报告，因此<strong>IGMP查询报文中的组地址被设置为0</strong>。</p>
-<p>4) <strong>主机通过发送IGMP报告来响应一个IGMP查询</strong>，对每个至少还包含一个进程的组均要发回IGMP报告。</p>
-<p>使用这些查询和报告报文，多播路由器对每个接口保持一个表，表中记录接口上至少还包含一个主机的多播组。当路由器收到要转发的多播数据报时，它只将该数据报转发到（使用相应的多播链路层地址）还拥有属于那个组主机的接口上。</p>
-<h2 id="IGMP-报文"><a href="#IGMP-报文" class="headerlink" title="IGMP 报文"></a>IGMP 报文</h2><p><img src="IGMP报文.png" width="60%" height="60%" /></p>
-<ul>
-<li>IGMP<strong>类型为1</strong>说明是由多播路由器发出的查询报文，<strong>为2</strong>说明是主机发出的报告报文。</li>
-<li>检验和的计算和ICMP协议相同。</li>
-<li>组地址为D类IP地址。在查询报文中组地址设置为0，在报告报文中组地址为要参加的组地址。</li>
-</ul>
-<p>IGMPv1的查询与响应过程如下：</p>
-<ul>
-<li>IGMP查询器周期性地向共享网段内所有主机以<strong>组播方式</strong>（目的地址为224.0.0.1）发送“成员关系<strong>查询</strong>”报文（组地址为0）。</li>
-<li>网络内所有主机都接收到该查询消息，如果某主机对任意组播组G感兴趣，则发送“成员关系<strong>报告</strong>”报文（其中携带组播组G的地址）来宣告自己将加入该组播组。</li>
-<li>经过查询/响应过程后，IGMP路由器了解到本网络内存在组播组G对应的接收者，生成（*，G）组播转发表项并依此作为组播信息的转发依据。（*表示组播组成员，G表示某个组播组）。</li>
-</ul>
-<h1 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h1><p>OSPF(Open Shortest Path First开放式最短路径优先）  </p>
-<ul>
-<li><p>是一个内部网关协议(Interior Gateway Protocol，简称IGP）   </p>
-</li>
-<li><p>是目前广泛使用的一种<strong>动态路由协议</strong>，属于链路状态路由协议，运作于自治系统内部    </p>
-</li>
-<li><p>著名的迪克斯加算法被用来计算最短路径树</p>
-</li>
-<li><p>OSPF支持负载均衡和基于服务类型的选路</p>
-</li>
-<li><p>也支持多种路由形式，如特定主机路由和子网路由等。   </p>
-</li>
-</ul>
-<h1 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h1><p><strong>RIP(Routing Information Protocol, 路由信息协议）</strong></p>
-<ul>
-<li><p>是一种内部网关协议（IGP），是一种<strong>动态路由选择协议</strong>，用于自治系统 (autonomous system,AS）   内的路由信息的传递</p>
-</li>
-<li><p>RIP协议基于距离矢量算法（DistanceVectorAlgorithms）</p>
-</li>
-</ul>
-<center><b>--THE END--<b></center>
-
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>协议</tag>
-        <tag>TCP/IP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>TCP/IP协议架构介绍（一）：网络接口层</title>
     <url>/posts/tcp-ip-protocol-architecture-model_link-layer/</url>
     <content><![CDATA[<p>TCP/IP协议架构是通信协议的统称，常被称为<strong>TCP/IP协议族</strong>，包括两个核心协议：<strong>TCP（传输控制协议）</strong>和<strong>IP（网际协议）</strong>，TCP/IP协议的开发始于20世纪60年代后期，早于OSI参考模型，由于TCP/IP模型更加简洁易用，目前大多采用TCP/IP模型。一共包括4层：应用层、传输层、网络层和网络接口层。</p>
@@ -10481,6 +10150,337 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <p><img src="DHCP续租失败.png" width="60%" height="60%" /></p>
 <p>(3) 没有IP地址缓存的情况<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">C:\Users\DELL&gt;ipconfig /renew</span><br></pre></td></tr></table></figure><br><img src="DHCP报文_没有IP地址缓存.png" width="60%" height="60%" /></p>
 <p>这是因为没有IP地址缓存<br>下图为有IP地址缓存的情况下，会有option 50这个字段<br><img src="DHCP报文_有IP地址缓存.png" width="60%" height="60%" /></p>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>协议</tag>
+        <tag>TCP/IP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TCP/IP协议架构介绍（二）：网络层</title>
+    <url>/posts/tcp-ip-protocol-architecture-model_internet-layer/</url>
+    <content><![CDATA[<p>网络层负责<strong>寻址</strong>和<strong>路由</strong>，还可以实现拥塞控制、网际互连等功能。数据的单位称为<strong>数据包（packet）-分组</strong>。</p>
+<p>分组指IP数据报既可以是一个IP数据报（IP datagram，也可以是IP数据报的一个片（fragment）。<strong>网络层协议</strong>的代表包括：IP、IPX、RIP、OSPF等<br><a id="more"></a></p>
+<h1 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h1><p>所有的TCP，UDP，IMCP，IGMP的数据都以IP数据格式传输。要注意的是，IP是<strong>不可靠的协议</strong>，这是说，IP协议没有提供一种数据未传达以后的处理机制，这是上层协议（传输层）：TCP或UDP要做的事情。</p>
+<p><img src="IP及其配套协议.png" width="60%" height="60%" /></p>
+<h2 id="IP数据报首部"><a href="#IP数据报首部" class="headerlink" title="IP数据报首部"></a>IP数据报首部</h2><p><img src="IP数据报.png" width="60%" height="60%" /></p>
+<p>首部和数据报之和的长度，<strong>最大65535</strong>，不能超过MTU（即最大传送单元）   </p>
+<p><strong>版本</strong>：4位，IP协议的版本 </p>
+<p><strong>首部长度</strong>：4位（1个单位表示4个字节）  </p>
+<p><strong>区分服务</strong>：8位，报文的优先级，获得更好的服务（QoS应用）</p>
+<p><strong>总长度</strong>：16位</p>
+<p><strong>标识</strong>：计数器，产生数据报的标识（共有几个数据报）</p>
+<p><strong>标志</strong>：3位，前两位有意义（MF=1，有分片，MF=0，最后一个分片，DF=0，允许分片）</p>
+<p><strong>片偏移</strong>：13位，较长的分组在分片后，某片在原分组中的相对位置，以8个字节为偏移单位</p>
+<p><strong>生存时间</strong>：TTL，数据报在网络中可通过的路由器数的最大值（8位）</p>
+<p><strong>协议</strong>：8位，指出数据报使用何种协议</p>
+<p><strong>首部校验和</strong>：16位，只检查数据报首部，不检查数据部分</p>
+<h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p><img src="IP地址分类.png" width="60%" height="60%" /></p>
+<p><strong>192.168.128.10/24</strong></p>
+<ul>
+<li><p>24表示从头数到第几为止属于网络标识（前面24位为网络标识）</p>
+<p>路由器仅根据目的主机所连接的网络号来转发分组（不考虑目的主机号）   </p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">IP地址</th>
+<th style="text-align:center">地址范围</th>
+<th style="text-align:center">私有地址</th>
+<th style="text-align:center">保留地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A类</td>
+<td style="text-align:center">0.0.0.0 ~127.255.255.255</td>
+<td style="text-align:center">10.0.0.0~10.255.255.255</td>
+<td style="text-align:center">127.0.0.0~127.255.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">B类</td>
+<td style="text-align:center">128.0.0.0~191.255.255.255</td>
+<td style="text-align:center">172.16.0.0~172.31.255.255</td>
+<td style="text-align:center">169.254.0.0~169.254.255.255</td>
+</tr>
+<tr>
+<td style="text-align:center">C类</td>
+<td style="text-align:center">192.0.0.0~223.255.255.255</td>
+<td style="text-align:center">192.168.0.0~192.168.255.255</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">D类</td>
+<td style="text-align:center">224.0.0.0-239.255.255.255</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">E类</td>
+<td style="text-align:center">240.0.0.0~255.255.255.255</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>私有地址就是在互联网上不使用，而被用在局域网络中的地址 </p>
+</li>
+<li><p><strong>单播地址</strong>：A类，B类和C类地址</p>
+</li>
+<li><p><strong>多播地址</strong>：D类地址</p>
+</li>
+<li><p>224.0.0.0代表组地址，用在IGMP查询报文中</p>
+</li>
+<li><p>224. 0.0.1 代表“该子网内的所有主机”，用在IGMP的查询报文</p>
+</li>
+<li><p>224.0.0.2 代表“该子网内的所有路由器组”</p>
+</li>
+<li><p>224.0.1.1 用作网络时间协议NTP</p>
+</li>
+<li><p>224.0.0.9 用作RIP-2</p>
+</li>
+<li><p>224.0.1.2 用作SGI公司的dogfight应用</p>
+</li>
+</ul>
+<p><strong>广播地址</strong></p>
+<ul>
+<li><p>主机地址全为1的IP地址为广播地址</p>
+</li>
+<li><p>本地广播：在本网络内的广播</p>
+</li>
+<li><p>直接广播：不同网络之间的广播</p>
+</li>
+</ul>
+<p><strong>特殊IP地址</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">net-id</th>
+<th style="text-align:center">host-id</th>
+<th style="text-align:center">源地址使用</th>
+<th style="text-align:center">目的地址使用</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">不可</td>
+<td style="text-align:center">本网络本主机(DHCP协议)</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">host-id</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">不可</td>
+<td style="text-align:center">本网络的某个主机(host-id)</td>
+</tr>
+<tr>
+<td style="text-align:center">全1</td>
+<td style="text-align:center">全1</td>
+<td style="text-align:center">不可</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">广播地址（在本网络广播，即路由器不转发）</td>
+</tr>
+<tr>
+<td style="text-align:center">net-id</td>
+<td style="text-align:center">全1</td>
+<td style="text-align:center">不可</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">广播地址(对net-id上的所有主机进行广播)</td>
+</tr>
+<tr>
+<td style="text-align:center">127</td>
+<td style="text-align:center">非全0或全1的任何数</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">可以</td>
+<td style="text-align:center">环回地址：本主机进程之间的通信</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><p>从主机号借用若干位作为子网号，两级IP地址变成了三级IP地址：网络号、子网号和主机号</p>
+<p>数据报到达路由器后，路由器通过子网掩码来确定子网，将数据转发到子网到达目的主机</p>
+<p><img src="IP地址及子网掩码.png" width="60%" height="60%" /></p>
+<p>为了便于查找路由表，不划分子网时也使用子网掩码</p>
+<ul>
+<li><p>A类地址默认子网掩码：255.0.0.0</p>
+</li>
+<li><p>B类地址默认子网掩码：255.255.0.0</p>
+</li>
+<li><p>C类地址默认子网掩码：255.255.255.0</p>
+</li>
+</ul>
+<h2 id="为什么同时需要IP地址和MAC地址？"><a href="#为什么同时需要IP地址和MAC地址？" class="headerlink" title="为什么同时需要IP地址和MAC地址？"></a>为什么同时需要IP地址和MAC地址？</h2><ul>
+<li>如果只用MAC地址，网桥在学习到MAC地址前，必须向全世界发送包，将会造成巨大的网络流量，并且表格难以维护，超过网桥所能承受的极限。</li>
+<li>如果只使用IP地址，网络中的路由器会隔断网络，在以太网发送IP包时，“下一个路由器”只能有MAC地址来确定，IP地址无法确定。</li>
+<li>IP地址的作用很重要的一部分就是<strong>屏蔽链路层的差异</strong>，因为它是一个逻辑地址，所以可以适应于多种链路；</li>
+<li>以太网这种<strong>链路层组网</strong>方式中，要通过mac地址来通信，其实ip协议完全可以运行于串口（通常运行slip或ppp等链路层协议）等其他形式的链路之上，这时并不需要一个mac地址</li>
+<li>在<strong>局域网</strong>中两台电脑之间传输数据包用MAC地址即可识别</li>
+<li>而<strong>通过路由器访问互联网</strong> ，传输数据包中的MAC地址就转成路由器的MAC地址。此时就要靠IP来识别，当我要<strong>换了一台路由器</strong>时候，只要我的IP地址不变，要跟我们传输数据的对象只要记住IP地址即可与我们通信，而不需记住我们的mac地址。</li>
+</ul>
+<h1 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h1><p>地址解析协议ARP（Address Resolution Protocol）</p>
+<p>ARP 是根据IP地址获取MAC地址的一种协议，  工作在数据链路层与网络层之间  </p>
+<p><img src="ARP.png" width="60%" height="60%" /></p>
+<ul>
+<li>IP地址和MAC地址都具有唯一性，只有IP地址具有<strong>层次性</strong>（网段）</li>
+<li>当主机要发送一个IP包的时候，会首先查一下自己的<strong>ARP高速缓存</strong>（就是一个IP-MAC地址对应表缓存）。</li>
+<li>如果查询的IP－MAC值对不存在，那么主机就向网络发送一个<strong>ARP协议广播包</strong>，这个广播包里面就有待查询的IP地址</li>
+<li>收到这份广播的包的所有主机都会<strong>查询自己的IP地址</strong></li>
+<li>如果收到广播包的某一个主机发现自己符合条件，那么就准备好一个<strong>包含自己的MAC地址</strong>的ARP包传送给发送ARP广播的主机。</li>
+</ul>
+<h2 id="ARP报文字段"><a href="#ARP报文字段" class="headerlink" title="ARP报文字段"></a>ARP报文字段</h2><p><img src="ARP字段.png" width="60%" height="60%" /></p>
+<ul>
+<li><p><strong>以太网帧类型</strong>：0x0806</p>
+</li>
+<li><p><strong>硬件类型</strong>：1表示以太网地址</p>
+</li>
+<li><p><strong>协议类型</strong>：表示要映射的协议地址类型。值为0x0800，表示IP地址</p>
+</li>
+<li><p><strong>硬件地址长度和协议地址长度</strong>分别指出硬件地址和协议地址的长度，以字节为单位。对于以太网上IP地址的ARP请求或应答来说，它们的值分别为6和4。</p>
+</li>
+<li><p><strong>操作字段：</strong>指出四种操作类型，ARP请求（值为1）、ARP应答（值为2）、RARP请求（值为3）和RARP应答（值为4）</p>
+</li>
+</ul>
+<p>以太网目的地址为全1的广播地址，以太网源地址和发送端以太网地址相同。</p>
+<h2 id="ARP请求响应报文"><a href="#ARP请求响应报文" class="headerlink" title="ARP请求响应报文"></a>ARP请求响应报文</h2><p><strong>1 ARP request(ARP请求)</strong></p>
+<p><img src="ARPrequest报文.png" width="60%" height="60%" /></p>
+<p><strong>2 ARP replay(ARP响应)</strong></p>
+<p><img src="ARPreplay报文.png" width="60%" height="60%" /></p>
+<h2 id="ARP缓存表"><a href="#ARP缓存表" class="headerlink" title="ARP缓存表"></a>ARP缓存表</h2><p>ARP是借助ARP请求与ARP响应两种类型的包确定MAC地址</p>
+<ul>
+<li>主机A为了获得主机B的MAC地址，起初要通过<strong>广播</strong>发送一个ARP请求包。这个包中包含了想要了解其MAC地址的主机IP地址。</li>
+<li>ARP的请求包会被这同一个链路上所有的主机和路由器解析。如果ARP请求包中的目标IP地址与自己的IP地址一致，那么这个节点就将自己的MAC地址塞入ARP响应包返回给主机A。</li>
+<li>由此，可以通过ARP从IP地址获得MAC地址，实现链路内的IP通信。</li>
+<li>如果每发送一个IP数据报都要进行一次ARP请求以确定MAC地址，那将会造成不必要的网络流量，因此，通常的做法是<strong>把获取到的MAC地址缓存一段时间</strong>。</li>
+<li>即把第一次通过ARP获取到的MAC地址作为IP对MAC的映射关系记忆到一个<strong>ARP缓存表</strong>中，下一次再向这个IP地址发送数据报时不需再重新发送ARP请求，而是直接使用这个缓存表当中的MAC地址进行数据报的发送。</li>
+<li>每执行一次ARP，其对应的缓存内容都会被清除。高速缓存中每一项的生存时间一般为<strong>20分钟</strong></li>
+</ul>
+<h1 id="RARP协议"><a href="#RARP协议" class="headerlink" title="RARP协议"></a>RARP协议</h1><p>逆地址解析协议PARP（Reverse Address Resolution Protocol）</p>
+<p>从MAC地址定位IP地址</p>
+<ul>
+<li>对于嵌入式设备，会遇到没有任何输入接口或无法通过DHCP动态获取IP地址的情况。需要RARP服务器来注册设备的MAC地址及其IP地址。</li>
+<li>RARP分组的格式与ARP分组基本一致。主要的差别是RARP<strong>请求或应答的帧类型代码为0x8035</strong>，<strong>而且RARP请求的操作代码为3，应答操作代码为4</strong>。</li>
+<li>ARP，RARP请求以广播方式传送，应答一般是单播(unicast)传送的</li>
+</ul>
+<h1 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h1><p>ICMP协议（Internet Control Message Protocol，网际控制报文协议）</p>
+<p>IP协议并不是一个可靠的协议，它不保证数据被送达，那么，自然的，<strong>保证数据送达</strong>的工作应该由其他的模块来完成。其中一个重要的模块就是<strong>ICMP(网络控制报文)协议</strong>。ICMP不是高层协议，而是IP层的协议。当传送IP数据包发生错误。比如主机不可达，路由不可达等等，ICMP协议将会把错误信息封包，然后传送回给主机。给主机一个处理错误的机会</p>
+<p>ICMP报文是在IP数据报内部被传输的</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ping www.baidu.com</span><br><span class="line">tracert www.baidu.com  # 侦测主机到目的主机之间所经路由情况</span><br></pre></td></tr></table></figure>
+<p>Ping发送一个ICMP，回声请求消息给目的地并报告是否收到所希望的ICMP echo （ICMP回声应答）。它是用来检查网络是否通畅或者网络连接速度的命令。<br>原理：利用网络上机器IP地址的唯一性，给目标IP地址发送一个数据包，再要求对方返回一个同样大小的数据包来确定两台网络机器是否连接相通，时延是多少。</p>
+<h2 id="ICMP报文"><a href="#ICMP报文" class="headerlink" title="ICMP报文"></a>ICMP报文</h2><p><img src="ICMP报文.png" width="60%" height="60%" /></p>
+<p>不同类型由报文中的类型字段和代码字段来共同决定</p>
+<p><strong>查询报文</strong><br>类型8 代码0：请求回显（ping请求）</p>
+<p><img src="ICMP响应报文.png" width="60%" height="60%" /></p>
+<p><strong>响应报文</strong><br>类型0 代码0：回显应答(Ping应答）<br><img src="ICMP响应报文2.png" width="60%" height="60%" /></p>
+<ul>
+<li><strong>0 回送应答（Echo Reply）</strong></li>
+<li>3 目标不可达（Destination Unreachable）</li>
+<li>4 原点抑制（Source Quench）</li>
+<li>5 重定向或改变路由（Redirect）</li>
+<li><strong>8 回送请求（Echo Request）</strong></li>
+<li>9 路由器公告（Router Advertisement）</li>
+<li>10 路由器请求（Router Solicitation）</li>
+<li><strong>11 超时（Time Exceeded）</strong></li>
+<li>17 地址子网请求（Address Mask Request）</li>
+<li>18 地址子网应答（Address Mask Reply）</li>
+</ul>
+<h1 id="IGMP协议"><a href="#IGMP协议" class="headerlink" title="IGMP协议"></a>IGMP协议</h1><p>IGMP协议（Internet Group Management Protocol，网际组管理协议），用于主机与路由器之间交互信息，IGMP有固定的报文长度，没有可选数据</p>
+<ul>
+<li>所有要加入组播组的主机和所有连接到有组播主机的子网中的路由器都需支持IGMP协议</li>
+<li>IGMP消息不能被路由器转发，只限制在本地网络内</li>
+<li>IGMP报文的TTL值始终为1</li>
+</ul>
+<h2 id="IGMP版本"><a href="#IGMP版本" class="headerlink" title="IGMP版本"></a>IGMP版本</h2><ul>
+<li>IGMP的版本目前有V1/V2/V3三种<br> RFC 1112 — IGMPv1<br> RFC 2236 — IGMPv2<br> RFC 3376 — IGMPv3</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">IGMPv1</th>
+<th style="text-align:center">IGMPv2</th>
+<th style="text-align:center">IGMPv3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>查询器选举</strong></td>
+<td style="text-align:center">依靠上层路由协议</td>
+<td style="text-align:center">自己选举</td>
+<td style="text-align:center">自己选举</td>
+</tr>
+<tr>
+<td><strong>成员离开方式</strong></td>
+<td style="text-align:center">默默离开</td>
+<td style="text-align:center">主动发出离开报文</td>
+<td style="text-align:center">主动发出离开报文</td>
+</tr>
+<tr>
+<td><strong>特定组查询</strong></td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td><strong>指定源、组加入</strong></td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="多播路由器"><a href="#多播路由器" class="headerlink" title="多播路由器"></a>多播路由器</h2><p><strong>加入一个多播组</strong><br>一个主机通过组地址和接口来识别一个多播组。主机必须保留一个表，此表中包含所有至少含有一个进程的多播组以及多播组中的进程数量。</p>
+<p>多播路由器使用IGMP报文来记录与该路由器相连网络中组成员的变化情况。使用规则如下：<br>1)  当第一个进程<strong>加入一个组</strong>时，<strong>主机就发送一个IGMP报告</strong>。如果一个主机的多个进程加入同一组，只发送一个IGMP报告。这个报告被发送到进程加入组所在的同一接口上。</p>
+<p>2) 进程<strong>离开一个组</strong>时，主机<strong>不发送IGMP报告</strong>，即便是组中的最后一个进程离开。主机知道在确定的组中已不再有组成员后，在随后收到的IGMP查询中就不再发送报告报文。</p>
+<p>3) <strong>多播路由器定时发送IGMP查询</strong>来了解是否还有任何主机包含有属于多播组的进程。多播路由器必须向每个接口发送一个IGMP查询。因为路由器希望主机对它加入的每个多播组均发回一个报告，因此<strong>IGMP查询报文中的组地址被设置为0</strong>。</p>
+<p>4) <strong>主机通过发送IGMP报告来响应一个IGMP查询</strong>，对每个至少还包含一个进程的组均要发回IGMP报告。</p>
+<p>使用这些查询和报告报文，多播路由器对每个接口保持一个表，表中记录接口上至少还包含一个主机的多播组。当路由器收到要转发的多播数据报时，它只将该数据报转发到（使用相应的多播链路层地址）还拥有属于那个组主机的接口上。</p>
+<h2 id="IGMP-报文"><a href="#IGMP-报文" class="headerlink" title="IGMP 报文"></a>IGMP 报文</h2><p><img src="IGMP报文.png" width="60%" height="60%" /></p>
+<ul>
+<li>IGMP<strong>类型为1</strong>说明是由多播路由器发出的查询报文，<strong>为2</strong>说明是主机发出的报告报文。</li>
+<li>检验和的计算和ICMP协议相同。</li>
+<li>组地址为D类IP地址。在查询报文中组地址设置为0，在报告报文中组地址为要参加的组地址。</li>
+</ul>
+<p>IGMPv1的查询与响应过程如下：</p>
+<ul>
+<li>IGMP查询器周期性地向共享网段内所有主机以<strong>组播方式</strong>（目的地址为224.0.0.1）发送“成员关系<strong>查询</strong>”报文（组地址为0）。</li>
+<li>网络内所有主机都接收到该查询消息，如果某主机对任意组播组G感兴趣，则发送“成员关系<strong>报告</strong>”报文（其中携带组播组G的地址）来宣告自己将加入该组播组。</li>
+<li>经过查询/响应过程后，IGMP路由器了解到本网络内存在组播组G对应的接收者，生成（*，G）组播转发表项并依此作为组播信息的转发依据。（*表示组播组成员，G表示某个组播组）。</li>
+</ul>
+<h1 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h1><p>OSPF(Open Shortest Path First开放式最短路径优先）  </p>
+<ul>
+<li><p>是一个内部网关协议(Interior Gateway Protocol，简称IGP）   </p>
+</li>
+<li><p>是目前广泛使用的一种<strong>动态路由协议</strong>，属于链路状态路由协议，运作于自治系统内部    </p>
+</li>
+<li><p>著名的迪克斯加算法被用来计算最短路径树</p>
+</li>
+<li><p>OSPF支持负载均衡和基于服务类型的选路</p>
+</li>
+<li><p>也支持多种路由形式，如特定主机路由和子网路由等。   </p>
+</li>
+</ul>
+<h1 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h1><p><strong>RIP(Routing Information Protocol, 路由信息协议）</strong></p>
+<ul>
+<li><p>是一种内部网关协议（IGP），是一种<strong>动态路由选择协议</strong>，用于自治系统 (autonomous system,AS）   内的路由信息的传递</p>
+</li>
+<li><p>RIP协议基于距离矢量算法（DistanceVectorAlgorithms）</p>
+</li>
+</ul>
 <center><b>--THE END--<b></center>
 
 ]]></content>
