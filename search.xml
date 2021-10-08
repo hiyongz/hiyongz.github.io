@@ -31,6 +31,42 @@
 ]]></content>
   </entry>
   <entry>
+    <title>iOS APP�Զ�����class chain��λ����</title>
+    <url>/posts/app-testing-for-ios-location-with-classChain/</url>
+    <content><![CDATA[<p>��<a href="https://blog.csdn.net/u010698107/article/details/120318075">iOS APP�Զ�����predicate��λ</a>�н�����iOS APP��predicate��λ���������Ľ�����XPath�﷨�Ƚ����Ƶ�class chain��λ������</p>
+<a id="more"></a>
+<h1 id="class-chain-��λ"><a href="#class-chain-��λ" class="headerlink" title="class chain ��λ"></a>class chain ��λ</h1><p>class chain ��λ������<strong><a href="https://github.com/mykola-mokhnach">mykola-mokhnach</a></strong>��������XPath�Ƚ����ƣ�����ʵ�ֲַ��ѯ�������Ĳ�ѯ���ܸ��ߣ�ͨ����class chain��ѯӳ�䵽һϵ�е�XCUITest�����У��������ӽڵ㣬����XPath�����ݹ�ز�ѯ����UI����</p>
+<p>class chain ֧��Predicate�ַ���ƥ�䣬�������class chain ��λ������</p>
+<h2 id="���ӽڵ�����"><a href="#���ӽڵ�����" class="headerlink" title="���ӽڵ�����"></a>���ӽڵ�����</h2><p>ѡ�����Ԫ�أ�������XPath�﷨�еķ�б��<code>/</code>��</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">XCUIElementTypeWindow[`label BEGINSWITH <span class="string">&quot;text&quot;</span>`][-1] <span class="comment"># ѡ��label��foo��ͷ�����һ��</span></span><br><span class="line">XCUIElementTypeWindow/XCUIElementTypeButton[3] <span class="comment"># ѡ��window�Ķ���Ԫ��XCUIElementTypeButton�ĵ�3����������1��ʼ��</span></span><br><span class="line">XCUIElementTypeWindow/*[3]  <span class="comment"># ѡ��window�ĵ�3������Ԫ��</span></span><br><span class="line">XCUIElementTypeWindow <span class="comment"># ѡ�������Ӵ���</span></span><br><span class="line">XCUIElementTypeWindow[2] <span class="comment"># ѡ��ڶ�������</span></span><br><span class="line">XCUIElementTypeWindow[2]/XCUIElementTypeAny <span class="comment"># ѡ��ڶ����Ӵ��ڵ�������Ԫ��</span></span><br></pre></td></tr></table></figure>
+<h2 id="����ڵ�����"><a href="#����ڵ�����" class="headerlink" title="����ڵ�����"></a>����ڵ�����</h2><p>������XPath�﷨�е�˫��б��<code>//</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">**/XCUIElementTypeCell[`name BEGINSWITH <span class="string">&quot;A&quot;</span>`][-1]/XCUIElementTypeButton[10] <span class="comment"># ѡ��name��A��ͷ�����һ��CellԪ�صĵ�10����Ԫ��</span></span><br><span class="line">**/XCUIElementTypeCell[`name BEGINSWITH <span class="string">&quot;B&quot;</span>`] <span class="comment"># ѡ��name��B��ͷ������CellԪ��</span></span><br><span class="line">**/XCUIElementTypeCell[`name BEGINSWITH <span class="string">&quot;C&quot;</span>`]/XCUIElementTypeButton[10] <span class="comment"># ѡ��name��C��ͷ�ĵ�һ��CellԪ�صĵ�10����Ԫ��</span></span><br><span class="line">**/XCUIElementTypeCell[`name BEGINSWITH <span class="string">&quot;D&quot;</span>`]/**/XCUIElementTypeButton <span class="comment"># ѡ��name��D��ͷ�ĵ�һ��CellԪ�������к��Button</span></span><br></pre></td></tr></table></figure>
+<p>ʹ��class chain��λ����Ҫע�����¼��㣺</p>
+<ul>
+<li>Predicate�ַ���Ҫд���������У�����ʹ�÷����Ű�����</li>
+<li>Predicate����ʽӦ��д������ǰ��</li>
+</ul>
+<h1 id="class-chain��λʾ��"><a href="#class-chain��λʾ��" class="headerlink" title="class chain��λʾ��"></a>class chain��λʾ��</h1><p>ʹ��<a href="https://github.com/openatx/facebook-wda">facebook-wda</a>����Ԫ�ص��������</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = c.session(<span class="string">&#x27;com.apple.Preferences&#x27;</span>) <span class="comment"># ������</span></span><br><span class="line"></span><br><span class="line">s(classChain=<span class="string">&#x27;XCUIElementTypeWindow/**/XCUIElementTypeCell[`label BEGINSWITH &quot;��Ļ&quot;`]&#x27;</span>).click() <span class="comment"># �������Ļʹ��ʱ�䡿</span></span><br><span class="line">s(classChain=<span class="string">&#x27;**/XCUIElementTypeCell[`label BEGINSWITH &quot;��Ļ&quot;`]&#x27;</span>).click()</span><br><span class="line">s(classChain=<span class="string">&#x27;**/XCUIElementTypeTable/*[`name == &quot;֪ͨ&quot;`]&#x27;</span>).click() <span class="comment"># �����֪ͨ��</span></span><br><span class="line">s(classChain=<span class="string">&#x27;**/XCUIElementTypeCell[7]&#x27;</span>).click() <span class="comment"># �����֪ͨ��</span></span><br></pre></td></tr></table></figure>
+<p>����Ķ�λ���Ҳ����ʹ��XPath�﷨����Ӧ���£�<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s(xpath=<span class="string">&#x27;//XCUIElementTypeWindow//XCUIElementTypeCell[starts-with(@label,&quot;��Ļ&quot;)]&#x27;</span>).click()</span><br><span class="line">s(xpath=<span class="string">&#x27;//XCUIElementTypeCell[starts-with(@label,&quot;��Ļ&quot;)]&#x27;</span>).click()</span><br><span class="line">s(xpath=<span class="string">&#x27;//XCUIElementTypeTable/*[@name=&quot;֪ͨ&quot;]&#x27;</span>).click()</span><br><span class="line">s(xpath=<span class="string">&#x27;//XCUIElementTypeCell[7]&#x27;</span>).click()</span><br></pre></td></tr></table></figure></p>
+<p>XPath��λЧ�ʱ�class chain�ͣ�����ʹ��class chain�����ж�λ��</p>
+<p><strong>�ο��ĵ���</strong></p>
+<ol>
+<li><p><a href="https://github.com/facebookarchive/WebDriverAgent/wiki/Class-Chain-Queries-Construction-Rules">https://github.com/facebookarchive/WebDriverAgent/wiki/Class-Chain-Queries-Construction-Rules</a></p>
+</li>
+<li><p><a href="https://github.com/appium/appium-xcuitest-driver/pull/391">https://github.com/appium/appium-xcuitest-driver/pull/391</a></p>
+</li>
+</ol>
+<center><b>--THE END--<b></center>]]></content>
+      <categories>
+        <category>�Զ�������</category>
+        <category>App�Զ�������</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Go语言并发编程：互斥锁</title>
     <url>/posts/golang-concurrent-synchronization-for-mutex/</url>
     <content><![CDATA[<p>在并发编程中，多个Goroutine访问同一块内存资源时可能会出现竞态条件，我们需要在临界区中使用适当的同步操作来以避免竞态条件。Go 语言中提供了很多同步工具，本文将介绍互斥锁Mutex和读写锁RWMutex的使用方法。</p>
