@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/markdown-basic-syntax/wechat.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/markdown-basic-syntax/wechat.png">
 <meta property="article:published_time" content="2021-06-12T12:12:00.000Z">
-<meta property="article:modified_time" content="2021-10-08T14:24:59.258Z">
+<meta property="article:modified_time" content="2021-10-09T06:19:28.207Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
@@ -282,7 +282,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.9k</span>
+              <span>7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -633,9 +633,13 @@
 <li>与文本保持内联的部分</li>
 <li>存储在文件其他地方以使文本易于阅读的部分。</li>
 </ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">我的博客</span>][<span class="symbol">blog</span>] </span><br><span class="line">[<span class="symbol">blog</span>]:<span class="link">https://hiyongz.github.io/ &quot;我的博客&quot;</span></span><br></pre></td></tr></table></figure>
-<p>效果：<a href="https://hiyongz.github.io/" title="我的博客">我的博客</a></p>
-<h2 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h2><p>每一个标题都是一个锚点，和HTML的锚点（<code>#</code>）类似，比如我们 </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">blog</span>]:<span class="link">https://hiyongz.github.io/ &quot;我的博客&quot;</span></span><br><span class="line"></span><br><span class="line">[<span class="string">我的博客</span>][<span class="symbol">blog</span>] </span><br><span class="line"><span class="section"># 或者</span></span><br><span class="line">[<span class="string">blog</span>][<span class="symbol"></span>]</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<ul>
+<li><a href="https://hiyongz.github.io/" title="我的博客">我的博客</a></li>
+<li><a href="https://hiyongz.github.io/" title="我的博客">blog</a></li>
+</ul>
+<h2 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h2><p>每一个标题都是一个锚点，和HTML的锚点（<code>#</code>）类似，可以用它来实现页面内跳转。 </p>
 <div class="table-container">
 <table>
 <thead>
@@ -648,17 +652,22 @@
 <tbody>
 <tr>
 <td>markdown</td>
-<td><code>[目录](#目录)</code></td>
-<td><a href="#目录">目录</a></td>
+<td><code>[目录](#目录 &quot;悬停显示&quot;)</code></td>
+<td><a href="#目录" title="悬停显示">目录</a></td>
 </tr>
 <tr>
 <td>HTML</td>
-<td><code>&lt;a href=&quot;#目录&quot;&gt;目录&lt;/a&gt;</code></td>
-<td><a href="#目录">目录</a></td>
+<td><code>&lt;a href=&quot;#目录&quot; title=&quot;悬停显示&quot;&gt;目录&lt;/a&gt;</code></td>
+<td><a href="#目录" title="悬停显示">目录</a></td>
 </tr>
 </tbody>
 </table>
 </div>
+<blockquote>
+<p>其中title可以不用设置。</p>
+</blockquote>
+<p>也可以使用和参考链接一样的方式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[文章目录]</span>: #目录</span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[目录]</span><span class="selector-attr">[文章目录]</span></span><br><span class="line"><span class="selector-attr">[文章目录]</span><span class="selector-attr">[]</span></span><br></pre></td></tr></table></figure><br>效果：</p>
+<p><a href="#目录">目录</a><br><a href="#目录">文章目录</a></p>
 <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>语法：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">alt</span>](<span class="link">URL title</span>)</span><br></pre></td></tr></table></figure><br>alt和title对应HTML中的alt和title属性（都可省略）：</p>
 <ul>
 <li>alt表示图片显示失败时的替换文本</li>
@@ -1054,6 +1063,9 @@
 
 
 
+
+
+<p>[博客]: </p>
 
 
     
