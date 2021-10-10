@@ -80,7 +80,9 @@
 <p>设计动机选项的一种方法是对某种特定选择体系提出下列 4 个问题：谁使用？谁选择？谁掏钱？谁受益？</p>
 <p><strong>设法助推并使人们按照之前从未选择过的方向行事是一件好事。选项设计有时候就是帮助人们学到一些东西，从而使他们在未来做出更好的选择。</strong></p>
 <p>我们生活中遇到的大多数的选择其实都是由私人选择设计者（企业）或者公共选择设计者（政府）设计的，不管他们是为了自己的利益或者造福大众，我们受到影响是无可争议的。助推无处不在，极大地影响我们的决定。由于我们的精力有限，离不开他们提供的选择。助推者的道德和能力非常关键，他们提供的选择直接关系到客户的利益，因此选择设计的透明度是非常重要的，公开性原则是一种限制和实施助推的很好的原则，客户可以更清楚的了解提供服务的数量、质量以及需要支付的费用。比如最近美团因垄断被罚款事件，这是由于助推者的自利性，损害了人们的利益。</p>
-<center><b>--THE END--<b></center>]]></content>
+<center><b>--THE END--<b></center>
+
+]]></content>
       <categories>
         <category>阅读</category>
       </categories>
@@ -12470,12 +12472,65 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <p><img src="git8.png" alt="img"></p>
 <p>查看远程仓库和本地仓库之间的关系：</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ git remote show origin</span><br><span class="line">* remote origin</span><br><span class="line">  Fetch URL: https://github.com/hiyongz/PythonNotes.git</span><br><span class="line">  Push  URL: https://github.com/hiyongz/PythonNotes.git</span><br><span class="line">  HEAD branch: master</span><br><span class="line">  Remote branch:</span><br><span class="line">    master tracked</span><br><span class="line">  Local branch configured <span class="keyword">for</span> <span class="string">&#x27;git pull&#x27;</span>:</span><br><span class="line">    master merges with remote master</span><br><span class="line">  Local ref configured <span class="keyword">for</span> <span class="string">&#x27;git push&#x27;</span>:</span><br><span class="line">    master pushes to master (up to date)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="四、gitignore文件"><a href="#四、gitignore文件" class="headerlink" title="四、gitignore文件"></a>四、gitignore文件</h1><p>在使用Git管理仓库时，可能有些文件不需要进行版本管理，需要忽略的文件可以使用 <code>.gitignore</code> 文件来跟踪，该文件一般放在项目仓库的根目录下。</p>
+<p><code>.gitignore</code> 使用<a href="https://linux.die.net/man/7/glob">glob</a>规则来匹配文件路径，开始是在Unix系统中用来匹配文件路径的，使用通配符匹配路径，很多编程语言也实现了glob方法，比如Python的glob模块。下面举几个 <code>.gitignore</code> 语法示例：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">语法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">log</td>
+<td style="text-align:left">匹配名称为log的文件和目录，包括目录下的文件及子目录</td>
+</tr>
+<tr>
+<td style="text-align:center">log/</td>
+<td style="text-align:left">匹配名称为log的目录，包括目录下的文件及子目录</td>
+</tr>
+<tr>
+<td style="text-align:center">**/log</td>
+<td style="text-align:left">匹配名称为log的任何目录</td>
+</tr>
+<tr>
+<td style="text-align:center">**/log/test.log</td>
+<td style="text-align:left">匹配名称为log的目录下的test.log文件</td>
+</tr>
+<tr>
+<td style="text-align:center">*.log</td>
+<td style="text-align:left">匹配后缀为log的所有文件</td>
+</tr>
+<tr>
+<td style="text-align:center">/test.log</td>
+<td style="text-align:left">只匹配根目录下的test.log</td>
+</tr>
+<tr>
+<td style="text-align:center">test.log</td>
+<td style="text-align:left">匹配所有test.log文件</td>
+</tr>
+<tr>
+<td style="text-align:center">test?.log</td>
+<td style="text-align:left">匹配test开头，后面只有一个字符的log文件</td>
+</tr>
+<tr>
+<td style="text-align:center">test[0-9].log、test[a-z].log</td>
+<td style="text-align:left">test后为单个数字、字母的log文件</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>.gitignore</code> 文件使用<code>#</code> 来注释：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ignore all log</span></span><br><span class="line">*.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<h1 id="github访问问题"><a href="#github访问问题" class="headerlink" title="github访问问题"></a>github访问问题</h1><p>访问github经常不成功， 推荐一个代理工具dev-sidecar，地址为 <a href="https://gitee.com/docmirror/dev-sidecar">https://gitee.com/docmirror/dev-sidecar</a> 。使用方法参考说明文档。</p>
 <h1 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h1><h2 id="git-push报错"><a href="#git-push报错" class="headerlink" title="git push报错"></a>git push报错</h2><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">OpenSSL SSL_connect: Connection was reset in connection to github.com:443</span><br></pre></td></tr></table></figure>
 <p>解决：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ git config --global --<span class="built_in">unset</span> http.proxy</span><br></pre></td></tr></table></figure></p>
 <h2 id="git-clone报错"><a href="#git-clone报错" class="headerlink" title="git clone报错"></a>git clone报错</h2><p>报错信息：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">$ git clone https://github.com/hiyongz/GoProjects.git</span><br><span class="line">Cloning into &#x27;GoProjects&#x27;...</span><br><span class="line">fatal: unable to access &#x27;https://github.com/hiyongz/GoProjects.git/&#x27;: OpenSSL SSL_connect: Connection was reset in connection to github.com:443</span><br></pre></td></tr></table></figure></p>
 <p>解决方案：关闭ssl认证<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ git config --global http.sslVerify <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="token认证"><a href="#token认证" class="headerlink" title="token认证"></a>token认证</h2><p>2021.8.14更新：</p>
-<p>现在github去除了密码认证方式通过HTTPS访问GitHub，需要token认证。</p>
+<p>现在github去除了密码认证方式，通过HTTPS访问GitHub，需要token认证。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git pull</span><br><span class="line">remote: Support <span class="keyword">for</span> password authentication was removed on August 13, 2021. Please use a personal access token instead.</span><br><span class="line">remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ <span class="keyword">for</span> more information.</span><br><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/hiyongz/MyBlog.git/&#x27;</span>: The requested URL returned error: 403</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>个人token创建方法参考：<a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token">https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token</a></p>
 <p>生成个人token如下：</p>
@@ -12486,16 +12541,16 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git remote set-url origin https:&#x2F;&#x2F;github.com&#x2F;USERNAME&#x2F;REPOSITORY.git</span><br></pre></td></tr></table></figure>
 <p>查看是否设置凭证<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ git config credential.helper</span><br><span class="line">manager-core</span><br></pre></td></tr></table></figure><br>清除凭证管理：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> url=https://github.com/account | git credential reject</span><br></pre></td></tr></table></figure><br>account为你的github用户名。</p>
 <p>接下来的git操作如果要你输入用户名和密码，其中密码为前面获取的token值。</p>
-<p>参考：</p>
+<p><strong>参考：</strong></p>
 <ol>
+<li>git - 简明指南：<a href="http://rogerdudler.github.io/git-guide/index.zh.html">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
+<li>廖雪峰git 教程：<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></li>
 <li><a href="https://stackoverflow.com/questions/68775869/support-for-password-authentication-was-removed-please-use-a-personal-access-to">Support for password authentication was removed. Please use a personal access token instead</a></li>
 <li>清除凭证管理：<a href="https://git-scm.com/docs/gitfaq#http-reset-credentials">https://git-scm.com/docs/gitfaq#http-reset-credentials</a></li>
 </ol>
-<h1 id="四、参考教程"><a href="#四、参考教程" class="headerlink" title="四、参考教程"></a>四、参考教程</h1><ol>
-<li>git - 简明指南：<a href="http://rogerdudler.github.io/git-guide/index.zh.html">http://rogerdudler.github.io/git-guide/index.zh.html</a></li>
-<li>廖雪峰git 教程：<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></li>
-</ol>
-<center><b>--THE END--<b></center>]]></content>
+<center><b>--THE END--<b></center>
+
+]]></content>
       <categories>
         <category>版本管理</category>
       </categories>
