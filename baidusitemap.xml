@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%B9%BF%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E7%A9%BA%E9%97%B4%E5%92%8C%E6%97%B6%E9%97%B4/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-testing-technology/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/test-theory-for-white-box-testing/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -29,11 +41,7 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E5%B9%BF%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/%E6%97%B6%E9%97%B4%E7%AE%80%E5%8F%B2-%E7%A9%BA%E9%97%B4%E5%92%8C%E6%97%B6%E9%97%B4/</loc>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-software-develop-management/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -42,10 +50,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/test-theory-for-testing-platform/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/test-theory-for-testing-technology/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -58,10 +62,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/test-theory-for-black-box-testing/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/test-theory-for-software-develop-management/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -105,6 +105,18 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mayijinfu/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mysql/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-network/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -133,22 +145,6 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mayijinfu/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mobile-app-testing/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-mysql/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/selenium-browsers/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/selenium-grid-for-parallel-execute-script/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -166,10 +162,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/selenium-webelement-operate/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -197,6 +189,14 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/selenium-browsers/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -205,7 +205,35 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-passing-arguments-in-function/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-string-interning/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-reflection/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-string/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/pytest-plugin/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -265,30 +293,6 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-passing-arguments-in-function/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-string-interning/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-reflection/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-string/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/pytest-fixture/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -301,15 +305,11 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/pytest-plugin/</loc>
+    <loc>https://hiyongz.github.io/posts/pytest-allure-report/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/pytest-allure-report/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -333,26 +333,6 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-for-getopt/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-networking-management-guide/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-performance-command-guide/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-tools-for-samba/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/linux-vm-name-and-hostname/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -370,22 +350,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/markdown-basic-syntax/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-password-less-ssh-login-for-multiple-remote-servers/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -409,7 +373,43 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-for-getopt/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-networking-management-guide/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-performance-command-guide/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-tools-for-samba/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-password-less-ssh-login-for-multiple-remote-servers/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -457,11 +457,11 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/front-end-for-typora-css/</loc>
+    <loc>https://hiyongz.github.io/posts/git-generate-ssh-public-key-guide/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/git-generate-ssh-public-key-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/front-end-for-typora-css/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -481,6 +481,10 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -489,15 +493,7 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/container-docker-for-jenkins-install/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -513,11 +509,11 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
+    <loc>https://hiyongz.github.io/posts/container-docker-for-jenkins-install/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/appium-install-and-architecture/</loc>
+    <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -533,10 +529,6 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/appium-android-webview/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
     <loc>https://hiyongz.github.io/posts/appium-automatic-traversal-test-appcrawler/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -545,15 +537,23 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/appium-install-and-architecture/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/appium-android-webview/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/appium-adb/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -597,11 +597,11 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/api-test-curl-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/api-test-mitmproxy-guide/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
-    <loc>https://hiyongz.github.io/posts/api-test-mitmproxy-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/api-test-curl-guide/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
@@ -637,6 +637,14 @@
     <lastmod>2021-10-10</lastmod>
   </url>
   <url>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</loc>
+    <lastmod>2021-10-10</lastmod>
+  </url>
+  <url>
     <loc>https://hiyongz.github.io/posts/Python-Enhancement-Proposals/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
@@ -654,14 +662,6 @@
   </url>
   <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/</loc>
-    <lastmod>2021-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</loc>
     <lastmod>2021-10-10</lastmod>
   </url>
 </urlset> 
