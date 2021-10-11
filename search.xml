@@ -8701,7 +8701,8 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
   <entry>
     <title>Linux三剑客grep、awk和sed介绍</title>
     <url>/posts/linux-shell-programming-grep-sed-awk/</url>
-    <content><![CDATA[<p>grep，sed 和 awk是Linux/Unix 系统中常用的三个文本处理的命令行工具，称为文本处理三剑客。本文将简要介绍这三个命令并给出基本用法。<a id="more"></a></p>
+    <content><![CDATA[<p>grep，sed 和 awk是Linux/Unix 系统中常用的三个文本处理的命令行工具，称为文本处理三剑客。本文将简要介绍这三个命令的基本用法以及它们在Windows系统中的使用方法。</p>
+<a id="more"></a>
 <h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><p>在介绍这两个命令之前，有必要介绍一下Unix/Linux中管道（pipe）的概念。管道将一个命令/程序/进程的输出发送到另一个命令/程序/进程，以进行进一步处理。是一种进程间通信机制，使用管道符”|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。<br><img src="pipe.png" width="60%" height="60%" /></p>
 <p>管道实现了数据在多个命令之间传递，不需要创建临时文件来传递，它是单向的，数据通过管道从左向右流动。</p>
 <p>实例1：<br><code>cat test.txt | grep test1</code></p>
@@ -8835,6 +8836,7 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <li><code># :1</code> ：标记  t1</li>
 <li><code>;</code>：把不同的命令分开</li>
 </ul>
+<h1 id="在Windows中使用这三个命令"><a href="#在Windows中使用这三个命令" class="headerlink" title="在Windows中使用这三个命令"></a>在Windows中使用这三个命令</h1><p>在Windows系统中也可以使用这3个命令，然而，windows cmd不支持这3个命令，因此需要下载对应的exe文件，下面提供几种下载方法：</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
 <li>正则表达式30分钟入门教程：<a href="https://deerchao.cn/tutorials/regex/regex.htm">https://deerchao.cn/tutorials/regex/regex.htm</a></li>
 <li><a href="https://blog.csdn.net/u010698107/article/details/111568817">Python正则表达式</a></li>
