@@ -31,6 +31,38 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Go语言并发编程：sync.Once</title>
+    <url>/posts/golang-concurrent-synchronization-for-sync-once/</url>
+    <content><![CDATA[<p>sync.Once用于保证某个动作只被执行一次，可用于单例模式中，比如初始化配置。我们知道init()函数也只会执行一次，不过它是在main()函数之前执行，如果想要在代码执行过程中只运行某个动作一次，可以使用sync.Once，下面来介绍一下它的使用方法。</p>
+<a id="more"></a>
+<p>先来看下面的代码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">6</span></span><br><span class="line">	<span class="keyword">var</span> once sync.Once</span><br><span class="line"></span><br><span class="line">	add_one := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		num = num + <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	minus_one := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		num = num - <span class="number">1</span></span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">	once.Do(add_one)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;The num: %d\n&quot;</span>, num)</span><br><span class="line">	once.Do(minus_one)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;The num: %d\n&quot;</span>, num)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">The num: <span class="number">7</span></span><br><span class="line">The num: <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<p>sync.Once类型提供了一个Do方法，Do方法只接受一个参数，且参数类型必须是func() ，也就是没有参数声明和结果声明的函数。</p>
+<p>Do方法只会执行首次被调用时传入的那个函数，只执行一次，也不会执行其它函数。上面的例子中，即使传入的函数不同，也只会执行第一次传入的那个函数。如果有多个只执行一次的函数，需要为每一个函数分配一个sync.Once类型的值：<br><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> num = <span class="number">6</span></span><br><span class="line">	<span class="keyword">var</span> once1 sync.Once</span><br><span class="line">	<span class="keyword">var</span> once2 sync.Once</span><br><span class="line"></span><br><span class="line">	add_one := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		num = num + <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	minus_one := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		num = num - <span class="number">1</span></span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">	once1.Do(add_one)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;The num: %d\n&quot;</span>, num)</span><br><span class="line">	once2.Do(minus_one)</span><br><span class="line">	fmt.Printf(<span class="string">&quot;The num: %d\n&quot;</span>, num)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>sync.Once类型是一个结构体类型，一个是名为done的uint32类型字段，还有一个互斥锁m。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Once <span class="keyword">struct</span> &#123;</span><br><span class="line">	done <span class="keyword">uint32</span></span><br><span class="line">	m    Mutex</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>done字段的值只可能是0或者1，Do方法首次调用完成后，done的值就变为了1。done的值使用四个字节的uint32类型的原因是为了保证对它的操作是“原子操作”，通过调用atomic.LoadUint32函数获取它的值，如果为1，直接返回，不会执行函数。</p>
+<p>如果为0，Do方法会立即锁定字段m，如果这里不加锁，多个goroutine 同时执行到Do方法时判断都为0，则都会执行函数，所以Once是并发安全的。</p>
+<p>加锁之后，会再次检查done字段的值，如果满足条件，执行传入的函数，并用原子操作函数atomic.StoreUint32将done的值设置为1。</p>
+<p>下面是Once的源码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(o *Once)</span> <span class="title">Do</span><span class="params">(f <span class="keyword">func</span>()</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> atomic.LoadUint32(&amp;o.done) == <span class="number">0</span> &#123;</span><br><span class="line">		o.doSlow(f)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(o *Once)</span> <span class="title">doSlow</span><span class="params">(f <span class="keyword">func</span>()</span>)</span> &#123;</span><br><span class="line">	o.m.Lock()</span><br><span class="line">	<span class="keyword">defer</span> o.m.Unlock()</span><br><span class="line">	<span class="keyword">if</span> o.done == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> atomic.StoreUint32(&amp;o.done, <span class="number">1</span>)</span><br><span class="line">		f()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>源码非常简洁，和GoF 设计模式中的单例模式非常相似。</p>
+<center><b>--THE END--<b></center>
+
+
+
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>VBSscript实现后台运行Windows bat脚本</title>
     <url>/posts/windows-notes-for-running-a-bat-file-in-background/</url>
     <content><![CDATA[<p>VBScript 是Visual Basic 语言的轻量级版本，本文介绍使用VBS实现在后台运行bat脚本。</p>
