@@ -11548,14 +11548,11 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
     <content><![CDATA[<p>Android调试桥(ADB, Android Debug Bridge)是一个Android命令行工具，包含在SDK 平台工具包中，adb可以用于连接Android设备，或者模拟器，实现对设备的控制，比如安装和调试应用。和Appium一样，adb也是基于C/S架构实现的。<br><a id="more"></a></p>
 <h1 id="一、ADB运行原理"><a href="#一、ADB运行原理" class="headerlink" title="一、ADB运行原理"></a>一、ADB运行原理</h1><p>adb分为三个部分：PC上的adb client，adb server和手机（也可能是PC上的模拟器）上的adb daemon。这是一个<strong>多多连接</strong>的设计。即一台PC可以连接多个手机，一台手机也可以连接多个PC。<br><img src="adb.jpg" alt="img"></p>
 <ol>
-<li><strong>Client本质上就是Shell</strong>，用来发送命令给<strong>Server</strong>。发送命令时，首先检测PC上有没有启动Server，如果没有Server，则自动启动一个Server，绑定 TCP 的 5037 端口，然后将命令发送到Server，并不关心命令发送过去以后会怎样。</li>
-<li><strong>ADB Server</strong>：运行在PC上的后台程序，目的是检测USB接口何时连接或者移除设备。ADB Server维护着一个“已连接的设备的链表”，并且为每一个设备标记了一个状态：<strong>offline，bootloader，recovery或者online</strong>；Server一直在做一些循环和等待，，监听从 clients 发来的命令，协调client和Server还有daemon之间的通信。</li>
+<li><strong>Client本质上就是Shell</strong>，用来发送命令给<strong>Server</strong>。发送命令时，首先检测PC上有没有启动Server，如果没有Server，则自动启动一个Server，绑定 TCP 的 5037 端口，然后将命令发送到Server，并不关心命令发送过去以后会怎样。在终端输入adb 命令其实就是调用了client。</li>
 <li><strong>ADB Daemon</strong>：程序“adbd”作为一个<strong>后台进程</strong>在Android设备或模拟器系统中运行。它的作用是<u>连接ADB服务器</u>，并且为运行在主机上的客户端提供一些服务；</li>
+<li><strong>ADB Server</strong>：运行在PC上的后台程序，管理 client 和 adb daemon 之间的通信。目的是检测USB接口何时连接或者移除设备。ADB Server维护着一个“已连接的设备的链表”，并且为每一个设备标记了一个状态：<strong>offline，bootloader，recovery或者online</strong>；Server一直在做一些循环和等待，监听从 clients 发来的命令，协调client和Server还有daemon之间的通信。</li>
 </ol>
-<p>Client和Server之间通过<strong>TCP/IP</strong>通信，Server侦听本机的<strong>5037端口</strong>，Client试图去连接这个端口。基于ADB的工具有 DDMS 、monkey 测试等</p>
-<ul>
-<li>adb源码：<a href="https://android.googlesource.com/platform/system/core/+/refs/heads/android10-c2f2-release/adb/">https://android.googlesource.com/platform/system/core/+/refs/heads/android10-c2f2-release/adb/</a></li>
-</ul>
+<p>Client和Server之间通过<strong>TCP/IP</strong>通信，Server侦听本机的<strong>5037端口</strong>，Client试图去连接这个端口。基于ADB的工具有 DDMS 、monkey 测试等。（monkey使用可参考<a href="https://blog.csdn.net/u010698107/article/details/111437735">自动遍历测试之Monkey工具</a>）</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -nao | findstr 5037</span><br></pre></td></tr></table></figure>
 <p><img src="adb2.jpg" alt="img"></p>
 <h1 id="二、ADB常用命令"><a href="#二、ADB常用命令" class="headerlink" title="二、ADB常用命令"></a>二、ADB常用命令</h1><h2 id="1-adb-server启动和连接"><a href="#1-adb-server启动和连接" class="headerlink" title="1. adb server启动和连接"></a>1. adb server启动和连接</h2><ul>
@@ -11601,6 +11598,11 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <h1 id="三、Python获取ADB返回结果"><a href="#三、Python获取ADB返回结果" class="headerlink" title="三、Python获取ADB返回结果"></a>三、Python获取ADB返回结果</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cmd = <span class="string">&quot;adb shell pm list packages smarthome&quot;</span></span><br><span class="line">result = os.popen(cmd)</span><br><span class="line">f = result.read() <span class="comment">#result只能读取一次</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;smarthome&quot;</span> <span class="keyword">in</span> f:</span><br><span class="line">    print(f)</span><br></pre></td></tr></table></figure>
 <p>ADB获取手机时间<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">now_time_new</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># now_time_new = datetime.datetime.now().strftime(&#x27;%H:%M&#x27;)</span></span><br><span class="line">        <span class="comment"># print &quot;now_time_new&quot;,self.now_time_new</span></span><br><span class="line">        time_a=os.popen(<span class="string">&#x27;adb shell date &quot;+%Y-%m-%d+%H:%M:%S&quot;&#x27;</span>)</span><br><span class="line">        time_a=time_a.read()</span><br><span class="line">        time_a=time_a.strip()</span><br><span class="line">        dates=time_a.split(<span class="string">&#x27;+&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">        times=time_a.split(<span class="string">&#x27;+&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> (dates,times)</span><br></pre></td></tr></table></figure></p>
 <h1 id="四、常见问题"><a href="#四、常见问题" class="headerlink" title="四、常见问题"></a>四、常见问题</h1><p>没有运行模拟器，而<code>adb devices</code>显示多余的设备emulator-5576<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">C:\Users\DELL&gt;adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">emulator-5576   offline</span><br><span class="line">611DKBQC22SH2   device</span><br></pre></td></tr></table></figure><br>解决方法：<br>运行<code>adb kill-server</code><br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">C:\Users\DELL&gt;adb kill-server</span><br><span class="line"></span><br><span class="line">C:\Users\DELL&gt;adb devices</span><br><span class="line">* daemon not running. starting it now on port 5037 *</span><br><span class="line">* daemon started successfully *</span><br><span class="line">List of devices attached</span><br><span class="line">611DKBQC22SH2   device</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ol>
+<li>adb源码：<a href="https://android.googlesource.com/platform/system/core/+/refs/heads/android10-c2f2-release/adb/">https://android.googlesource.com/platform/system/core/+/refs/heads/android10-c2f2-release/adb/</a></li>
+<li>adb抓包：<a href="https://itimetraveler.github.io/2019/06/07/Android%20ADB%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/">https://itimetraveler.github.io/2019/06/07/Android%20ADB%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/</a></li>
+</ol>
 <center><b>--THE END--<b></center>
 
 ]]></content>
