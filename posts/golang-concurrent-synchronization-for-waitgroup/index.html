@@ -22,20 +22,20 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。">
+  <meta name="description" content="我们知道，在并发编程中，主要线程需要等待子线程运行结束后才能退出，go语言中，主 goroutine 等待其他 goroutine 运行结束可以使用通道来解决，具体实现可以参考文章Go语言并发编程：互斥锁中的例子。使用通道可能不是很简洁，本文介绍另一种方法，也就是sync包中的WaitGroup类型来等待 goroutine执行完成。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go语言基础语法（三）：结构体及方法">
-<meta property="og:url" content="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/index.html">
+<meta property="og:title" content="Go语言并发编程：WaitGroup">
+<meta property="og:url" content="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。">
+<meta property="og:description" content="我们知道，在并发编程中，主要线程需要等待子线程运行结束后才能退出，go语言中，主 goroutine 等待其他 goroutine 运行结束可以使用通道来解决，具体实现可以参考文章Go语言并发编程：互斥锁中的例子。使用通道可能不是很简洁，本文介绍另一种方法，也就是sync包中的WaitGroup类型来等待 goroutine执行完成。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-28T12:12:00.000Z">
+<meta property="article:published_time" content="2021-10-19T12:12:00.000Z">
 <meta property="article:modified_time" content="2021-10-19T12:15:11.223Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/">
+<link rel="canonical" href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Go语言基础语法（三）：结构体及方法 | HiYong</title>
+  <title>Go语言并发编程：WaitGroup | HiYong</title>
   
 
 
@@ -209,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
@@ -222,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Go语言基础语法（三）：结构体及方法
+          Go语言并发编程：WaitGroup
         </h1>
 
         <div class="post-meta">
@@ -236,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-28 12:12:00" itemprop="dateCreated datePublished" datetime="2021-09-28T12:12:00+00:00">2021-09-28</time>
+              <time title="创建时间：2021-10-19 12:12:00" itemprop="dateCreated datePublished" datetime="2021-10-19T12:12:00+00:00">2021-10-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,8 +268,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/golang-notes-for-struct-and-method/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/golang-notes-for-struct-and-method/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/golang-concurrent-synchronization-for-waitgroup/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/golang-concurrent-synchronization-for-waitgroup/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -298,33 +298,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>结构体类型可以用来保存不同类型的数据，也可以通过方法的形式来声明它的行为。本文将介绍go语言中的结构体和方法，以及“继承”的实现方法。</p>
+        <p>我们知道，在并发编程中，主要线程需要等待子线程运行结束后才能退出，go语言中，主 goroutine 等待其他 goroutine 运行结束可以使用通道来解决，具体实现可以参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/120248679">Go语言并发编程：互斥锁</a>中的例子。使用通道可能不是很简洁，本文介绍另一种方法，也就是sync包中的WaitGroup类型来等待 goroutine执行完成。</p>
 <a id="more"></a>
-<h1 id="结构体类型"><a href="#结构体类型" class="headerlink" title="结构体类型"></a>结构体类型</h1><p>结构体类型（struct）在go语言中具有重要地位，它是实现go语言面向对象编程的重要工具。go语言中没有类的概念，可以使用结构体实现类似的功能，传统的OOP（Object-Oriented Programming）思想中的继承在go中可以通过嵌入字段的方式实现。</p>
-<p>结构体的声明与定义：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用关键字 type 和 struct 定义名字为Person结构体</span></span><br><span class="line"><span class="keyword">type</span> Robot <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	height <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>初始化及赋值：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过var声明</span></span><br><span class="line"><span class="keyword">var</span> r1 Robot</span><br><span class="line">r1.name = <span class="string">&quot;Optimus Prime&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字面量直接赋值</span></span><br><span class="line">r2 := Robot&#123;name: <span class="string">&quot;Optimus Prime&quot;</span>&#125;</span><br><span class="line">r3 := Robot&#123;<span class="string">&quot;Optimus Prime&quot;</span>, <span class="number">100</span>&#125; <span class="comment">//如果不加字段名，值必须按定义顺序给出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// new 函数</span></span><br><span class="line">r4 := <span class="built_in">new</span>(Robot)</span><br><span class="line">r4.name = <span class="string">&quot;Optimus Prime&quot;</span></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line">r5 := &amp;Robot&#123;&#125;</span><br><span class="line">r5.name = r1.name</span><br></pre></td></tr></table></figure>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>go语言中的函数和方法是有区别的，方法必须有名字，必须隶属于某一个类型，这个类型通过方法声明中的接收者（receiver）声明定义。</p>
-<p>接收者声明位于关键字func和方法名称之间的圆括号中，必须包含确切的名称和类型字面量。</p>
+<p>sync.WaitGroup类型主要包括3个方法：</p>
 <ul>
-<li>类型就是当前方法所属的类型</li>
-<li>名称用于当前方法中引用它所属类型的值</li>
+<li>Add：用于需要等待的 goroutine 的数量</li>
+<li>Done：对计数器的值进行减一操作，一般在需要等待的goroutine运行完成之前执行这一操作，可以通过defer语句调用它</li>
+<li>Wait：用于阻塞当前的 goroutine，直到其所属值中的计数器归零</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Robot <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">	height <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r Robot)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span>&#123;	</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;name: %s, height: %d&quot;</span>,r.name, r.height)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    r1 := Robot&#123;name: <span class="string">&quot;Optimus Prime&quot;</span>, height: <span class="number">100</span>&#125;</span><br><span class="line">	fmt.Println(r1)  <span class="comment">// 结果： name: Optimus Prime, height: 100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>从String()方法的接收者声明可以看出它隶属于Robot类型，接收者名称为r。</p>
-<h1 id="结构体内嵌：“继承”与“重写”"><a href="#结构体内嵌：“继承”与“重写”" class="headerlink" title="结构体内嵌：“继承”与“重写”"></a>结构体内嵌：“继承”与“重写”</h1><p>Go 语言中没有继承的概念，具体原因和理念可参考官网：<a target="_blank" rel="noopener" href="https://golang.org/doc/faq#inheritance">Why is there no type inheritance?</a></p>
-<p>go语言可以通过嵌入字段来实现类似继承的效果，来看下面的代码：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Skills <span class="keyword">struct</span> &#123;</span><br><span class="line">	speak <span class="keyword">string</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s Skills)</span> <span class="title">Speak</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	fmt.Println(s.speak)	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Robot <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="keyword">string</span> <span class="comment">// 姓名</span></span><br><span class="line">	height <span class="keyword">int</span> <span class="comment">// 身高</span></span><br><span class="line">	Skills</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	skill := Skills&#123;speak: <span class="string">&quot;hello !&quot;</span>&#125;</span><br><span class="line">	skill.Speak()</span><br><span class="line">	</span><br><span class="line">	robot := Robot&#123;</span><br><span class="line">		name: <span class="string">&quot;Optimus Prime&quot;</span>,</span><br><span class="line">		Skills: skill,</span><br><span class="line">	&#125;</span><br><span class="line">	robot.Speak()</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>嵌入字段的方法集合会被合并到被嵌入类型的方法集合中。上面代码中，<code>robot.Speak()</code> 会调用嵌入字段Skills的Speak()方法，类似于继承了Skills的Speak()方法。执行结果如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello !</span><br><span class="line">hello !</span><br></pre></td></tr></table></figure>
-<p>下面添加一个Robot类型的Speak()方法：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r Robot)</span> <span class="title">Speak</span><span class="params">()</span></span> &#123;	</span><br><span class="line">	fmt.Printf(<span class="string">&quot;My name is %s, &quot;</span>,r.name)</span><br><span class="line">	r.Skills.Speak()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么再次执行，会执行哪个Speak()方法呢？答案是Robot类型的Speak()方法，嵌入字段Skills的Speak()方法被“屏蔽”了，也就是说，被嵌入类型的方法覆盖了嵌入字段的同名方法，这与方法重写类似。</p>
+<p>下面直接修改<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/120248679">Go语言并发编程：互斥锁</a>中的例子，使用WaitGroup来等待goroutine：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;flag&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    mutex   sync.Mutex</span><br><span class="line">    balance <span class="keyword">int</span></span><br><span class="line">    protecting <span class="keyword">uint</span>  <span class="comment">// 是否加锁</span></span><br><span class="line">    sign = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">10</span>) <span class="comment">//通道，用于等待所有goroutine</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line"></span><br><span class="line"><span class="comment">// 存钱</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">deposit</span><span class="params">(value <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> protecting == <span class="number">1</span> &#123;</span><br><span class="line">        mutex.Lock()</span><br><span class="line">        <span class="keyword">defer</span> mutex.Unlock()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">&quot;余额: %d\n&quot;</span>, balance)</span><br><span class="line">    balance += value</span><br><span class="line">    fmt.Printf(<span class="string">&quot;存 %d 后的余额: %d\n&quot;</span>, value, balance)</span><br><span class="line">    fmt.Println()</span><br><span class="line"></span><br><span class="line">    wg.Done()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取钱</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">withdraw</span><span class="params">(value <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> wg.Done()</span><br><span class="line">    <span class="keyword">if</span> protecting == <span class="number">1</span> &#123;</span><br><span class="line">        mutex.Lock()</span><br><span class="line">        <span class="keyword">defer</span> mutex.Unlock()</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;余额: %d\n&quot;</span>, balance)</span><br><span class="line">    balance -= value</span><br><span class="line">    fmt.Printf(<span class="string">&quot;取 %d 后的余额: %d\n&quot;</span>, value, balance)</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg.Add(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> withdraw(<span class="number">500</span>) <span class="comment">// 取500</span></span><br><span class="line">        <span class="keyword">go</span> deposit(<span class="number">500</span>)  <span class="comment">// 存500</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">&quot;当前余额: %d\n&quot;</span>, balance)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">    balance = <span class="number">1000</span> <span class="comment">// 初始账户余额为1000</span></span><br><span class="line">    flag.UintVar(&amp;protecting, <span class="string">&quot;protecting&quot;</span>, <span class="number">1</span>, <span class="string">&quot;是否加锁，0表示不加锁，1表示加锁&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>先声明了一个WaitGroup类型的全局变量wg。main方法中的wg.Add(10)表示有10个goroutine需要等待，wg.Wait()表示等待那10个goroutine执行结束。</p>
+<p>另外，WaitGroup值是可以被复用的，wg归0后，可以继续使用：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg.Add(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> deposit(<span class="number">500</span>)  <span class="comment">// 存500</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line"></span><br><span class="line">    time.Sleep(time.Duration(<span class="number">3</span>) * time.Second)</span><br><span class="line">    </span><br><span class="line">    wg.Add(<span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> withdraw(<span class="number">500</span>) <span class="comment">// 取500</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">&quot;当前余额: %d\n&quot;</span>, balance)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果你有多组任务，而这些任务需要串行执行，可以使用上面这种写法。</p>
+<p>比如实现按顺序存钱：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> deposit(<span class="number">500</span>+i)  <span class="comment">// 存500</span></span><br><span class="line">        wg.Wait()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">&quot;当前余额: %d\n&quot;</span>, balance)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行结果：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello !</span><br><span class="line">My name is Optimus Prime, hello !</span><br></pre></td></tr></table></figure>
-<p>可以通过链式的选择表达式，选择到嵌入字段的字段或方法，<code>r.Skills.Speak()</code> 就调用了嵌入字段Skills的Speak()方法。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>需要注意的是Go 语言虽然支持面向对象编程，但是它没有继承的概念，可以通过嵌入字段的方式来实现类似继承的功能，这种组合方法相比多重继承更加简洁。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">余额: <span class="number">1000</span></span><br><span class="line">存 <span class="number">500</span> 后的余额: <span class="number">1500</span></span><br><span class="line"></span><br><span class="line">余额: <span class="number">1500</span></span><br><span class="line">存 <span class="number">501</span> 后的余额: <span class="number">2001</span></span><br><span class="line"></span><br><span class="line">余额: <span class="number">2001</span></span><br><span class="line">存 <span class="number">502</span> 后的余额: <span class="number">2503</span></span><br><span class="line"></span><br><span class="line">余额: <span class="number">2503</span></span><br><span class="line">存 <span class="number">503</span> 后的余额: <span class="number">3006</span></span><br><span class="line"></span><br><span class="line">余额: <span class="number">3006</span></span><br><span class="line">存 <span class="number">504</span> 后的余额: <span class="number">3510</span></span><br><span class="line"></span><br><span class="line">当前余额: <span class="number">3510</span></span><br></pre></td></tr></table></figure>
 <center><b>--THE END--<b></center>
 
 
@@ -350,10 +339,10 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>Go语言基础语法（三）：结构体及方法</a></p>
+  <p><span>本文标题:</span>Go语言并发编程：WaitGroup</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/golang-notes-for-struct-and-method/" title="Go语言基础语法（三）：结构体及方法">https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"  aria-label="复制成功！"></i></span>
+  <p><span>文章链接:</span><a href="/posts/golang-concurrent-synchronization-for-waitgroup/" title="Go语言并发编程：WaitGroup">https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
 </div>
@@ -387,13 +376,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/continuous-integration-for-blog-build-with-github-actions/" rel="prev" title="使用GitHub Actions实现Hexo博客自动发布">
-      <i class="fa fa-chevron-left"></i> 使用GitHub Actions实现Hexo博客自动发布
+    <a href="/posts/app-testing-tools-for-facebook-wda/" rel="prev" title="使用facebook-wda进行iOS APP自动化测试">
+      <i class="fa fa-chevron-left"></i> 使用facebook-wda进行iOS APP自动化测试
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/golang-concurrent-synchronization-for-mutex/" rel="next" title="Go语言并发编程：互斥锁">
-      Go语言并发编程：互斥锁 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -453,7 +439,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">结构体类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%86%85%E5%B5%8C%EF%BC%9A%E2%80%9C%E7%BB%A7%E6%89%BF%E2%80%9D%E4%B8%8E%E2%80%9C%E9%87%8D%E5%86%99%E2%80%9D"><span class="nav-number">3.</span> <span class="nav-text">结构体内嵌：“继承”与“重写”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-10-18T23:44:17.967Z</updated>
+  <updated>2021-10-19T12:15:11.223Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Go语言并发编程：WaitGroup</title>
+    <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
+    <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
+    <published>2021-10-19T12:12:00.000Z</published>
+    <updated>2021-10-19T12:15:11.223Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们知道，在并发编程中，主要线程需要等待子线程运行结束后才能退出，go语言中，主 goroutine 等待其他 goroutine 运行结束可以使用通道来解决，具体实现可以参考文章&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/120248679&quot;&gt;Go语言并发编程：互斥锁&lt;/a&gt;中的例子。使用通道可能不是很简洁，本文介绍另一种方法，也就是sync包中的WaitGroup类型来等待 goroutine执行完成。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="Go" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/"/>
+    
+    
+      <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用facebook-wda进行iOS APP自动化测试</title>
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</id>
     <published>2021-10-16T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:17.967Z</updated>
+    <updated>2021-10-19T12:15:11.155Z</updated>
     
     <summary type="html">
     
@@ -46,7 +69,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/</id>
     <published>2021-10-14T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -69,7 +92,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</id>
     <published>2021-10-12T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.171Z</updated>
+    <updated>2021-10-19T12:15:11.319Z</updated>
     
     <summary type="html">
     
@@ -92,7 +115,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-nudge/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-nudge/</id>
     <published>2021-10-10T12:52:00.000Z</published>
-    <updated>2021-10-18T23:44:18.115Z</updated>
+    <updated>2021-10-19T12:15:11.275Z</updated>
     
     <summary type="html">
     
@@ -113,7 +136,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/</id>
     <published>2021-10-08T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:17.955Z</updated>
+    <updated>2021-10-19T12:15:11.143Z</updated>
     
     <summary type="html">
     
@@ -136,7 +159,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/</id>
     <published>2021-10-06T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -159,7 +182,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</id>
     <published>2021-09-28T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -182,7 +205,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/</id>
     <published>2021-09-26T22:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.003Z</updated>
+    <updated>2021-10-19T12:15:11.183Z</updated>
     
     <summary type="html">
     
@@ -211,7 +234,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</id>
     <published>2021-09-24T12:02:00.000Z</published>
-    <updated>2021-10-18T23:44:18.059Z</updated>
+    <updated>2021-10-19T12:15:11.227Z</updated>
     
     <summary type="html">
     
@@ -232,7 +255,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/</id>
     <published>2021-09-22T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -255,7 +278,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-the-winner-curse/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-the-winner-curse/</id>
     <published>2021-09-21T18:26:00.000Z</published>
-    <updated>2021-10-18T23:44:18.115Z</updated>
+    <updated>2021-10-19T12:15:11.275Z</updated>
     
     <summary type="html">
     
@@ -276,7 +299,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/</id>
     <published>2021-09-18T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.063Z</updated>
+    <updated>2021-10-19T12:15:11.227Z</updated>
     
     <summary type="html">
     
@@ -299,7 +322,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-predicate-locator/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-predicate-locator/</id>
     <published>2021-09-16T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:17.955Z</updated>
+    <updated>2021-10-19T12:15:11.143Z</updated>
     
     <summary type="html">
     
@@ -322,7 +345,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-channel-sync/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-channel-sync/</id>
     <published>2021-09-14T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -345,7 +368,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/</id>
     <published>2021-09-09T12:02:00.000Z</published>
-    <updated>2021-10-18T23:44:18.059Z</updated>
+    <updated>2021-10-19T12:15:11.227Z</updated>
     
     <summary type="html">
     
@@ -366,7 +389,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-string-concatenation/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-string-concatenation/</id>
     <published>2021-09-07T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -389,7 +412,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-programing2/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-programing2/</id>
     <published>2021-08-31T12:02:00.000Z</published>
-    <updated>2021-10-18T23:44:18.063Z</updated>
+    <updated>2021-10-19T12:15:11.227Z</updated>
     
     <summary type="html">
     
@@ -410,7 +433,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-basic-syntax-function/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-basic-syntax-function/</id>
     <published>2021-08-26T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.055Z</updated>
+    <updated>2021-10-19T12:15:11.223Z</updated>
     
     <summary type="html">
     
@@ -433,7 +456,7 @@
     <link href="https://hiyongz.github.io/posts/linux-tools-for-samba/"/>
     <id>https://hiyongz.github.io/posts/linux-tools-for-samba/</id>
     <published>2021-08-24T12:12:00.000Z</published>
-    <updated>2021-10-18T23:44:18.063Z</updated>
+    <updated>2021-10-19T12:15:11.231Z</updated>
     
     <summary type="html">
     
@@ -446,27 +469,6 @@
     
     
       <category term="samba" scheme="https://hiyongz.github.io/tags/samba/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记 | 神们自己</title>
-    <link href="https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/"/>
-    <id>https://hiyongz.github.io/posts/reading-notes-for-the-gods-themselves/</id>
-    <published>2021-08-22T18:26:00.000Z</published>
-    <updated>2021-10-18T23:44:18.115Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《神们自己》是艾萨克·阿西莫夫（Isaac Asimov）于1972年创作的科幻小说，获得了1972年星云奖最佳小说奖和1973年雨果奖最佳小说奖。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
