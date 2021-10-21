@@ -5304,6 +5304,8 @@
 </ol>
 <h1 id="windows计算器"><a href="#windows计算器" class="headerlink" title="windows计算器"></a>windows计算器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">calc</span><br></pre></td></tr></table></figure>
 <h1 id="打开记事本"><a href="#打开记事本" class="headerlink" title="打开记事本"></a>打开记事本</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">notepad</span><br></pre></td></tr></table></figure>
+<h1 id="打开系统属性窗口"><a href="#打开系统属性窗口" class="headerlink" title="打开系统属性窗口"></a>打开系统属性窗口</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysdm.cpl</span><br></pre></td></tr></table></figure>
+<p>打开系统属性窗口后，点击【高级】，可以打开【环境变量】设置系统环境变量</p>
 <h1 id="打开控制面板"><a href="#打开控制面板" class="headerlink" title="打开控制面板"></a>打开控制面板</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">control</span><br></pre></td></tr></table></figure>
 <h1 id="打开剪贴板"><a href="#打开剪贴板" class="headerlink" title="打开剪贴板"></a>打开剪贴板</h1><p>Win10：windows + v</p>
 <h1 id="打开屏幕键盘"><a href="#打开屏幕键盘" class="headerlink" title="打开屏幕键盘"></a>打开屏幕键盘</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">osk</span><br></pre></td></tr></table></figure>
