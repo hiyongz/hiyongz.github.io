@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-shell-file-command-guide/linux-shell-file.png">
 <meta property="article:published_time" content="2020-12-24T12:02:00.000Z">
-<meta property="article:modified_time" content="2021-10-21T10:53:10.898Z">
+<meta property="article:modified_time" content="2021-10-21T11:27:01.440Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary">
@@ -277,7 +277,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -350,11 +350,14 @@
 <li>打开终端，输入vi test.txt 回车，按a或i进入编辑模式<br>输入 TEST，然后按esc键退出编辑模式，输入 <code>:wq</code> 保存并退出。</li>
 </ul>
 <p><strong>方法二：echo命令法</strong>　　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追加</span></span><br><span class="line"><span class="built_in">echo</span> ‘TEST’ &gt;&gt; ./test.txt</span><br><span class="line"><span class="comment"># 覆盖</span></span><br><span class="line"><span class="built_in">echo</span> ‘TEST’ &gt; ./test.txt</span><br></pre></td></tr></table></figure><br><strong>方法三：cat命令法</strong>　　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; ./test.txt &lt;&lt;<span class="string">TEST</span></span><br></pre></td></tr></table></figure><br>结尾的TEST要顶格。 </p>
-<p><strong>方法四：cat编辑法</strong>　　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;&gt; ./test.txt</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法四：cat编辑法</strong>　　<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追加</span></span><br><span class="line">cat &gt;&gt; ./test.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 覆盖</span></span><br><span class="line">cat &gt; ./test.txt</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>回车后开始编辑输入内容：TEST</li>
-<li>按ctrl+d组合键结束编辑。</li>
+<li>回车后开始编辑输入内容：TEST，然后回车</li>
+<li>按<code>ctrl+d</code> 或者 <code>ctrl+c</code>组合键结束编辑。</li>
 </ul>
+<h1 id="清空文件内容"><a href="#清空文件内容" class="headerlink" title="清空文件内容"></a>清空文件内容</h1><p>下面介绍几种清空文件内容的方式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; test.txt</span><br><span class="line">: &gt; test.txt</span><br><span class="line">cat /dev/null &gt; test.txt</span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&quot;&quot;</span> &gt; test.txt</span><br></pre></td></tr></table></figure><br>也可以使用 <code>dd</code> 和 <code>truncate</code>命令来清空内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd of=test.txt count=0</span><br><span class="line">dd <span class="keyword">if</span>=/dev/null of=test.txt</span><br><span class="line">truncate -s 0 test.txt</span><br></pre></td></tr></table></figure><br>这两个命令可以用来生成指定大小的文件，具体使用方法可参考文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/118861439">Linux和Windows创建指定大小文件方法</a>。</p>
+<p>还可以使用 <code>sed</code> 命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i d test.txt</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;/^$/d&#x27;</span> test.txt <span class="comment"># 删除空行</span></span><br><span class="line">sed -i <span class="string">&#x27;s/ *//g&#x27;</span> test.txt <span class="comment"># 删除空格</span></span><br></pre></td></tr></table></figure>
 <h1 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h1><p>用于查找文件，基本用法：<code>find path -name‘xxx&#39;</code><br><code>find / -name jenkins</code>：查找所有目录下的jenkins文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># find / -name jenkins</span></span><br><span class="line">/root/jenkins</span><br><span class="line">/var/lib/docker/overlay2/6cc1d9dcc70fed5dcc455ca4147a13f650724c2e8004a9c101b4e2130276241c/diff/usr/share/jenkins</span><br><span class="line">/var/lib/docker/overlay2/9b98446d8cf91c4c8da9d8eab5cd6366ef2cec266615c1fe6ad4f4faa84f25a1/diff/usr/share/jenkins</span><br><span class="line">/var/lib/docker/overlay2/f1f4123687b215d1eff46d989df6c9568be89c231a83ab6105dc22c136ccf24b/diff/usr/share/jenkins</span><br><span class="line">[root@iZ8vb54310gt89j8qct198Z ~]<span class="comment"># </span></span><br></pre></td></tr></table></figure><br>限制搜索深度</p>
 <ul>
 <li>-maxdepth</li>
@@ -509,7 +512,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">文件属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">基本终端操作命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">文件、目录操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">文件内容显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%91%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9"><span class="nav-number">5.</span> <span class="nav-text">向文件添加内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#find%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">find命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B"><span class="nav-number">7.</span> <span class="nav-text">文件解压</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#du-%E5%91%BD%E4%BB%A4%EF%BC%9A%E6%98%BE%E7%A4%BA%E7%9B%AE%E5%BD%95%E6%88%96%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">8.</span> <span class="nav-text">du 命令：显示目录或文件的大小</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">文件属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">基本终端操作命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E3%80%81%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">文件、目录操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%98%BE%E7%A4%BA"><span class="nav-number">4.</span> <span class="nav-text">文件内容显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%91%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%86%85%E5%AE%B9"><span class="nav-number">5.</span> <span class="nav-text">向文件添加内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%85%E7%A9%BA%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">6.</span> <span class="nav-text">清空文件内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#find%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">find命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B"><span class="nav-number">8.</span> <span class="nav-text">文件解压</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#du-%E5%91%BD%E4%BB%A4%EF%BC%9A%E6%98%BE%E7%A4%BA%E7%9B%AE%E5%BD%95%E6%88%96%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="nav-number">9.</span> <span class="nav-text">du 命令：显示目录或文件的大小</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -586,7 +589,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">698k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
