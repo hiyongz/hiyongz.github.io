@@ -31,6 +31,58 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest</title>
+    <url>/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</url>
+    <content><![CDATA[<p>在<a href="https://blog.csdn.net/u010698107/article/details/119492403">Windows上实现iOS APP自动化测试：tidevice + WDA + facebook-wda / appium</a>中介绍了使用阿里开源的tidevice 和 facebook-wda实现在Windows上进行iOS APP自动化测试。本文介绍如何使用tidevice + WDA +  airtest进行iOS APP自动化测试。</p>
+<a id="more"></a>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>本文使用的环境如下：</p>
+<ol>
+<li>Python 3.7.6，Python版本需要3.6+</li>
+<li>tidevice==0.4.14</li>
+<li>WebDriverAgent，下载最新版本进行编译安装：<a href="https://github.com/appium/WebDriverAgent">https://github.com/appium/WebDriverAgent</a></li>
+<li>airtest==1.2.2</li>
+<li>iOS 设备： iPhone12 mini（14.6）</li>
+<li>Windows系统版本：Windows 10 家庭中文版</li>
+</ol>
+<p>tidevice和WebDriverAgent介绍及安装可参考<a href="https://blog.csdn.net/u010698107/article/details/119492403">Windows上实现iOS APP自动化测试：tidevice + WDA + facebook-wda / appium</a>。</p>
+<p>使用USB连接设备，检测tidevice是否安装成功：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tidevice list</span><br></pre></td></tr></table></figure></p>
+<p>airtest安装可参考：<a href="https://blog.csdn.net/u010698107/article/details/118468631">App自动化测试工具Airtest</a></p>
+<h1 id="airtest-iOS-自动化"><a href="#airtest-iOS-自动化" class="headerlink" title="airtest iOS 自动化"></a>airtest iOS 自动化</h1><h2 id="1-启动WDA"><a href="#1-启动WDA" class="headerlink" title="1. 启动WDA"></a>1. 启动WDA</h2><p>获取设备的udid：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tidevice list</span><br></pre></td></tr></table></figure></p>
+<p>查看wda的bundle id：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tidevice applist</span><br></pre></td></tr></table></figure></p>
+<p>使用tidevice启动iOS设备上的WDA应用<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ tidevice -u [设备 udid] wdaproxy -B [wda 的 bundle Id] --port 8100</span><br></pre></td></tr></table></figure><br><img src="tidevice-wda-start-log.png" width="80%" height="80%" /></p>
+<p>如果你觉得每次进行自动化测试之前都要手动启动WDA比较麻烦，可以考虑使用vbs+bat的方式后台启动WDA。</p>
+<h2 id="2-airtest-连接设备"><a href="#2-airtest-连接设备" class="headerlink" title="2. airtest 连接设备"></a>2. airtest 连接设备</h2><p>如果要使用airtest IDE来编写自动化测试脚本，先连接 iOS 设备。</p>
+<p>打开Airtest IDE，在右下角【连接iOS设备】中输入地址：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">http+usbmux://00008101-000255021E08001E</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">http://localhost:8100/</span><br></pre></td></tr></table></figure>
+<p><code>00008101-000255021E08001E</code> 是手机的udid，8100是使用tidevice启动WDA时设置的端口号。</p>
+<p><img src="airtest-ios-device-connect.png" width="80%" height="80%" /></p>
+<p><img src="airtest-ios-device.png" width="80%" height="80%" /></p>
+<p>可以使用init_device()或者connect_device()方法连接iOS设备：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http://localhost:8100/&quot;</span>)</span><br><span class="line"><span class="comment"># 方法2</span></span><br><span class="line">connect_device(<span class="string">&quot;ios:///http://127.0.0.1:8100&quot;</span>)</span><br><span class="line"><span class="comment"># 方法3</span></span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http+usbmux://00008101-000255021E08001E&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-airtest-自动化"><a href="#3-airtest-自动化" class="headerlink" title="3. airtest 自动化"></a>3. airtest 自动化</h2><p>连接上iOS设备后就可以编写测试用例了， airtest使用的是图像识别的方法进行元素操作，元素操作方法可参考文章 <a href="https://blog.csdn.net/u010698107/article/details/118468631">App自动化测试工具Airtest</a> 。</p>
+<p>下面是一个示例脚本：打开【设置】</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># @Time:    2021/9/26 13:55</span></span><br><span class="line"><span class="comment"># @File:    test_ios_airtest.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> airtest.core.api <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> airtest.report.report <span class="keyword">import</span> simple_report</span><br><span class="line"></span><br><span class="line"><span class="comment"># auto_setup(__file__, logdir=True, devices=[&quot;ios:///http://127.0.0.1:8100&quot;,])</span></span><br><span class="line">auto_setup(__file__, logdir=<span class="literal">True</span>)</span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http://localhost:8100/&quot;</span>)</span><br><span class="line"></span><br><span class="line">start_app(<span class="string">&quot;com.apple.Preferences&quot;</span>) <span class="comment"># 打开【设置】</span></span><br><span class="line">touch(Template(<span class="string">r&quot;tpl1632398524727.png&quot;</span>, record_pos=(-<span class="number">0.34</span>, <span class="number">0.236</span>), resolution=(<span class="number">1125</span>, <span class="number">2436</span>))) <span class="comment"># 点击</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># generate html report</span></span><br><span class="line">simple_report(__file__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="poco-iOS自动化"><a href="#poco-iOS自动化" class="headerlink" title="poco iOS自动化"></a>poco iOS自动化</h1><p>也可以使用poco进行UI元素操作，WDA启动和连接设备和前面介绍的【airtest iOS 自动化】一样。连接设备使用airtest提供的方法。</p>
+<p>UI 元素可通过在AirtestIDE的Poco 辅助窗查看，注意要选择iOS。</p>
+<p><img src="poco-ios-device-ui-inspector.png" width="80%" height="80%" /></p>
+<p>poco元素操作方法可参考文章 <a href="https://blog.csdn.net/u010698107/article/details/118468631">App自动化测试工具Airtest</a> 。</p>
+<p>使用AirtestProject进行APP自动化测试时，通常将airtest和poco结合起来使用，下面是一个示例脚本：打开【设置】，检查软件版本为14.8</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># @Time:    2021/9/26 13:56</span></span><br><span class="line"><span class="comment"># @File:    test_ios_poco.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> airtest.core.api <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> airtest.report.report <span class="keyword">import</span> simple_report</span><br><span class="line"><span class="keyword">from</span> poco.drivers.ios <span class="keyword">import</span> iosPoco</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接设备、初始化日志路径</span></span><br><span class="line">auto_setup(__file__, logdir=<span class="literal">True</span>)</span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http://localhost:8100/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开【设置】</span></span><br><span class="line">start_app(<span class="string">&quot;com.apple.Preferences&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化ios poco</span></span><br><span class="line">poco = iosPoco()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点击</span></span><br><span class="line">poco(<span class="string">&quot;通用&quot;</span>).click()</span><br><span class="line">poco(<span class="string">&quot;关于本机&quot;</span>).click()</span><br><span class="line"><span class="comment"># 断言</span></span><br><span class="line"><span class="keyword">assert</span> poco(<span class="string">&#x27;软件版本&#x27;</span>).attr(<span class="string">&#x27;value&#x27;</span>) == <span class="string">&quot;14.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># generate html report</span></span><br><span class="line">simple_report(__file__)</span><br></pre></td></tr></table></figure>
+<p>查看生成的报告：</p>
+<p><img src="airtest-ios-testing-report.png" width="80%" height="80%" /></p>
+<p>另外说明一下，facebook-wda、airtest和poco这3个测试库可以混合使用。</p>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>App自动化测试</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Go语言并发编程：上下文Context</title>
     <url>/posts/golang-concurrent-synchronization-for-context/</url>
     <content><![CDATA[<p>context.Context类型是在 Go 1.7 版本引入到标准库的，上下文Context主要用来在goroutine之间传递截止日期、停止信号等上下文信息，并且它是并发安全的，可以控制多个goroutine，因此它可以很方便的用于并发控制和超时控制，标准库中的一些代码包也引入了Context参数，比如os/exec包、net包、database/sql包，等等。下面来介绍Context类型的使用方法。</p>
