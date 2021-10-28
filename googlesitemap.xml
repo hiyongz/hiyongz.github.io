@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/about/index.html</loc>
-    
-    <lastmod>2021-10-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/books/index.html</loc>
     
     <lastmod>2021-10-28</lastmod>
@@ -87,6 +80,13 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/test-theory-for-white-box-testing/</loc>
+    
+    <lastmod>2021-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/about/index.html</loc>
     
     <lastmod>2021-10-28</lastmod>
     
@@ -744,6 +744,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
+    
+    <lastmod>2021-10-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</loc>
     
     <lastmod>2021-10-28</lastmod>
@@ -836,13 +843,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/linux-centos-configure-tutorials/</loc>
-    
-    <lastmod>2021-10-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
     
     <lastmod>2021-10-28</lastmod>
     
@@ -1157,14 +1157,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/</loc>
     
     <lastmod>2021-10-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</loc>
     
     <lastmod>2021-10-28</lastmod>
     
@@ -2398,14 +2398,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/bat/</loc>
+    <loc>https://hiyongz.github.io/tags/GitHub-Actions/</loc>
     <lastmod>2021-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/tags/GitHub-Actions/</loc>
+    <loc>https://hiyongz.github.io/tags/bat/</loc>
     <lastmod>2021-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
