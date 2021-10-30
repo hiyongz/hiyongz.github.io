@@ -22,20 +22,21 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+  <meta name="description" content="本文介绍使用bat脚本添加系统环境变量">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试题库：MySQL数据库">
-<meta property="og:url" content="https://hiyongz.github.io/posts/software-testing-points-for-mysql/index.html">
+<meta property="og:title" content="通过bat脚本配置系统环境变量">
+<meta property="og:url" content="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="本文介绍使用bat脚本添加系统环境变量">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-26T12:12:00.000Z">
-<meta property="article:modified_time" content="2021-10-30T13:08:03.311Z">
+<meta property="article:published_time" content="2021-10-30T08:12:00.000Z">
+<meta property="article:modified_time" content="2021-10-30T13:08:03.347Z">
 <meta property="article:author" content="HiYo">
-<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="bat">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/">
+<link rel="canonical" href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>测试题库：MySQL数据库 | HiYong</title>
+  <title>通过bat脚本配置系统环境变量 | HiYong</title>
   
 
 
@@ -209,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/software-testing-points-for-mysql/">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
@@ -222,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          测试题库：MySQL数据库
+          通过bat脚本配置系统环境变量
         </h1>
 
         <div class="post-meta">
@@ -236,7 +237,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-26 12:12:00" itemprop="dateCreated datePublished" datetime="2021-04-26T12:12:00+00:00">2021-04-26</time>
+              <time title="创建时间：2021-10-30 08:12:00" itemprop="dateCreated datePublished" datetime="2021-10-30T08:12:00+00:00">2021-10-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,15 +245,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">测试开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B5%8B%E8%AF%95%E9%A2%98%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">测试题库</span></a>
+                  <a href="/categories/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a>
                 </span>
             </span>
 
@@ -272,8 +265,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/software-testing-points-for-mysql/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/software-testing-points-for-mysql/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/windows-notes-for-environment-variables-setting/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/windows-notes-for-environment-variables-setting/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -283,7 +276,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -302,29 +295,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="f291e0555a72060c9ad98168481aef1450280ea90f75f8c1e78ee9b1e7b2db77">b63abfd0cc043585c7f59d942442ea6dbad3a4000ac292d5753d774d4588170e915b6ec05b6fcb9edf9fb9eefd8e5a67e2bf60078337208fea83780dff2ad6785ef94719ab4cde9f060547b03594f84d1e65178678558bdc5d174e59e1e53a62f082650dae71f7cd9c2c947f1a52cfeba80e93c8b5b5f297b23d64b60764285af6c36fe46e2774bd23c9f0af7d05dd2ec9b24663ed3563d9465eaa7e074d03ad68d71db0749f72ec9612382604ca5478126061e3009fbbd32acae68e1028e73a1928fe67ff41f06fccd9b10b4a6349bea534c0347ed6edf74ffa2ecf1b0ea02611a1049a46e9be05f3e249d78a0c6fc8fc6a614b0a78a7bdcf82fe15bf741b3d16defc3a41bc25d154cf57b35639effa12d1c87f49c1f703851ec6ee41428ead612dc556cdc78fd599e3b42191bc5984ceb5f51fd5cc0e53a1d2ad4d02726202b7b3af8f988f0f2f84c6c1995650fb1ec07e48003f03201c833d78a9e972b2cc4b31c2f9ed2e1e2fb8ab5b08f4aab1dc4a45682cfc4a5f6c21cf2e8f862f843c40c671d45c1076817d246a76d46bc947730c6ba7891077738b7c6512cb3d4c1afa9c88d4282815036e328acd7dfcfebe785a2a1b21db3616d56d8ab7655b6f8fc6125f24125f695d73d1200f89d849c168bab1da7a8cbd563531a3651b31ee3f9edaf754fcb609ec15c5dbbc7063b1237fb1097fd589b067d1a375627be0daa95fc8f3a2784deb9ba8195a8c95b6233d603a16193a90870439d6c2c12742839750ca1318b6e21cf7c8f115bc57a3d3bb5d3d03a381503c93c6b49c6f1130e744aec981f8c94328d1f2070f77ac3db964b418781fb16ab7d2900c8f0354f95d84b7a6b2a8f52c26b688a33a7c05d645a85fc843de1df7148318bf3c740633be63c1c85812eae3155e81e39152eee7c02dd7ded0fde3a7587c4c06d82d0c53ae8a9515d26a9bfaa214928e7c7d9ba00254eaa240eeb6951927fdddbd1032e4f2e676bd4a93cae7e43f087fa4e80886e6ddd1a4679739f54a1751fab7bc68caf7123bb3f8b09e9f0749f6f6447f1cc6a3ad545e6565ef4af033fed630729891cb24f000e7629f44b6c51bbeacf85edf77a4f53e759810b6c32a461359ceb02e39f85e1efa2bd3cd2039607df81117d31bbad9f6ea49f080003ac559e939fbb62b1e27959c3c8746f3895bec204671a56287ff8ca3149e272967733d1265ec22726f7bf83f683eb71ed3ce33981a02a53bc31456fc354ebec53f3815d8fe0385ce5997c57883e98735f0fb423d3739dde9bef5b5d8b4db91a28bd494d0f94a0743f488957b17bd2dc8e8e12808f154d9c1771d64926fdda79dcd3339299fbfe79ac5edba50888eb00968d4311d62cad7dd43cdeff7fa9b1210695de808a32569093a2f056b12ba6713d26244e4d6796862477bd5e35626d0ddcc11e2142a6536b3af2748ee4f65a231a65f946c260563cfe6f023adbd5cb5786145580bbf94b5f43600a4b5123723e17ca0d722138e605e6448449e746d62fac463f082ffbefadd44d7b30b9ea08e25c8d5efca68229809e83bb4a0decb956cb396cda331920f5d722baa8c10e00b74e1f81f080c1c2aa40ac1a8f9731583ebff8f9041218f042f383914874a0437e83b5b9ced4d1a4eb608080261aee7c61550f14e6aaac58dee0691fc078e71b4cac58e251c9e47bdff113383bcb9fbc9def10fee7c6d2e5d1745d73ce7a5fa82ad144554c6de00a302a99e99674e9e2f90f638662f4e29467ede385d6825da9761da8b6ce856c9af05d2fc9830693ef2721966eb4ad92239f6219f0e7a685e6168a46caa3d2ea94aa559ca1bc413943d7e189aa188e557398492148ec1569eb8ef401466ac6722bef2b28de1cc286ac195ed3fab045284ecbb646685ddfe989c2dddcfeaa767ec961e9ea1e60dce61050cf63d629156426eb4d8ce21cb77d31b9f55c4f0d34088d53fae2bc1d181198e66474891b33d5b5de9bf6be265b555028d67f37e407e02bc8c3d58f101272649f0037a965e4af59bbb5cb39d35a297237f60eb2e1bc362ceac9cc6ca0a226a245a58e9655216f98e4456b160e5055939b990634ddcd438ef3e644d0c046df77b310a3a677dcc4b3792551b00cba5c90fe9bd3b7858091a23479dc862dc62a4d9db7ae79d3d73a1fdf3a820ff68dbd636ab1735c099c91e79be9d00ad55838cee5838b4b8e4e0675b660ba55eb97df0bf65401d8195925e3da2bab15e2be1788d51cd25f16de507812609fdea1769bcb32e66eda484bcbc5dc703c4924698138052f696ba4d242d2f21bd6542732b98c47d78addb06e28cd886864d84b9ae1db0099700f1d2c779a5a20f6fe52ddfac1dfee4fa8b477a8b0acd4043474e5fda4997c54f1f5dbaac30a06b9d3bd15bb8b474be10c51d1ca3de60e0fef5975f076b08d8350fc446d7debcb11ccf9833babee0f5128b524762de439580d84462d0a47812cb308196fea83461f6140ce953425ebf45725eb2e4b477246bc73146f71778e31e31ee9c26a3517da1d8c7ed2dd10016de57712b1f2da5a28e03d79eb80b6b2fc17d941fa17b8e52865a32b9b7654b55e3252fef557cbe97dafec78ac81286021245932298a11faef9e381c04c17201dd083f96daa8b4e167be17325b368b75f6749904840eeec9f9c827cdddd9e0446312948938abb8e65a375b5ce4184bfc2cbeb908c369f702ce872d1baff75fbf4feeffe9f0095710d291aa17766dbb7c718f9c0c343df9409285bc9d13bd1b81e64cab23e20c2199630a69afabc7c61f1c7710ffbf5fe5c0eeb2603c2885c3369e247cb3161ff650a4c75f111d8db3f0520c15e39eb4599243acdcc0d6550824382a723f7068fa1742f7d6c30e00ba17e3fd6c6663332ff48d6dd46f13c9f9e350f2e97d7d5051bad326e2c012c84aef257e365b4398c2434259e21fb051f8ab1f038fae23ee91bc76b65ac8162a37fefade3fb27a29a0645458ea9fbe4ab6e8a2efd2d11d42ee63e37605b262ea2cacfa719b6fad9446cbce010469efd741f4763400dced3d2924edee17a702221d72d979c17fa60230caf99ef6d76e53ba443cadff936ab85c5ec15f6735910c6e05c6baf07d206f6e825afec3673b1f48a7c066728f3ab1a664a946df0a607a326f563d268566f3041bbcf60fc51dba0dc7f131aabb9d53296eaf99126152a5348992144a3ef69444ed4a7c495299d20f19e0b728d629f491f5caa0cbcd76dbc4fa9d7259eff449b4486a11c4415e5e01154b5a1df0bbbc77ea8b6498102f2e0b12aa4ed037a1f09c59544be256fa892cedaf259c0012224d6081b7aa5f9c4e69ef0da537b3bcf2cadd769d74831913d1c2a4a3afe33eac87aa978849daad86e669c94e6d9b5380c8b1e03385c8ada33acb0b8e5aa7806e4da8b92844b1c81673e7d987ad80dd4b93de651e8249ff54ebacd7469dad430d574f39d2902771910ffde1b411597313cb61329485fd8edb8d7043264225ccf4781fe64ddfa4a876947d6ea183c1dc13abd76d10b176c6d5df3d8f2730ec1210d97d38a1b8c976c53c46ba7c5aa8c5f99fcf02e38b5701d29aa7b812671ffcafb11df4db6fa520100d1658fd72dd09672b07ab3e93f404c79cb8fba366d867ccbcb6a65c75f99e4553d832aae04d5a2958861fd9faa6df94fd0b8fdf48ecd0053df5b51b77d019da19e008e998d8fbd3df455762726181789c34cd54071e518110bb568c75e9972121254831660b80a8db0e56e926de0151f2c532ea6405aa43e82b133b063a38ec089c7181c77319353248258560a47119fc07ecc495b35fbc8e156c72ec3a61610508bd9257a0273db4eab9826d5c429b1f0f2c16829ed3b38a6e654d5ee0d7771be10f34495d0214b0123d5576b7df91313481056221e86e70cb2b6dea53ab5e958d965014b834251ec87d03a084575f353455db8494c2f0f2166fb019a4ff64a438adb443d1d1eec5f5c95021d6278414ab79c1afc689e75d1f2da75f1079845728650c0fa7d33c4bdfc659eeeb855fcb0da3672e979c2bbde32a7492516b56e8969a837c61024c69982790444f49520f46d818aabc4eac7574eb3929958995fdc897d23d3c03009c81e20b2197f178df64da34418d6fae933ec8d3be378fa1f19730ebbf1229d9ebd0a808b6b2d69f5c7ad0a71077b60f8d2bf26cf6a1c8ff70cdb92a4fbeed30cc0d17b8f64f4f5b865c5bcc7859f9b0243242369aab3cdafa4af79969c525fae0c7afcedeb058f6b9ff8f7102e0e3ffefae414525d232c6a06a726a6ef4f7e8378107ab5c1df3897f85b0c7cfbfedbcc57e0d8615459f31758cba57ad5164a7bf1084f069828b3a1fb0811aa022e012874b4862a343cd896408f92ce92d40678062338353f6e0e2eaafd2bce0ad0cbc6fbce6de5009fa9a79fbe4a9d03299722aa5cd19a9c820644bfa906cc6578c7f097b3b890234ee9295b4f160f370c3dcb1dded69e0499b472e5dc2fac6c14d81a6a0214888bf9c1d5fec25844def6652135bc3ec6de382f209bee0d8539ea058ef99e0389c41c970a1f7aebf10b21a9a61185322726b1500aef52a42795900ce5331b0c73979b261881c505c5783f94ddaf9931418892df0cb0f512b85b5b19581cff2c0dfe677fde38ba79e4b1e45cfbcf70d847a2bd720741f038f0feffed27440b4997fe743d01b05c8ef45c2d9efd0f7a023ed4d92364a4bc40cb7913a12a68365fe81401cce24b6aacc63806dd431b884d918758c0448949ed062908784b43691d1513f1e8cdd379b97d9a0a3424507de8e6b842f4e2a98d748302fc2979570058939da72a439fff3547f0e665a6d528718026a5e4124d75f38e28b02af0672416d1b1e85bad534aa7014ccbcf9b959cb0d24cb204288ac1ecd1ffb9f7da35df892a846eff2f7fc478ba9990ade2a8e501abd854e7bb7a215233a583936ac02a739967164207225bc6f2c990e3eb86db0c9f07e49433e8d0cb823fe3ef4935d3fdc43b8aacf79765ba664878bed9a333b8f77fd60b9ffd825ab276e5a226ff08135fb39e1eac30ad3e5d88bd3812f9851854a5f302d0c49d8f4da15eeda16f437fc93533c5c95c1002e5f31682daca805c0de639130bfb9ac1f1c7813161875df6b3d4ed46b55b87658d791109e1dabe103a7208c0a3066a04d44411ff1c9e5edbb7e79fd409b92a3edebe8c38360d603463e6136e42014fdb663f8091400b064b82c59bf2ec3c1ca409e9ca7fcdd50736781feb9d591594fbb33ab0d61292ca069fda426a55a0ff4463bf47847fa0f878409d4a2de8ca2c71e82ffcc235f68fb6c8b41ce20c05f1411fe4bde4b380dc4cd7c4a791196dff62ad0050d5b210a8fca285d42437b5f358f28417aa3e194d6ae76e3826bc73f68418b446c4e3af6034bbb4e9bb20900a6852392b66c8c6eaab9b91ff4d4a88dc161963299863b61963a69a18d05add4890090203471bc35bf55a496b614a2b15150fae6f32fe5ccea7cf19b7aa8ababae49150b14df766fb00fdaaf86cdcb9dddd64961439babec15256b8984bd358d083a68a7baf8ee762dfa9506a0ba2cf5dfa578d331278e6d37dd851129855b56754d5c0889d04982ff5cbe774eb2961451e37c9c028157f3a77ce81a60e83133a0dcce3067d311bb7453b85547d4d3035761f6441818174630ca8ebc1539b6998eb7b36adad67f873ab90da98206fbbeb589ff69fc3f6f65d035a210c92083bfde80df8fc010b4316fe9366aba9e1a3da3e9a86c0675e6e428ee0e99357747cb857f09dd4e0961009dd9ecdc98153276d984386754f55898f3aef55b0eb5ef96d722138e943ebcdee359ec3adb07c28bb18e32a835eff7787caa1c3aafed8f3ff348fff2113d24f0b16b45ecd06f341d61bf43f464d45c9935b4cb42f152b27e42817435116cf08924cae8eb036dcdf1b356bab9408e9f8a8dd1943e40bcf8387b52eac612287febc9853c9231f26c6909b81f3bf79101765a958e19e2a05a063563f65281c8d956a7aedc916af41bb890511d8fb2df3e0575a88e83d808c435322335e65f2149f27adb969d21dc56cfa941077f4ef49e663044ea1388dd1cb19beb52d65643d88d7888046217517b18821a48d77089bc673108c9432b0b72cb1ee03f12267a6480ebb8a67b8462c6c5c2bd17d97eefd97bbb8b04dd1c489d706251fcd08d567f86d3c5436ff6e2fbaccfd9c2df028c6c47cfb5425447efb4336834a5ba01fc6060c1b795d1836dd5e1310b02caeeb923659e327045cb67edc0c4b9560eb0715791c125823f23a1ee33f461e873a5d6d59eb1fa5faf06a5fadf26689e91239f2b4fedc0b358a7df63a0e75dfd0c673e55f629551a489902dbbaecdceebefce2a04de40b9c97199a2ee875f30116801fca426274cf747d73e4b3867eaf81334acc881928500742693cb25c65993da14773fcfa5d151b342227aff5fce495a4e5ea56d5673495487bfb89f6a47b2e0ad9a9535d52554e5eab2216250852a5540914941a12caf8ed2c67e5b954ad9b5842d45a4082e3e1373abb540e5f443b14109e9d89ff3eac71444b44d38042755c0b5d8a00b4e232162dca5bce560ca0d2f4304684760dbeaee922f1d3d958fe9e2e13dc8a1e95543eb5e3ea297a9c7ac2fa38453cdfa4d3eb385b479c49da86b35488dbdb8ad9d5248db3c7783dbe231500334a621d1710682993d0abc3a7802b14b018067808cdf758d3b98ddce2df971aaf7abdce49b73afd6c1b9d32aa772b90ab6041fd5bc41379bbaeed7f3f5356234251a1aa8aaf9a1c45ccbd5020e4c3e7cb71e2c0d9eb845049d4f4728ab07577dcad47ab18cb81fcca3dd1707e704cceb97dc8b9ca7ab1c1b5eec0575a731b6a8ca6c8819e0857837575d72e7f9c2b0cf195a090b884bf339136c1a1904304eb1bc833541b3973f03b5dcd42f0949e305b7c470c9fc4a56ad6703a2218b2ccec8e29172042a5f2dfa1a022dd45f2d4fc0821b95fe407c34c140940eb599e2a5b124417bf9c3376d17a22f08779ef3e1497305035f52cbcb440eb4c07f92151181218b49f2e681d385303f9f3e6aca80fc8614fc6f6d89ad7cbd58fbc855e74d4bf0951db7e4ce981de634b3125f057bb3d38b5c7b7f735acf503610d65c475c57c6a1f95a86a3f8b74071bf3fb054fde447c10e257caccf681cc07097d0228fdbc14dbc40891ec7b0216ff871982c9782f4e7eaea8931780697543f1d897d5b0e5d5d06951da9690fcd291d3a47a6989a7c237c9203d90ffe8e2fafb7831790d018f69c2f17752c14345c8545a71f4bebb073f9700db63941e84a6f5517f89858c97a911f3b1d0256a704c8b36385601dbee75b62c37dff028a2d66f31f10a99df3b07fb2f91d941e62055940aceecc06b13b1235cde1411672de5519e37690a97843e92620e86489f47adc55812f8fd20da1f52ec70a6bdc8f8941dbad9d52e26fc57541def028b058976858bcfe8c692d6880ff668099318176fd42358ea918477beccca2095492289f8391d4edd5e3c01bdd229c761d2a50e68c890097b232edf0653246ee64f6dc4986d6a77f94374e18d1f1299b9451947af268fc926634dba104ce45bd14fdc7dc143f01046ba19b68b73c1b1b647f9928cc981c82c355c5181ebf19d2a27ed413c95beffe273a7d2ea41a1bc02d9085d4b3ec55a321caf67780724d9e430208ec19263ed36a79f192b7587eb25297904be730c5e2c11dc23bf46ef71b82966114249d53488775f7acf9da3f6d23f9053ae616a602f66e1a08cfb6771e1e50d3fec8f9e4073e138f5304e44ef12b1dde380bd3b0cd817805bb60487fbc1dca527f7cab849596ccf0a13fdba5d76702fbdcda489452ae34fa545748a4772c5c881214bdcb6b093eea53a1c6727b9c05d7bac0c447da238e9f1924ea1969b8f93582209cd9c1835d2547e4668b01166b3f6bdde36a12f3fef1bf036b4d84cc776a782f0e29770c556a7e5d2aa2d2584eb8da799bcb1f04bee658ce0c8869c3259694bc0ad51b5bf671631bbc84193cc1a22c9b2f2bd98e89488590aeaf654b28ced57354a2ed3af964c869e2c26092dc28c3fc3d38c98a97ba85fa619379d34c1c2c9b08a850d91ab30fc8783d4da28feb893166c2e0419f47a56efb2a15a307153e41ab58f526a8016c2cb9f22def0a8f9db40956237eca3b5096773877ff49a7d22403cdf7a151cde0b6b61dc6a1edce458ebde1da6b1f497b5e4968f7de6e3375f98cefaa3daec0daec789b82055bcc2c2b9353570d2abe437d27c2f28aac6d6d33504056e3a9fb2b9a4663f10a7c4a6b180801d50dbbf4205381456823c784035ba11469884cb877721ddade9e8f92c559bd2061fc180c5903984fc64bdd3041fd0a2a688eba3c9b075511624d30dcc4ea20df837cd779f3aa1f78c588e5cd285c2ee24731b5b981ee0d28ab089baff88b7e947827d257ba4bb8eb30924bfb20e3efc088d50d196e4c2be5a03521df232f18982649c3efa32e947b4212fcc64ec75df9499ec59ef4ea3613dcf0cea9012e3d53bc2e579de06bc033080292bf80eb3208dfdfc10be9d08fcb50f72d14fcb3ce15d5c01ca951cff63e9985eb4bc3d29e525b60df001f28d108207f5756f1963da8264e07e628f3238c0aa07612574894e0049731a2a0f6fa156b0420fef05aadd33301627330533f895446623b25a9bffc58b2f2b6976008c739a118509eb8dc0dd9fc99514d56fcfe2e0f5ed051229173d1e6f514dc804888563779dd0bb118e0ecf064184a3ff11d4fb8845770ee6a0763516dd002fc93db1a6731b02f3cdc3cc7742544d0dc0ee1b2f1ff6278a6e8bb5869f0ffaf164a0d4f6733353c4fca84f1da04de01aa5d71f18f364497ba8619168ae9729b7d2a96f78593cf870f2d261caeedb8f686707e6fbec2501c87c4dd41448bbe30e6712827ea6a8a79e80889034c21f83852e32145adcb1c71ec42c9df17241858bfd8f6ec3d208398295cc2246195ea873735f3b9dd2a6b24cef60aed2643539054372acfde96c2f7d121263bdf49a93bea8270dbacdc933e82e670b7ceade1a625d5584f1cb790453ed75916b982bf1b</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-xray">
-      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">Hey, password is required here.</span>
-      </label>
-      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>
-      </svg>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <p>本文介绍使用bat脚本添加系统环境变量</p>
+<a id="more"></a>
+<h2 id="添加PATH环境变量"><a href="#添加PATH环境变量" class="headerlink" title="添加PATH环境变量"></a>添加PATH环境变量</h2><p>添加PATH环境变量，如果已经存在则不添加。</p>
+<p>介绍2种方法来循环搜索路径是否已经存在：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> ---------------------------------------</span><br><span class="line"><span class="built_in">set</span> pan=%~d0</span><br><span class="line"><span class="built_in">set</span> filePath=%~p0 </span><br><span class="line"><span class="built_in">set</span> filePath=%pan%%filePath%</span><br><span class="line"><span class="built_in">echo</span> current path: %filePath%</span><br><span class="line"></span><br><span class="line">REM 添加PATH环境变量：如果已经存在则不添加</span><br><span class="line"><span class="built_in">echo</span> ---------------------------------------</span><br><span class="line">SET add_path=</span><br><span class="line"></span><br><span class="line">SET toAdd=D:\software\Nmap</span><br><span class="line">SET MYPATHCOPY=%PATH%</span><br><span class="line">call :search1</span><br><span class="line"><span class="built_in">echo</span> %add_path%</span><br><span class="line"></span><br><span class="line">SET toAdd=C:\Program Files\Go\bin</span><br><span class="line">SET MYPATHCOPY=%PATH%</span><br><span class="line">call :search2</span><br><span class="line"><span class="built_in">echo</span> %add_path%</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> add the path: %add_path%</span><br><span class="line">call <span class="built_in">set</span> xx=%Path%;%add_path%</span><br><span class="line">wmic ENVIRONMENT <span class="built_in">where</span> <span class="string">&quot;name=&#x27;Path&#x27; and username=&#x27;&lt;system&gt;&#x27;&quot;</span> <span class="built_in">set</span> VariableValue=<span class="string">&quot;%xx%&quot;</span></span><br><span class="line"></span><br><span class="line">pause</span><br><span class="line">REM TIMEOUT /T 10</span><br><span class="line"></span><br><span class="line">REM 方法1</span><br><span class="line">:search1</span><br><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;tokens=1* delims=;&quot;</span> %%a <span class="keyword">in</span> (<span class="string">&quot;%MYPATHCOPY%&quot;</span>) <span class="keyword">do</span> (</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&quot;%toAdd%&quot;</span>==<span class="string">&quot;%%a&quot;</span> (</span><br><span class="line">		goto :isFinded</span><br><span class="line">	)</span><br><span class="line">	<span class="built_in">set</span> MYPATHCOPY=%%b</span><br><span class="line">    goto :search1</span><br><span class="line">)</span><br><span class="line"><span class="built_in">set</span> add_path=%toAdd%;%add_path%</span><br><span class="line">goto :EOF</span><br><span class="line"></span><br><span class="line">REM 方法2</span><br><span class="line">:search2</span><br><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;delims=; tokens=1,2*&quot;</span> %%p <span class="keyword">in</span> (<span class="string">&quot;%MYPATHCOPY%&quot;</span>) <span class="keyword">do</span> (</span><br><span class="line">   REM @<span class="built_in">echo</span> %%~p</span><br><span class="line">   SET MYPATHCOPY=%%~q;%%~r</span><br><span class="line">   <span class="keyword">if</span> <span class="string">&quot;%toAdd%&quot;</span>==<span class="string">&quot;%%p&quot;</span> (</span><br><span class="line">        REM <span class="built_in">echo</span> %%p</span><br><span class="line">	    goto :isFinded</span><br><span class="line">    )</span><br><span class="line">	goto :search2</span><br><span class="line">)</span><br><span class="line"><span class="built_in">set</span> add_path=%toAdd%;%add_path%</span><br><span class="line">goto :EOF</span><br><span class="line"></span><br><span class="line">:isFinded</span><br><span class="line"><span class="built_in">echo</span> The path already exists: %toAdd%</span><br><span class="line">goto :EOF</span><br></pre></td></tr></table></figure>
+<h2 id="新建系统变量"><a href="#新建系统变量" class="headerlink" title="新建系统变量"></a>新建系统变量</h2><p>1、使用 <code>setx</code> 来设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> ENV_Path=%PYTHONPATH%</span><br><span class="line">setx /M PYTHONPATH <span class="string">&quot;D:\Anaconda3&quot;</span></span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>2、使用 <code>wmic</code> 命令设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line">::如果存在，先删除PYTHONPATH</span><br><span class="line">wmic ENVIRONMENT <span class="built_in">where</span> <span class="string">&quot;name=&#x27;PYTHONPATH&#x27;&quot;</span> delete</span><br><span class="line"></span><br><span class="line">:: 创建系统变量PYTHONPATH</span><br><span class="line">wmic ENVIRONMENT create name=<span class="string">&quot;PYTHONPATH&quot;</span>,username=<span class="string">&quot;&lt;system&gt;&quot;</span>,VariableValue=<span class="string">&quot;D:\Anaconda3&quot;</span></span><br></pre></td></tr></table></figure>
+<center><b>--THE END--<b></center>
+
+
 
     
     
     
 	  
 	  <div class="post-tags">              
-		  <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+		  <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>              
+		  <a href="/tags/bat/" rel="tag"><i class="fa fa-tag"></i> bat</a>
 	  </div>
       <br/>
       <div>
@@ -338,10 +328,10 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>测试题库：MySQL数据库</a></p>
+  <p><span>本文标题:</span>通过bat脚本配置系统环境变量</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/software-testing-points-for-mysql/" title="测试题库：MySQL数据库">https://hiyongz.github.io/posts/software-testing-points-for-mysql/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/software-testing-points-for-mysql/"  aria-label="复制成功！"></i></span>
+  <p><span>文章链接:</span><a href="/posts/windows-notes-for-environment-variables-setting/" title="通过bat脚本配置系统环境变量">https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
 </div>
@@ -375,13 +365,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/software-testing-points-for-performance-testing/" rel="prev" title="测试题库：性能测试">
-      <i class="fa fa-chevron-left"></i> 测试题库：性能测试
+    <a href="/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/" rel="prev" title="Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest">
+      <i class="fa fa-chevron-left"></i> Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/software-testing-points-for-mobile-app-testing/" rel="next" title="测试题库：app自动化测试">
-      测试题库：app自动化测试 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -441,6 +428,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0PATH%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">添加PATH环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%B3%BB%E7%BB%9F%E5%8F%98%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">新建系统变量</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
