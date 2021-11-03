@@ -16,20 +16,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2-%E5%95%86%E8%AA%89/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -93,7 +79,28 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -135,13 +142,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/test-theory-for-software-develop-management/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_transport-layer/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -156,6 +156,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-software-develop-management/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -164,27 +171,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_internet-layer/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-for-web-testing/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/software-testing-points-question-bank/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_application-layer/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -220,6 +206,27 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/software-testing-points-for-test-theory/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-for-web-testing/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/software-testing-points-question-bank/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_application-layer/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -401,35 +408,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-string-interning/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/python-notes-for-string/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/python-vscode-jupyter-notebook/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-string-interning/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -534,6 +520,27 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/python-scapy-for-packet-build-and-parser/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-variable-and-attribute/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/python-notes-for-string/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-list/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -576,14 +583,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/</loc>
+    <loc>https://hiyongz.github.io/posts/pytest-allure-report/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/pytest-allure-report/</loc>
+    <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -618,6 +625,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/network-cookies-session-and-token/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/performance-monitoring-for-server-with-prometheus/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -626,6 +640,13 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/network-tcpdump-and-wireshark/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -667,13 +688,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/network-cookies-session-and-token/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -695,6 +709,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-file-command-guide/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -709,13 +730,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-bash-splitinteger/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-bash-generate-random-numbers/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -724,6 +738,13 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-bash-programing2/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -751,7 +772,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-file-command-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -793,6 +814,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/golang-notes-for-channel-sync/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -828,13 +856,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/linux-copying-files-using-scp-or-rsync/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/linux-and-windows-create-files-certain-size/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -843,20 +864,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/linux-centos-configure-tutorials/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-kernel-and-shell-introduce/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -912,13 +919,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-blog-build/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -926,7 +926,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</loc>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -940,7 +940,21 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/container-docker-guide/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -955,13 +969,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/container-docker-for-jenkins-install/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -996,13 +1003,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/appium-automatic-traversal-test-appcrawler/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/appium-automatic-traversal-test-monkey/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -1017,6 +1017,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/appium-automatic-traversal-test-appcrawler/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/appium-android-webview/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -1024,14 +1031,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
+    <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
+    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -1171,6 +1178,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</loc>
+    
+    <lastmod>2021-11-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/</loc>
     
     <lastmod>2021-11-03</lastmod>
@@ -1178,7 +1192,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -1214,13 +1228,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
-    
-    <lastmod>2021-11-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-graph-tree-and-heap/</loc>
     
     <lastmod>2021-11-03</lastmod>
     
@@ -2427,6 +2434,13 @@
   
   <url>
     <loc>https://hiyongz.github.io/tags/GitHub-Actions/</loc>
+    <lastmod>2021-11-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/tags/URL%E9%87%8D%E5%AE%9A%E5%90%91/</loc>
     <lastmod>2021-11-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
