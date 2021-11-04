@@ -31,6 +31,63 @@
 ]]></content>
   </entry>
   <entry>
+    <title>一些windows批处理脚本</title>
+    <url>/posts/windows-notes-for-bat-script/</url>
+    <content><![CDATA[<p>本文记录一些平时使用到的bat语法。</p>
+<a id="more"></a>
+<h2 id="1-获取当前目录"><a href="#1-获取当前目录" class="headerlink" title="1.  获取当前目录"></a>1.  获取当前目录</h2><p>获取当前路径<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> DriveLetter=%~d0</span><br><span class="line"><span class="built_in">echo</span> %DriveLetter%</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> filePath=%~p0</span><br><span class="line"><span class="built_in">echo</span> %filePath%</span><br><span class="line"> </span><br><span class="line"><span class="built_in">set</span> filePath=%DriveLetter%%filePath%</span><br><span class="line"><span class="built_in">echo</span> current path: %filePath%</span><br><span class="line"><span class="built_in">echo</span> current path: %<span class="built_in">cd</span>%</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure></p>
+<p>执行结果：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">D:</span><br><span class="line">\ProgramWorkspace\ShellNotes\Windows\</span><br><span class="line">current path: D:\ProgramWorkspace\ShellNotes\Windows\</span><br><span class="line">current path: D:\ProgramWorkspace\ShellNotes\Windows</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-获取目录中的文件和子目录"><a href="#2-获取目录中的文件和子目录" class="headerlink" title="2. 获取目录中的文件和子目录"></a>2. 获取目录中的文件和子目录</h2><p>可以使用 <code>dir</code> 命令来获取某个目录下的文件或者子目录文件，使用 <code>dir /?</code> 命令查看帮助文档。</p>
+<p>下面介绍几种使用方法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示当前目录下的文件、子目录以及子目录下的文件</span></span><br><span class="line">dir /a /b /s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示当前目录下的文件</span></span><br><span class="line">dir /b /a-d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从大到小排序</span></span><br><span class="line">dir /b /a-d /o-s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示后缀为bat的文件</span></span><br><span class="line">dir /b /a-d /o-s *.bat</span><br></pre></td></tr></table></figure>
+<p>bat脚本打印当前目录下的bat文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;delims=\&quot; %%a in (&#x27;dir /b /a-d /o-s &quot;</span>%<span class="built_in">cd</span>%\*.bat<span class="string">&quot;&#x27;) do (</span></span><br><span class="line"><span class="string">  echo %%a</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">pause</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-读取配置文件"><a href="#3-读取配置文件" class="headerlink" title="3. 读取配置文件"></a>3. 读取配置文件</h2><p>创建一个配置文件 <code>config.ini</code> :</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">host</span>=<span class="number">192.168</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">port</span>=<span class="number">8100</span></span><br></pre></td></tr></table></figure>
+<p>读取host和port的值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line">:: 读取配置</span><br><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;tokens=1,2 delims==&quot;</span> %%a <span class="keyword">in</span> (config.ini) <span class="keyword">do</span> (</span><br><span class="line">	<span class="keyword">if</span> %%a==host <span class="built_in">set</span> host=%%b</span><br><span class="line">	<span class="keyword">if</span> %%a==port <span class="built_in">set</span> port=%%b</span><br><span class="line">) </span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> host: %host%</span><br><span class="line"><span class="built_in">echo</span> port: %port%</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">host: 192.168.0.1</span><br><span class="line">port: 8100</span><br></pre></td></tr></table></figure>
+<h2 id="4-清空文件内容"><a href="#4-清空文件内容" class="headerlink" title="4. 清空文件内容"></a>4. 清空文件内容</h2><p>清空 test.log 文件中的内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span>.&gt;test.log</span><br></pre></td></tr></table></figure>
+<p>linux shell清空文件内容方法参考<a href="https://blog.csdn.net/u010698107/article/details/111501686">Linux常用命令：文件操作命令</a></p>
+<h2 id="5-打印换行"><a href="#5-打印换行" class="headerlink" title="5. 打印换行"></a>5. 打印换行</h2><p>使用 <code>echo.</code> 打印换行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> hello</span><br><span class="line"><span class="built_in">echo</span>.</span><br><span class="line"><span class="built_in">echo</span> world</span><br><span class="line"></span><br><span class="line">pause </span><br></pre></td></tr></table></figure>
+<h2 id="6-设置窗口显示颜色"><a href="#6-设置窗口显示颜色" class="headerlink" title="6. 设置窗口显示颜色"></a>6. 设置窗口显示颜色</h2><p>语法：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">COLOR [attr]</span><br></pre></td></tr></table></figure><br>颜色属性 attr 可用于设置背景和前景的设置，可以设置的颜色：</p>
+<ul>
+<li>0 = 黑色</li>
+<li>1 = 蓝色</li>
+<li>2 = 绿色</li>
+<li>3 = 浅绿色</li>
+<li>4 = 红色</li>
+<li>5 = 紫色</li>
+<li>6 = 黄色</li>
+<li>7 = 白色</li>
+<li>8 = 灰色</li>
+<li>9 = 淡蓝色</li>
+<li>A = 淡绿色</li>
+<li>B = 淡浅绿色</li>
+<li>C = 淡红色</li>
+<li>D = 淡紫色</li>
+<li>E = 淡黄色</li>
+<li>F = 亮白色</li>
+</ul>
+<p>例如设置窗口为白色背景，红色文字：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"></span><br><span class="line">color 74</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> Hello world !</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="cmd-color.jpg" width="70%" height="70%" /></p>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>bat</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>selenium URL重定向检查</title>
     <url>/posts/web-testing-with-selenium-for-redirect-check/</url>
     <content><![CDATA[<p>有时候需要测试URL重定向是否正确，本文介绍一种使用selenium测试URL重定向的方法。<br><a id="more"></a></p>
