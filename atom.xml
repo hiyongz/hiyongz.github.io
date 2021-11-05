@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-11-05T07:20:18.736Z</updated>
+  <updated>2021-11-05T07:49:00.926Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-11-05T07:20:18.736Z</updated>
+    <updated>2021-11-05T07:49:00.926Z</updated>
     
     <summary type="html">
     
@@ -46,7 +46,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.796Z</updated>
+    <updated>2021-11-05T07:49:00.986Z</updated>
     
     <summary type="html">
     
@@ -69,7 +69,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.796Z</updated>
+    <updated>2021-11-05T07:49:00.986Z</updated>
     
     <summary type="html">
     
@@ -94,7 +94,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.796Z</updated>
+    <updated>2021-11-05T07:49:00.986Z</updated>
     
     <summary type="html">
     
@@ -117,7 +117,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.796Z</updated>
+    <updated>2021-11-05T07:49:00.986Z</updated>
     
     <summary type="html">
     
@@ -140,7 +140,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.600Z</updated>
+    <updated>2021-11-05T07:49:00.782Z</updated>
     
     <summary type="html">
     
@@ -163,7 +163,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
     <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.688Z</updated>
+    <updated>2021-11-05T07:49:00.874Z</updated>
     
     <summary type="html">
     
@@ -186,7 +186,7 @@
     <link href="https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/"/>
     <id>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</id>
     <published>2021-10-21T12:02:00.000Z</published>
-    <updated>2021-11-05T07:20:18.692Z</updated>
+    <updated>2021-11-05T07:49:00.878Z</updated>
     
     <summary type="html">
     
@@ -215,7 +215,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
     <published>2021-10-19T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.688Z</updated>
+    <updated>2021-11-05T07:49:00.874Z</updated>
     
     <summary type="html">
     
@@ -238,7 +238,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</id>
     <published>2021-10-16T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.616Z</updated>
+    <updated>2021-11-05T07:49:00.798Z</updated>
     
     <summary type="html">
     
@@ -263,7 +263,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/</id>
     <published>2021-10-14T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.688Z</updated>
+    <updated>2021-11-05T07:49:00.874Z</updated>
     
     <summary type="html">
     
@@ -286,7 +286,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</id>
     <published>2021-10-12T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.796Z</updated>
+    <updated>2021-11-05T07:49:00.986Z</updated>
     
     <summary type="html">
     
@@ -309,7 +309,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-nudge/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-nudge/</id>
     <published>2021-10-10T12:52:00.000Z</published>
-    <updated>2021-11-05T07:20:18.744Z</updated>
+    <updated>2021-11-05T07:49:00.930Z</updated>
     
     <summary type="html">
     
@@ -330,7 +330,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/</id>
     <published>2021-10-08T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.604Z</updated>
+    <updated>2021-11-05T07:49:00.786Z</updated>
     
     <summary type="html">
     
@@ -353,7 +353,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/</id>
     <published>2021-10-06T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.688Z</updated>
+    <updated>2021-11-05T07:49:00.874Z</updated>
     
     <summary type="html">
     
@@ -376,7 +376,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</id>
     <published>2021-09-28T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.688Z</updated>
+    <updated>2021-11-05T07:49:00.874Z</updated>
     
     <summary type="html">
     
@@ -399,7 +399,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/</id>
     <published>2021-09-26T22:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.644Z</updated>
+    <updated>2021-11-05T07:49:00.826Z</updated>
     
     <summary type="html">
     
@@ -428,7 +428,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</id>
     <published>2021-09-24T12:02:00.000Z</published>
-    <updated>2021-11-05T07:20:18.692Z</updated>
+    <updated>2021-11-05T07:49:00.878Z</updated>
     
     <summary type="html">
     
@@ -449,7 +449,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/</id>
     <published>2021-09-22T12:12:00.000Z</published>
-    <updated>2021-11-05T07:20:18.688Z</updated>
+    <updated>2021-11-05T07:49:00.874Z</updated>
     
     <summary type="html">
     
@@ -472,7 +472,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-the-winner-curse/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-the-winner-curse/</id>
     <published>2021-09-21T18:26:00.000Z</published>
-    <updated>2021-11-05T07:20:18.744Z</updated>
+    <updated>2021-11-05T07:49:00.930Z</updated>
     
     <summary type="html">
     

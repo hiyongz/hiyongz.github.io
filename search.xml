@@ -38,38 +38,6 @@
 <p>stackoverflow上有类似的问题：<a href="https://stackoverflow.com/questions/61812374/imagechops-difference-not-working-with-simple-png-images">https://stackoverflow.com/questions/61812374/imagechops-difference-not-working-with-simple-png-images</a></p>
 <p>转换为RGB通道：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">im_source_obj = Image.<span class="built_in">open</span>(self.im_source_path).convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">im_target_obj = Image.<span class="built_in">open</span>(self.im_target_path).convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">print(im_source_obj.mode)</span><br><span class="line">diff = ImageChops.difference(im_source_obj, im_target_obj)</span><br><span class="line"><span class="keyword">if</span> diff.getbbox() <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">	print(<span class="string">&quot;图片相同&quot;</span>)</span><br></pre></td></tr></table></figure></p>
 <p>Image.open() 方法默认返回的是RGBA模式，多一个alpha通道，用来记录图像的透明度。其实python2也返回的是RGBA模式，不知道具体是什么原因导致python3中需要转换为RGB通道，也可能是版本问题。</p>
-<center><b>--THE END--<b></center>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <center><b>--THE END--<b></center>]]></content>
       <categories>
         <category>编程语言</category>
