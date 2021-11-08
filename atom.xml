@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-11-05T07:49:00.926Z</updated>
+  <updated>2021-11-08T03:08:50.308Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>读书笔记 | “错误”的行为</title>
+    <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
+    <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
+    <published>2021-11-06T09:26:00.000Z</published>
+    <updated>2021-11-08T03:08:50.308Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《“错误”的行为》是理查德·塞勒的个人学术自传，展现了行为经济学的大致发展脉络。如果想大致了解他关于行为经济学的主要工作，阅读这本书就可以了。下面整理一下这本书的部分内容。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python3 PIL库问题：ImageChops.difference返回None</title>
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-11-05T07:49:00.926Z</updated>
+    <updated>2021-11-08T03:08:50.304Z</updated>
     
     <summary type="html">
     
@@ -46,7 +67,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.986Z</updated>
+    <updated>2021-11-08T03:08:50.360Z</updated>
     
     <summary type="html">
     
@@ -69,7 +90,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.986Z</updated>
+    <updated>2021-11-08T03:08:50.360Z</updated>
     
     <summary type="html">
     
@@ -94,7 +115,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.986Z</updated>
+    <updated>2021-11-08T03:08:50.356Z</updated>
     
     <summary type="html">
     
@@ -117,7 +138,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.986Z</updated>
+    <updated>2021-11-08T03:08:50.360Z</updated>
     
     <summary type="html">
     
@@ -140,7 +161,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.782Z</updated>
+    <updated>2021-11-08T03:08:50.172Z</updated>
     
     <summary type="html">
     
@@ -163,7 +184,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
     <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.874Z</updated>
+    <updated>2021-11-08T03:08:50.256Z</updated>
     
     <summary type="html">
     
@@ -186,7 +207,7 @@
     <link href="https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/"/>
     <id>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</id>
     <published>2021-10-21T12:02:00.000Z</published>
-    <updated>2021-11-05T07:49:00.878Z</updated>
+    <updated>2021-11-08T03:08:50.260Z</updated>
     
     <summary type="html">
     
@@ -215,7 +236,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
     <published>2021-10-19T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.874Z</updated>
+    <updated>2021-11-08T03:08:50.256Z</updated>
     
     <summary type="html">
     
@@ -238,7 +259,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</id>
     <published>2021-10-16T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.798Z</updated>
+    <updated>2021-11-08T03:08:50.188Z</updated>
     
     <summary type="html">
     
@@ -263,7 +284,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/</id>
     <published>2021-10-14T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.874Z</updated>
+    <updated>2021-11-08T03:08:50.256Z</updated>
     
     <summary type="html">
     
@@ -286,7 +307,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</id>
     <published>2021-10-12T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.986Z</updated>
+    <updated>2021-11-08T03:08:50.360Z</updated>
     
     <summary type="html">
     
@@ -309,7 +330,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-nudge/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-nudge/</id>
     <published>2021-10-10T12:52:00.000Z</published>
-    <updated>2021-11-05T07:49:00.930Z</updated>
+    <updated>2021-11-08T03:08:50.308Z</updated>
     
     <summary type="html">
     
@@ -330,7 +351,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/</id>
     <published>2021-10-08T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.786Z</updated>
+    <updated>2021-11-08T03:08:50.176Z</updated>
     
     <summary type="html">
     
@@ -353,7 +374,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/</id>
     <published>2021-10-06T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.874Z</updated>
+    <updated>2021-11-08T03:08:50.256Z</updated>
     
     <summary type="html">
     
@@ -376,7 +397,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</id>
     <published>2021-09-28T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.874Z</updated>
+    <updated>2021-11-08T03:08:50.256Z</updated>
     
     <summary type="html">
     
@@ -399,7 +420,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/</id>
     <published>2021-09-26T22:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.826Z</updated>
+    <updated>2021-11-08T03:08:50.216Z</updated>
     
     <summary type="html">
     
@@ -428,7 +449,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</id>
     <published>2021-09-24T12:02:00.000Z</published>
-    <updated>2021-11-05T07:49:00.878Z</updated>
+    <updated>2021-11-08T03:08:50.260Z</updated>
     
     <summary type="html">
     
@@ -449,7 +470,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/</id>
     <published>2021-09-22T12:12:00.000Z</published>
-    <updated>2021-11-05T07:49:00.874Z</updated>
+    <updated>2021-11-08T03:08:50.256Z</updated>
     
     <summary type="html">
     
@@ -464,27 +485,6 @@
     
     
       <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记 | 赢家的诅咒</title>
-    <link href="https://hiyongz.github.io/posts/reading-notes-for-the-winner-curse/"/>
-    <id>https://hiyongz.github.io/posts/reading-notes-for-the-winner-curse/</id>
-    <published>2021-09-21T18:26:00.000Z</published>
-    <updated>2021-11-05T07:49:00.930Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《赢家的诅咒》是诺贝尔经济学奖得主理查德·塞勒的经典著作，副标题是“经济生活中的悖论与反常现象”，主要探讨了我们现实生活中广泛存在的一些”反常“现象，所谓”反常“是指与标准经济学理论的分析和预测不一致的现象。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
