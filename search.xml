@@ -31,6 +31,93 @@
 ]]></content>
   </entry>
   <entry>
+    <title>电子书创建：Sphinx + Github + ReadTheDocs</title>
+    <url>/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</url>
+    <content><![CDATA[<p>我写博客的初衷是为了系统的构建自己的知识体系，目前使用的平台有微信公众号，CSDN，博客园，GitHub Pages和Gitee Pages，他们都各有优缺点，整理的笔记多了之后发现这些平台不是很方便，比如公众号，CSDN和博客园，每次写完文章后，还需要再平台上进行编辑再发布，比较麻烦；GitHub Pages和Gitee Pages虽然可以快速发布，但是在文章系统管理上不是很方便。我希望将笔记整理成类似电子书一样，方便搜索和管理，经过查询资料，发现了ReadTheDocs这个文档管理工具，比较符合我的需求。可以使用 Sphinx 生成文档，GitHub 托管文档，然后导入到 ReadtheDocs进行展示，本文记录一下搭建过程。</p>
+<a id="more"></a>
+<h1 id="准备条件"><a href="#准备条件" class="headerlink" title="准备条件"></a>准备条件</h1><p>1、github账号<br>使用<a href="https://github.com/">github</a>对文档进行版本管理</p>
+<p>2、注册Read the Docs账号<br>官网地址：<a href="https://readthedocs.org/">https://readthedocs.org/</a></p>
+<p>3、安装Python<br><a href="https://www.sphinx.org.cn/">Sphinx</a>是一个python工具，用于生成文档，所以需要安装Python环境。</p>
+<h1 id="Sphinx创建文档"><a href="#Sphinx创建文档" class="headerlink" title="Sphinx创建文档"></a>Sphinx创建文档</h1><p>Sphinx是一个基于Python的文档生成项目，开始是用来生成 Python 官方文档的工具，更多介绍可参考官网：<a href="https://www.sphinx.org.cn/">https://www.sphinx.org.cn/</a> 。</p>
+<h2 id="1-安装Sphinx"><a href="#1-安装Sphinx" class="headerlink" title="1. 安装Sphinx"></a>1. 安装Sphinx</h2><p>Sphinx的GitHub地址：<a href="https://github.com/sphinx-doc/sphinx">https://github.com/sphinx-doc/sphinx</a></p>
+<p>pip安装Sphinx</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pip install -U sphinx</span><br></pre></td></tr></table></figure>
+<h2 id="2-创建文档"><a href="#2-创建文档" class="headerlink" title="2. 创建文档"></a>2. 创建文档</h2><p>先将远程github仓库clone到本地，这个仓库是你要托管文档的仓库，如果没有就新建一个。</p>
+<p>clone到本地后，在项目根目录创建一个<code>docs</code>目录，cd进入docs目录，执行如下命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sphinx-quickstart</span><br><span class="line">Welcome to the Sphinx 4.2.0 quickstart utility.</span><br><span class="line"></span><br><span class="line">Please enter values <span class="keyword">for</span> the following settings (just press Enter to</span><br><span class="line">accept a default value, <span class="keyword">if</span> one is given <span class="keyword">in</span> brackets).</span><br><span class="line"></span><br><span class="line">Selected root path: .</span><br><span class="line"></span><br><span class="line">You have two options <span class="keyword">for</span> placing the build directory <span class="keyword">for</span> Sphinx output.</span><br><span class="line">Either, you use a directory <span class="string">&quot;_build&quot;</span> within the root path, or you separate</span><br><span class="line"><span class="string">&quot;source&quot;</span> and <span class="string">&quot;build&quot;</span> directories within the root path.</span><br><span class="line">&gt; Separate <span class="built_in">source</span> and build directories (y/n) [n]: y</span><br><span class="line"></span><br><span class="line">The project name will occur <span class="keyword">in</span> several places <span class="keyword">in</span> the built documentation.</span><br><span class="line">&gt; Project name: 测试开发小记</span><br><span class="line">&gt; Author name(s): hiyongz</span><br><span class="line">&gt; Project release []: 0.1.0</span><br><span class="line"></span><br><span class="line">If the documents are to be written <span class="keyword">in</span> a language other than English,</span><br><span class="line">you can select a language here by its language code. Sphinx will <span class="keyword">then</span></span><br><span class="line">translate text that it generates into that language.</span><br><span class="line"></span><br><span class="line">For a list of supported codes, see</span><br><span class="line">https://www.sphinx-doc.org/en/master/usage/configuration.html<span class="comment">#confval-language.</span></span><br><span class="line">&gt; Project language [en]: zh_CN</span><br><span class="line"></span><br><span class="line">Creating file D:\pythonproj\devtest\<span class="built_in">source</span>\conf.py.</span><br><span class="line">Creating file D:\pythonproj\devtest\<span class="built_in">source</span>\index.rst.</span><br><span class="line">Creating file D:\pythonproj\devtest\Makefile.</span><br><span class="line">Creating file D:\pythonproj\devtest\make.bat.</span><br><span class="line"></span><br><span class="line">Finished: An initial directory structure has been created.</span><br><span class="line"></span><br><span class="line">You should now populate your master file D:\pythonproj\devtest\<span class="built_in">source</span>\index.rst and create other documentation</span><br><span class="line"><span class="built_in">source</span> files. Use the Makefile to build the docs, like so:</span><br><span class="line">   make builder</span><br><span class="line"><span class="built_in">where</span> <span class="string">&quot;builder&quot;</span> is one of the supported builders, e.g. html, latex or linkcheck.</span><br></pre></td></tr></table></figure><br>上面的配置可以选择默认，稍后修改生成的conf.py配置文件即可。</p>
+<p>设置完成后，目录结构如下：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">│   make.bat</span><br><span class="line">│   Makefile</span><br><span class="line">│</span><br><span class="line">├───build</span><br><span class="line">└───<span class="built_in">source</span></span><br><span class="line">    │   conf.py</span><br><span class="line">    │   index.rst</span><br><span class="line">    │</span><br><span class="line">    ├───_static</span><br><span class="line">    └───_templates</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>build 存放编译后的文件</li>
+<li>source/_static 存放静态文件</li>
+<li>source/_templates 存放模板文件</li>
+<li>source/conf.py 项目配置文件，上面的配置可以在这里面修改</li>
+<li>source/index.rst 首页</li>
+</ul>
+<h2 id="3-编译"><a href="#3-编译" class="headerlink" title="3. 编译"></a>3. 编译</h2><p>对rst文件进行编译生成HTML及相关静态文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make html</span><br><span class="line">Running Sphinx v4.2.0</span><br><span class="line">loading translations [zh_CN]... <span class="keyword">done</span></span><br><span class="line">making output directory... <span class="keyword">done</span></span><br><span class="line">building [mo]: targets <span class="keyword">for</span> 0 po files that are out of date</span><br><span class="line">building [html]: targets <span class="keyword">for</span> 1 <span class="built_in">source</span> files that are out of date</span><br><span class="line">updating environment: [new config] 1 added, 0 changed, 0 removed</span><br><span class="line">reading sources... [100%] index</span><br><span class="line">looking <span class="keyword">for</span> now-outdated files... none found</span><br><span class="line">pickling environment... <span class="keyword">done</span></span><br><span class="line">checking consistency... <span class="keyword">done</span></span><br><span class="line">preparing documents... <span class="keyword">done</span></span><br><span class="line">writing output... [100%] index</span><br><span class="line">generating indices... genindex <span class="keyword">done</span></span><br><span class="line">writing additional pages... search <span class="keyword">done</span></span><br><span class="line">copying static files... <span class="keyword">done</span></span><br><span class="line">copying extra files... <span class="keyword">done</span></span><br><span class="line">dumping search index <span class="keyword">in</span> Chinese (code: zh)... <span class="keyword">done</span></span><br><span class="line">dumping object inventory... <span class="keyword">done</span></span><br><span class="line">build succeeded.</span><br><span class="line"></span><br><span class="line">The HTML pages are <span class="keyword">in</span> build\html.</span><br></pre></td></tr></table></figure>
+<p>index.rst文件内容会编译到_build/html目录下。</p>
+<p>打开_build\html\index.html文件，下面是渲染出来的HTML页面：</p>
+<p><img src="sphinx-index.jpg" width="70%" height="70%" /></p>
+<p>默认主题不好看，可以配置其它主题。</p>
+<h2 id="4-配置主题"><a href="#4-配置主题" class="headerlink" title="4. 配置主题"></a>4. 配置主题</h2><p>安装sphinx Read the Docs主题</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install sphinx_rtd_theme</span><br></pre></td></tr></table></figure>
+<p>更多主题可到官网 <a href="https://sphinx-themes.org/">https://sphinx-themes.org/</a> 查看。</p>
+<p>配置source/conf.py 文件：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sphinx_rtd_theme</span><br><span class="line">html_theme = <span class="string">&quot;sphinx_rtd_theme&quot;</span></span><br><span class="line">html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]</span><br></pre></td></tr></table></figure>
+<p>重新编译：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ make html</span><br></pre></td></tr></table></figure><br>打开_build\html\index.html文件，可以发现主题配置成功。</p>
+<p><img src="sphinx_rtd_theme.jpg" width="70%" height="70%" /></p>
+<h2 id="5-配置markdown"><a href="#5-配置markdown" class="headerlink" title="5. 配置markdown"></a>5. 配置markdown</h2><p>Sphinx默认使用 reStructuredText 标记语言，由于已经习惯使用markdown进行文档编辑，下面来配置markdown。</p>
+<p><strong>1) 安装recommonmark插件</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install recommonmark</span><br></pre></td></tr></table></figure>
+<p><strong>2）安装支持markdown表格的插件</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install sphinx_markdown_tables</span><br></pre></td></tr></table></figure>
+<p>ReadTheDocs的python环境貌似没有sphinx_markdown_tables，在构建时可能报如下错误：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ModuleNotFoundError: No module named <span class="string">&#x27;sphinx_markdown_tables&#x27;</span></span><br></pre></td></tr></table></figure><br>解决方案是在docs目录下新建一个requirements.txt文件，写入如下内容：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sphinx-markdown-tables==0.0.15</span><br></pre></td></tr></table></figure></p>
+<p><strong>3）配置source/conf.py 文件</strong></p>
+<p>增加：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">extensions = [<span class="string">&#x27;recommonmark&#x27;</span>,<span class="string">&#x27;sphinx_markdown_tables&#x27;</span>] </span><br></pre></td></tr></table></figure>
+<p>在source目录下创建一个markdown文件，将makdown文件名添加到source/index.rst 中</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.. toctree::</span><br><span class="line">   :maxdepth: <span class="number">2</span></span><br><span class="line">   :caption: Contents:</span><br><span class="line">   </span><br><span class="line">    windows-shortcuts.md</span><br></pre></td></tr></table></figure>
+<p>重新编译</p>
+<p><img src="sphinx-markdown.jpg" width="70%" height="70%" /></p>
+<p><strong>4）提交上传</strong></p>
+<p><code>.gitignore</code>文件添加<code>docs/build/</code>目录，不需要上传这个目录。上传：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h1 id="关联Read-the-Docs"><a href="#关联Read-the-Docs" class="headerlink" title="关联Read the Docs"></a>关联Read the Docs</h1><p>关联Read the Docs，使其可以在线访问文档。</p>
+<p>浏览器访问 <a href="https://readthedocs.org/">https://readthedocs.org/</a>， 点击【我的项目】-&gt; 【Import a Project】：</p>
+<p><img src="readthedocs-import-project.png" width="70%" height="70%" /></p>
+<p>选择仓库</p>
+<p><img src="read-the-docs-import-project.jpg" width="70%" height="70%" /></p>
+<p>点击下一步</p>
+<p><img src="read-the-docs-import-project2.jpg" width="70%" height="70%" /></p>
+<p>构建版本</p>
+<p><img src="read-the-docs-import-project3.jpg" width="70%" height="70%" /></p>
+<p>构建完成后，点击阅读文档</p>
+<p><img src="read-the-docs-import-project4.jpg" width="70%" height="70%" /></p>
+<p>构建成功</p>
+<p><img src="sphinx-markdown2.jpg" width="70%" height="70%" /></p>
+<p>在线文档地址为<a href="https://devtest-notes.readthedocs.io/">https://devtest-notes.readthedocs.io/</a>。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.sphinx.org.cn/">https://www.sphinx.org.cn/</a></li>
+<li><a href="https://readthedocs.org/">https://readthedocs.org/</a></li>
+<li><a href="https://github.com/readthedocs/readthedocs.org">https://github.com/readthedocs/readthedocs.org</a></li>
+<li><a href="https://docs.readthedocs.io/en/stable/tutorial/">https://docs.readthedocs.io/en/stable/tutorial/</a></li>
+<li><a href="https://www.osgeo.cn/sphinx/usage/markdown.html">https://www.osgeo.cn/sphinx/usage/markdown.html</a></li>
+<li><a href="https://www.sphinx-doc.org/zh_CN/master/usage/configuration.html">https://www.sphinx-doc.org/zh_CN/master/usage/configuration.html</a></li>
+<li><a href="https://iridescent.ink/HowToMakeDocs/Basic/reST.html">https://iridescent.ink/HowToMakeDocs/Basic/reST.html</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>其它</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>GitHub Pages</tag>
+        <tag>Gitee Pages</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>读书笔记 | “错误”的行为</title>
     <url>/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</url>
     <content><![CDATA[<p>《“错误”的行为》是理查德·塞勒的个人学术自传，展现了行为经济学的大致发展脉络。如果想大致了解他关于行为经济学的主要工作，阅读这本书就可以了。下面整理一下这本书的部分内容。</p>

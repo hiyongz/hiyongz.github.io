@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-11-08T03:08:50.308Z</updated>
+  <updated>2021-11-09T14:16:02.492Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>电子书创建：Sphinx + Github + ReadTheDocs</title>
+    <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
+    <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
+    <published>2021-11-09T09:52:00.000Z</published>
+    <updated>2021-11-09T14:16:02.492Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我写博客的初衷是为了系统的构建自己的知识体系，目前使用的平台有微信公众号，CSDN，博客园，GitHub Pages和Gitee Pages，他们都各有优缺点，整理的笔记多了之后发现这些平台不是很方便，比如公众号，CSDN和博客园，每次写完文章后，还需要再平台上进行编辑再发布，比较麻烦；GitHub Pages和Gitee Pages虽然可以快速发布，但是在文章系统管理上不是很方便。我希望将笔记整理成类似电子书一样，方便搜索和管理，经过查询资料，发现了ReadTheDocs这个文档管理工具，比较符合我的需求。可以使用 Sphinx 生成文档，GitHub 托管文档，然后导入到 ReadtheDocs进行展示，本文记录一下搭建过程。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="其它" scheme="https://hiyongz.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+      <category term="Hexo" scheme="https://hiyongz.github.io/tags/Hexo/"/>
+    
+      <category term="GitHub Pages" scheme="https://hiyongz.github.io/tags/GitHub-Pages/"/>
+    
+      <category term="Gitee Pages" scheme="https://hiyongz.github.io/tags/Gitee-Pages/"/>
+    
+  </entry>
+  
+  <entry>
     <title>读书笔记 | “错误”的行为</title>
     <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
     <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2021-11-08T03:08:50.308Z</updated>
+    <updated>2021-11-09T14:16:02.520Z</updated>
     
     <summary type="html">
     
@@ -42,7 +67,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-11-08T03:08:50.304Z</updated>
+    <updated>2021-11-09T14:16:02.516Z</updated>
     
     <summary type="html">
     
@@ -67,7 +92,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.360Z</updated>
+    <updated>2021-11-09T14:16:02.572Z</updated>
     
     <summary type="html">
     
@@ -90,7 +115,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.360Z</updated>
+    <updated>2021-11-09T14:16:02.572Z</updated>
     
     <summary type="html">
     
@@ -115,7 +140,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.356Z</updated>
+    <updated>2021-11-09T14:16:02.572Z</updated>
     
     <summary type="html">
     
@@ -138,7 +163,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.360Z</updated>
+    <updated>2021-11-09T14:16:02.572Z</updated>
     
     <summary type="html">
     
@@ -161,7 +186,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.172Z</updated>
+    <updated>2021-11-09T14:16:02.380Z</updated>
     
     <summary type="html">
     
@@ -184,7 +209,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
     <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.256Z</updated>
+    <updated>2021-11-09T14:16:02.464Z</updated>
     
     <summary type="html">
     
@@ -207,7 +232,7 @@
     <link href="https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/"/>
     <id>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</id>
     <published>2021-10-21T12:02:00.000Z</published>
-    <updated>2021-11-08T03:08:50.260Z</updated>
+    <updated>2021-11-09T14:16:02.468Z</updated>
     
     <summary type="html">
     
@@ -236,7 +261,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
     <published>2021-10-19T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.256Z</updated>
+    <updated>2021-11-09T14:16:02.464Z</updated>
     
     <summary type="html">
     
@@ -259,7 +284,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</id>
     <published>2021-10-16T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.188Z</updated>
+    <updated>2021-11-09T14:16:02.396Z</updated>
     
     <summary type="html">
     
@@ -284,7 +309,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/</id>
     <published>2021-10-14T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.256Z</updated>
+    <updated>2021-11-09T14:16:02.464Z</updated>
     
     <summary type="html">
     
@@ -307,7 +332,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</id>
     <published>2021-10-12T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.360Z</updated>
+    <updated>2021-11-09T14:16:02.572Z</updated>
     
     <summary type="html">
     
@@ -330,7 +355,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-nudge/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-nudge/</id>
     <published>2021-10-10T12:52:00.000Z</published>
-    <updated>2021-11-08T03:08:50.308Z</updated>
+    <updated>2021-11-09T14:16:02.520Z</updated>
     
     <summary type="html">
     
@@ -351,7 +376,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/</id>
     <published>2021-10-08T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.176Z</updated>
+    <updated>2021-11-09T14:16:02.384Z</updated>
     
     <summary type="html">
     
@@ -374,7 +399,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/</id>
     <published>2021-10-06T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.256Z</updated>
+    <updated>2021-11-09T14:16:02.464Z</updated>
     
     <summary type="html">
     
@@ -397,7 +422,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</id>
     <published>2021-09-28T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.256Z</updated>
+    <updated>2021-11-09T14:16:02.464Z</updated>
     
     <summary type="html">
     
@@ -420,7 +445,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/</id>
     <published>2021-09-26T22:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.216Z</updated>
+    <updated>2021-11-09T14:16:02.420Z</updated>
     
     <summary type="html">
     
@@ -449,7 +474,7 @@
     <link href="https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/"/>
     <id>https://hiyongz.github.io/posts/linux-shell-bash-fisher-yates-shuffle-algorithm/</id>
     <published>2021-09-24T12:02:00.000Z</published>
-    <updated>2021-11-08T03:08:50.260Z</updated>
+    <updated>2021-11-09T14:16:02.468Z</updated>
     
     <summary type="html">
     
@@ -462,29 +487,6 @@
     
     
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go语言并发编程：原子操作</title>
-    <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/"/>
-    <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-atomic-operation/</id>
-    <published>2021-09-22T12:12:00.000Z</published>
-    <updated>2021-11-08T03:08:50.256Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在程序执行过程中，操作系统会进行线程调度，同一时刻能同时执行的程序数量跟CPU的内核线程数有关，比如4核CPU，同时最多只能有4个线程。Go 语言中的运行时系统也会对goroutine进行调度，调度器会频繁地让goroutine处于中断或者运行状态，这就不能保证代码执行的原子性（atomicity），即使使用互斥锁也不能保证原子性操作。Go语言中的atomic包提供了原子操作方法，下面来介绍它的使用方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="Go" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/"/>
-    
-    
-      <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
     
   </entry>
   
