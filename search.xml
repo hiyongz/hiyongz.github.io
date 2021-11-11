@@ -12024,6 +12024,96 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
       </tags>
   </entry>
   <entry>
+    <title>Web自动化测试之playwright：Web元素定位</title>
+    <url>/posts/web-testing-with-playwright-for-locator/</url>
+    <content><![CDATA[<p>要对web页面进行控制，首先需要定位到页面对应的元素，和Selenium一样，playwright也支持多种元素定位方法，下面来介绍它支持的元素选择器。</p>
+<a id="more"></a>
+<p>playwright主要的选择器:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Locator</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">text</td>
+<td style="text-align:left">文本值</td>
+</tr>
+<tr>
+<td style="text-align:left">css selector</td>
+<td style="text-align:left">CSS 选择器</td>
+</tr>
+<tr>
+<td style="text-align:left">xpath</td>
+<td style="text-align:left">xpath表达式</td>
+</tr>
+<tr>
+<td style="text-align:left">React selector</td>
+<td style="text-align:left">React选择器</td>
+</tr>
+<tr>
+<td style="text-align:left">Vue selector</td>
+<td style="text-align:left">Vue 选择器</td>
+</tr>
+<tr>
+<td style="text-align:left">id, data-testid, data-test-id, data-test</td>
+<td style="text-align:left">属性值，只支持这4种属性。其它属性需要通过css方式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>可以和Selenium对比来看：<a href="https://blog.csdn.net/u010698107/article/details/111414583">Selenium Web元素定位方法</a> 。</p>
+<p>其中Vue selector和React selector目前还是实验性的功能，这里不做更多介绍。</p>
+<h1 id="Text-定位"><a href="#Text-定位" class="headerlink" title="Text 定位"></a>Text 定位</h1><p>通过文本值定位</p>
+<p><img src="link_text.png" width="70%" height="70%" /></p>
+<p>点击【学术】：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&#x27;text=&quot;学术&quot;&#x27;</span>)</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">page.click(<span class="string">&#x27;&quot;学术&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="属性值定位"><a href="#属性值定位" class="headerlink" title="属性值定位"></a>属性值定位</h1><p>只支持id, data-testid, data-test-id, data-test这4种属性值，其它属性需要使用css表达式。</p>
+<p><img src="id_locator.png" width="70%" height="70%" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.fill(<span class="string">&quot;id=kw&quot;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">page.click(<span class="string">&quot;id=su&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>其它属性值定位：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.fill(<span class="string">&#x27;css=[id=&quot;kw&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">page.fill(<span class="string">&#x27;css=[class=&quot;s_ipt&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">page.fill(<span class="string">&#x27;css=[name=&quot;wd&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line"><span class="comment"># 也可以简化为</span></span><br><span class="line">page.fill(<span class="string">&#x27;[id=&quot;kw&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">page.fill(<span class="string">&#x27;[class=&quot;s_ipt&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">page.fill(<span class="string">&#x27;[name=&quot;wd&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="xpath定位"><a href="#xpath定位" class="headerlink" title="xpath定位"></a>xpath定位</h1><p>xpath 定位语法介绍可参考：<a href="https://blog.csdn.net/u010698107/article/details/111415888">Web自动化测试：xpath &amp; CSS Selector定位</a> 。</p>
+<p><img src="css_selector.png" width="70%" height="70%" /></p>
+<p>使用xpath定位上图中的【资讯】：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&#x27;//*[@id=&quot;s_tab&quot;]//a[2]&#x27;</span>)</span><br></pre></td></tr></table></figure></p>
+<h1 id="css-selector-定位"><a href="#css-selector-定位" class="headerlink" title="css selector 定位"></a>css selector 定位</h1><h2 id="CSS常规用法"><a href="#CSS常规用法" class="headerlink" title="CSS常规用法"></a>CSS常规用法</h2><p>css selector 定位语法介绍可参考：<a href="https://blog.csdn.net/u010698107/article/details/111415888">Web自动化测试：xpath &amp; CSS Selector定位</a> 。</p>
+<p><img src="css_selector.png" width="70%" height="70%" /></p>
+<p>点击【资讯】：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&quot;#s_tab a:nth-child(2) + a&quot;</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="定位可见元素"><a href="#定位可见元素" class="headerlink" title="定位可见元素"></a>定位可见元素</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&quot;button:visible&quot;</span>)</span><br><span class="line">page.click(<span class="string">&quot;button &gt;&gt; visible=true&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="伪类：-has"><a href="#伪类：-has" class="headerlink" title="伪类：:has()"></a>伪类：<code>:has()</code></h2><p>父元素包含某个子元素</p>
+<p><img src="css_selector_has.png" width="70%" height="70%" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&quot;#s-top-left:has(a) &gt; a:nth-child(2)&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="伪类：-is"><a href="#伪类：-is" class="headerlink" title="伪类：:is()"></a>伪类：<code>:is()</code></h2><p>选择其中任何一个元素，点击【新闻】</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&#x27;:is(a:has-text(&quot;新闻&quot;), a:has-text(&quot;News&quot;))&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="通过页面布局定位元素"><a href="#通过页面布局定位元素" class="headerlink" title="通过页面布局定位元素"></a>通过页面布局定位元素</h1><p>Playwright可以通过页面布局来定位元素，下面来定位输入框右边的【百度一下】<br><img src="css_selector_layout.png" width="70%" height="70%" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&#x27;input:right-of(#kw)&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>主要包括以下5种用法：</p>
+<ul>
+<li><code>:right-of(inner &gt; selector)</code> - 匹配 inner selector的任意右边元素</li>
+<li><code>:left-of(inner &gt; selector)</code> - 匹配inner selector左边元素</li>
+<li><code>:above(inner &gt; selector)</code> - 匹配inner selector上面的元素</li>
+<li><code>:below(inner &gt; selector)</code> - 匹配inner selector下面的元素</li>
+<li><code>:near(inner &gt; selector)</code> - 匹配inner selector附近 ( 50 pixels以内) 的元素。</li>
+</ul>
+<h1 id="组合定位"><a href="#组合定位" class="headerlink" title="组合定位"></a>组合定位</h1><p>文本定位方法可以和css、xpath等方法组合</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&#x27;css=[class=&quot;bg s_btn&quot;] &gt;&gt; text=百度一下&#x27;</span>)</span><br><span class="line">page.click(<span class="string">&#x27;#s-top-left:has(a) &gt;&gt; text=hao123&#x27;</span>)</span><br><span class="line">page.click(<span class="string">&#x27;//*[@id=&quot;s_tab&quot;]//a &gt;&gt; text=资讯&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="定位第n个元素：-nth-match"><a href="#定位第n个元素：-nth-match" class="headerlink" title="定位第n个元素：:nth-match()"></a>定位第n个元素：<code>:nth-match()</code></h1><p>如果定位到多个元素需要选择其中某一个，可以使用<code>:nth-match()</code>，索引从1开始。</p>
+<p><img src="css_selector_has.png" width="70%" height="70%" /></p>
+<p>点击【hao123】:<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.click(<span class="string">&#x27;:nth-match(#s-top-left &gt; a, 2)&#x27;</span>) <span class="comment"># 点击匹配到的第2个元素</span></span><br></pre></td></tr></table></figure><br>注意：和 <code>:nth-child()</code> 不同之处在于，<code>:nth-match()</code>匹配的元素可以不是邻居关系。</p>
+<h1 id="完整测试代码"><a href="#完整测试代码" class="headerlink" title="完整测试代码"></a>完整测试代码</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestLocator</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup</span>(<span class="params">self</span>):</span></span><br><span class="line">        playwright = sync_playwright().start()</span><br><span class="line">        self.browser = playwright.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">        self.context = self.browser.new_context()</span><br><span class="line">        self.page = self.context.new_page()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">teardown</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.browser.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_text</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        <span class="comment"># self.page.click(&quot;text=学术&quot;)</span></span><br><span class="line">        self.page.click(<span class="string">&#x27;&quot;学术&quot;&#x27;</span>)</span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_id</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        <span class="comment"># self.page.fill(&quot;id=kw&quot;, &quot;test&quot;)</span></span><br><span class="line">        <span class="comment"># self.page.fill(&#x27;css=[id=&quot;kw&quot;]&#x27;, &quot;test&quot;)</span></span><br><span class="line">        <span class="comment"># self.page.fill(&#x27;css=[class=&quot;s_ipt&quot;]&#x27;, &quot;test&quot;)</span></span><br><span class="line">        self.page.fill(<span class="string">&#x27;[class=&quot;s_ipt&quot;]&#x27;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">        <span class="comment"># self.page.fill(&#x27;css=[name=&quot;wd&quot;]&#x27;, &quot;test&quot;)</span></span><br><span class="line">        <span class="comment"># self.page.click(&#x27;css=[class=&quot;bg s_btn&quot;] &gt;&gt; text=百度一下&#x27;)</span></span><br><span class="line">        self.page.click(<span class="string">&quot;id=su&quot;</span>)</span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_xpath</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        self.page.fill(<span class="string">&quot;id=kw&quot;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">        self.page.click(<span class="string">&quot;id=su&quot;</span>)</span><br><span class="line">        sleep(<span class="number">2</span>)</span><br><span class="line">        self.page.click(<span class="string">&#x27;//*[@id=&quot;s_tab&quot;]//a[2]&#x27;</span>)</span><br><span class="line">        <span class="comment"># self.page.click(&#x27;//*[@id=&quot;s_tab&quot;]//a &gt;&gt; text=资讯&#x27;)</span></span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_css_selector</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        self.page.fill(<span class="string">&quot;id=kw&quot;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">        self.page.click(<span class="string">&quot;id=su&quot;</span>)</span><br><span class="line">        sleep(<span class="number">2</span>)</span><br><span class="line">        self.page.click(<span class="string">&quot;#s_tab a:nth-child(2) + a&quot;</span>)</span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_css_has</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        self.page.click(<span class="string">&#x27;#s-top-left:has(a) &gt; a:nth-child(2)&#x27;</span>)</span><br><span class="line">        <span class="comment"># self.page.click(&#x27;#s-top-left:has(a) &gt;&gt; text=hao123&#x27;)</span></span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_css_is</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        sleep(<span class="number">2</span>)</span><br><span class="line">        self.page.click(<span class="string">&#x27;:is(a:has-text(&quot;新闻&quot;), a:has-text(&quot;News&quot;))&#x27;</span>)</span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_layout</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        sleep(<span class="number">2</span>)</span><br><span class="line">        self.page.fill(<span class="string">&quot;id=kw&quot;</span>, <span class="string">&quot;test&quot;</span>)</span><br><span class="line">        self.page.click(<span class="string">&#x27;input:right-of(#kw)&#x27;</span>)</span><br><span class="line">        sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_nth_march</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        sleep(<span class="number">2</span>)</span><br><span class="line">        self.page.click(<span class="string">&#x27;:nth-match(#s-top-left &gt; a, 2)&#x27;</span>)</span><br><span class="line">        sleep(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>playwright和Selenium的元素定位方法有相似之处，因为都是对相同的WEB页面元素进行定位，所以差别不大，区别在于它们的定位方式，Selenium对每种选择器提供了对应的方法，而playwright只需要写定位表达式就可以了，不需要指定具体方法。从这一点来看，playwright是非常方便的。</p>
+<center><b>--THE END--<b></center>]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>Web自动化测试</category>
+      </categories>
+      <tags>
+        <tag>playwright</tag>
+        <tag>元素定位</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Pytest测试框架（四）：pytest 参数化用例</title>
     <url>/posts/pytest-parametrize/</url>
     <content><![CDATA[<p>在 <a href="https://hiyong.gitee.io/posts/pytest-fixture/">Pytest测试框架（三）：pytest fixture 用法</a> 中介绍了pytest.fixture()可以参数化fixture函数，@pytest.mark.parametrize 可以为测试方法或者测试类定义多组变量。本文将分享使用@pytest.mark.parametrize 实现参数化用例。</p>
