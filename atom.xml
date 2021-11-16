@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-11-16T10:10:03.650Z</updated>
+  <updated>2021-11-16T12:40:36.009Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Github shields徽章配置方法介绍</title>
+    <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
+    <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
+    <published>2021-11-16T12:06:00.000Z</published>
+    <updated>2021-11-16T12:40:36.009Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;你可能会注意到很多GitHub项目有很漂亮的徽章，它们可以用来显示项目的进度，版本等信息：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;github-shields.jpg&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;本文介绍shields徽章配置方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="其它" scheme="https://hiyongz.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+      <category term="github" scheme="https://hiyongz.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Web自动化测试之playwright：Web元素定位</title>
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2021-11-16T10:10:03.650Z</updated>
+    <updated>2021-11-16T12:40:36.117Z</updated>
     
     <summary type="html">
     
@@ -46,7 +69,7 @@
     <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
     <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
     <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2021-11-16T10:10:03.562Z</updated>
+    <updated>2021-11-16T12:40:36.041Z</updated>
     
     <summary type="html">
     
@@ -71,7 +94,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
     <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2021-11-16T10:10:03.594Z</updated>
+    <updated>2021-11-16T12:40:36.069Z</updated>
     
     <summary type="html">
     
@@ -92,7 +115,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-11-16T10:10:03.586Z</updated>
+    <updated>2021-11-16T12:40:36.061Z</updated>
     
     <summary type="html">
     
@@ -117,7 +140,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.654Z</updated>
+    <updated>2021-11-16T12:40:36.121Z</updated>
     
     <summary type="html">
     
@@ -140,7 +163,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.654Z</updated>
+    <updated>2021-11-16T12:40:36.121Z</updated>
     
     <summary type="html">
     
@@ -165,7 +188,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.654Z</updated>
+    <updated>2021-11-16T12:40:36.121Z</updated>
     
     <summary type="html">
     
@@ -188,7 +211,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.654Z</updated>
+    <updated>2021-11-16T12:40:36.121Z</updated>
     
     <summary type="html">
     
@@ -211,7 +234,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.426Z</updated>
+    <updated>2021-11-16T12:40:35.925Z</updated>
     
     <summary type="html">
     
@@ -234,7 +257,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
     <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.526Z</updated>
+    <updated>2021-11-16T12:40:36.009Z</updated>
     
     <summary type="html">
     
@@ -257,7 +280,7 @@
     <link href="https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/"/>
     <id>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</id>
     <published>2021-10-21T12:02:00.000Z</published>
-    <updated>2021-11-16T10:10:03.534Z</updated>
+    <updated>2021-11-16T12:40:36.017Z</updated>
     
     <summary type="html">
     
@@ -286,7 +309,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
     <published>2021-10-19T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.526Z</updated>
+    <updated>2021-11-16T12:40:36.009Z</updated>
     
     <summary type="html">
     
@@ -309,7 +332,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</id>
     <published>2021-10-16T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.442Z</updated>
+    <updated>2021-11-16T12:40:35.941Z</updated>
     
     <summary type="html">
     
@@ -334,7 +357,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/</id>
     <published>2021-10-14T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.526Z</updated>
+    <updated>2021-11-16T12:40:36.009Z</updated>
     
     <summary type="html">
     
@@ -357,7 +380,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</id>
     <published>2021-10-12T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.654Z</updated>
+    <updated>2021-11-16T12:40:36.121Z</updated>
     
     <summary type="html">
     
@@ -380,7 +403,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-nudge/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-nudge/</id>
     <published>2021-10-10T12:52:00.000Z</published>
-    <updated>2021-11-16T10:10:03.594Z</updated>
+    <updated>2021-11-16T12:40:36.069Z</updated>
     
     <summary type="html">
     
@@ -401,7 +424,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-location-with-classChain/</id>
     <published>2021-10-08T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.430Z</updated>
+    <updated>2021-11-16T12:40:35.929Z</updated>
     
     <summary type="html">
     
@@ -424,7 +447,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-mutex/</id>
     <published>2021-10-06T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.526Z</updated>
+    <updated>2021-11-16T12:40:36.009Z</updated>
     
     <summary type="html">
     
@@ -447,7 +470,7 @@
     <link href="https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/"/>
     <id>https://hiyongz.github.io/posts/golang-notes-for-struct-and-method/</id>
     <published>2021-09-28T12:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.530Z</updated>
+    <updated>2021-11-16T12:40:36.013Z</updated>
     
     <summary type="html">
     
@@ -462,35 +485,6 @@
     
     
       <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用GitHub Actions实现Hexo博客自动发布</title>
-    <link href="https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/"/>
-    <id>https://hiyongz.github.io/posts/continuous-integration-for-blog-build-with-github-actions/</id>
-    <published>2021-09-26T22:12:00.000Z</published>
-    <updated>2021-11-16T10:10:03.474Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我在&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/115888855&quot;&gt;使用jenkins实现hexo博客自动发布&lt;/a&gt;中介绍了可以使用jenkins实现博客自动发布，其实还有一种更简单的方法，就是GitHub提供的持续集成服务：GitHub Actions。下面就来介绍一下如何使用GitHub Actions来实现将hexo博客自动编译及发布到GitHub Pages和Gitee pages上。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-      <category term="其它" scheme="https://hiyongz.github.io/categories/%E5%85%B6%E5%AE%83/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-      <category term="Hexo" scheme="https://hiyongz.github.io/tags/Hexo/"/>
-    
-      <category term="GitHub Actions" scheme="https://hiyongz.github.io/tags/GitHub-Actions/"/>
     
   </entry>
   

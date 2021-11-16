@@ -31,6 +31,68 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Github shields徽章配置方法介绍</title>
+    <url>/posts/github-skills-for-shields-build/</url>
+    <content><![CDATA[<p>你可能会注意到很多GitHub项目有很漂亮的徽章，它们可以用来显示项目的进度，版本等信息：</p>
+<p><img src="github-shields.jpg" width="80%" height="80%" /></p>
+<p>本文介绍shields徽章配置方法。</p>
+<a id="more"></a>
+<h1 id="自定义徽章"><a href="#自定义徽章" class="headerlink" title="自定义徽章"></a>自定义徽章</h1><p>shields徽章可用来说明项目状态或者版本等信息，可以访问官网 <a href="https://www.shields.io/">https://www.shields.io/</a> 制作徽章，<br><img src="shields-page.jpg" width="80%" height="80%" /></p>
+<p>找到Your BADGE 自定义定制徽章，输入标签和信息，点击生成：<br><img src="shields-make.jpg" width="80%" height="80%" /></p>
+<p><img src="shields-make.jpg" width="80%" height="80%" /></p>
+<p>然后就可以使用生成的shields链接了。<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;docs\img\wechat.png&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0-brightgreen&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;公众号&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure><br>效果：</p>
+<p align="center">
+  <a href="docs\img\wechat.png"><img src="https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0-brightgreen" alt="公众号"></a>
+</p> 
+
+<p>也可以直接编辑URL：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://img.shields.io/badge/&lt;LABEL&gt;-&lt;MESSAGE&gt;-&lt;COLOR&gt;.svg</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">https://img.shields.io/static/v1?label=&lt;LABEL&gt;&amp;message=&lt;MESSAGE&gt;&amp;color=&lt;COLOR&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h1><p>有以下几种颜色可以选择：</p>
+<p>brightgreen、green、yellow、green、yellow、orange、red、blue、lightgrey、success、important、critical、informational、inactive、blueviolet、ff69b4、9cf。</p>
+<p><img src="shields-colors.jpg" width="80%" height="80%" /></p>
+<p>还可以配置style和logo参数<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0-brightgreen.svg?style=social&amp;logo=telegram</span><br></pre></td></tr></table></figure></p>
+<p align="center">
+  <a href="docs\img\wechat.png"><img src="https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0-brightgreen.svg?style=social&logo=telegram" alt="公众号"></a>
+</p> 
+style样式默认为flat，还可以设置为plastic、flat-square、for-the-badge和social。
+
+logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.org/)上提供的图标，比如微信的图标：
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">logo=WeChat</span><br></pre></td></tr></table></figure>
+<p align="center">
+  <a href="docs\img\wechat.png"><img src="https://img.shields.io/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0-brightgreen.svg?style=plastic&logo=WeChat" alt="公众号"></a>
+  <a href="docs\img\wechat.png"><img src="https://img.shields.io/badge/Fork-10k+-brightgreen.svg?style=social&logo=github" alt="公众号"></a>
+</p> 
+还可以设置其它参数，更多玩法可到 [https://shields.io/](https://shields.io/) 查阅。
+
+
+
+# 设置链接
+
+可以给徽章设置一个链接
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[![](https://img.shields.io/badge/csdn-CSDN-brightgreen.svg)](https://blog.csdn.net/u010698107)</span><br></pre></td></tr></table></figure>
+[![](https://img.shields.io/badge/csdn-CSDN-brightgreen.svg)](https://blog.csdn.net/u010698107)
+
+或者使用HTML语法：
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://blog.csdn.net/u010698107&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://img.shields.io/badge/csdn-CSDN-brightgreen.svg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;csdn&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p align="center">
+    <a href="https://blog.csdn.net/u010698107"><img src="https://img.shields.io/badge/csdn-CSDN-brightgreen.svg" alt="csdn"></a>
+</p> 
+
+
+
+<center><b>--THE END--<b></center>
+
+
+
+]]></content>
+      <categories>
+        <category>其它</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Web自动化测试之playwright：Web元素定位</title>
     <url>/posts/web-testing-with-playwright-for-locator/</url>
     <content><![CDATA[<p>要对web页面进行控制，首先需要定位到页面对应的元素，和Selenium一样，playwright也支持多种元素定位方法，下面来介绍它支持的元素选择器。</p>
