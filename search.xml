@@ -406,7 +406,10 @@
 <li>现代web特性：支持Shadow DOM选择，元素位置定位，页面提示处理，Web Worker等Web API。</li>
 <li>覆盖所有场景：支持文件下载、上传、OOPIF（out-of-process iframes），输入、点击，暗黑模式等。</li>
 </ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Playwright安装简单，不需要单独下载浏览器驱动，pip安装：</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Playwright有Node.js、Python、C# 和 Java语言版本，本文只介绍Python版本的Playwright使用方法。</p>
+<p>Playwright的Python版本仓库地址：<a href="https://github.com/microsoft/playwright-python">https://github.com/microsoft/playwright-python</a></p>
+<p>官方文档地址：<a href="https://playwright.dev/python/docs/intro">https://playwright.dev/python/docs/intro</a></p>
+<p>Playwright安装简单，不需要单独下载浏览器驱动，pip安装：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install playwright</span><br><span class="line">playwright install <span class="comment"># 安装支持的浏览器：cr, chromium, ff, firefox, wk 和 webkit</span></span><br><span class="line">playwright install chromium <span class="comment"># 安装指定的chromium浏览器</span></span><br></pre></td></tr></table></figure>
 <p>安装时会自动下载浏览器依赖，windows系统在<code>%USERPROFILE%\AppData\Local\ms-playwright</code> 路径下。</p>
 <p><img src="playwright-browser-path.png" width="70%" height="70%" /></p>
