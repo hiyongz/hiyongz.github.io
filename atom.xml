@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-11-22T14:01:20.733Z</updated>
+  <updated>2021-11-23T12:21:30.626Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Web自动化测试之playwright：pages、popup、dialog和frame处理</title>
+    <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
+    <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
+    <published>2021-11-23T09:30:36.000Z</published>
+    <updated>2021-11-23T12:21:30.626Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍如何使用playwright来处理新页面、frame以及对话框。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="playwright" scheme="https://hiyongz.github.io/tags/playwright/"/>
+    
+  </entry>
+  
+  <entry>
     <title>儒家最后一位圣人王阳明的生平事迹</title>
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2021-11-22T14:01:20.733Z</updated>
+    <updated>2021-11-23T12:21:30.578Z</updated>
     
     <summary type="html">
     
@@ -42,7 +65,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2021-11-22T14:01:20.729Z</updated>
+    <updated>2021-11-23T12:21:30.574Z</updated>
     
     <summary type="html">
     
@@ -63,7 +86,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2021-11-22T14:01:20.797Z</updated>
+    <updated>2021-11-23T12:21:30.630Z</updated>
     
     <summary type="html">
     
@@ -88,7 +111,7 @@
     <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
     <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
     <published>2021-11-16T12:06:00.000Z</published>
-    <updated>2021-11-22T14:01:20.661Z</updated>
+    <updated>2021-11-23T12:21:30.518Z</updated>
     
     <summary type="html">
     
@@ -111,7 +134,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2021-11-22T14:01:20.793Z</updated>
+    <updated>2021-11-23T12:21:30.626Z</updated>
     
     <summary type="html">
     
@@ -136,7 +159,7 @@
     <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
     <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
     <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2021-11-22T14:01:20.697Z</updated>
+    <updated>2021-11-23T12:21:30.546Z</updated>
     
     <summary type="html">
     
@@ -161,7 +184,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
     <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2021-11-22T14:01:20.729Z</updated>
+    <updated>2021-11-23T12:21:30.574Z</updated>
     
     <summary type="html">
     
@@ -182,7 +205,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-11-22T14:01:20.725Z</updated>
+    <updated>2021-11-23T12:21:30.570Z</updated>
     
     <summary type="html">
     
@@ -207,7 +230,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.801Z</updated>
+    <updated>2021-11-23T12:21:30.634Z</updated>
     
     <summary type="html">
     
@@ -230,7 +253,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.801Z</updated>
+    <updated>2021-11-23T12:21:30.634Z</updated>
     
     <summary type="html">
     
@@ -255,7 +278,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.801Z</updated>
+    <updated>2021-11-23T12:21:30.630Z</updated>
     
     <summary type="html">
     
@@ -278,7 +301,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.801Z</updated>
+    <updated>2021-11-23T12:21:30.634Z</updated>
     
     <summary type="html">
     
@@ -301,7 +324,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.553Z</updated>
+    <updated>2021-11-23T12:21:30.434Z</updated>
     
     <summary type="html">
     
@@ -324,7 +347,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
     <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.661Z</updated>
+    <updated>2021-11-23T12:21:30.518Z</updated>
     
     <summary type="html">
     
@@ -347,7 +370,7 @@
     <link href="https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/"/>
     <id>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</id>
     <published>2021-10-21T12:02:00.000Z</published>
-    <updated>2021-11-22T14:01:20.669Z</updated>
+    <updated>2021-11-23T12:21:30.522Z</updated>
     
     <summary type="html">
     
@@ -376,7 +399,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
     <published>2021-10-19T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.661Z</updated>
+    <updated>2021-11-23T12:21:30.518Z</updated>
     
     <summary type="html">
     
@@ -399,7 +422,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</id>
     <published>2021-10-16T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.573Z</updated>
+    <updated>2021-11-23T12:21:30.450Z</updated>
     
     <summary type="html">
     
@@ -424,7 +447,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-sync-once/</id>
     <published>2021-10-14T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.661Z</updated>
+    <updated>2021-11-23T12:21:30.518Z</updated>
     
     <summary type="html">
     
@@ -447,7 +470,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-running-a-bat-file-in-background/</id>
     <published>2021-10-12T12:12:00.000Z</published>
-    <updated>2021-11-22T14:01:20.801Z</updated>
+    <updated>2021-11-23T12:21:30.634Z</updated>
     
     <summary type="html">
     
@@ -462,27 +485,6 @@
       <category term="Windows" scheme="https://hiyongz.github.io/tags/Windows/"/>
     
       <category term="bat" scheme="https://hiyongz.github.io/tags/bat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记 | 助推</title>
-    <link href="https://hiyongz.github.io/posts/reading-notes-for-nudge/"/>
-    <id>https://hiyongz.github.io/posts/reading-notes-for-nudge/</id>
-    <published>2021-10-10T12:52:00.000Z</published>
-    <updated>2021-11-22T14:01:20.733Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《助推》是诺贝尔经济学奖得主理查德·塞勒的著作，副标题为“如何做出有关健康、财富与幸福的最佳决策”，由于我们可能无法做出完全理性的选择，通过使用助推，可以引导人们做出更好的选择。任何能够显著改变社会人行为的因素都可以被称为“助推”。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
