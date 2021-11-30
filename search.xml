@@ -31,6 +31,87 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Python文件及目录处理方法</title>
+    <url>/posts/python-notes-for-file-and-direction-handling/</url>
+    <content><![CDATA[<p>Python可以用于处理文本文件和二进制文件，比如创建文件、读写文件等操作。本文介绍Python处理目录以及文件的相关方法。</p>
+<a id="more"></a>
+<p>下面先来介绍python目录处理相关方法。</p>
+<h1 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h1><h2 id="1-获取当前代码路径"><a href="#1-获取当前代码路径" class="headerlink" title="1. 获取当前代码路径"></a>1. 获取当前代码路径</h2><p>test_folder.py</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">print(__file__)</span><br><span class="line">print(sys.argv[<span class="number">0</span>])</span><br><span class="line">print(os.path.realpath(__file__))</span><br><span class="line">print(os.path.abspath(sys.argv[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<p>Out：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">D:/ProgramWorkspace/PythonNotes/03-File-Handling/test_folder.py</span><br><span class="line">D:/ProgramWorkspace/PythonNotes/03-File-Handling/test_folder.py</span><br><span class="line">D:\ProgramWorkspace\PythonNotes\03-File-Handling\test_folder.py</span><br><span class="line">D:\ProgramWorkspace\PythonNotes\03-File-Handling\test_folder.py</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-获取当前文件-file-的所在目录"><a href="#2-获取当前文件-file-的所在目录" class="headerlink" title="2. 获取当前文件__file__的所在目录"></a>2. 获取当前文件<code>__file__</code>的所在目录</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(os.getcwd())</span><br><span class="line">print(os.path.dirname(os.path.realpath(__file__)))</span><br><span class="line">print(os.path.split(os.path.realpath(__file__))[<span class="number">0</span>])</span><br><span class="line">path = os.path.dirname(os.path.realpath(__file__))</span><br></pre></td></tr></table></figure>
+<p>Out：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">D:\ProgramWorkspace\PythonNotes\03-File-Handling</span><br><span class="line">D:\ProgramWorkspace\PythonNotes\03-File-Handling</span><br><span class="line">D:\ProgramWorkspace\PythonNotes\03-File-Handling</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-获取当前文件名名称"><a href="#3-获取当前文件名名称" class="headerlink" title="3. 获取当前文件名名称"></a>3. 获取当前文件名名称</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(os.path.basename(sys.argv[<span class="number">0</span>])) <span class="comment"># 当前文件名名称</span></span><br><span class="line">print(os.path.basename(__file__))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Out：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">test_folder.py</span><br><span class="line">test_folder.py</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-拼接路径"><a href="#4-拼接路径" class="headerlink" title="4. 拼接路径"></a>4. 拼接路径</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">path = os.path.dirname(os.path.realpath(__file__))</span><br><span class="line">filename = os.path.basename(__file__)</span><br><span class="line">abspath = os.path.join(path, filename)</span><br><span class="line">print(abspath)</span><br></pre></td></tr></table></figure>
+<p>Out：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">D:\ProgramWorkspace\PythonNotes\03-File-Handling\test_folder.py</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-创建目录"><a href="#5-创建目录" class="headerlink" title="5. 创建目录"></a>5. 创建目录</h2><p>判断目录是否存在：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">os.path.exists(path)</span><br></pre></td></tr></table></figure>
+<p>创建目录</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(path): </span><br><span class="line">    print(<span class="string">f&quot;创建文件夹: <span class="subst">&#123;path&#125;</span>&quot;</span>)</span><br><span class="line">    os.makedirs(path)</span><br></pre></td></tr></table></figure>
+<h1 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h1><h2 id="1-创建文本文件"><a href="#1-创建文本文件" class="headerlink" title="1. 创建文本文件"></a>1. 创建文本文件</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text = <span class="string">&quot;Hello World!&quot;</span></span><br><span class="line">newfilepath = os.path.join(path, <span class="string">&quot;newfile.txt&quot;</span>)</span><br><span class="line">file = <span class="built_in">open</span>(newfilepath, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">file.write(text)  <span class="comment"># 写入内容信息</span></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<h2 id="2-判断文件是否存在"><a href="#2-判断文件是否存在" class="headerlink" title="2. 判断文件是否存在"></a>2. 判断文件是否存在</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(os.path.isfile(path)) </span><br><span class="line">print(os.path.isfile(newfilepath))</span><br><span class="line">print(os.path.exists(newfilepath))</span><br></pre></td></tr></table></figure>
+<p>Out：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p><code>os.path.isfile</code> 用于判断是否为文件且是否存在，<code>os.path.exists</code> 也可以用于判断文件是否存在，但还是建议使用<code>os.path.isfile</code> 判断文件，<code>os.path.exists</code> 判断目录是否存在。比如，某个文件为newfile，使用这两个方法都会返回True，无法判断到底是文件还是目录。</p>
+<h2 id="3-判断文件属性"><a href="#3-判断文件属性" class="headerlink" title="3. 判断文件属性"></a>3. 判断文件属性</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(os.access(newfilepath,os.F_OK)) <span class="comment"># 文件是否存在</span></span><br><span class="line">print(os.access(newfilepath,os.R_OK)) <span class="comment"># 文件是否可读</span></span><br><span class="line">print(os.access(newfilepath,os.W_OK)) <span class="comment"># 文件是否可以写入</span></span><br><span class="line">print(os.access(newfilepath,os.X_OK)) <span class="comment"># 文件是否有执行权限</span></span><br></pre></td></tr></table></figure>
+<p>Out：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p><code>os.access(newfilepath,os.F_OK)</code> 也可以用于判断文件是否存在。</p>
+<h2 id="4-打开文件"><a href="#4-打开文件" class="headerlink" title="4. 打开文件"></a>4. 打开文件</h2><p>打开文本文件或者二进制文件可以使用 <code>open()</code> 方法:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(filename, mode)</span><br></pre></td></tr></table></figure>
+<p>几种文件打开模式：</p>
+<ul>
+<li><code>b</code>：二进制模式</li>
+<li><code>t</code>：文本模式(默认)</li>
+<li><code>r</code>: 打开存在的文件，读操作(默认)。</li>
+<li><code>w</code>: 打开文件，写操作，先前文件中的内容会被删除。如果文件不存在会自动创建。 </li>
+<li><code>a</code>: 打开文件，追加操作，不会删除先前文件中的内容。如果文件不存在会自动创建。 </li>
+<li><code>x</code>：创建新文件，写操作，使用此模式打开存在的文件会抛出异常。</li>
+<li><code>r+</code>: 读、写操作，不会删除先前文件中的内容，但是会覆盖内容。</li>
+<li><code>w+</code>: 写、读操作，会删除先前文件中的内容。</li>
+<li><code>a+</code>: 追加、读操作，不会删除和覆盖先前文件中的内容。</li>
+<li><code>x+</code> ：创建新文件，读写操作。</li>
+</ul>
+<p><code>open()</code>方法的默认模式为 <code>rt</code> 模式，也就是读文本文件。</p>
+<p>另外需要注意filename的写法，比如文件路径是：<code>D:\test.txt</code> ，其中<code>\t</code> 可能会被转义，需要自前面加一个 <code>r</code> ：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">r&quot;D:\test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="5-写文件"><a href="#5-写文件" class="headerlink" title="5. 写文件"></a>5. 写文件</h2><p>读写文件都需要先打开文件，返回一个文件对象，然后对文件对象进行读写操作。写文件需要设置写权限，比如 <code>w</code>、<code>w+</code>、<code>a</code> 模式。</p>
+<p>写文件主要包括两种方法：</p>
+<ul>
+<li><code>file.write(str)</code>：写入字符串</li>
+<li><code>file.writelines(list)</code>：写入字符串列表，用于同时插入多个字符串。</li>
+</ul>
+<p>举个栗子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">text1 = <span class="string">&quot;Hello World!\n你好，世界！\r&quot;</span></span><br><span class="line">file.write(text1)  <span class="comment"># 写入内容信息</span></span><br><span class="line"></span><br><span class="line">text2 = [<span class="string">&quot;To the time to life, \n&quot;</span>, <span class="string">&quot;rather than to life in time.\r&quot;</span>]</span><br><span class="line">file.writelines(text2)</span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<p><code>w</code> 模式会删除先前文件中的内容，如果不想删除，需要直接追加到后面，可以使用<code>a</code> 和 <code>a+</code> 模式：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="6-读文件"><a href="#6-读文件" class="headerlink" title="6. 读文件"></a>6. 读文件</h2><p>常见的读取文件方法有以下几种：</p>
+<ul>
+<li>in操作符</li>
+<li>read()：读取所有数据，返回一个字符串。</li>
+<li>readline()：读取第一行</li>
+<li>readlines()：读取所有行，每行保存为列表的一个元素。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开并读取文件</span></span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">	print(line)</span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line">file.seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">print(file.read(<span class="number">5</span>))  <span class="comment"># </span></span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line">file.seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">print(file.readline(<span class="number">12</span>))</span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line">file.seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">print(file.readlines())</span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Hello World!</span><br><span class="line"></span><br><span class="line">你好，世界！</span><br><span class="line"></span><br><span class="line">To the time to life, </span><br><span class="line"></span><br><span class="line">rather than to life <span class="keyword">in</span> time.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Hello</span><br><span class="line"></span><br><span class="line">Hello World!</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;Hello World!\n&#x27;</span>, <span class="string">&#x27;你好，世界！\n&#x27;</span>, <span class="string">&#x27;To the time to life, \n&#x27;</span>, <span class="string">&#x27;rather than to life in time.\n&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<p>读取file对象的所有内容后，文本的光标会移动到最后，再次读取file需要将光标移到前面，使用 <code>file.seek(0, 0)</code> 方法可以将光标移到前面。还有一种解决方案是将读取的内容存一个在局部变量中。</p>
+<h2 id="7-with语句"><a href="#7-with语句" class="headerlink" title="7. with语句"></a>7. with语句</h2><p>with语句可用于异常处理，可以确保资源的适当获取及自动释放。使用with语句后就不需要调用<code>file.close()</code> 语句了，它会自动释放。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text1 = <span class="string">&quot;Hello World!\n你好，世界！\r&quot;</span></span><br><span class="line">text2 = [<span class="string">&quot;To the time to life, \n&quot;</span>, <span class="string">&quot;rather than to life in time.\r&quot;</span>]</span><br><span class="line"><span class="comment"># 写</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    file.write(text1)</span><br><span class="line">    file.writelines(text2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&quot;r+&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">	print(file.read())</span><br></pre></td></tr></table></figure>
+<p>with语句对处理大文件非常有用，比如10G大小的文件， with语句会进行上下文管理。</p>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Typora集成免费图床：PicGo + Gitee</title>
     <url>/posts/typora-picture-host-setting-with-picgo-and-gitee/</url>
     <content><![CDATA[<p>我主要使用Typora来记笔记，它是一款非常好用的MarkDown编辑器，Typora在0.9.84版本之后支持使用PicGo上传图像，本文介绍使用Gitee和PicGo搭建免费图床。<br><a id="more"></a></p>
