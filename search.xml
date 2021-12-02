@@ -31,6 +31,173 @@
 ]]></content>
   </entry>
   <entry>
+    <title>黑苹果安装笔记（更新）</title>
+    <url>/posts/macos-bigsur-hackintosh-installation-tutorial/</url>
+    <content><![CDATA[<p>本文记录黑苹果安装过程</p>
+<a id="more"></a>
+<p>安装成功的设备：</p>
+<p><strong>笔记本：</strong></p>
+<p>1、ASUS FL8000UQ</p>
+<ul>
+<li>EFI文件：<a href="https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh">https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh</a></li>
+</ul>
+<p><strong>台式机：</strong></p>
+<p>1、联想启天M420 B360</p>
+<ul>
+<li>EFI文件：<a href="https://github.com/bpefei/Lenovo-QiTian-M425-N050-OpenCore-EFI">https://github.com/bpefei/Lenovo-QiTian-M425-N050-OpenCore-EFI</a></li>
+<li>解锁CFG Lock方法：<a href="https://github.com/oscnet/opencore-M420">https://github.com/oscnet/opencore-M420</a></li>
+</ul>
+<h1 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h1><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p>1、md5检查器WinMD5：<a href="https://www.winmd5.com/">https://www.winmd5.com/</a></p>
+<p>2、磁盘分区工具Disk Genuis：<a href="https://www.diskgenius.cn/">https://www.diskgenius.cn/</a></p>
+<p>3、U盘制作工具(选一个就行，我使用的是TransMac，balenaEtcher没有制作成功)：</p>
+<ul>
+<li>TransMac：<a href="https://www.acutesystems.com/scrtm.htm">https://www.acutesystems.com/scrtm.htm</a></li>
+<li>balenaEtcher：<a href="https://www.balena.io/etcher/">https://www.balena.io/etcher/</a></li>
+</ul>
+<p>4、下载安装镜像</p>
+<ul>
+<li>镜像下载：使用【黑果小兵】提供的镜像<a href="https://blog.daliansky.net/categories/%E4%B8%8B%E8%BD%BD/%E9%95%9C%E5%83%8F/">https://blog.daliansky.net/categories/%E4%B8%8B%E8%BD%BD/%E9%95%9C%E5%83%8F/</a> </li>
+<li>macOS Monterey 12.1 21C5021h：<a href="https://mp.weixin.qq.com/s/oIpn3Aa6QeCXdtl8YDGBvA">https://mp.weixin.qq.com/s/oIpn3Aa6QeCXdtl8YDGBvA</a> </li>
+<li>下载完成后使用WinMD5校验md5值是否一致，如果不一致需要重新下载。</li>
+</ul>
+<p>5、下载EFI</p>
+<ul>
+<li>很多大佬分享了自己的EFI配置文件，可以参考<a href="https://blog.daliansky.net/Hackintosh-long-term-maintenance-model-checklist.html">Hackintosh黑苹果长期维护机型整理清单</a>，选择适合自己的EFI。</li>
+<li>如果在清单中找不到你的机型的EFI，可以到github上搜索。</li>
+<li>如果还是没有找到，可以使用相近型号（配置相似）的EFI文件，新电脑可能找不到现成的EFI文件。自己制作需要耗费大量精力和智力，如果对这方面不了解建议放弃（个人观点）。</li>
+</ul>
+<h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><p>准备一个大于16G的U盘，用来制作系统盘。</p>
+<p>硬盘最好使用固态硬盘，或者要兼容 APFS格式的硬盘，因为High Sierra 以上的系统都会自动转换硬盘为 APFS 格式。</p>
+<p>如果磁盘为MBR格式，需要转换为GUID格式。可以使用DiskGenius工具进行转换：选中要转换的磁盘，点击菜单栏的【磁盘】，点击【转换分区表类型为GUID格式】，转换完成后保存更改。</p>
+<p>其它硬件配置参考EFI文件对应的说明文档，检查你的电脑是否符合。</p>
+<h2 id="分配磁盘空间"><a href="#分配磁盘空间" class="headerlink" title="分配磁盘空间"></a>分配磁盘空间</h2><p>分配磁盘空间用于安装macOS系统。</p>
+<p>打开window自带的【磁盘管理】，如果没有空闲的磁盘分区，可以选择一个剩余空间大的磁盘，右键选择的磁盘选择【压缩卷】，单独分配部分空间出来，MAC系统需要占用30G左右，我分配了120G。</p>
+<p>获取了单独的分区后，右键选择【删除卷】，得到120G的【空闲】分区</p>
+<p>打开磁盘分区工具Disk Genuis，找到刚才删除的卷，右键单击选择【建立新分区】，文件系统类型选择【EFI system partition】主要用于分配EFI空间。EFI系统分区(ESP)用于存放可供引导启动系统的文件，将EFI文件存放在EFI系统分区中，这样黑苹果就不用使用U盘来引导了。</p>
+<p>分区大小必须大于300Mb，我设置的大小为500Mb。</p>
+<p>EFI分区设置完成后回到【磁盘管理】，选择剩下的未分配空间，右键选择【新建简单卷】，分配驱动器号，注意<strong>不要格式化</strong>。</p>
+<h2 id="U盘制作安装镜像"><a href="#U盘制作安装镜像" class="headerlink" title="U盘制作安装镜像"></a>U盘制作安装镜像</h2><p>将macOS系统镜像写到U盘上</p>
+<p>以管理员身份运行  TransMac，选择你的U盘：</p>
+<ol>
+<li>格式化：选择【Format Disk for Mac】进行格式化操作</li>
+<li>输入系统镜像：选择【Restore with Disk Image】，选择下载的系统镜像，等待刷入完成。</li>
+</ol>
+<p>打开DiskGenius，替换U盘中的EFI</p>
+<ol>
+<li>将U盘中的EFI删除</li>
+<li>将刚才下载的EFI复制到U盘</li>
+</ol>
+<h2 id="定制USB"><a href="#定制USB" class="headerlink" title="定制USB"></a>定制USB</h2><p>macOS Big Sur 11.3 限制了每个 USB 控制器 15 个端口上限，目前 <code>OpenCore</code> <code>v0.6.8</code> 关于 <code>Kernel</code> 的 <code>Quirk</code> - <code>XhciPortLimit</code> 在 <code>macOS Big Sur 11.3</code> 下失效，黑苹果无法使用超出 15 个以上的 USB 端口，未来 <code>OpenCore</code> 更新版本是否会修复还没有确切的消息。因此，如果要安装macOS Big Sur 11.3及以上版本，需要提前<strong><code>定制USB</code></strong>。</p>
+<p>有多种定制USB方法，下面介绍在<strong>Windows10</strong>上定制USB的方法。</p>
+<h3 id="软件准备-1"><a href="#软件准备-1" class="headerlink" title="软件准备"></a>软件准备</h3><p>提前准备如下软件、工具：</p>
+<ol>
+<li><a href="https://heipg.cn/tag/usbtoolbox">USBToolBox</a>：USB 接口发现及 USBMap.kext 生成工具</li>
+<li>USBToolBox.kext</li>
+<li>DiskGenius</li>
+<li>ProperTree：<a href="https://heipg.cn/apps/propertree-110.html">https://heipg.cn/apps/propertree-110.html</a></li>
+<li><a href="https://heipg.cn/tag/hackintool">Hackintool</a>：用以验证定制结果</li>
+<li>USB3.0 接口的 U 盘</li>
+<li>如果有 Type-c 接口，准备 Type-c 接口的 U 盘</li>
+</ol>
+<h3 id="生成-UTBMap-kext文件"><a href="#生成-UTBMap-kext文件" class="headerlink" title="生成 UTBMap.kext文件"></a>生成 UTBMap.kext文件</h3><p>打开USBToolBox，输入 <code>D</code> 发现端口</p>
+<p><img src="USBToolBox-D.png" width="70%" height="70%" /></p>
+<p>使用 USB3.0 的 U 盘挨个插拔所有USB接口，识别出 U 盘（变为绿色）后再移除设备。</p>
+<p><img src="USBToolBox-D2.jpg" width="70%" height="70%" /></p>
+<p>可以看到一共有16个USB接口，由于USB3.0 接口同时兼容 USB2.0 接口，因此 3.0 接口会有两个端口。也就是本设备有6个USB3.0接口，4个USB2.0接口，一般机箱后面的接口为USB2.0。</p>
+<p>全部插拔完成后，输入 B 回车返回上一级菜单。</p>
+<p>然后输入S，回车</p>
+<p><img src="USBToolBox-S.png" width="70%" height="70%" /></p>
+<p>进入接口选择和 Kext 创建界面。</p>
+<p><img src="USBToolBox-S2.png" width="70%" height="70%" /></p>
+<p>脚本会自动选择刚才识别到的USB接口。</p>
+<p>输入 K 回车，生成 <code>UTBMap.kext</code> 文件，文件会生成到软件同级目录下。</p>
+<p><img src="USBToolBox-K.png" width="70%" height="70%" /></p>
+<h3 id="删除多余端口"><a href="#删除多余端口" class="headerlink" title="删除多余端口"></a>删除多余端口</h3><p>前面说过macOS Big Sur 11.3及以上版本只支持15个USB端口，现在有16个，需要删除多余的端口。下面删除一个USB2.0端口。</p>
+<p>使用ProperTree打开 <code>UTBMap.kext\Contents\Info.plist</code> 文件，删除USB2.0端口10：</p>
+<p><img src="ProperTree-delete-port.png" width="70%" height="70%" /></p>
+<p>删除后保存。</p>
+<p>然后使用DiskGenius工具将USBToolBox.kext和UTBMap.kext文件复制到 <code>/EFI/OC/Kexts/</code>目录下</p>
+<p><img src="diskgenius-usbkext.png" width="70%" height="70%" /></p>
+<h3 id="更新config-plist"><a href="#更新config-plist" class="headerlink" title="更新config.plist"></a>更新config.plist</h3><p>驱动放到Kexts目录下之后需要更新config.plist文件，将 <code>/EFI/OC</code> 目录下的config.plist文件复制到桌面。</p>
+<p><img src="diskgenius-config-list.png" width="70%" height="70%" /></p>
+<p>使用ProperTree打开config.plist文件。进入Kernel -&gt; Add，选中最后一项键值对，<code>Ctrl + c</code> 复制，然后选中Add，<code>Ctrl + v</code> 粘贴，执行两次粘贴操作。</p>
+<p>修改对应的值，具体见下图。</p>
+<p><img src="ProperTree-config-list.png" width="70%" height="70%" /></p>
+<p>取消加载USBInjectAll.kext以及USBPorts.kext(若没有可忽略)</p>
+<p><img src="USBPorts-false.png" width="70%" height="70%" /></p>
+<p>设置XhciPortLimit（Kernel -&gt; Quirks -&gt; XhciPortLimit）为false</p>
+<p><img src="XhciPortLimit-false.pngg" width="70%" height="70%" /></p>
+<p>设置完成后保存。</p>
+<p>使用DiskGenius将更新完成的config.plist文件覆盖到<code>/EFI/OC</code> 目录下。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="设置BIOS"><a href="#设置BIOS" class="headerlink" title="设置BIOS"></a>设置BIOS</h2><p>win10系统接入BIOS界面方法（不同电脑接入BIOS方法不一样，请网上搜索具体步骤）：<br>点击开始菜单，选择【设置】-&gt; 【恢复】-&gt;【立即重新启动】-&gt; 【疑难解答】-&gt; 【高级选项】-&gt;【UEFI固件设置】</p>
+<p>BIOS设置：</p>
+<ul>
+<li>关闭<code>SecureBoot</code></li>
+<li>关闭<code>FastBoot</code></li>
+<li>设置第一启动方式为U盘启动</li>
+<li><p>解锁<code>CFG Lock</code> (<strong>注意</strong>：不同主板的CFG Lock解锁方式不一样，下面是ASUS-FL8000UQ的解锁方式)</p>
+<ol>
+<li>将U盘格式化为FAT32格式；</li>
+<li>打开CFG文件夹，将里面的EFI文件复制到U盘中，重启按ESC键选择U盘启动；</li>
+<li>输入命令<code>setup_var_3 0x527 0x00</code>即可解锁CFG Lock。</li>
+</ol>
+</li>
+</ul>
+<p>为什么要解锁CFG Lock呢？这涉及到MSR寄存器（Model Specific Register，特定模块寄存器），属于非标准寄存器，用来控制CPU的工作环境和读取工作状态，比如电压，温度，功耗等非程序性能指标。苹果系统的电源管理、CPU的P-state、C-state就是放在MSR寄存器里的。大多数UEFI主板厂家，锁定了MSR寄存器的第15位为只读，也就是MSR 0xE2 Locking（BIOS 中叫CFG Lock）。MSR 0xE2被锁定为只读后，AppleIntelCPUPowernamegement一旦去写入数据，马上就核心崩溃。安装黑苹果时，必须解锁MSR 0xE2，否则无法使用原生电源管理。</p>
+<h2 id="安装macOS"><a href="#安装macOS" class="headerlink" title="安装macOS"></a>安装<code>macOS</code></h2><p>重启，按【ESC】（注意不同笔记本可能按键不一样）选择U盘引导，然后就是选择安装macOS了。</p>
+<p>耐心等待…</p>
+<p>出现安装界面，选择<strong><code>磁盘工具</code></strong>，点击<strong><code>继续</code></strong></p>
+<p>进入<strong><code>磁盘工具</code></strong>，选择准备的磁盘：这里要注意，千万不要选择有数据的盘，否则数据会全部删除。</p>
+<p>点击<code>抹掉</code>，在弹出的窗口中输入名称，格式选择<strong><code>APFS</code></strong></p>
+<p>点击<code>抹除</code>，然后等待操作结束，点击<strong><code>完成</code></strong>，退出磁盘工具，选择<strong><code>安装macOS</code></strong>，点击<strong><code>继续</code></strong>，遇到同意就点击同意，选择要安装的磁盘卷标，点击继续。</p>
+<p>耐心等待，会多次重启…</p>
+<p>然后是系统初始化设置…</p>
+<h1 id="安装后的系统设置"><a href="#安装后的系统设置" class="headerlink" title="安装后的系统设置"></a>安装后的系统设置</h1><p>先打开终端，输入几行命令：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo spctl --master-disable		<span class="comment"># 启用macOS安装应用允许任何来源</span></span><br><span class="line">sudo kextcache -i /						<span class="comment"># 重建缓存</span></span><br></pre></td></tr></table></figure>
+<p>安装homebrew<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh&#x2F;bin&#x2F;zsh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;gitee.com&#x2F;cunkai&#x2F;HomebrewCN&#x2F;raw&#x2F;master&#x2F;Homebrew.sh)&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="将U盘中的EFI复制进硬盘"><a href="#将U盘中的EFI复制进硬盘" class="headerlink" title="将U盘中的EFI复制进硬盘"></a>将U盘中的EFI复制进硬盘</h1><p>目的是脱离U盘启动。</p>
+<p>下面介绍使用Hackintool工具配置方法。</p>
+<p>macos下载Hackintool工具：<a href="https://github.com/headkaze/Hackintool">https://github.com/headkaze/Hackintool</a></p>
+<p>1、打开<code>Hackintool</code>工具，点击<code>磁盘</code>图标</p>
+<p><img src="Hackintool-EFI.png" width="70%" height="70%" /></p>
+<p>2、选择安装系统的磁盘，点击挂载图标，输入用户密码</p>
+<p>前面分配磁盘空间时新建了500Mb大小的EFI分区。</p>
+<p><img src="Hackintool-EFI2.png" width="70%" height="70%" /></p>
+<p>3、点击挂载磁盘和U盘的EFI分区，打开文件夹，将U盘的<code>EFI</code>分区中的<code>EFI</code>目录复制到固态硬盘的<code>EFI</code>分区里就可以了。</p>
+<p>更多配置方法参考：</p>
+<ol>
+<li><a href="https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html">https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MjM5OTAzMTI0OA==&amp;mid=2450024555&amp;idx=2&amp;sn=a9ae9fd12338b551419bc8d7fe2149d8&amp;chksm=b13d70d4864af9c2ac0765b57664c3c7f1f7389c0711a065c2c5a121952295b8529036276d0c&amp;scene=178&amp;cur_album_id=1512094489392250881#rd">【黑果小兵】【微信首发】Big Sur安装教程</a></li>
+</ol>
+<p>好了，到此macOS就安装完成了！</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://heipg.cn/">https://heipg.cn/</a></li>
+<li><a href="https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html">https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html</a></li>
+<li><a href="https://www.zdynb.cn/2020/jie-suo-cfg-lock.html">https://www.zdynb.cn/2020/jie-suo-cfg-lock.html</a></li>
+<li><a href="https://blog.daliansky.net/Hackintosh-long-term-maintenance-model-checklist.html">https://blog.daliansky.net/Hackintosh-long-term-maintenance-model-checklist.html</a></li>
+<li><a href="https://derrors.cn/index.php/hackintosh/dvmt-cfg.html">https://derrors.cn/index.php/hackintosh/dvmt-cfg.html</a></li>
+<li><p><a href="https://blog.csdn.net/weixin_42525211/article/details/112126322">https://blog.csdn.net/weixin_42525211/article/details/112126322</a></p>
+</li>
+<li><p><a href="https://www.bilibili.com/video/BV1UU4y1J7RV/">https://www.bilibili.com/video/BV1UU4y1J7RV/</a></p>
+</li>
+<li><a href="https://mp.weixin.qq.com/s/rUmTZMLC5Iyzzshk9K2v8A">https://mp.weixin.qq.com/s/rUmTZMLC5Iyzzshk9K2v8A</a></li>
+<li><a href="https://mp.weixin.qq.com/s/dlP60QcxcLrGYuXN4I44lg">https://mp.weixin.qq.com/s/dlP60QcxcLrGYuXN4I44lg</a></li>
+<li>OCC配置器使用入门：驱动更新： <a href="https://post.smzdm.com/p/anxm88q2/">https://post.smzdm.com/p/anxm88q2/</a></li>
+<li>OpenCore Configurator下载：<a href="https://heipg.cn/tag/opencore-configurator">https://heipg.cn/tag/opencore-configurator</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>其它</category>
+      </categories>
+      <tags>
+        <tag>iOS</tag>
+        <tag>黑苹果</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python文件及目录处理方法</title>
     <url>/posts/python-notes-for-file-and-direction-handling/</url>
     <content><![CDATA[<p>Python可以用于处理文本文件和二进制文件，比如创建文件、读写文件等操作。本文介绍Python处理目录以及文件的相关方法。</p>
@@ -4130,95 +4297,6 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
       </categories>
       <tags>
         <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>黑苹果安装笔记</title>
-    <url>/posts/macos-bigsur-hackintosh-installation-tutorial/</url>
-    <content><![CDATA[<p>本文记录黑苹果安装过程</p>
-<a id="more"></a>
-<h1 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h1><h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p>1、md5检查器WinMD5：<a href="https://www.winmd5.com/">https://www.winmd5.com/</a></p>
-<p>2、磁盘分区工具Disk Genuis：<a href="https://www.diskgenius.cn/">https://www.diskgenius.cn/</a></p>
-<p>3、U盘制作工具(选一个就行，我使用的是TransMac，balenaEtcher没有制作成功)：</p>
-<ul>
-<li>TransMac：<a href="https://www.acutesystems.com/scrtm.htm">https://www.acutesystems.com/scrtm.htm</a></li>
-<li>balenaEtcher：<a href="https://www.balena.io/etcher/">https://www.balena.io/etcher/</a></li>
-</ul>
-<p>4、下载安装镜像</p>
-<ul>
-<li>镜像下载地址：使用【黑果小兵】提供的镜像<a href="https://blog.daliansky.net/categories/%E4%B8%8B%E8%BD%BD/%E9%95%9C%E5%83%8F/">https://blog.daliansky.net/categories/%E4%B8%8B%E8%BD%BD/%E9%95%9C%E5%83%8F/</a> ，我下载的是<a href="https://blog.daliansky.net/macOS-BigSur-11.2.3-20D91-Release-version-with-OC-0.6.7-and-Clover-5131-and-PE-original-image.html">acOS Big Sur 11.2.3 20D91</a>。</li>
-<li>下载完成后使用WinMD5校验md5值是否一致，如果不一致需要重新下载。</li>
-</ul>
-<p>5、下载EFI</p>
-<ul>
-<li>很多大佬分享了自己的EFI配置文件，可以参考<a href="https://blog.daliansky.net/Hackintosh-long-term-maintenance-model-checklist.html">Hackintosh黑苹果长期维护机型整理清单</a>，选择适合自己的EFI。</li>
-<li>我的机型选择：<a href="https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh">https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh</a></li>
-</ul>
-<h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><p>我的笔记本型号为ASUS-FL8000UQ</p>
-<p>处理器：Intel i7-8550U</p>
-<p>操作系统为Win10</p>
-<p>其它配置可以参考：<a href="https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh">https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh</a>，差异不大。</p>
-<h2 id="分配磁盘空间"><a href="#分配磁盘空间" class="headerlink" title="分配磁盘空间"></a>分配磁盘空间</h2><p>分配磁盘空间用于安装macOS系统。</p>
-<p>打开window自带的磁盘管理，如果没有空闲的磁盘分区，可以选择一个剩余空间大的磁盘，右键选择的磁盘选择【压缩卷】，单独分配部分空间出来，我分配了120G。</p>
-<p>获取了单独的分区后，右键选择【删除卷】，得到120G的【空闲】分区</p>
-<p>打开磁盘分区工具Disk Genuis，找到刚才删除的卷，右键单击选择【建立新分区】，文件系统类型选择【EFI system partition】主要用于分配EFI空间。EFI系统分区(ESP)用于存放可供引导启动系统的文件，将EFI文件存放在EFI系统分区中，这样黑苹果不用使用U盘来引导了。</p>
-<p>分区大小必须大于300Mb，我设置的大小为500Mb。</p>
-<p>EFI分区设置完成后回到磁盘管理，选择剩下的未分配空间，右键选择【新建简单卷】，分配驱动器号，注意<strong>不要格式化</strong>。</p>
-<h2 id="U盘制作安装镜像"><a href="#U盘制作安装镜像" class="headerlink" title="U盘制作安装镜像"></a>U盘制作安装镜像</h2><p>将macOS系统镜像写到U盘上</p>
-<p>以管理员身份运行  TransMac，选择你的U盘：</p>
-<ol>
-<li>格式化：择【Format Disk for Mac】进行格式化操作</li>
-<li>输入系统镜像：选择【Restore with Disk Image】，选择下载的系统镜像，等待刷入完成。</li>
-</ol>
-<p>打开DiskGenius，替换U盘中的EFI</p>
-<ol>
-<li>将U盘中的EFI删除</li>
-<li>将刚才下载的EFI复制到U盘</li>
-</ol>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="设置BIOS"><a href="#设置BIOS" class="headerlink" title="设置BIOS"></a>设置BIOS</h2><p>win10系统接入BIOS界面方法：<br>点击开始菜单，选择【设置】-&gt; 【恢复】-&gt;【立即重新启动】-&gt; 【疑难解答】-&gt; 【高级选项】-&gt;【UEFI固件设置】</p>
-<p>BIOS设置：<a href="https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh">https://github.com/KKKIIINNN/ASUS-FL8000UQ-Hackintosh</a></p>
-<ul>
-<li><p>关闭<code>SecureBoot</code></p>
-</li>
-<li><p>关闭<code>FastBoot</code></p>
-</li>
-<li><p>解锁<code>CFG Lock</code></p>
-<ol>
-<li>将U盘格式化为FAT32格式；</li>
-<li>打开CFG文件夹，将里面的EFI文件复制到U盘中，重启按ESC键选择U盘启动；</li>
-<li>输入命令<code>setup_var_3 0x527 0x00</code>即可解锁CFG Lock。</li>
-</ol>
-</li>
-<li>可以设置第一启动方式为U盘启动</li>
-</ul>
-<h2 id="安装macOS-Big-Sur"><a href="#安装macOS-Big-Sur" class="headerlink" title="安装macOS Big Sur"></a>安装<code>macOS Big Sur</code></h2><p>重启，按【ESC】（注意不同笔记本可能按键不一样）选择U盘引导，然后就是选择安装macOS Big Sur了。</p>
-<p>耐心等待…</p>
-<p>出现安装界面，选择<code>磁盘工具</code>，点击<code>继续</code></p>
-<p>进入<code>磁盘工具</code>，选择准备的磁盘：这里要注意，千万不要选择有数据的盘，否则数据会全部删除。</p>
-<p>点击<code>抹掉</code>，在弹出的窗口中输入名称，格式选择<code>APFS</code></p>
-<p>点击<code>抹除</code>，然后等待操作结束，点击<code>完成</code>，退出磁盘工具，选择<code>安装macOS</code>，点击<code>继续</code>，遇到同意就点击同意，选择要安装的磁盘卷标，点击继续。</p>
-<p>耐心等待…</p>
-<p>然后是系统初始化设置…</p>
-<h1 id="安装后的系统设置"><a href="#安装后的系统设置" class="headerlink" title="安装后的系统设置"></a>安装后的系统设置</h1><p>先打开终端，输入几行命令：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo spctl --master-disable		<span class="comment"># 启用macOS安装应用允许任何来源</span></span><br><span class="line">sudo kextcache -i /						<span class="comment"># 重建缓存</span></span><br></pre></td></tr></table></figure>
-<p>重建缓存：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo chown -R root:wheel /System/Library/Extensions/</span><br><span class="line">sudo chmod -R 755 /System/Library/Extensions/</span><br><span class="line">sudo kmutil install --update-all</span><br><span class="line">sudo kcditto</span><br></pre></td></tr></table></figure>
-<p>安装homebrew<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh&#x2F;bin&#x2F;zsh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;gitee.com&#x2F;cunkai&#x2F;HomebrewCN&#x2F;raw&#x2F;master&#x2F;Homebrew.sh)&quot;</span><br></pre></td></tr></table></figure></p>
-<h1 id="将U盘中的EFI复制进硬盘"><a href="#将U盘中的EFI复制进硬盘" class="headerlink" title="将U盘中的EFI复制进硬盘"></a>将U盘中的EFI复制进硬盘</h1><p>目的是脱离U盘启动。</p>
-<p>macos下载Hackintool工具：<a href="https://github.com/headkaze/Hackintool">https://github.com/headkaze/Hackintool</a></p>
-<p>具体配置方法参考：<a href="https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html">https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html</a></p>
-<p>好了，到此macOS就安装完成了！</p>
-<p>参考：</p>
-<p><a href="https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html">https://blog.daliansky.net/Lenovo-Tianyi-510s-Mini-and-macOS-BigSur-Installation-Tutorial.html</a></p>
-<center><b>--THE END--<b></center>
-
-]]></content>
-      <categories>
-        <category>其它</category>
-      </categories>
-      <tags>
-        <tag>iOS</tag>
-        <tag>黑苹果</tag>
       </tags>
   </entry>
   <entry>
