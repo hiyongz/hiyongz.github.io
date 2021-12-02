@@ -198,6 +198,35 @@
       </tags>
   </entry>
   <entry>
+    <title>Web自动化测试之playwright：执行JavaScript脚本</title>
+    <url>/posts/web-testing-with-playwright-for-javascript-expression/</url>
+    <content><![CDATA[<p>在<a href="https://blog.csdn.net/u010698107/article/details/111415957">Selenium执行JavaScript脚本</a>中介绍了Selenium执行JavaScript脚本的方法，playwright也支持执行JavaScript脚本，playwright本身就是一个Node.js库，本文介绍playwright-python执行js脚本的方法。</p>
+<a id="more"></a>
+<p>playwright-python使用 <code>evaluate()</code> 方法来执行JavaScript脚本，和selenium类似，也有两种方法实现元素操作。</p>
+<ul>
+<li>page.evaluate()：直接执行完整的JavaScript脚本。</li>
+<li>locator.evaluate()：定位到元素后再使用JavaScript执行操作。</li>
+</ul>
+<h1 id="page-evaluate"><a href="#page-evaluate" class="headerlink" title="page.evaluate()"></a>page.evaluate()</h1><p>在浏览器上下文中执行：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">page.evaluate(expression, **kwargs)</span><br></pre></td></tr></table></figure>
+<p>示例代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestJs</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup</span>(<span class="params">self</span>):</span></span><br><span class="line">        playwright = sync_playwright().start()</span><br><span class="line">        self.browser = playwright.chromium.launch(headless=<span class="literal">False</span>)</span><br><span class="line">        self.context = self.browser.new_context()</span><br><span class="line">        self.page = self.context.new_page()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">teardown</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.browser.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_case1</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line">        <span class="comment"># 获取浏览器语言</span></span><br><span class="line">        lan = self.page.evaluate(<span class="string">&quot;window.navigator.language;&quot;</span>)</span><br><span class="line">        <span class="keyword">assert</span> lan == <span class="string">&quot;zh-CN&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 获取当前浏览器标题：&quot;百度一下，你就知道&quot;</span></span><br><span class="line">        title = self.page.evaluate(<span class="string">&quot;document.title;&quot;</span>)</span><br><span class="line">        <span class="keyword">assert</span> title == self.page.title()</span><br><span class="line"></span><br><span class="line">        self.page.evaluate(<span class="string">&#x27;document.getElementById(&quot;kw&quot;).value = &quot;test&quot;&#x27;</span>) <span class="comment"># 搜索框输入“test”</span></span><br><span class="line">        text = self.page.evaluate(<span class="string">&quot;document.getElementById(&#x27;kw&#x27;).value&quot;</span>) <span class="comment"># 读取输入的值</span></span><br><span class="line">        <span class="keyword">assert</span> text == <span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br><span class="line">        self.page.evaluate(<span class="string">&#x27;document.getElementById(&quot;su&quot;).click()&#x27;</span>)  <span class="comment"># 点击 【百度一下】；page.click(&quot;text=百度一下&quot;)</span></span><br><span class="line">        self.page.click(<span class="string">&quot;#page &gt;&gt; text=2&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="locator-evaluate"><a href="#locator-evaluate" class="headerlink" title="locator.evaluate()"></a>locator.evaluate()</h1><p>先定位到元素后再进行js操作：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">handle = page.query_selector(<span class="string">&quot;id=kw&quot;</span>)</span><br><span class="line">handle.evaluate(<span class="string">&#x27;node =&gt; node.value = &quot;test&quot;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>下面来看一个例子，实现上面代码中的操作：输入“test”，点击【百度一下】</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_case2</span>(<span class="params">self</span>):</span></span><br><span class="line">	self.page.goto(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 搜索框输入“test”</span></span><br><span class="line">	input_handle = self.page.query_selector(<span class="string">&quot;id=kw&quot;</span>)</span><br><span class="line">	input_handle.evaluate(<span class="string">&#x27;node =&gt; node.value = &quot;test&quot;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">	text = input_handle.evaluate(<span class="string">&#x27;node =&gt; node.value&#x27;</span>) <span class="comment"># 读取输入的值</span></span><br><span class="line">	print(text)</span><br><span class="line">	<span class="keyword">assert</span> text == <span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment"># 点击 【百度一下】</span></span><br><span class="line">	submit_handle = self.page.query_selector(<span class="string">&quot;id=su&quot;</span>)</span><br><span class="line">	submit_handle.evaluate(<span class="string">&#x27;node =&gt; node.click()&#x27;</span>)</span><br><span class="line">	time.sleep(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>Web自动化测试</category>
+      </categories>
+      <tags>
+        <tag>playwright</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python文件及目录处理方法</title>
     <url>/posts/python-notes-for-file-and-direction-handling/</url>
     <content><![CDATA[<p>Python可以用于处理文本文件和二进制文件，比如创建文件、读写文件等操作。本文介绍Python处理目录以及文件的相关方法。</p>

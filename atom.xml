@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-12-02T13:04:28.516Z</updated>
+  <updated>2021-12-02T13:11:53.518Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-12-02T20:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.516Z</updated>
+    <updated>2021-12-02T13:11:53.518Z</updated>
     
     <summary type="html">
     
@@ -40,11 +40,34 @@
   </entry>
   
   <entry>
+    <title>Web自动化测试之playwright：执行JavaScript脚本</title>
+    <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/"/>
+    <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/</id>
+    <published>2021-12-02T09:30:36.000Z</published>
+    <updated>2021-12-02T13:11:53.622Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/111415957&quot;&gt;Selenium执行JavaScript脚本&lt;/a&gt;中介绍了Selenium执行JavaScript脚本的方法，playwright也支持执行JavaScript脚本，playwright本身就是一个Node.js库，本文介绍playwright-python执行js脚本的方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="playwright" scheme="https://hiyongz.github.io/tags/playwright/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python文件及目录处理方法</title>
     <link href="https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/</id>
     <published>2021-11-30T12:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.568Z</updated>
+    <updated>2021-12-02T13:11:53.562Z</updated>
     
     <summary type="html">
     
@@ -67,7 +90,7 @@
     <link href="https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/"/>
     <id>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</id>
     <published>2021-11-25T12:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.636Z</updated>
+    <updated>2021-12-02T13:11:53.622Z</updated>
     
     <summary type="html">
     
@@ -96,7 +119,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
     <published>2021-11-23T09:30:36.000Z</published>
-    <updated>2021-12-02T13:04:28.636Z</updated>
+    <updated>2021-12-02T13:11:53.622Z</updated>
     
     <summary type="html">
     
@@ -119,7 +142,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2021-12-02T13:04:28.576Z</updated>
+    <updated>2021-12-02T13:11:53.570Z</updated>
     
     <summary type="html">
     
@@ -140,7 +163,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2021-12-02T13:04:28.576Z</updated>
+    <updated>2021-12-02T13:11:53.570Z</updated>
     
     <summary type="html">
     
@@ -161,7 +184,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2021-12-02T13:04:28.640Z</updated>
+    <updated>2021-12-02T13:11:53.626Z</updated>
     
     <summary type="html">
     
@@ -186,7 +209,7 @@
     <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
     <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
     <published>2021-11-16T12:06:00.000Z</published>
-    <updated>2021-12-02T13:04:28.504Z</updated>
+    <updated>2021-12-02T13:11:53.506Z</updated>
     
     <summary type="html">
     
@@ -209,7 +232,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2021-12-02T13:04:28.636Z</updated>
+    <updated>2021-12-02T13:11:53.622Z</updated>
     
     <summary type="html">
     
@@ -234,7 +257,7 @@
     <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
     <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
     <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2021-12-02T13:04:28.544Z</updated>
+    <updated>2021-12-02T13:11:53.542Z</updated>
     
     <summary type="html">
     
@@ -259,7 +282,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
     <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2021-12-02T13:04:28.576Z</updated>
+    <updated>2021-12-02T13:11:53.570Z</updated>
     
     <summary type="html">
     
@@ -280,7 +303,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-12-02T13:04:28.568Z</updated>
+    <updated>2021-12-02T13:11:53.566Z</updated>
     
     <summary type="html">
     
@@ -305,7 +328,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.644Z</updated>
+    <updated>2021-12-02T13:11:53.630Z</updated>
     
     <summary type="html">
     
@@ -328,7 +351,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.644Z</updated>
+    <updated>2021-12-02T13:11:53.630Z</updated>
     
     <summary type="html">
     
@@ -353,7 +376,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.644Z</updated>
+    <updated>2021-12-02T13:11:53.630Z</updated>
     
     <summary type="html">
     
@@ -376,7 +399,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.644Z</updated>
+    <updated>2021-12-02T13:11:53.630Z</updated>
     
     <summary type="html">
     
@@ -399,7 +422,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.404Z</updated>
+    <updated>2021-12-02T13:11:53.422Z</updated>
     
     <summary type="html">
     
@@ -422,7 +445,7 @@
     <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
     <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
     <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.504Z</updated>
+    <updated>2021-12-02T13:11:53.506Z</updated>
     
     <summary type="html">
     
@@ -445,7 +468,7 @@
     <link href="https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/"/>
     <id>https://hiyongz.github.io/posts/linux-regular-expression-for-multiple-lines/</id>
     <published>2021-10-21T12:02:00.000Z</published>
-    <updated>2021-12-02T13:04:28.508Z</updated>
+    <updated>2021-12-02T13:11:53.514Z</updated>
     
     <summary type="html">
     
@@ -466,29 +489,6 @@
       <category term="shell" scheme="https://hiyongz.github.io/tags/shell/"/>
     
       <category term="正则表达式" scheme="https://hiyongz.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go语言并发编程：WaitGroup</title>
-    <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/"/>
-    <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-waitgroup/</id>
-    <published>2021-10-19T12:12:00.000Z</published>
-    <updated>2021-12-02T13:04:28.504Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我们知道，在并发编程中，主要线程需要等待子线程运行结束后才能退出，go语言中，主 goroutine 等待其他 goroutine 运行结束可以使用通道来解决，具体实现可以参考文章&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/120248679&quot;&gt;Go语言并发编程：互斥锁&lt;/a&gt;中的例子。使用通道可能不是很简洁，本文介绍另一种方法，也就是sync包中的WaitGroup类型来等待 goroutine执行完成。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="Go" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/"/>
-    
-    
-      <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
     
   </entry>
   
