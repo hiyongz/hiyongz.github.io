@@ -22,26 +22,20 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="在Windows上实现iOS APP自动化测试：tidevice + WDA + facebook-wda &#x2F; appium中介绍了使用阿里开源的tidevice 和 facebook-wda实现在Windows上进行iOS APP自动化测试。本文介绍如何使用tidevice + WDA +  airtest进行iOS APP自动化测试。">
+  <meta name="description" content="在代码执行过程中会进行频繁的I&#x2F;O操作，而计算资源往往是有限的，需要进行资源管理，保证这些资源在使用过后得到释放，防止发生资源泄露。Python中使用上下文管理器（context manager）进行资源管理，比如我们经常用到的with关键字，上下文管理器可以进行自动分配并且释放资源。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest">
-<meta property="og:url" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/index.html">
+<meta property="og:title" content="Python上下文管理器">
+<meta property="og:url" content="https://hiyongz.github.io/posts/python-notes-for-context-manager/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="在Windows上实现iOS APP自动化测试：tidevice + WDA + facebook-wda &#x2F; appium中介绍了使用阿里开源的tidevice 和 facebook-wda实现在Windows上进行iOS APP自动化测试。本文介绍如何使用tidevice + WDA +  airtest进行iOS APP自动化测试。">
+<meta property="og:description" content="在代码执行过程中会进行频繁的I&#x2F;O操作，而计算资源往往是有限的，需要进行资源管理，保证这些资源在使用过后得到释放，防止发生资源泄露。Python中使用上下文管理器（context manager）进行资源管理，比如我们经常用到的with关键字，上下文管理器可以进行自动分配并且释放资源。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/tidevice-wda-start-log.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/airtest-ios-device-connect.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/airtest-ios-device.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/poco-ios-device-ui-inspector.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/airtest-ios-testing-report.png">
-<meta property="article:published_time" content="2021-10-28T08:12:00.000Z">
-<meta property="article:modified_time" content="2021-12-07T12:48:41.037Z">
+<meta property="article:published_time" content="2021-12-07T12:12:00.000Z">
+<meta property="article:modified_time" content="2021-12-07T12:48:41.205Z">
 <meta property="article:author" content="HiYo">
-<meta property="article:tag" content="iOS">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/tidevice-wda-start-log.png">
 
-<link rel="canonical" href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/">
+<link rel="canonical" href="https://hiyongz.github.io/posts/python-notes-for-context-manager/">
 
 
 <script id="page-configurations">
@@ -54,7 +48,7 @@
   };
 </script>
 
-  <title>Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest | HiYong</title>
+  <title>Python上下文管理器 | HiYong</title>
   
 
 
@@ -215,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/python-notes-for-context-manager/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
@@ -228,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest
+          Python上下文管理器
         </h1>
 
         <div class="post-meta">
@@ -242,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-28 08:12:00" itemprop="dateCreated datePublished" datetime="2021-10-28T08:12:00+00:00">2021-10-28</time>
+              <time title="创建时间：2021-12-07 12:12:00" itemprop="dateCreated datePublished" datetime="2021-12-07T12:12:00+00:00">2021-12-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,11 +244,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/App%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">App自动化测试</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -274,8 +268,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/python-notes-for-context-manager/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/python-notes-for-context-manager/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -285,7 +279,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -304,44 +298,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/119492403">Windows上实现iOS APP自动化测试：tidevice + WDA + facebook-wda / appium</a>中介绍了使用阿里开源的tidevice 和 facebook-wda实现在Windows上进行iOS APP自动化测试。本文介绍如何使用tidevice + WDA +  airtest进行iOS APP自动化测试。</p>
+        <p>在代码执行过程中会进行频繁的I/O操作，而计算资源往往是有限的，需要进行资源管理，保证这些资源在使用过后得到释放，防止发生资源泄露。Python中使用上下文管理器（context manager）进行资源管理，比如我们经常用到的<code>with</code>关键字，上下文管理器可以进行自动分配并且释放资源。</p>
 <a id="more"></a>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>本文使用的环境如下：</p>
-<ol>
-<li>Python 3.7.6，Python版本需要3.6+</li>
-<li>tidevice==0.4.14</li>
-<li>WebDriverAgent，下载最新版本进行编译安装：<a target="_blank" rel="noopener" href="https://github.com/appium/WebDriverAgent">https://github.com/appium/WebDriverAgent</a></li>
-<li>airtest==1.2.2</li>
-<li>iOS 设备： iPhone12 mini（14.6）</li>
-<li>Windows系统版本：Windows 10 家庭中文版</li>
-</ol>
-<p>tidevice和WebDriverAgent介绍及安装可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/119492403">Windows上实现iOS APP自动化测试：tidevice + WDA + facebook-wda / appium</a>。</p>
-<p>使用USB连接设备，检测tidevice是否安装成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tidevice list</span><br></pre></td></tr></table></figure></p>
-<p>airtest安装可参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/118468631">App自动化测试工具Airtest</a></p>
-<h1 id="airtest-iOS-自动化"><a href="#airtest-iOS-自动化" class="headerlink" title="airtest iOS 自动化"></a>airtest iOS 自动化</h1><h2 id="1-启动WDA"><a href="#1-启动WDA" class="headerlink" title="1. 启动WDA"></a>1. 启动WDA</h2><p>获取设备的udid：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tidevice list</span><br></pre></td></tr></table></figure></p>
-<p>查看wda的bundle id：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tidevice applist</span><br></pre></td></tr></table></figure></p>
-<p>使用tidevice启动iOS设备上的WDA应用<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tidevice -u [设备 udid] wdaproxy -B [wda 的 bundle Id] --port 8100</span><br></pre></td></tr></table></figure><br><img src="tidevice-wda-start-log.png" width="80%" height="80%" /></p>
-<p>如果你觉得每次进行自动化测试之前都要手动启动WDA比较麻烦，可以考虑使用vbs+bat的方式后台启动WDA。</p>
-<h2 id="2-airtest-连接设备"><a href="#2-airtest-连接设备" class="headerlink" title="2. airtest 连接设备"></a>2. airtest 连接设备</h2><p>如果要使用airtest IDE来编写自动化测试脚本，先连接 iOS 设备。</p>
-<p>打开Airtest IDE，在右下角【连接iOS设备】中输入地址：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http+usbmux://00008101-000255021E08001E</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">http://localhost:8100/</span><br></pre></td></tr></table></figure>
-<p><code>00008101-000255021E08001E</code> 是手机的udid，8100是使用tidevice启动WDA时设置的端口号。</p>
-<p><img src="airtest-ios-device-connect.png" width="80%" height="80%" /></p>
-<p><img src="airtest-ios-device.png" width="80%" height="80%" /></p>
-<p>可以使用init_device()或者connect_device()方法连接iOS设备：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http://localhost:8100/&quot;</span>)</span><br><span class="line"><span class="comment"># 方法2</span></span><br><span class="line">connect_device(<span class="string">&quot;ios:///http://127.0.0.1:8100&quot;</span>)</span><br><span class="line"><span class="comment"># 方法3</span></span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http+usbmux://00008101-000255021E08001E&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="3-airtest-自动化"><a href="#3-airtest-自动化" class="headerlink" title="3. airtest 自动化"></a>3. airtest 自动化</h2><p>连接上iOS设备后就可以编写测试用例了， airtest使用的是图像识别的方法进行元素操作，元素操作方法可参考文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/118468631">App自动化测试工具Airtest</a> 。</p>
-<p>下面是一个示例脚本：打开【设置】</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># @Time:    2021/9/26 13:55</span></span><br><span class="line"><span class="comment"># @File:    test_ios_airtest.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> airtest.core.api <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> airtest.report.report <span class="keyword">import</span> simple_report</span><br><span class="line"></span><br><span class="line"><span class="comment"># auto_setup(__file__, logdir=True, devices=[&quot;ios:///http://127.0.0.1:8100&quot;,])</span></span><br><span class="line">auto_setup(__file__, logdir=<span class="literal">True</span>)</span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http://localhost:8100/&quot;</span>)</span><br><span class="line"></span><br><span class="line">start_app(<span class="string">&quot;com.apple.Preferences&quot;</span>) <span class="comment"># 打开【设置】</span></span><br><span class="line">touch(Template(<span class="string">r&quot;tpl1632398524727.png&quot;</span>, record_pos=(-<span class="number">0.34</span>, <span class="number">0.236</span>), resolution=(<span class="number">1125</span>, <span class="number">2436</span>))) <span class="comment"># 点击</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># generate html report</span></span><br><span class="line">simple_report(__file__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="poco-iOS自动化"><a href="#poco-iOS自动化" class="headerlink" title="poco iOS自动化"></a>poco iOS自动化</h1><p>也可以使用poco进行UI元素操作，WDA启动和连接设备和前面介绍的【airtest iOS 自动化】一样。连接设备使用airtest提供的方法。</p>
-<p>UI 元素可通过在AirtestIDE的Poco 辅助窗查看，注意要选择iOS。</p>
-<p><img src="poco-ios-device-ui-inspector.png" width="80%" height="80%" /></p>
-<p>poco元素操作方法可参考文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/118468631">App自动化测试工具Airtest</a> 。</p>
-<p>使用AirtestProject进行APP自动化测试时，通常将airtest和poco结合起来使用，下面是一个示例脚本：打开【设置】，检查软件版本为14.8</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># @Time:    2021/9/26 13:56</span></span><br><span class="line"><span class="comment"># @File:    test_ios_poco.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> airtest.core.api <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> airtest.report.report <span class="keyword">import</span> simple_report</span><br><span class="line"><span class="keyword">from</span> poco.drivers.ios <span class="keyword">import</span> iosPoco</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接设备、初始化日志路径</span></span><br><span class="line">auto_setup(__file__, logdir=<span class="literal">True</span>)</span><br><span class="line">init_device(platform=<span class="string">&quot;IOS&quot;</span>,uuid=<span class="string">&quot;http://localhost:8100/&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开【设置】</span></span><br><span class="line">start_app(<span class="string">&quot;com.apple.Preferences&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化ios poco</span></span><br><span class="line">poco = iosPoco()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点击</span></span><br><span class="line">poco(<span class="string">&quot;通用&quot;</span>).click()</span><br><span class="line">poco(<span class="string">&quot;关于本机&quot;</span>).click()</span><br><span class="line"><span class="comment"># 断言</span></span><br><span class="line"><span class="keyword">assert</span> poco(<span class="string">&#x27;软件版本&#x27;</span>).attr(<span class="string">&#x27;value&#x27;</span>) == <span class="string">&quot;14.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># generate html report</span></span><br><span class="line">simple_report(__file__)</span><br></pre></td></tr></table></figure>
-<p>查看生成的报告：</p>
-<p><img src="airtest-ios-testing-report.png" width="80%" height="80%" /></p>
-<p>另外说明一下，facebook-wda、airtest和poco这3个测试库可以混合使用。</p>
+<p>下面先来介绍一下with关键字在文件读写中的应用，简单了解上下文管理器的功能。</p>
+<h1 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h1><p>在<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/121593923">Python文件及目录处理方法</a>中介绍了读写大文件建议使用with语句，with语句会进行资源的自动管理。文件很多的情况下也会导致资源泄露，下面来打开100000个文件，不进行文件关闭操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100000</span>):</span><br><span class="line">    file = <span class="built_in">open</span>(<span class="string">&#x27;test.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">    file_descriptors.append(file)</span><br></pre></td></tr></table></figure>
+<p>执行会报如下错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSError: [Errno <span class="number">24</span>] Too many <span class="built_in">open</span> files: <span class="string">&#x27;test.txt&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>原因就是打开了太多文件而没有及时关闭导致了资源泄露，造成系统崩溃。完成处理后需要对文件进行关闭操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">file_descriptors = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">	file = <span class="built_in">open</span>(<span class="string">&#x27;test.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">	<span class="keyword">try</span>:</span><br><span class="line">		file_descriptors.append(file)</span><br><span class="line">	<span class="keyword">finally</span>:</span><br><span class="line">		file.close()</span><br></pre></td></tr></table></figure>
+<p>使用 with 语句可以完成自动分配并且释放资源，比上面的写法更加简洁：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file_descriptors = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">	<span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">		file_descriptors.append(file)</span><br></pre></td></tr></table></figure>
+<h1 id="上下文管理器创建"><a href="#上下文管理器创建" class="headerlink" title="上下文管理器创建"></a>上下文管理器创建</h1><h2 id="基于类的上下文管理器"><a href="#基于类的上下文管理器" class="headerlink" title="基于类的上下文管理器"></a>基于类的上下文管理器</h2><p>可以使用类来创建上下文管理器，需要保证这个类包括两个方法：<code>__enter__()</code> 和<code>__exit__()</code>。其中，方法 <code>__enter__()</code> 返回需要被管理的资源，方法 <code>__exit__()</code> 进行资源释放、清理操作。</p>
+<p>下面来模拟 Python 的打开、关闭文件操作：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileManager</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, mode</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;__init__ method called&#x27;</span>)</span><br><span class="line">        self.name = name</span><br><span class="line">        self.mode = mode</span><br><span class="line">        self.file = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;__enter__ method called&#x27;</span>)</span><br><span class="line">        self.file = <span class="built_in">open</span>(self.name, self.mode)</span><br><span class="line">        <span class="keyword">return</span> self.file</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span>(<span class="params">self, exc_type, exc_value, exc_traceback</span>):</span></span><br><span class="line">        print(<span class="string">&#x27;__exit__ method called&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.file:</span><br><span class="line">            self.file.close()</span><br><span class="line">        <span class="keyword">if</span> exc_type:</span><br><span class="line">            print(<span class="string">f&#x27;exc_type: <span class="subst">&#123;exc_type&#125;</span>&#x27;</span>)</span><br><span class="line">            print(<span class="string">f&#x27;exc_value: <span class="subst">&#123;exc_value&#125;</span>&#x27;</span>)</span><br><span class="line">            print(<span class="string">f&#x27;exc_traceback: <span class="subst">&#123;exc_traceback&#125;</span>&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> FileManager(<span class="string">&#x27;test.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	print(<span class="string">&#x27;开始写操作&#x27;</span>)</span><br><span class="line">	f.write(<span class="string">&#x27;hello world !&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">print(f.closed)</span><br></pre></td></tr></table></figure></p>
+<p>执行结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">__init__ method called</span><br><span class="line">__enter__ method called</span><br><span class="line">开始写操作</span><br><span class="line">__exit__ method called</span><br><span class="line">exc_type: &lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">Exception</span>&#x27;&gt;</span></span><br><span class="line"><span class="class"><span class="title">exc_value</span>:</span> exception raised</span><br><span class="line">exc_traceback: &lt;traceback <span class="built_in">object</span> at <span class="number">0x000001B43C2444C8</span>&gt;</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到执行顺序为：</p>
+<ul>
+<li><p><code>__init__()</code>：初始化对象 FileManager</p>
+</li>
+<li><p><code>__enter__()</code>：打开文件，返回 FileManager 对象</p>
+</li>
+<li><p>with中的代码</p>
+</li>
+<li><p><code>__exit__()</code>：关闭打开的文件流</p>
+</li>
+</ul>
+<p><code>__exit__()</code>方法中的参数<code>exc_type</code>, <code>exc_value</code>, 和 <code>exc_traceback</code> 用于管理异常。</p>
+<h2 id="contextmanager-装饰器"><a href="#contextmanager-装饰器" class="headerlink" title="@contextmanager 装饰器"></a>@contextmanager 装饰器</h2><p>可以使用 <code>contextlib.contextmanager</code> 装饰器而不使用类的方式来实现上下文管理器，它是基于生成器的上下文管理器，用以支持 with 语句。</p>
+<p>仍以打开、关闭文件为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_manager</span>(<span class="params">name, mode</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        f = <span class="built_in">open</span>(name, mode)</span><br><span class="line">        <span class="keyword">yield</span> f</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        f.close()</span><br><span class="line">        </span><br><span class="line"><span class="keyword">with</span> file_manager(<span class="string">&#x27;test.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&#x27;hello world !&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>其中 <code>file_manager()</code> 函数是一个生成器，yield 之前可以看成是<code>__enter__</code>方法中的内容，yield 后面的是 <code>__exit__()</code> 内容。加上<code>@contextmanager</code>装饰器，使用基于生成器的上下文管理器时，不需要定义<code>__enter__()</code>和<code>__exit__()</code>方法。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>上下文管理器可确保用过的资源得到迅速释放，通常和 with 语句一起使用，大大提高了程序的简洁度。另外需要注意的是，编写基于类或者生成器的上下文管理器时，记住不要忘记释放资源。</p>
 <center><b>--THE END--<b></center>
 
 
@@ -351,7 +338,7 @@
     
 	  
 	  <div class="post-tags">              
-		  <a href="/tags/iOS/" rel="tag"><i class="fa fa-tag"></i> iOS</a>
+		  <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
 	  </div>
       <br/>
       <div>
@@ -365,10 +352,10 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest</a></p>
+  <p><span>本文标题:</span>Python上下文管理器</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/" title="Windows上实现iOS APP自动化测试：tidevice + WDA +  airtest">https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"  aria-label="复制成功！"></i></span>
+  <p><span>文章链接:</span><a href="/posts/python-notes-for-context-manager/" title="Python上下文管理器">https://hiyongz.github.io/posts/python-notes-for-context-manager/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/python-notes-for-context-manager/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
 </div>
@@ -402,13 +389,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/golang-concurrent-synchronization-for-context/" rel="prev" title="Go语言并发编程：上下文Context">
-      <i class="fa fa-chevron-left"></i> Go语言并发编程：上下文Context
+    <a href="/posts/macos-bigsur-hackintosh-installation-tutorial/" rel="prev" title="黑苹果安装笔记（更新）">
+      <i class="fa fa-chevron-left"></i> 黑苹果安装笔记（更新）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/windows-notes-for-environment-variables-setting/" rel="next" title="通过bat脚本配置系统环境变量">
-      通过bat脚本配置系统环境变量 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -468,7 +452,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#airtest-iOS-%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">airtest iOS 自动化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%90%AF%E5%8A%A8WDA"><span class="nav-number">2.1.</span> <span class="nav-text">1. 启动WDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-airtest-%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87"><span class="nav-number">2.2.</span> <span class="nav-text">2. airtest 连接设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-airtest-%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">3. airtest 自动化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#poco-iOS%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">poco iOS自动化</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#with%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">with语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">上下文管理器创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%B1%BB%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">基于类的上下文管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contextmanager-%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">@contextmanager 装饰器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
