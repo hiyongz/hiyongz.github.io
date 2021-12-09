@@ -31,6 +31,149 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Robot Framework自定义测试库开发详解</title>
+    <url>/posts/test-framework-for-robotframework-skills/</url>
+    <content><![CDATA[<p>Robot Framework是一个开源自动化测试框架，主要特点是基于关键字驱动，本文介绍自定义测试库及测试库文档创建方法。</p>
+<a id="more"></a>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Robot Framework是用于验收测试(Acceptance Testing)，验收测试驱动开发（Acceptance Test Driven Development, ATDD）和<br>机器人流程自动化（Robotic Process Automation, RPA）的开源自动化框架，支持数据驱动、关键字驱动和行为驱动（BDD）。它具有简单的纯文本语法，并且可以使用Python或Java实现库的扩展。</p>
+<p>Robot Framework核心框架使用Python实现，支持Python 2 和 Python 3，还可以在Jython（JVM），IronPython（.NET）和PyPy上运行。该框架具有丰富的生态，有各种通用库和工具，比如selenium测试库SeleniumLibrary，appium测试库AppiumLibrary等，更多测试库可查看官网<a href="http://robotframework.org">http://robotframework.org</a> 。</p>
+<p>Robot Framework GitHub地址：<a href="https://github.com/robotframework/robotframework">https://github.com/robotframework/robotframework</a></p>
+<p>RIDE地址：<a href="https://github.com/robotframework/RIDE">https://github.com/robotframework/RIDE</a></p>
+<p>下图是基于Robot Framework进行web自动化（SeleniumLibrary）测试的架构图，</p>
+<p><img src="rf-overview-on-the-testing-architecture.png" width="70%" height="70%" /></p>
+<center><font size="2">https://blog.codecentric.de/en/2012/04/robot-framework-tutorial-a-complete-example/</font></center>
+
+<p>安装：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install robotframework</span><br><span class="line">pip install robotframework-ride</span><br></pre></td></tr></table></figure><br>RIDE是使用wxPython库编写的Robot Framework图形界面。</p>
+<h1 id="RF分层思想"><a href="#RF分层思想" class="headerlink" title="RF分层思想"></a>RF分层思想</h1><p>一个好的设计模式有助于提高脚本开发速度，且利于维护。使用Robot Framework进行自动化用例开发时可以考虑使用分层的思想，类似于Page Object 设计模式。</p>
+<p>顾名思义，“分层” 意思就是把一个过程分为多层，比如下面的例子：实现web UI自动化的登录测试。</p>
+<p><img src="rf-hierarchy-architecture.png" width="70%" height="70%" /></p>
+<p>一共分为了4层：</p>
+<ul>
+<li><code>01_测试用例</code>：编写测试用例</li>
+<li><code>02_流程层</code>： 封装操作流程关键字</li>
+<li><code>03_元素层</code>：存放页面元素标签以及页面基本操作关键字，比如开关操作，点击，输入等</li>
+<li><code>04_数据</code>：用来存放数据，比如全局变量</li>
+</ul>
+<p>使用分层思想，将数据和流程分离开，能够减少一些由需求变更引发的修改，更易于扩展和维护。当然也可以使用其它分层方式，最终目的是让你的项目容易维护。</p>
+<p>Robot Framework的测试库已经非常丰富了，如果还是无法满足需求，可以自己开发，下面来介绍如何开发自定义测试库。</p>
+<h1 id="开发自定义测试库"><a href="#开发自定义测试库" class="headerlink" title="开发自定义测试库"></a>开发自定义测试库</h1><p>Robot Framework主要有三种API：静态API、动态API和混合API，下面分别进行介绍。</p>
+<h2 id="静态API"><a href="#静态API" class="headerlink" title="静态API"></a>静态API</h2><p>静态API直接将方法(methods)映射为关键字。关键字接收的参数和方法相同的参数一样。</p>
+<p><strong>1. 编写测试库</strong></p>
+<p>在<code>~\Lib\site-packages</code>目录中新建一个包【比如MyLibrary】， 然后在创建的测试库MyLibrary目录下新建MyKeywords类文件(MyKeywords.py)，用来封装要实现的关键字。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyKeywords</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span>(<span class="params">self, a, b, c</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;两数相加</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :a: value1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :b: value2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :c: 预期结果</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Example:</span></span><br><span class="line"><span class="string">        | Test Add | 2 | 3 | 5 |</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">float</span>(a) + <span class="built_in">float</span>(b) == <span class="built_in">float</span>(c):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;%s + %s != %s&quot;</span>%(a,b,c))</span><br></pre></td></tr></table></figure>
+<p>接下来在<code>~\Lib\site-packages\MyLibrary</code> 目录下新建<code>version.py</code> 文件，用于设置自定义测试库MyLibrary的版本信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">VERSION = <span class="string">&#x27;0.0.1&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>然后在<code>__init__.py</code>文件导入关键字及版本信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> .MyKeywords <span class="keyword">import</span> MyKeywords</span><br><span class="line"><span class="keyword">from</span> .version <span class="keyword">import</span> VERSION</span><br><span class="line">_version_ = VERSION</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLibrary</span>(<span class="params">MyKeywords</span>):</span>    </span><br><span class="line">    <span class="string">&quot;&quot;&quot;    MyLibrary    &quot;&quot;&quot;</span>    </span><br><span class="line">    ROBOT_LIBRARY_SCOPE = <span class="string">&#x27;GLOBAL&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><strong>2. 导入测试库</strong></p>
+<p>创建一个测试套件，然后导入测试库<br><img src="rf-mylibrary-import.png" width="70%" height="70%" /></p>
+<p>查询测试库关键字信息（F5）<br><img src="rf-mylibrary-f5.png" width="70%" height="70%" /></p>
+<p><strong>3. 编写用例脚本</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">*** Settings ***</span><br><span class="line">Library           MyLibrary</span><br><span class="line"></span><br><span class="line">*** Test Cases ***</span><br><span class="line">case_001</span><br><span class="line">    $&#123;<span class="built_in">sum</span>&#125;    Test Add    <span class="number">2</span>    <span class="number">3</span>    <span class="number">5</span></span><br><span class="line">    Should Be <span class="literal">True</span>    $&#123;<span class="built_in">sum</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="动态API"><a href="#动态API" class="headerlink" title="动态API"></a>动态API</h2><p>动态API和静态API的区别在于发现测试库关键字、关键字的参数、说明文档，以及关键字实际执行方式不同。Python版本中，静态API是使用反射的方式获取（python反射介绍可参考<a href="https://blog.csdn.net/u010698107/article/details/117600196">Python反射介绍</a>），而动态API采用的是指定的方法来动态获取这些信息，主要包括4个方法：get_keyword_names、run_keyword、get_keyword_arguments和get_keyword_documentation 。这些方法其实也使用了Python反射函数来获取测试类属性信息。</p>
+<p>使用动态API的好处就是可以更加灵活的编写测试库，动态API说明文档可参考：<a href="http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#dynamic-library-api">http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#dynamic-library-api</a></p>
+<p><strong>1. 编写测试库</strong></p>
+<p>和静态API类似，在<code>~\Lib\site-packages</code>目录中新建一个包【MyDynamicLibrary】， 然后在创建的测试库MyDynamicLibrary目录下新建MyKeywords类文件(MyKeywords.py)，用来封装要实现的关键字。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> robot.api.deco <span class="keyword">import</span> keyword</span><br><span class="line"><span class="keyword">from</span> robot.api <span class="keyword">import</span> logger</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyKeywords</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self._cal = Calculate()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_keyword_names</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 获取当前测试类的所有属性</span></span><br><span class="line">        attributes = [(name, <span class="built_in">getattr</span>(self._cal, name)) <span class="keyword">for</span> name <span class="keyword">in</span> <span class="built_in">dir</span>(self._cal)]</span><br><span class="line">        <span class="comment"># 过滤没有设置robot_name的属性</span></span><br><span class="line">        keywords = [(name, value) <span class="keyword">for</span> name, value <span class="keyword">in</span> attributes</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">hasattr</span>(value, <span class="string">&#x27;robot_name&#x27;</span>)]</span><br><span class="line">        <span class="comment"># 返回关键字名称</span></span><br><span class="line">        <span class="keyword">return</span> [value.robot_name <span class="keyword">or</span> name <span class="keyword">for</span> name, value <span class="keyword">in</span> keywords]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run_keyword</span>(<span class="params">self, name, args, kwargs</span>):</span></span><br><span class="line">        print(<span class="string">&quot;Running keyword &#x27;%s&#x27; with positional arguments %s and named arguments %s.&quot;</span></span><br><span class="line">              % (name, args, kwargs))</span><br><span class="line">        func = <span class="built_in">getattr</span>(self._cal, name)</span><br><span class="line">        <span class="keyword">return</span> func(*args,**kwargs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculate</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">not_keyword</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @keyword</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_sub</span>(<span class="params">self, a, b, results=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;两数相减</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">float</span>(a) - <span class="built_in">float</span>(b) == <span class="built_in">float</span>(results):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;%s - %s != %s&quot;</span>%(a,b,results))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @keyword</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span>(<span class="params">self, a, b, c</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;两数相加</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :a: value1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :b: value2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :c: 预期结果</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Example:</span></span><br><span class="line"><span class="string">        | Test Add | 2 | 3 | 5 |</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">float</span>(a) + <span class="built_in">float</span>(b) == <span class="built_in">float</span>(c):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;%s + %s != %s&quot;</span>%(a,b,c))</span><br></pre></td></tr></table></figure>
+<p> <code>get_keyword_names</code> 方法实现动态获取关键字名称，此方法没有参数，并且必须返回包含当前测试库实现的关键字列表或数组。代码中使用到了python反射函数 <code>getattr()</code> 、 <code>hasattr</code> 和 <code>dir()</code>。</p>
+<p><code>run_keyword</code> 用于执行关键字，包括2个或者3个参数：name, args, kwargs，<code>name</code> 为关键字方法名称，通过<code>get_keyword_names</code> 获得；<code>args</code> 为关键字方法的位置参数，<code>kwargs</code>为关键字参数，可以不设置。</p>
+<p> <code>get_keyword_names</code> 和 <code>run_keyword</code> 是动态库必须要有的方法，如果没有它们就会变成一个静态库。动态API涉及到的主要方法如下表。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th>参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>get_keyword_names</code></td>
+<td></td>
+<td style="text-align:left">获取关键字名称</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>run_keyword</code></td>
+<td><code>name, arguments, kwargs</code></td>
+<td style="text-align:left">执行关键字</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get_keyword_arguments</code></td>
+<td><code>name</code></td>
+<td style="text-align:left">获取关键字参数（可选方法）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get_keyword_types</code></td>
+<td><code>name</code></td>
+<td style="text-align:left">返回关键字参数类型信息（可选方法）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get_keyword_tags</code></td>
+<td><code>name</code></td>
+<td style="text-align:left">返回关键字标签（可选方法）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get_keyword_documentation</code></td>
+<td><code>name</code></td>
+<td style="text-align:left">返回关键字及测试库文档（可选方法）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get_keyword_source</code></td>
+<td><code>name</code></td>
+<td style="text-align:left">返回关键字源信息（可选方法）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code>Calculate</code>是一个存放关键字的类，这个类可以写在其它模块中。</p>
+<p><code>__init__.py</code> 和 <code>version.py</code>文件和静态API写法一样。</p>
+<p><strong>2. 导入测试库</strong></p>
+<p>导入测试库MyDynamicLibrary后，查询测试库关键字信息（F5）</p>
+<p><img src="dynamic-api-f5.png" width="70%" height="70%" /></p>
+<p>从上图可以看到已经获取到了关键字，没有添加 <code>@keyword</code> 装饰器的<code>not_keyword</code> 关键字没有显示出来。</p>
+<p>另外，Description那一列是空白的，Arguments没有显示关键字的真实参数，关键字注释文档也没有显示。这需要<code>get_keyword_documentation</code> 和 <code>get_keyword_arguments</code> 这两个函数来实现文档和变量显示。将下面代码添加到MyKeywords类中：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_keyword_documentation</span>(<span class="params">self, name</span>):</span></span><br><span class="line">    func = <span class="built_in">getattr</span>(self._cal, name)</span><br><span class="line">    <span class="keyword">return</span> func.__doc__</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_keyword_arguments</span>(<span class="params">self, name</span>):</span></span><br><span class="line">    func = <span class="built_in">getattr</span>(self._cal, name)</span><br><span class="line">    func_args = func.__code__.co_varnames</span><br><span class="line">    <span class="keyword">if</span> func_args[<span class="number">0</span>] == <span class="string">&quot;self&quot;</span>:</span><br><span class="line">        func_args = func_args[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">return</span> func_args</span><br></pre></td></tr></table></figure>
+<p>重启Robot Framework，F5查看测试库关键字信息：</p>
+<p><img src="dynamic-api2-f5.png" width="70%" height="70%" /></p>
+<p><strong>3. 编写用例脚本</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">*** Settings ***</span><br><span class="line">Library           MyDynamicLibrary</span><br><span class="line"></span><br><span class="line">*** Test Cases ***</span><br><span class="line">case_001</span><br><span class="line">    $&#123;res&#125;    Test Add    <span class="number">2</span>    <span class="number">3</span>    <span class="number">5</span></span><br><span class="line">    Should Be <span class="literal">True</span>    $&#123;res&#125;</span><br><span class="line"></span><br><span class="line">case_002</span><br><span class="line">    $&#123;res&#125;    Test Sub    <span class="number">6</span>    <span class="number">1</span>    results=<span class="number">5</span></span><br><span class="line">    Should Be <span class="literal">True</span>    $&#123;res&#125;</span><br></pre></td></tr></table></figure>
+<p>执行，日志如下：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Starting test: PO demo<span class="number">.01</span> 测试用例.自定义测试库-动态API.case_001</span><br><span class="line"><span class="number">20211119</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">00.980</span> :  INFO : Running keyword <span class="string">&#x27;test_add&#x27;</span> <span class="keyword">with</span> positional arguments (<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;5&#x27;</span>) <span class="keyword">and</span> named arguments &#123;&#125;.</span><br><span class="line"><span class="number">20211119</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">00.980</span> :  INFO : $&#123;res&#125; = <span class="literal">True</span></span><br><span class="line">Ending test:   PO demo<span class="number">.01</span> 测试用例.自定义测试库-动态API.case_001</span><br><span class="line"></span><br><span class="line">Starting test: PO demo<span class="number">.01</span> 测试用例.自定义测试库-动态API.case_002</span><br><span class="line"><span class="number">20211119</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">00.982</span> :  INFO : Running keyword <span class="string">&#x27;test_sub&#x27;</span> <span class="keyword">with</span> positional arguments (<span class="string">&#x27;6&#x27;</span>, <span class="string">&#x27;1&#x27;</span>) <span class="keyword">and</span> named arguments &#123;<span class="string">&#x27;results&#x27;</span>: <span class="string">&#x27;5&#x27;</span>&#125;.</span><br><span class="line"><span class="number">20211119</span> <span class="number">18</span>:<span class="number">00</span>:<span class="number">00.982</span> :  INFO : $&#123;res&#125; = <span class="literal">True</span></span><br><span class="line">Ending test:   PO demo<span class="number">.01</span> 测试用例.自定义测试库-动态API.case_002</span><br></pre></td></tr></table></figure></p>
+<p>动态库也可以借助robotlibcore 库来实现，编写动态API更加简洁。具体使用方法参考：<a href="https://github.com/robotframework/PythonLibCore">https://github.com/robotframework/PythonLibCore</a></p>
+<h2 id="混合API"><a href="#混合API" class="headerlink" title="混合API"></a>混合API</h2><p>混合API就是静态API和动态API方式的混合使用。混合API通过使用 <code>get_keyword_names</code> 方法获取所有关键字，但是不使用 <code>run_keyword</code> 方法执行关键字，执行方式和静态API相同。</p>
+<p>在<code>~\Lib\site-packages</code>目录中新建一个包【MyHybridLibrary】， MyKeywords.py文件中编写关键字方法，使用 <code>get_keyword_names</code> 方法获取关键字，其它写法和静态API类似：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> robot.api.deco <span class="keyword">import</span> keyword</span><br><span class="line"><span class="keyword">from</span> robot.api <span class="keyword">import</span> logger</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyKeywords</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_keyword_names</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 获取当前测试类的所有属性</span></span><br><span class="line">        attributes = [(name, <span class="built_in">getattr</span>(self, name)) <span class="keyword">for</span> name <span class="keyword">in</span> <span class="built_in">dir</span>(self)]</span><br><span class="line">        <span class="comment"># 过滤没有设置robot_name的属性</span></span><br><span class="line">        keywords = [(name, value) <span class="keyword">for</span> name, value <span class="keyword">in</span> attributes</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">hasattr</span>(value, <span class="string">&#x27;robot_name&#x27;</span>)]</span><br><span class="line">        <span class="comment"># 返回关键字名称</span></span><br><span class="line">        <span class="keyword">return</span> [value.robot_name <span class="keyword">or</span> name <span class="keyword">for</span> name, value <span class="keyword">in</span> keywords]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">not_keyword</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @keyword</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_sub</span>(<span class="params">self, a, b, results=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;两数相减</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">float</span>(a) - <span class="built_in">float</span>(b) == <span class="built_in">float</span>(results):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;%s - %s != %s&quot;</span>%(a,b,results))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @keyword</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_add</span>(<span class="params">self, a, b, c</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;两数相加</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :a: value1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :b: value2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        :c: 预期结果</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Example:</span></span><br><span class="line"><span class="string">        | Test Add | 2 | 3 | 5 |</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">float</span>(a) + <span class="built_in">float</span>(b) == <span class="built_in">float</span>(c):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;%s + %s != %s&quot;</span>%(a,b,c))</span><br></pre></td></tr></table></figure>
+<p><code>__init__.py</code> 和 <code>version.py</code>文件和静态API写法一样。</p>
+<p>导入测试库MyHybridLibrary后，查询测试库关键字信息（F5）</p>
+<p><img src="hybrid-api-f5.png" width="70%" height="70%" /></p>
+<h2 id="导入Python脚本"><a href="#导入Python脚本" class="headerlink" title="导入Python脚本"></a>导入Python脚本</h2><p>如果不想创建包，可以直接写py文件，然后导入。</p>
+<p>可以将测试库文件放在 <code>~\Lib\site-packages</code> 目录下，这样在导入 Library 的时候可以直接写库名称就可以了，如果放在其它地方，需要使用绝对路径或者相对路径。</p>
+<p>需要注意的是测试类名称要和文件名一致，比如编写测试库TestLlibrary.py：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestLlibrary</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_sub</span>(<span class="params">self, a, b, results=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;两数相减</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">float</span>(a) - <span class="built_in">float</span>(b) == <span class="built_in">float</span>(results):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;%s - %s != %s&quot;</span>%(a,b,results))</span><br></pre></td></tr></table></figure>
+<p>这种方式和静态API的关键字读取、文档显示、关键字执行一样，其实它就是静态API。</p>
+<h1 id="生成测试库文档"><a href="#生成测试库文档" class="headerlink" title="生成测试库文档"></a>生成测试库文档</h1><p>可以将关键字方法的document注释（3个双引号括起来的内容）提取出来生成一个测试库文档。使用Libdoc工具可以很方便生成一份测试库文档，命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m robot.libdoc -f html MyLibrary MyLibrary.html</span><br></pre></td></tr></table></figure>
+<p>生成MyHybridLibrary库文档：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ python -m robot.libdoc -f html MyHybridLibrary MyHybridLibrary.html</span><br><span class="line">D:\MyHybridLibrary.html</span><br></pre></td></tr></table></figure>
+<p>MyHybridLibrary.html内容：</p>
+<p><img src="rf-libdoc.png" width="70%" height="70%" /></p>
+<p>这非常方便，不需要另外编辑一份测试文档，更新关键字后，执行上面的命令就可以快速生成。</p>
+<p><strong>参考文档：</strong></p>
+<ol>
+<li><a href="https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html">https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html</a></li>
+<li><a href="https://github.com/robotframework/PythonLibCore">https://github.com/robotframework/PythonLibCore</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>测试框架</category>
+      </categories>
+      <tags>
+        <tag>Robot Framework</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python上下文管理器</title>
     <url>/posts/python-notes-for-context-manager/</url>
     <content><![CDATA[<p>在代码执行过程中会进行频繁的I/O操作，而计算资源往往是有限的，需要进行资源管理，保证这些资源在使用过后得到释放，防止发生资源泄露。Python中使用上下文管理器（context manager）进行资源管理，比如我们经常用到的<code>with</code>关键字，上下文管理器可以进行自动分配并且释放资源。</p>

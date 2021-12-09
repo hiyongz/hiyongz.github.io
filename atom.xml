@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-12-07T12:48:41.205Z</updated>
+  <updated>2021-12-09T13:51:17.424Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Robot Framework自定义测试库开发详解</title>
+    <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/"/>
+    <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/</id>
+    <published>2021-12-09T12:30:36.000Z</published>
+    <updated>2021-12-09T13:51:17.424Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Robot Framework是一个开源自动化测试框架，主要特点是基于关键字驱动，本文介绍自定义测试库及测试库文档创建方法。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="测试框架" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/"/>
+    
+    
+      <category term="Robot Framework" scheme="https://hiyongz.github.io/tags/Robot-Framework/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python上下文管理器</title>
     <link href="https://hiyongz.github.io/posts/python-notes-for-context-manager/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-context-manager/</id>
     <published>2021-12-07T12:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.205Z</updated>
+    <updated>2021-12-09T13:51:17.376Z</updated>
     
     <summary type="html">
     
@@ -44,7 +67,7 @@
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-12-02T20:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.149Z</updated>
+    <updated>2021-12-09T13:51:17.336Z</updated>
     
     <summary type="html">
     
@@ -67,7 +90,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/</id>
     <published>2021-12-02T09:30:36.000Z</published>
-    <updated>2021-12-07T12:48:41.277Z</updated>
+    <updated>2021-12-09T13:51:17.436Z</updated>
     
     <summary type="html">
     
@@ -90,7 +113,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/</id>
     <published>2021-11-30T12:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.205Z</updated>
+    <updated>2021-12-09T13:51:17.376Z</updated>
     
     <summary type="html">
     
@@ -113,7 +136,7 @@
     <link href="https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/"/>
     <id>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</id>
     <published>2021-11-25T12:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.273Z</updated>
+    <updated>2021-12-09T13:51:17.432Z</updated>
     
     <summary type="html">
     
@@ -142,7 +165,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
     <published>2021-11-23T09:30:36.000Z</published>
-    <updated>2021-12-07T12:48:41.277Z</updated>
+    <updated>2021-12-09T13:51:17.436Z</updated>
     
     <summary type="html">
     
@@ -165,7 +188,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2021-12-07T12:48:41.213Z</updated>
+    <updated>2021-12-09T13:51:17.388Z</updated>
     
     <summary type="html">
     
@@ -186,7 +209,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2021-12-07T12:48:41.213Z</updated>
+    <updated>2021-12-09T13:51:17.384Z</updated>
     
     <summary type="html">
     
@@ -207,7 +230,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2021-12-07T12:48:41.281Z</updated>
+    <updated>2021-12-09T13:51:17.440Z</updated>
     
     <summary type="html">
     
@@ -232,7 +255,7 @@
     <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
     <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
     <published>2021-11-16T12:06:00.000Z</published>
-    <updated>2021-12-07T12:48:41.137Z</updated>
+    <updated>2021-12-09T13:51:17.324Z</updated>
     
     <summary type="html">
     
@@ -255,7 +278,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2021-12-07T12:48:41.277Z</updated>
+    <updated>2021-12-09T13:51:17.436Z</updated>
     
     <summary type="html">
     
@@ -280,7 +303,7 @@
     <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
     <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
     <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2021-12-07T12:48:41.181Z</updated>
+    <updated>2021-12-09T13:51:17.360Z</updated>
     
     <summary type="html">
     
@@ -305,7 +328,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
     <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2021-12-07T12:48:41.213Z</updated>
+    <updated>2021-12-09T13:51:17.384Z</updated>
     
     <summary type="html">
     
@@ -326,7 +349,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-12-07T12:48:41.205Z</updated>
+    <updated>2021-12-09T13:51:17.380Z</updated>
     
     <summary type="html">
     
@@ -351,7 +374,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.285Z</updated>
+    <updated>2021-12-09T13:51:17.444Z</updated>
     
     <summary type="html">
     
@@ -374,7 +397,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
     <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.285Z</updated>
+    <updated>2021-12-09T13:51:17.444Z</updated>
     
     <summary type="html">
     
@@ -399,7 +422,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-introduction/</id>
     <published>2021-11-02T12:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.285Z</updated>
+    <updated>2021-12-09T13:51:17.440Z</updated>
     
     <summary type="html">
     
@@ -422,7 +445,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-environment-variables-setting/</id>
     <published>2021-10-30T08:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.285Z</updated>
+    <updated>2021-12-09T13:51:17.444Z</updated>
     
     <summary type="html">
     
@@ -445,7 +468,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/"/>
     <id>https://hiyongz.github.io/posts/app-testing-for-ios-app-testing-on-windows-with-airtest/</id>
     <published>2021-10-28T08:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.037Z</updated>
+    <updated>2021-12-09T13:51:17.240Z</updated>
     
     <summary type="html">
     
@@ -460,29 +483,6 @@
     
     
       <category term="iOS" scheme="https://hiyongz.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go语言并发编程：上下文Context</title>
-    <link href="https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/"/>
-    <id>https://hiyongz.github.io/posts/golang-concurrent-synchronization-for-context/</id>
-    <published>2021-10-26T12:12:00.000Z</published>
-    <updated>2021-12-07T12:48:41.137Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;context.Context类型是在 Go 1.7 版本引入到标准库的，上下文Context主要用来在goroutine之间传递截止日期、停止信号等上下文信息，并且它是并发安全的，可以控制多个goroutine，因此它可以很方便的用于并发控制和超时控制，标准库中的一些代码包也引入了Context参数，比如os/exec包、net包、database/sql包，等等。下面来介绍Context类型的使用方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="Go" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Go/"/>
-    
-    
-      <category term="Go" scheme="https://hiyongz.github.io/tags/Go/"/>
     
   </entry>
   
