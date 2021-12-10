@@ -12956,6 +12956,8 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 <p>项目地址：<a href="https://github.com/alibaba/web-editor">https://github.com/alibaba/web-editor</a>。</p>
 <p>环境要求Python3.6+，通过pip安装：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pip3 install -U weditor <span class="comment"># 会安装uiautomator2和facebook-wda两个库，分别支持android和iOS APP。</span></span><br></pre></td></tr></table></figure><br>在命令窗口输入如下命令运行：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ weditor <span class="comment"># 启动server并打开浏览器</span></span><br></pre></td></tr></table></figure><br>启动后会在浏览器自动访问 <a href="http://localhost:17310">http://localhost:17310</a></p>
 <p><img src="weditor.png" width="80%" height="80%" /></p>
+<p>如果你用appium编写APP自动化用例，而使用weditor来查看页面元素。在运行appium用例脚本时需要停止UiAutomator守护服务，因为UiAutomator相关进程会导致appium依赖的uiautomatorviewer 服务无法运行。</p>
+<p>关闭方法参考文档 <a href="https://github.com/openatx/uiautomator2#stop-uiautomator">https://github.com/openatx/uiautomator2#stop-uiautomator</a> 。</p>
 <h2 id="Appium-inspector工具"><a href="#Appium-inspector工具" class="headerlink" title="Appium inspector工具"></a>Appium inspector工具</h2><p>打开appium，点击【启动服务器】</p>
 <p><img src="appium.png" width="80%" height="80%" /></p>
 <p>点击右上角搜索标志图标【Start Inspector Session】</p>
