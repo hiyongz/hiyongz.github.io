@@ -31,6 +31,183 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Python OCR工具pytesseract详解</title>
+    <url>/posts/python-notes-for-ocr-with-tesseract/</url>
+    <content><![CDATA[<p>pytesseract是基于Python的OCR工具， 底层使用的是Google的Tesseract-OCR 引擎，支持识别图片中的文字，支持jpeg, png, gif, bmp, tiff等图片格式。本文介绍如何使用pytesseract 实现图片文字识别。</p>
+<a id="more"></a>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>OCR（Optical character recognition，光学字符识别）是一种将图像中的手写字或者印刷文本转换为机器编码文本的技术。通过数字方式存储文本数据更容易保存和编辑，可以存储大量数据，比如1G的硬盘可以存储数百万本书。</p>
+<p>OCR技术可以将图片，纸质文档中的文本转换为数字形式的文本。OCR过程一般包括以下步骤：</p>
+<ol>
+<li>图像预处理</li>
+<li>文本定位</li>
+<li>字符分割</li>
+<li>字符识别</li>
+<li>后处理</li>
+</ol>
+<p>最初由惠普开发，后来Google赞助的开源OCR引擎 tesseract 提供了比较精确的文字识别API，本文将要介绍的Python库Pytesseract就是基于Tesseract-OCR 引擎。</p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>环境要求：</p>
+<ul>
+<li>Python 3.6+</li>
+<li>PIL库</li>
+<li>安装Google Tesseract OCR</li>
+<li>系统：windows/mac/linux，我的系统是Windows10</li>
+</ul>
+<h2 id="1-安装Google-Tesseract"><a href="#1-安装Google-Tesseract" class="headerlink" title="1. 安装Google Tesseract"></a>1. 安装Google Tesseract</h2><p>Tesseract OCR github地址：<a href="https://github.com/tesseract-ocr/tesseract">https://github.com/tesseract-ocr/tesseract</a></p>
+<p>Windows Tesseract下载地址：<a href="https://digi.bib.uni-mannheim.de/tesseract/">https://digi.bib.uni-mannheim.de/tesseract/</a></p>
+<p>Mac和Linux安装方法参考：<a href="https://tesseract-ocr.github.io/tessdoc/Installation.html">https://tesseract-ocr.github.io/tessdoc/Installation.html</a></p>
+<p>安装时可以选择需要的语言包：</p>
+<p><img src="tesseract-language.png" width="70%" height="70%" /></p>
+<p>安装完成后，添加到环境变量PATH中，我的安装路径是：<code>C:\Program Files\Tesseract-OCR</code> 。</p>
+<p>命令行窗口输入：<code>tesseract</code> ，查看是否安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tesseract</span><br><span class="line">Usage:</span><br><span class="line">  tesseract --<span class="built_in">help</span> | --help-extra | --version</span><br><span class="line">  tesseract --list-langs</span><br><span class="line">  tesseract imagename outputbase [options...] [configfile...]</span><br><span class="line"></span><br><span class="line">OCR options:</span><br><span class="line">  -l LANG[+LANG]        Specify language(s) used <span class="keyword">for</span> OCR.</span><br><span class="line">NOTE: These options must occur before any configfile.</span><br><span class="line"></span><br><span class="line">Single options:</span><br><span class="line">  --<span class="built_in">help</span>                Show this <span class="built_in">help</span> message.</span><br><span class="line">  --help-extra          Show extra <span class="built_in">help</span> <span class="keyword">for</span> advanced users.</span><br><span class="line">  --version             Show version information.</span><br><span class="line">  --list-langs          List available languages <span class="keyword">for</span> tesseract engine.</span><br></pre></td></tr></table></figure>
+<h2 id="2-安装pytesseract"><a href="#2-安装pytesseract" class="headerlink" title="2. 安装pytesseract"></a>2. 安装pytesseract</h2><p>Python tesseract：<a href="https://github.com/madmaze/pytesseract">https://github.com/madmaze/pytesseract</a></p>
+<p>pip安装pytesseract</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install pytesseract</span><br></pre></td></tr></table></figure>
+<p>另外需要安装一下<a href="https://github.com/python-pillow/Pillow">Pillow</a>库，用于图像处理。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pip install Pillow</span><br></pre></td></tr></table></figure>
+<h1 id="文字识别小例子"><a href="#文字识别小例子" class="headerlink" title="文字识别小例子"></a>文字识别小例子</h1><p>先准备一张包含英文字符的图片，下面的代码实现提取图片中的中文和英文字符，并识别为字符串：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pytesseract</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出支持的语言</span></span><br><span class="line">print(pytesseract.get_languages(config=<span class="string">&#x27;&#x27;</span>))</span><br><span class="line"></span><br><span class="line">print(pytesseract.image_to_string(Image.<span class="built_in">open</span>(<span class="string">&#x27;test.png&#x27;</span>), lang=<span class="string">&#x27;chi_sim+eng&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>识别下面图片中的文字（test.png）：</p>
+<p><img src="test-img.png" width="70%" height="70%" /></p>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="string">&#x27;chi_sim&#x27;</span>, <span class="string">&#x27;eng&#x27;</span>, <span class="string">&#x27;osd&#x27;</span>]</span><br><span class="line">拳 列出支持的语言</span><br><span class="line">print(pytesseract.get_languages (config=”))</span><br><span class="line"></span><br><span class="line">print(pytesseract.image_to_string(Image.<span class="built_in">open</span>(<span class="string">&#x27;test.png&#x27;</span>), lang=<span class="string">&#x27;chi_sim+eng&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="获取文字位置信息"><a href="#获取文字位置信息" class="headerlink" title="获取文字位置信息"></a>获取文字位置信息</h1><p><code>image_to_boxes()</code> 方法返回识别到的字符及字符边框信息。<code>image_to_data()</code> 返回单词及单词位置信息。下面来看看这两种方法的执行效果，识别下图中的中文字符：</p>
+<p><img src="testimg2.png" width="70%" height="70%" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;testimg2.png&#x27;</span>)</span><br><span class="line">print(pytesseract.image_to_boxes(img, output_type=Output.STRING, lang=<span class="string">&#x27;chi_sim&#x27;</span>))</span><br><span class="line">print(<span class="string">&quot;#&quot;</span>*<span class="number">30</span>)</span><br><span class="line">print(pytesseract.image_to_data(img, output_type=Output.STRING, lang=<span class="string">&#x27;chi_sim&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">生 <span class="number">63</span> <span class="number">211</span> <span class="number">80</span> <span class="number">227</span> <span class="number">0</span></span><br><span class="line">存 <span class="number">81</span> <span class="number">209</span> <span class="number">118</span> <span class="number">227</span> <span class="number">0</span></span><br><span class="line">是 <span class="number">122</span> <span class="number">211</span> <span class="number">139</span> <span class="number">226</span> <span class="number">0</span></span><br><span class="line">文 <span class="number">126</span> <span class="number">200</span> <span class="number">154</span> <span class="number">231</span> <span class="number">0</span></span><br><span class="line">明 <span class="number">142</span> <span class="number">210</span> <span class="number">157</span> <span class="number">226</span> <span class="number">0</span></span><br><span class="line">的 <span class="number">162</span> <span class="number">209</span> <span class="number">197</span> <span class="number">227</span> <span class="number">0</span></span><br><span class="line">第 <span class="number">200</span> <span class="number">217</span> <span class="number">218</span> <span class="number">219</span> <span class="number">0</span></span><br><span class="line">一 <span class="number">221</span> <span class="number">209</span> <span class="number">236</span> <span class="number">226</span> <span class="number">0</span></span><br><span class="line">需 <span class="number">217</span> <span class="number">200</span> <span class="number">253</span> <span class="number">231</span> <span class="number">0</span></span><br><span class="line">要 <span class="number">239</span> <span class="number">209</span> <span class="number">259</span> <span class="number">226</span> <span class="number">0</span></span><br><span class="line">。 <span class="number">260</span> <span class="number">211</span> <span class="number">266</span> <span class="number">216</span> <span class="number">0</span></span><br><span class="line">猜 <span class="number">325</span> <span class="number">64</span> <span class="number">364</span> <span class="number">82</span> <span class="number">0</span></span><br><span class="line">疑 <span class="number">364</span> <span class="number">64</span> <span class="number">481</span> <span class="number">82</span> <span class="number">0</span></span><br><span class="line">链 <span class="number">373</span> <span class="number">54</span> <span class="number">393</span> <span class="number">86</span> <span class="number">0</span></span><br><span class="line">和 <span class="number">383</span> <span class="number">54</span> <span class="number">403</span> <span class="number">86</span> <span class="number">0</span></span><br><span class="line">技 <span class="number">403</span> <span class="number">54</span> <span class="number">435</span> <span class="number">86</span> <span class="number">0</span></span><br><span class="line">术 <span class="number">419</span> <span class="number">54</span> <span class="number">451</span> <span class="number">86</span> <span class="number">0</span></span><br><span class="line">爆 <span class="number">441</span> <span class="number">54</span> <span class="number">477</span> <span class="number">86</span> <span class="number">0</span></span><br><span class="line">炸 <span class="number">469</span> <span class="number">54</span> <span class="number">485</span> <span class="number">86</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##############################</span></span><br><span class="line">level	page_num	block_num	par_num	line_num	word_num	left	top	width	height	conf	text</span><br><span class="line"><span class="number">1</span>	<span class="number">1</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">566</span>	<span class="number">279</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">63</span>	<span class="number">52</span>	<span class="number">203</span>	<span class="number">18</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">63</span>	<span class="number">52</span>	<span class="number">203</span>	<span class="number">18</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">4</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">0</span>	<span class="number">63</span>	<span class="number">52</span>	<span class="number">203</span>	<span class="number">18</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">63</span>	<span class="number">52</span>	<span class="number">55</span>	<span class="number">18</span>	<span class="number">96</span>	生存</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">122</span>	<span class="number">53</span>	<span class="number">17</span>	<span class="number">15</span>	<span class="number">96</span>	是</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">3</span>	<span class="number">126</span>	<span class="number">48</span>	<span class="number">31</span>	<span class="number">31</span>	<span class="number">96</span>	文明</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">4</span>	<span class="number">162</span>	<span class="number">52</span>	<span class="number">35</span>	<span class="number">18</span>	<span class="number">96</span>	的</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">5</span>	<span class="number">200</span>	<span class="number">60</span>	<span class="number">18</span>	<span class="number">2</span>	<span class="number">91</span>	第</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">6</span>	<span class="number">221</span>	<span class="number">53</span>	<span class="number">15</span>	<span class="number">17</span>	<span class="number">93</span>	一</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">7</span>	<span class="number">217</span>	<span class="number">48</span>	<span class="number">42</span>	<span class="number">31</span>	<span class="number">93</span>	需要</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">8</span>	<span class="number">260</span>	<span class="number">63</span>	<span class="number">6</span>	<span class="number">5</span>	<span class="number">91</span>	。</span><br><span class="line"><span class="number">2</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">325</span>	<span class="number">197</span>	<span class="number">156</span>	<span class="number">18</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">3</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">325</span>	<span class="number">197</span>	<span class="number">156</span>	<span class="number">18</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">4</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">0</span>	<span class="number">325</span>	<span class="number">197</span>	<span class="number">156</span>	<span class="number">18</span>	-<span class="number">1</span>	</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">325</span>	<span class="number">197</span>	<span class="number">156</span>	<span class="number">18</span>	<span class="number">94</span>	猜疑</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">373</span>	<span class="number">193</span>	<span class="number">20</span>	<span class="number">32</span>	<span class="number">77</span>	链</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">3</span>	<span class="number">383</span>	<span class="number">193</span>	<span class="number">20</span>	<span class="number">32</span>	<span class="number">92</span>	和</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">4</span>	<span class="number">403</span>	<span class="number">193</span>	<span class="number">48</span>	<span class="number">32</span>	<span class="number">96</span>	技术</span><br><span class="line"><span class="number">5</span>	<span class="number">1</span>	<span class="number">2</span>	<span class="number">1</span>	<span class="number">1</span>	<span class="number">5</span>	<span class="number">441</span>	<span class="number">193</span>	<span class="number">44</span>	<span class="number">32</span>	<span class="number">94</span>	爆炸</span><br></pre></td></tr></table></figure>
+<p>根据<code>image_to_data()</code> 方法返回的位置信息，下面来标出识别出的词语位置。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pytesseract</span><br><span class="line"><span class="keyword">from</span> pytesseract <span class="keyword">import</span> Output</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> ImageDraw</span><br><span class="line">    <span class="keyword">from</span> PIL <span class="keyword">import</span> ImageFont</span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="keyword">import</span> Image</span><br><span class="line">    </span><br><span class="line">img = cv2.imread(<span class="string">&#x27;testimg2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line">thresh = cv2.threshold(gray, <span class="number">0</span>, <span class="number">255</span>, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[<span class="number">1</span>]</span><br><span class="line">cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">cnts = cnts[<span class="number">0</span>] <span class="keyword">if</span> <span class="built_in">len</span>(cnts) == <span class="number">2</span> <span class="keyword">else</span> cnts[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">width_list = []</span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> cnts:</span><br><span class="line">	_, _, w, _ = cv2.boundingRect(c)</span><br><span class="line">	width_list.append(w)</span><br><span class="line">wm = np.median(width_list)</span><br><span class="line"></span><br><span class="line">tess_text = pytesseract.image_to_data(img, output_type=Output.DICT, lang=<span class="string">&#x27;chi_sim&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(tess_text[<span class="string">&#x27;text&#x27;</span>])):</span><br><span class="line">	word_len = <span class="built_in">len</span>(tess_text[<span class="string">&#x27;text&#x27;</span>][i])</span><br><span class="line">	<span class="keyword">if</span> word_len &gt; <span class="number">1</span>:</span><br><span class="line">		world_w = <span class="built_in">int</span>(wm * word_len)</span><br><span class="line">		(x, y, w, h) = (tess_text[<span class="string">&#x27;left&#x27;</span>][i], tess_text[<span class="string">&#x27;top&#x27;</span>][i], tess_text[<span class="string">&#x27;width&#x27;</span>][i], tess_text[<span class="string">&#x27;height&#x27;</span>][i])</span><br><span class="line">		cv2.rectangle(img, (x, y), (x + world_w, y + h), (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">1</span>)</span><br><span class="line">		im = Image.fromarray(img)</span><br><span class="line">		draw = ImageDraw.Draw(im)</span><br><span class="line">		font = ImageFont.truetype(font=<span class="string">&quot;simsun.ttc&quot;</span>, size=<span class="number">18</span>, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">		draw.text((x, y - <span class="number">20</span>), tess_text[<span class="string">&#x27;text&#x27;</span>][i], (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), font=font)</span><br><span class="line">		img = cv2.cvtColor(np.array(im), cv2.COLOR_RGB2BGR)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&quot;TextBoundingBoxes&quot;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<p><img src="text-bounding-boxes.png" width="70%" height="70%" /></p>
+<p>另外说明一下， <code>ImageFont.truetype(font=&quot;simsun.ttc&quot;, size=18, encoding=&quot;utf-8&quot;)</code> 用于设置字体及编码格式，原因是<code>draw.text()</code> 默认使用ISO-8859-1（latin-1）编码，中文需要使用UTF-8编码。Windows中，字体存放路径一般为<code>C:\Windows\Fonts</code> ，已经添加到了环境变量，直接写字体名称就可以了，<code>simsun.ttc</code> 表示宋体。</p>
+<p>如果不知道字体对应名称可以进入注册表查看：运行窗口或者命令行窗口输入<code>regedit</code>打开注册表，进入如下路径：<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts</code> ，可以查看对应字体文件名称。</p>
+<p><img src="regedit-fonts.png" width="70%" height="70%" /></p>
+<h1 id="多语言识别"><a href="#多语言识别" class="headerlink" title="多语言识别"></a>多语言识别</h1><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>图片中可能包含了多种语言，比如在上面的例子中，图片包含了中文和英文，<code>lang=&#39;chi_sim+eng&#39;</code> 表示识别简体中文和英文。</p>
+<p>简体中文chi_sim是在安装tesseract时勾选的，<code>get_languages()</code> 方法列出了支持的语言，也可以在命令行窗口执行 <code>tesseract --list-langs</code> 查看支持的语言：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tesseract --list-langs</span><br><span class="line">List of available languages (3):</span><br><span class="line">chi_sim</span><br><span class="line">eng</span><br><span class="line">osd</span><br></pre></td></tr></table></figure>
+<p>除了使用 <code>lang=&#39;chi_sim+eng&#39;</code> 方式指定语言外，也可以使用<code>config=&#39;-l chi_sim+eng&#39;</code> 形式：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;test.png&#x27;</span>)</span><br><span class="line">config = <span class="string">r&#x27;-l chi_sim+eng --psm 6&#x27;</span></span><br><span class="line">print(pytesseract.image_to_string(img, config=config))</span><br></pre></td></tr></table></figure>
+<p>执行结果和前面一样。</p>
+<h2 id="训练数据"><a href="#训练数据" class="headerlink" title="训练数据"></a>训练数据</h2><p>如果需要下载其它语言包，可以到这里<a href="https://tesseract-ocr.github.io/tessdoc/Data-Files">https://tesseract-ocr.github.io/tessdoc/Data-Files</a>下载。</p>
+<p>Tesseract 提供了三种训练数据：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>训练数据</th>
+<th>训练模型</th>
+<th>识别速度</th>
+<th>正确率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/tesseract-ocr/tessdata_fast">tessdata_fast</a></td>
+<td>LSTM</td>
+<td>最快</td>
+<td>最低</td>
+</tr>
+<tr>
+<td><a href="https://github.com/tesseract-ocr/tessdata_best">tessdata_best</a></td>
+<td>LSTM</td>
+<td>最慢</td>
+<td>最高</td>
+</tr>
+<tr>
+<td><a href="https://github.com/tesseract-ocr/tessdata">tessdata</a></td>
+<td>Legacy + LSTM</td>
+<td>中等</td>
+<td>略低于tesdata -best</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>根据自己的需要下载需要的模型文件，将traineddata文件放在 <code>C:\Program Files\Tesseract-OCR\tessdata</code> 目录（Tesseract安装目录）下就可以了。</p>
+<p>tessdata_best可用来再训练字库，训练方法参考文档：<a href="https://tesseract-ocr.github.io/tessdoc/tess4/TrainingTesseract-4.00.html">https://tesseract-ocr.github.io/tessdoc/tess4/TrainingTesseract-4.00.html</a>。</p>
+<h1 id="OCR选项"><a href="#OCR选项" class="headerlink" title="OCR选项"></a>OCR选项</h1><p>多语言识别中使用了 <code>-l</code> 和 <code>--psm</code> 选项，tesseract还支持更多的OCR选项。</p>
+<p>OCR选项：</p>
+<ul>
+<li><code>--tessdata-dir PATH</code>：Specify the location of tessdata path.</li>
+<li><code>--user-words PATH</code>：Specify the location of user words file.</li>
+<li><code>--user-patterns PATH</code>：Specify the location of user patterns file.</li>
+<li><code>--dpi VALUE</code>：Specify DPI for input image.</li>
+<li><code>-l LANG[+LANG]</code>：Specify language(s) used for OCR.</li>
+<li><code>-c VAR=VALUE</code>：Set value for config variables. Multiple -c arguments are allowed.</li>
+<li><code>--psm NUM</code>：Specify page segmentation mode.</li>
+<li><code>--oem NUM</code>：Specify OCR Engine mode.</li>
+</ul>
+<p>在pytesseract中的使用方法是添加config参数：<code>config=&#39;--psm 0 -c min_characters_to_try=5&#39;</code></p>
+<p>下面介绍一下psm和oem这两个选项。</p>
+<h2 id="图片分割模式（PSM）"><a href="#图片分割模式（PSM）" class="headerlink" title="图片分割模式（PSM）"></a>图片分割模式（PSM）</h2><p>tesseract有13种图片分割模式（page segmentation mode，psm）：</p>
+<ul>
+<li>0 — Orientation and script detection (OSD) only. 方向及语言检测（Orientation and script detection，OSD)</li>
+<li>1 — Automatic page segmentation with OSD. 自动图片分割</li>
+<li>2 — Automatic page segmentation, but no OSD, or OCR. 自动图片分割，没有OSD和OCR</li>
+<li>3 — Fully automatic page segmentation, but no OSD. (Default) 完全的自动图片分割，没有OSD</li>
+<li>4 — Assume a single column of text of variable sizes. 假设有一列不同大小的文本</li>
+<li>5 — Assume a single uniform block of vertically aligned text. 假设有一个垂直对齐的文本块</li>
+<li>6 — Assume a single uniform block of text. 假设有一个对齐的文本块</li>
+<li>7 — Treat the image as a single text line. 图片为单行文本</li>
+<li>8 — Treat the image as a single word. 图片为单词</li>
+<li>9 — Treat the image as a single word in a circle. 图片为圆形的单词</li>
+<li>10 — Treat the image as a single character. 图片为单个字符</li>
+<li>11 — Sparse text. Find as much text as possible in no particular order. 稀疏文本。查找尽可能多的文本，没有特定的顺序。</li>
+<li>12 — Sparse text with OSD. OSD稀疏文本</li>
+<li>13 — Raw line. Treat the image as a single text line, bypassing hacks that are Tesseract-specific. 原始行。将图像视为单个文本行。</li>
+</ul>
+<h2 id="OCR引擎模式（OEM）"><a href="#OCR引擎模式（OEM）" class="headerlink" title="OCR引擎模式（OEM）"></a>OCR引擎模式（OEM）</h2><p>有4种OCR引擎模式：</p>
+<ul>
+<li>0  —  Legacy engine only. </li>
+<li>1  —  Neural nets LSTM engine only. </li>
+<li>2  —  Legacy + LSTM engines. </li>
+<li>3  —  Default, based on what is available. </li>
+</ul>
+<h1 id="方向及语言检测OSD"><a href="#方向及语言检测OSD" class="headerlink" title="方向及语言检测OSD"></a>方向及语言检测OSD</h1><p>Tesseract支持方向及语言检测（Orientation and script detection，OSD) ，比如检测下面的图片：</p>
+<p><img src="osd-example.png" width="70%" height="70%" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">osd = pytesseract.image_to_osd(<span class="string">&#x27;osd-example.png&#x27;</span>,config=<span class="string">&#x27;--psm 0 -c min_characters_to_try=5&#x27;</span>)</span><br><span class="line">print(osd)</span><br></pre></td></tr></table></figure>
+<p>其中 <code>min_characters_to_try</code> 表示设置最小字符数，默认为50。</p>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Page number: <span class="number">0</span></span><br><span class="line">Orientation <span class="keyword">in</span> degrees: <span class="number">90</span></span><br><span class="line">Rotate: <span class="number">270</span></span><br><span class="line">Orientation confidence: <span class="number">0.74</span></span><br><span class="line">Script: Han</span><br><span class="line">Script confidence: <span class="number">0.83</span></span><br></pre></td></tr></table></figure>
+<p>结果是旋转了270度，识别到的语言为中文Han。</p>
+<h1 id="提取数字"><a href="#提取数字" class="headerlink" title="提取数字"></a>提取数字</h1><p>只提取下面图片中的数字：</p>
+<p><img src="number-example.png" width="70%" height="70%" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;number-example.png&#x27;</span>)</span><br><span class="line">config = <span class="string">r&#x27;--oem 3 --psm 6 outputbase digits&#x27;</span></span><br><span class="line">osd = pytesseract.image_to_string(img, config=config)</span><br><span class="line">print(osd)</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1200</span>-<span class="number">.41194</span>-.</span><br><span class="line"><span class="number">4</span>-.</span><br><span class="line"></span><br><span class="line"><span class="number">12000000</span></span><br><span class="line"></span><br><span class="line"><span class="number">11994933.</span></span><br><span class="line">-<span class="number">119940218</span></span><br><span class="line"></span><br><span class="line"><span class="number">119932207</span></span><br><span class="line"></span><br><span class="line"><span class="number">1199251</span></span><br><span class="line"></span><br><span class="line"><span class="number">119915241</span></span><br><span class="line"></span><br><span class="line"><span class="number">119907238</span></span><br><span class="line"></span><br><span class="line">-<span class="number">119853209</span></span><br><span class="line"><span class="number">1119450495</span></span><br><span class="line">.-<span class="number">11941637</span></span><br></pre></td></tr></table></figure>
+<h1 id="字符白名单"><a href="#字符白名单" class="headerlink" title="字符白名单"></a>字符白名单</h1><p>只检测特定的字符：只检测数字</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;number-example.png&#x27;</span>)</span><br><span class="line">config = <span class="string">r&#x27;-c tessedit_char_whitelist=0123456789 --psm 6&#x27;</span></span><br><span class="line">print(pytesseract.image_to_string(img, config=config))</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">12001194</span></span><br><span class="line"><span class="number">12000000</span></span><br><span class="line"><span class="number">11994933</span></span><br><span class="line"><span class="number">11994018</span></span><br><span class="line"><span class="number">11993207</span></span><br><span class="line"><span class="number">11992851</span></span><br><span class="line"><span class="number">11991541</span></span><br><span class="line"><span class="number">11990738</span></span><br><span class="line"><span class="number">11985309</span></span><br><span class="line"><span class="number">11945049</span></span><br><span class="line"><span class="number">11941637</span></span><br></pre></td></tr></table></figure>
+<p>发现识别精度比 <code>outputbase digits</code> 方法更加准确。</p>
+<h1 id="字符黑名单"><a href="#字符黑名单" class="headerlink" title="字符黑名单"></a>字符黑名单</h1><p>不检测数字：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&#x27;number-example.png&#x27;</span>)</span><br><span class="line">config = <span class="string">r&#x27;-c tessedit_char_blacklist=0123456789 --psm 6&#x27;</span></span><br><span class="line">print(pytesseract.image_to_string(img, config=config, lang=<span class="string">&#x27;chi_sim&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">胶片很快冲出来了，他开始查看哪张值得放大洗成照片，</span><br><span class="line">在第一张就发现了一件离奇的事。一个倒计时。倒计时从</span><br><span class="line"> 小时开始，到现在还剩余 小时。</span><br><span class="line"></span><br><span class="line">这张拍的是一个大商场外的一小片草地，他看到底片正中</span><br><span class="line">有一行白色的东西，</span><br><span class="line"></span><br><span class="line">细看是一排数字:  :  :</span><br><span class="line"></span><br><span class="line">第二张底片上也有数字: l]:  :  -。</span><br><span class="line"></span><br><span class="line">第三张: l : : lg，</span><br><span class="line"></span><br><span class="line">第四张:  :  :  ，</span><br><span class="line"></span><br><span class="line">第五张: ] :  : l;</span><br><span class="line"></span><br><span class="line">第六张:  : : l，</span><br><span class="line"></span><br><span class="line">第七张: l : o : g ;</span><br><span class="line"></span><br><span class="line">第八张: lg :  :  ;</span><br><span class="line"></span><br><span class="line">第三十四张: : :</span><br><span class="line"></span><br><span class="line">第三十六张，也是最后一张:  :  :</span><br></pre></td></tr></table></figure>
+<h1 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h1><p>pytesseract 支持将图片转换为PDF、HOCR以及ALTO XML格式。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pdf = pytesseract.image_to_pdf_or_hocr(<span class="string">&#x27;testimg2.png&#x27;</span>, extension=<span class="string">&#x27;pdf&#x27;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;test.pdf&#x27;</span>, <span class="string">&#x27;w+b&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(pdf)</span><br><span class="line">    </span><br><span class="line">hocr = pytesseract.image_to_pdf_or_hocr(<span class="string">&#x27;testimg2.png&#x27;</span>, extension=<span class="string">&#x27;hocr&#x27;</span>)</span><br><span class="line">xml = pytesseract.image_to_alto_xml(<span class="string">&#x27;testimg2.png&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>世人多巧, 心茫茫然</p>
+</blockquote>
+<p><strong>参考资料：</strong></p>
+<ol>
+<li><a href="https://nanonets.com/blog/ocr-with-tesseract/#limitationsoftesseract">https://nanonets.com/blog/ocr-with-tesseract/#limitationsoftesseract</a></li>
+<li><a href="https://tesseract-ocr.github.io/tessdoc/tess4/TrainingTesseract-4.00.html">https://tesseract-ocr.github.io/tessdoc/tess4/TrainingTesseract-4.00.html</a></li>
+<li>Tesseract文档：<a href="https://tesseract-ocr.github.io/">https://tesseract-ocr.github.io/</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>OCR</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Robot Framework自定义测试库开发详解</title>
     <url>/posts/test-framework-for-robotframework-skills/</url>
     <content><![CDATA[<p>Robot Framework是一个开源自动化测试框架，主要特点是基于关键字驱动，本文介绍自定义测试库及测试库文档创建方法。</p>
