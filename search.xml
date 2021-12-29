@@ -31,6 +31,149 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Linux cron定时介绍</title>
+    <url>/posts/continuous-integration-skills-for-cron-expression/</url>
+    <content><![CDATA[<p>定时任务的使用场景非常广泛，比如定时发送邮件，定时清理日志等等，在持续集成中，可以定时的触发测试任务，比如希望在每天晚上下班时间执行自动化用例。本文通过介绍Linux cron定时来了解​cron定时相关概念。</p>
+<a id="more"></a>
+<h1 id="Linux-Crontab-定时任务"><a href="#Linux-Crontab-定时任务" class="headerlink" title="Linux Crontab 定时任务"></a>Linux Crontab 定时任务</h1><p>cron来源于希腊语chronos，意思是时间。在类Unix的操作系统中，可以使用cron 服务器来实现定时执行任务。crontab文件存放cron指令，执行周期命令的守护进程crond负责激活这些任务，定期检查是否有任务执行。</p>
+<h2 id="crond-服务"><a href="#crond-服务" class="headerlink" title="crond 服务"></a>crond 服务</h2><p>crond 服务是用来执行周期任务或等待处理某些事件的一个守护进程，crontab 命令需要 crond 服务支持。centos7中一般是默认安装的，可以使用 <code>rpm</code> 命令查看是否安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rpm -qa | grep crontab</span><br><span class="line">crontabs-1.11-6.20121102git.el7.noarch</span><br></pre></td></tr></table></figure>
+<p>查看crond 服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># centos7</span></span><br><span class="line">systemctl status crond.service </span><br><span class="line"></span><br><span class="line"><span class="comment"># centos6</span></span><br><span class="line">service crond status</span><br></pre></td></tr></table></figure>
+<p>启动crond 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># centos7</span></span><br><span class="line">systemctl start  crond.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># centos6</span></span><br><span class="line">service crond start</span><br></pre></td></tr></table></figure>
+<p>停止crond 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># centos7</span></span><br><span class="line">systemctl stop  crond.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># centos6</span></span><br><span class="line">service crond stop</span><br></pre></td></tr></table></figure>
+<p>重启crond 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># centos7</span></span><br><span class="line">systemctl restart  crond.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># centos6</span></span><br><span class="line">service crond restart</span><br></pre></td></tr></table></figure>
+<p>重载crond 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># centos7</span></span><br><span class="line">systemctl reload  crond.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># centos6</span></span><br><span class="line">service crond reload</span><br></pre></td></tr></table></figure>
+<h2 id="crontab相关文件"><a href="#crontab相关文件" class="headerlink" title="crontab相关文件"></a>crontab相关文件</h2><p>cron 服务主要包括以下文件目录：</p>
+<ul>
+<li><code>/var/spool/cron</code>：用户定义的crontab文件存放目录</li>
+<li><code>/etc/cron.d</code>：存放要执行的crontab文件或脚本</li>
+<li><code>/etc/crontab</code>：系统任务调度的配置文件</li>
+<li><code>/etc/anacrontab</code>：anacron配置文件</li>
+<li><code>/etc/cron.deny</code>：列出不允许使用crontab命令的用户</li>
+<li><code>/etc/cron.daily</code>：每天执行一次的脚本</li>
+<li><code>/etc/cron.hourly</code>：每小时执行一次的脚本</li>
+<li><code>/etc/cron.monthly</code>：每月执行一次的脚本</li>
+<li><code>/etc/cron.weekly</code>：每星期执行一次的脚本</li>
+</ul>
+<p><code>/etc/crontab</code>文件负责管理和维护任务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cat /etc/crontab</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"></span><br><span class="line"><span class="comment"># For details see man 4 crontabs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example of job definition:</span></span><br><span class="line"><span class="comment"># .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="comment"># |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="comment"># |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="comment"># |  |  |  |  |</span></span><br><span class="line"><span class="comment"># *  *  *  *  * user-name  command to be executed</span></span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>SHELL</code>变量指定系统使用的shell版本</li>
+<li><code>PATH</code>指定系统执行命令的路径</li>
+<li><code>MAILTO</code>指定邮件发送的用户，如果为root，邮件会发送到<code>/var/spool/mail/root</code>文件中</li>
+</ul>
+<h2 id="cron表达式"><a href="#cron表达式" class="headerlink" title="cron表达式"></a>cron表达式</h2><p>用户定义的crontab文件保存在 <code>/var/spool/cron</code> 目录中，每个crontab任务以创建者的名字命名。crontab文件中每一行都代表一项任务，每条命令包括6个字段，前5个代表时间，第6个字段是要执行的命令。</p>
+<p>五颗星：<code>* * * * *</code></p>
+<ul>
+<li>第1颗星：分钟 minute，取值 0~59；</li>
+<li>第2颗星：小时 hour，取值 0~23；</li>
+<li>第3颗星：天 day，取值 1~31；</li>
+<li>第4颗星：月 month，取值 1~12；</li>
+<li>第5颗星：星期 week，取值 0~7，0 和 7 都表示星期天。</li>
+</ul>
+<p>可以使用4种操作符：</p>
+<ul>
+<li><code>*</code> ：当前代表的所有取值范围内的数字</li>
+<li><code>/</code>：需要间隔的数字</li>
+<li><code>-</code>：某个区间，比如1-3表示1, 2, 3</li>
+<li><code>,</code>：分散的数字，可以不连续，比如1, 3, 5</li>
+</ul>
+<p>下面举几个例子：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 每5分钟构建一次</span></span><br><span class="line">H/5 * * * *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每2小时构建一次</span></span><br><span class="line">H H/2 * * *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每天8点到22点，每2小时构建一次</span></span><br><span class="line">H 8-22/2 * * *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每天8点，22点各构建一次</span></span><br><span class="line">H 8,22 * * *</span><br></pre></td></tr></table></figure>
+<h2 id="crontab命令"><a href="#crontab命令" class="headerlink" title="crontab命令"></a>crontab命令</h2><p>crontab 命令用来配置定时任务，语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab [options] file</span><br><span class="line">crontab [options]</span><br></pre></td></tr></table></figure>
+<p>常用options：</p>
+<ul>
+<li><code>-u &lt;user&gt;</code>  ：定义用户</li>
+<li><code>-e</code>：编辑 crontab表</li>
+<li><code>-l</code>： 列出用户crontab表</li>
+<li><code>-r</code>：删除用户crontab表</li>
+<li><code>-i</code>：删除提示</li>
+<li><code>-n &lt;hostname&gt;</code>  设置用户crontab主机名</li>
+<li><code>-c</code>：获取运行用户crontab的主机名</li>
+<li><code>-s</code>：selinux 上下文</li>
+<li><code>-x &lt;mask&gt;</code> ：开启调试</li>
+</ul>
+<h2 id="crontab定时示例"><a href="#crontab定时示例" class="headerlink" title="crontab定时示例"></a>crontab定时示例</h2><p>先写一个用于采集CPU性能信息的脚本（cpu_Perf.sh）：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">mpstat -P ALL 1 2 &gt;&gt; /var/cron/perf.log</span><br></pre></td></tr></table></figure>
+<p>下面来添加一个定时任务：</p>
+<p>执行 命令<code>crontab -e</code> ，输入下面的cron表达式，每分钟执行一次CPU性能采集脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* * * * * /var/cron/cpu_Perf.sh</span><br></pre></td></tr></table></figure>
+<p>保存。命令保存到了 <code>/var/spool/cron/</code> 目录下的root文件中(当前用户为root)：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cat /var/spool/cron/root </span><br><span class="line">* * * * * /var/cron/cpu_Perf.sh</span><br><span class="line">$ crontab -l</span><br><span class="line">* * * * * /var/cron/cpu_Perf.sh</span><br></pre></td></tr></table></figure>
+<p>保存成功后，每一分钟就会执行一次脚本。</p>
+<h1 id="Linux-anacron-定时任务"><a href="#Linux-anacron-定时任务" class="headerlink" title="Linux anacron 定时任务"></a>Linux anacron 定时任务</h1><p>如果服务器关机或者无法运行任务，定时任务就不会执行，服务器恢复后，定时任务不会执行没有执行的定时任务。这种场景下可以使用anacron命令，它与crond功能相同，增加了执行被跳过任务的功能。一旦服务器启动，anacron就会检查配置的定时任务是否错过了上一次执行，如果有，将立即运行这个任务，且只运行一次(不管错过了多少个周期)。</p>
+<p>也就是说， anacron 是用来保证由于系统原因导致错过的定时任务可以在系统正常后执行的服务。</p>
+<h2 id="anacron命令"><a href="#anacron命令" class="headerlink" title="anacron命令"></a>anacron命令</h2><p>可以使用 anacron 命令来管理 anacron 服务，语法格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">anacron [options] [job] ...</span><br><span class="line">anacron -T [-t anacrontab-file]</span><br></pre></td></tr></table></figure>
+<p>options选项：</p>
+<ul>
+<li><code>-s</code>：串行调用任务</li>
+<li><code>-f</code>：强制执行任务，忽略设置的周期</li>
+<li><code>-n</code>：没有delay执行任务，隐含调用了<code>-s</code>参数</li>
+<li><code>-d</code>：把信息输出到标准输出设备和系统日志中</li>
+<li><code>-q</code>：禁止向标准输出发送消息，只能和-d选项配合使用。</li>
+<li><code>-u</code>：更新时间戳但不执行任务</li>
+<li><code>-V</code>：打印版本信息</li>
+<li><code>-h</code>：打印帮助信息</li>
+<li><code>-t &lt;file&gt;</code> ：使用指定的配置文件，忽略默认的/etc/anacrontab文件。</li>
+<li><code>-T</code>：Anacrontab测试</li>
+<li><code>-S &lt;dir&gt;</code>：指定存放timestamp文件的路径</li>
+</ul>
+<p><code>job</code> 是 <code>/etc/anacrontab</code> 文件中定义的工作名 job-identifier</p>
+<h2 id="anacron执行过程"><a href="#anacron执行过程" class="headerlink" title="anacron执行过程"></a>anacron执行过程</h2><p>下面来介绍一下anacron的执行过程：</p>
+<p>1、根据脚本需要执行的频率，将脚本安装到<code>/etc/cron.[hourly|daily|weekly|monthly]</code> 目录中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/cron.hourly</span><br><span class="line">/etc/cron.daily</span><br><span class="line">/etc/cron.monthly</span><br><span class="line">/etc/cron.weekly</span><br></pre></td></tr></table></figure>
+<p>2、crond 服务会执行<code>/etc/cron.d/0hourly</code> 中指定的cron 任务，</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cat /etc/cron.d/0hourly</span><br><span class="line"><span class="comment"># Run the hourly jobs</span></span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line">01 * * * * root run-parts /etc/cron.hourly</span><br></pre></td></tr></table></figure>
+<p>每小时运行一次 <strong>run-parts</strong> 程序，而 <strong>run-parts</strong> 程序执行 <code>/etc/cron.hourly</code> 中的所有的shell脚本。</p>
+<p><code>/etc/cron.hourly</code> 目录中包含 <code>0anacron</code> 脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls /etc/cron.hourly</span><br><span class="line">0anacron  mcelog.cron</span><br></pre></td></tr></table></figure>
+<p>3、 <code>0anacron</code> 脚本通过 <code>/etc/anacrontab</code> 配置文件来运行anacron程序。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ cat /etc/anacrontab</span><br><span class="line"><span class="comment"># /etc/anacrontab: configuration file for anacron</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># See anacron(8) and anacrontab(5) for details.</span></span><br><span class="line"></span><br><span class="line">SHELL=/bin/sh</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"><span class="comment"># the maximal random delay added to the base delay of the jobs</span></span><br><span class="line">RANDOM_DELAY=45</span><br><span class="line"><span class="comment"># the jobs will be started during the following hours only</span></span><br><span class="line">START_HOURS_RANGE=3-22</span><br><span class="line"></span><br><span class="line"><span class="comment">#period in days   delay in minutes   job-identifier   command</span></span><br><span class="line">1       5       cron.daily              nice run-parts /etc/cron.daily</span><br><span class="line">7       25      cron.weekly             nice run-parts /etc/cron.weekly</span><br><span class="line">@monthly 45     cron.monthly            nice run-parts /etc/cron.monthly</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>RANDOM_DELAY=45</code> ：表示最大随机延迟时间为45分钟。</p>
+</li>
+<li><p><code>START_HOURS_RANGE=3-22</code> : 执行的时间范围为03:00—22:00</p>
+</li>
+</ul>
+<p><code>/etc/anacrontab</code> 配置文件执行<code>cron.[daily|weekly|monthly]</code> 目录中的可执行文件。</p>
+<p>anacron的监测周期为每天、每周和每月，每天执行一次<code>/etc/cron.daily</code> 目录中的程序，每周执行一次 <code>/etc/cron.weekly</code> 中的程序，每月执行一次 <code>/etc/cron.monthly</code> 中的程序。</p>
+<p>anacron不能在指定某个时间运行某个程序，它的设计目的是在特定的时间间隔运行某个程序，例如每天，每周日或者每月第一天的03:00运行某个程序。如果因为某种原因（关机或者服务器异常）没有执行，anacron会在服务器正常后运行一次错过的执行。</p>
+<p>那么，anacron 是如何判断这些定时任务错过了执行呢？</p>
+<p>其实是通过读取上次执行 anacron 的时间记录文件，通过两个时间的差值判断是否超过指定间隔时间（1天、1周和1月）。</p>
+<p><code>/var/spool/anacron/</code> 目录中的 <code>cron.[daily|weekly|monthly]</code> 文件记录了上一次执行 cron任务 的时间：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ls /var/spool/anacron/</span><br><span class="line">cron.daily  cron.monthly  cron.weekly</span><br><span class="line">$ cat /var/spool/anacron/cron.daily</span><br><span class="line">20211123</span><br></pre></td></tr></table></figure>
+<h1 id="cron表达式应用"><a href="#cron表达式应用" class="headerlink" title="cron表达式应用"></a>cron表达式应用</h1><p>前面介绍了在Linux中通常用 crond 服务来实现任务定时执行，在很多场景都会用到定时任务，比如定时提醒，定时发送邮件等。比如python中可以使用<a href="https://github.com/agronholm/apscheduler">APScheduler</a>库执行定时任务，Java可以使用Quartz框架实现，Go语言使用 <a href="https://github.com/robfig/cron">github.com/robfig/cron</a> 包。</p>
+<p>在持续测试平台Jenkins中经常会配置定时执行任务，下面简单介绍一下Jenkins定时构建配置方法。</p>
+<h2 id="Jenkins定时构建"><a href="#Jenkins定时构建" class="headerlink" title="Jenkins定时构建"></a>Jenkins定时构建</h2><p>在配置Jenkins任务时，构建定时任务主要有两种形式：</p>
+<ul>
+<li>一种是配置周期触发（Build periodically），在特定时间进行自动触发测试流程。</li>
+<li>第二种是Poll SCM：定时检查源码变更，如果有更新就checkout新的代码下来，然后执行构建动作。</li>
+</ul>
+<p>在【Build Triggers】中选择 Build periodically 或者 Poll SCM<br><img src="build-triggers-periodically.png" width="80%" height="80%" /></p>
+<p>在Schedule中输入cron表达式来配置定时任务。</p>
+<p>Jenkins也可以创建多个定时，比如在每个工作日的9:30和每周五22:30构建：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">30 9 * * 1-5</span><br><span class="line">30 22 * * 5</span><br></pre></td></tr></table></figure></p>
+<center><b>--THE END--<b></center>
+
+]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>Linux</category>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>cron</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python OCR工具pytesseract详解</title>
     <url>/posts/python-notes-for-ocr-with-tesseract/</url>
     <content><![CDATA[<p>pytesseract是基于Python的OCR工具， 底层使用的是Google的Tesseract-OCR 引擎，支持识别图片中的文字，支持jpeg, png, gif, bmp, tiff等图片格式。本文介绍如何使用pytesseract 实现图片文字识别。</p>
