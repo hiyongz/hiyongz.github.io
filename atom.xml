@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2021-12-30T23:45:42.616Z</updated>
+  <updated>2022-01-02T10:10:09.337Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>2021年</title>
+    <link href="https://hiyongz.github.io/posts/my-2021-annual-summary/"/>
+    <id>https://hiyongz.github.io/posts/my-2021-annual-summary/</id>
+    <published>2021-12-31T21:26:00.000Z</published>
+    <updated>2022-01-02T10:10:09.337Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;转眼一年又要结束了，对2021年做个小结吧。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
+    
+    
+      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux cron定时介绍</title>
     <link href="https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/</id>
     <published>2021-12-28T12:16:00.000Z</published>
-    <updated>2021-12-30T23:45:42.616Z</updated>
+    <updated>2022-01-02T10:10:09.297Z</updated>
     
     <summary type="html">
     
@@ -48,7 +69,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/</id>
     <published>2021-12-21T12:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.696Z</updated>
+    <updated>2022-01-02T10:10:09.381Z</updated>
     
     <summary type="html">
     
@@ -73,7 +94,7 @@
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/</id>
     <published>2021-12-09T12:30:36.000Z</published>
-    <updated>2021-12-30T23:45:42.744Z</updated>
+    <updated>2022-01-02T10:10:09.433Z</updated>
     
     <summary type="html">
     
@@ -96,7 +117,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-context-manager/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-context-manager/</id>
     <published>2021-12-07T12:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.692Z</updated>
+    <updated>2022-01-02T10:10:09.377Z</updated>
     
     <summary type="html">
     
@@ -119,7 +140,7 @@
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-12-02T20:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.648Z</updated>
+    <updated>2022-01-02T10:10:09.329Z</updated>
     
     <summary type="html">
     
@@ -142,7 +163,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/</id>
     <published>2021-12-02T09:30:36.000Z</published>
-    <updated>2021-12-30T23:45:42.756Z</updated>
+    <updated>2022-01-02T10:10:09.441Z</updated>
     
     <summary type="html">
     
@@ -165,7 +186,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/</id>
     <published>2021-11-30T12:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.692Z</updated>
+    <updated>2022-01-02T10:10:09.377Z</updated>
     
     <summary type="html">
     
@@ -188,7 +209,7 @@
     <link href="https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/"/>
     <id>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</id>
     <published>2021-11-25T12:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.752Z</updated>
+    <updated>2022-01-02T10:10:09.437Z</updated>
     
     <summary type="html">
     
@@ -217,7 +238,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
     <published>2021-11-23T09:30:36.000Z</published>
-    <updated>2021-12-30T23:45:42.756Z</updated>
+    <updated>2022-01-02T10:10:09.441Z</updated>
     
     <summary type="html">
     
@@ -240,7 +261,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2021-12-30T23:45:42.704Z</updated>
+    <updated>2022-01-02T10:10:09.389Z</updated>
     
     <summary type="html">
     
@@ -261,7 +282,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2021-12-30T23:45:42.700Z</updated>
+    <updated>2022-01-02T10:10:09.385Z</updated>
     
     <summary type="html">
     
@@ -282,7 +303,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2021-12-30T23:45:42.760Z</updated>
+    <updated>2022-01-02T10:10:09.445Z</updated>
     
     <summary type="html">
     
@@ -307,7 +328,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/</id>
     <published>2021-11-16T19:30:36.000Z</published>
-    <updated>2021-12-30T23:45:42.756Z</updated>
+    <updated>2022-01-02T10:10:09.441Z</updated>
     
     <summary type="html">
     
@@ -330,7 +351,7 @@
     <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
     <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
     <published>2021-11-16T12:06:00.000Z</published>
-    <updated>2021-12-30T23:45:42.636Z</updated>
+    <updated>2022-01-02T10:10:09.317Z</updated>
     
     <summary type="html">
     
@@ -353,7 +374,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2021-12-30T23:45:42.756Z</updated>
+    <updated>2022-01-02T10:10:09.441Z</updated>
     
     <summary type="html">
     
@@ -378,7 +399,7 @@
     <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
     <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
     <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2021-12-30T23:45:42.672Z</updated>
+    <updated>2022-01-02T10:10:09.357Z</updated>
     
     <summary type="html">
     
@@ -403,7 +424,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
     <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2021-12-30T23:45:42.704Z</updated>
+    <updated>2022-01-02T10:10:09.385Z</updated>
     
     <summary type="html">
     
@@ -424,7 +445,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-pil-problem/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-pil-problem/</id>
     <published>2021-11-05T15:16:00.000Z</published>
-    <updated>2021-12-30T23:45:42.696Z</updated>
+    <updated>2022-01-02T10:10:09.381Z</updated>
     
     <summary type="html">
     
@@ -449,7 +470,7 @@
     <link href="https://hiyongz.github.io/posts/windows-notes-for-bat-script/"/>
     <id>https://hiyongz.github.io/posts/windows-notes-for-bat-script/</id>
     <published>2021-11-04T12:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.764Z</updated>
+    <updated>2022-01-02T10:10:09.449Z</updated>
     
     <summary type="html">
     
@@ -464,31 +485,6 @@
       <category term="Windows" scheme="https://hiyongz.github.io/tags/Windows/"/>
     
       <category term="bat" scheme="https://hiyongz.github.io/tags/bat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>selenium URL重定向检查</title>
-    <link href="https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/"/>
-    <id>https://hiyongz.github.io/posts/web-testing-with-selenium-for-redirect-check/</id>
-    <published>2021-11-03T18:12:00.000Z</published>
-    <updated>2021-12-30T23:45:42.764Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有时候需要测试URL重定向是否正确，本文介绍一种使用selenium测试URL重定向的方法。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="selenium" scheme="https://hiyongz.github.io/tags/selenium/"/>
-    
-      <category term="URL重定向" scheme="https://hiyongz.github.io/tags/URL%E9%87%8D%E5%AE%9A%E5%90%91/"/>
     
   </entry>
   
