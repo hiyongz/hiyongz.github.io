@@ -9488,11 +9488,16 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
 <li>Blue Ocean</li>
 <li>Allure</li>
 </ul>
-<h2 id="用户权限控制"><a href="#用户权限控制" class="headerlink" title="用户权限控制"></a>用户权限控制</h2><p>在Jenkins的初始化安装过程中会先注册一个管理员用户，管理员用户可以创建一般用户，管理员用户具有最高权限。</p>
-<p>进入Manage Jenkins -&gt; Security -&gt; Configure Global Security进行安全配置<br>可以勾选允许用户注册，团队人数较少时，一般建议不勾选，由管理员创建<br><img src="jenkins-security.png" width="80%" height="80%" /></p>
-<p>进入Manage Jenkins -&gt; Security -&gt; Manage Users进行用户管理，可以进行用户删除、修改和添加操作<br><img src="jenkins-security-manage-user.png" width="80%" height="80%" /></p>
-<p>权限控制在Manage Jenkins -&gt; Security -&gt; Configure Global Security -&gt; Authorization下<br>可以选择【安全矩阵】（个人权限）或者【项目矩阵】（项目权限）进行权限管理<br><img src="jenkins-security-matrix.png" width="80%" height="80%" /></p>
-<h2 id="关闭跨站请求伪造保护（CSRF）"><a href="#关闭跨站请求伪造保护（CSRF）" class="headerlink" title="关闭跨站请求伪造保护（CSRF）"></a>关闭跨站请求伪造保护（CSRF）</h2><p>Jenkins高版本不能再web页面关闭CSRF。</p>
+<h2 id="用户权限控制"><a href="#用户权限控制" class="headerlink" title="用户权限控制"></a>用户权限控制</h2><h3 id="用户权限管理"><a href="#用户权限管理" class="headerlink" title="用户权限管理"></a>用户权限管理</h3><p>在Jenkins的初始化安装过程中会先注册一个管理员用户，管理员用户可以创建一般用户，管理员用户具有最高权限。</p>
+<p>进入Manage Jenkins -&gt; Security -&gt; Configure Global Security进行安全配置</p>
+<p>可以勾选允许用户注册，团队人数较少时，一般建议不勾选，由管理员创建</p>
+<p><img src="jenkins-security.png" width="80%" height="80%" /></p>
+<p>进入Manage Jenkins -&gt; Security -&gt; Manage Users进行用户管理，可以进行用户删除、修改和添加操作</p>
+<p><img src="jenkins-security-manage-user.png" width="80%" height="80%" /></p>
+<p>权限控制在Manage Jenkins -&gt; Security -&gt; Configure Global Security -&gt; Authorization下</p>
+<p>可以选择【安全矩阵】（个人权限）或者【项目矩阵】（项目权限）进行权限管理</p>
+<p><img src="jenkins-security-matrix.png" width="80%" height="80%" /></p>
+<h3 id="项目权限配置"><a href="#项目权限配置" class="headerlink" title="项目权限配置"></a>项目权限配置</h3><h2 id="关闭跨站请求伪造保护（CSRF）"><a href="#关闭跨站请求伪造保护（CSRF）" class="headerlink" title="关闭跨站请求伪造保护（CSRF）"></a>关闭跨站请求伪造保护（CSRF）</h2><p>Jenkins高版本不能再web页面关闭CSRF。</p>
 <p>一种方法是在Jenkins启动时加入取消保护的参数：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">-Dhudson.security.csrf.GlobalCrumbIssuerConfiguration=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <p>第二种方法是修改Jenkins容器中的/usr/local/bin/jenkins.sh文件：</p>
