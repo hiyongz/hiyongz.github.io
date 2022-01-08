@@ -24,21 +24,30 @@
 
   <meta name="description" content="持续集成（Continuous integration，CI）是软件开发和发布流程中最重要的组成部分，有利于加快开发进度。Jenkins是常用的持续集成管理工具，本文将简要介绍Jenkins持续集成工具。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="持续集成平台Jenkins介绍">
+<meta property="og:title" content="持续集成平台Jenkins配置方法介绍">
 <meta property="og:url" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/index.html">
 <meta property="og:site_name" content="HiYong">
 <meta property="og:description" content="持续集成（Continuous integration，CI）是软件开发和发布流程中最重要的组成部分，有利于加快开发进度。Jenkins是常用的持续集成管理工具，本文将简要介绍Jenkins持续集成工具。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/continuous-integration.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/CI-software-compare.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-download.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-system-information.png">
-<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-download-update.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-shell-executable.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-manage-plugin.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-manage-user.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-matrix.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-job-security-matrix.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-job-security-matrix2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-role-based-authorization-strategy.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-role-based-strategy.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-manage-and-assign-roles.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-manage-and-assign-roles2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-manage-roles.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-manage-roles-item-roles.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-manage-roles-node-roles.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-assign-roles-global-roles.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-assign-roles-item-roles.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-security-assign-roles-node-roles.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/csrf-disabled.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-slave-node-configure.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-manage-node.png">
@@ -60,6 +69,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-edit-new-item.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-build-now.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-console-output.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/windows-node-configure.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-father-child-job.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-first-job-build.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-second-job-build.png">
@@ -81,7 +91,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-email-build.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-email.png">
 <meta property="article:published_time" content="2021-03-05T12:12:00.000Z">
-<meta property="article:modified_time" content="2022-01-08T07:27:04.551Z">
+<meta property="article:modified_time" content="2022-01-08T10:33:40.369Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
@@ -100,7 +110,7 @@
   };
 </script>
 
-  <title>持续集成平台Jenkins介绍 | HiYong</title>
+  <title>持续集成平台Jenkins配置方法介绍 | HiYong</title>
   
 
 
@@ -274,7 +284,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          持续集成平台Jenkins介绍
+          持续集成平台Jenkins配置方法介绍
         </h1>
 
         <div class="post-meta">
@@ -335,7 +345,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.4k</span>
+              <span>9.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -367,16 +377,12 @@
 <li>易于定位项目进度，使项目更加透明。</li>
 <li>导致更快的发布</li>
 </ul>
-<h1 id="Jenkins介绍"><a href="#Jenkins介绍" class="headerlink" title="Jenkins介绍"></a>Jenkins介绍</h1><p>Jenkins官网：<a target="_blank" rel="noopener" href="https://www.jenkins.io/">https://www.jenkins.io/</a><br>Jenkins官网文档：<a target="_blank" rel="noopener" href="https://www.jenkins.io/doc/">https://www.jenkins.io/doc/</a></p>
+<h1 id="Jenkins介绍"><a href="#Jenkins介绍" class="headerlink" title="Jenkins介绍"></a>Jenkins介绍</h1><p>Jenkins官网：<a target="_blank" rel="noopener" href="https://www.jenkins.io/">https://www.jenkins.io/</a></p>
+<p>Jenkins官网文档：<a target="_blank" rel="noopener" href="https://www.jenkins.io/doc/">https://www.jenkins.io/doc/</a></p>
 <p>Jenkins是免费开源的持续集成管理工具，基于Java开发，可以跨平台运行，提供持续集成和持续交付服务 ( continuous integration or continuous delivery，CI/CD)，自动化软件开发流程中的构建、测试和部署工作。Jenkins插件丰富，有超过1000个插件来支持构建、部署自动化，满足任何项目的需要。</p>
 <p>持续集成工具比较：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software">https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software</a></p>
 <p><img src="CI-software-compare.png" width="80%" height="80%" /></p>
 <p>Docker Jenkins安装和启动方法参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/113819992">Docker搭建持续集成平台Jenkins</a></p>
-<h1 id="Jenkins更新"><a href="#Jenkins更新" class="headerlink" title="Jenkins更新"></a>Jenkins更新</h1><p>进入Manage Jenkins，提示新版本，点击下载 jenkins.war 包。<br><img src="jenkins-download.png" width="80%" height="80%" /></p>
-<h2 id="1-jenkins-war-位置查看"><a href="#1-jenkins-war-位置查看" class="headerlink" title="1. jenkins.war 位置查看"></a>1. jenkins.war 位置查看</h2><p><strong>方法1：Manage Jenkins中查看</strong><br>点击进入Manage Jenkins，找到Status Information，点击System Information，可以查看war包位置<br><img src="jenkins-system-information.png" width="80%" height="80%" /><br><strong> 方法2：find命令查找 </strong><br>使用root账号进入容器中后使用find命令查找<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># docker exec -it -u root jenkins bash</span></span><br><span class="line">root@ed883da9faab:/<span class="comment"># find / -name jenkins.war</span></span><br><span class="line">find: ‘/proc/1/map_files’: Operation not permitted</span><br><span class="line">find: ‘/proc/7/map_files’: Operation not permitted</span><br><span class="line">find: ‘/proc/138/map_files’: Operation not permitted</span><br><span class="line">find: ‘/proc/155/map_files’: Operation not permitted</span><br><span class="line">/usr/share/jenkins/jenkins.war</span><br><span class="line">root@ed883da9faab:/<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
-<h2 id="2-更新容器中的war包"><a href="#2-更新容器中的war包" class="headerlink" title="2. 更新容器中的war包"></a>2. 更新容器中的war包</h2><p>使用root账号进入容器中，备份原来的war包<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># docker exec -it -u root jenkins bash</span></span><br><span class="line">root@ed883da9faab:/<span class="comment"># cd /usr/share/jenkins</span></span><br><span class="line">root@ed883da9faab:/usr/share/jenkins<span class="comment"># mv jenkins.war jenkins.war.bak</span></span><br></pre></td></tr></table></figure><br>将下载的war包复制到容器目录 /usr/share/jenkins 下（注意是在宿主机上操作）<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># docker cp jenkins.war jenkins:/usr/share/jenkins/</span></span><br><span class="line">[root@server ~]<span class="comment"># docker exec -it -u root jenkins bash</span></span><br><span class="line">root@ed883da9faab:/usr/share/jenkins<span class="comment"># ls</span></span><br><span class="line">jenkins.war  jenkins.war.bak  ref</span><br></pre></td></tr></table></figure></p>
-<h2 id="3-重启Jenkins"><a href="#3-重启Jenkins" class="headerlink" title="3. 重启Jenkins"></a>3. 重启Jenkins</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker restart jenkins</span><br></pre></td></tr></table></figure>
-<p>刷新页面，登陆，进入Manage Jenkins，可以看到版本更新成功，可以降回原来的版本。<br><img src="jenkins-download-update.png" width="80%" height="80%" /></p>
 <h1 id="Jenkins配置"><a href="#Jenkins配置" class="headerlink" title="Jenkins配置"></a>Jenkins配置</h1><h2 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h2><p>进入Manage Jenkins -&gt; System Configuration -&gt; Configure System进行系统配置，有很多配置参数可以配置，比如：</p>
 <ul>
 <li>Jenkins URL：服务器域名</li>
@@ -385,7 +391,7 @@
 <li>默认 Shell：bash</li>
 <li>等</li>
 </ul>
-<h3 id="配置-Shell"><a href="#配置-Shell" class="headerlink" title="配置 Shell"></a>配置 Shell</h3><p>比如在windows代理节点中，默认命令行使用cmd，如果你想使用Git Bash，可以在系统配置中进行配置。进入Manage Jenkins -&gt; System Configuration -&gt; Configure System，下拉到shell，配置Shell executable为你的命令行文件路径，比如我的git bash路径为：<code>D:/tools/Git/bin/sh.exe</code><br><img src="jenkins-shell-executable.png" width="80%" height="80%" /></p>
+<p>在windows代理节点中，默认命令行使用cmd，如果你想使用Git Bash，可以在系统配置中进行配置。进入Manage Jenkins -&gt; System Configuration -&gt; Configure System，下拉到shell，配置Shell executable为你的命令行文件路径，比如我的git bash路径为：<code>D:/tools/Git/bin/sh.exe</code><br><img src="jenkins-shell-executable.png" width="80%" height="80%" /></p>
 <h2 id="插件管理"><a href="#插件管理" class="headerlink" title="插件管理"></a>插件管理</h2><p>Jenkins插件众多，扩展了很多功能。进入Manage Jenkins -&gt; System Configuration -&gt; Manage Plugins进行插件的管理。</p>
 <p>可以先点击Advanced 设置更新网址URL：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json">https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</a><br><img src="jenkins-manage-plugin.png" width="80%" height="80%" /></p>
 <p>然后进行插件的安装更新操作， 插件的安装方法，在Available中的输入框输入要安装的插件名称关键字进行搜索，选择要安装的插件，点击“Download now and install after  restart”进行下载安装。</p>
@@ -399,16 +405,31 @@
 <li>Blue Ocean</li>
 <li>Allure</li>
 </ul>
-<h2 id="用户权限控制"><a href="#用户权限控制" class="headerlink" title="用户权限控制"></a>用户权限控制</h2><h3 id="用户权限管理"><a href="#用户权限管理" class="headerlink" title="用户权限管理"></a>用户权限管理</h3><p>在Jenkins的初始化安装过程中会先注册一个管理员用户，管理员用户可以创建一般用户，管理员用户具有最高权限。</p>
+<h2 id="用户权限控制"><a href="#用户权限控制" class="headerlink" title="用户权限控制"></a>用户权限控制</h2><h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><p>在Jenkins的初始化安装过程中会先注册一个管理员用户，管理员用户可以创建一般用户，管理员用户具有最高权限。</p>
 <p>进入Manage Jenkins -&gt; Security -&gt; Configure Global Security进行安全配置</p>
 <p>可以勾选允许用户注册，团队人数较少时，一般建议不勾选，由管理员创建</p>
 <p><img src="jenkins-security.png" width="80%" height="80%" /></p>
 <p>进入Manage Jenkins -&gt; Security -&gt; Manage Users进行用户管理，可以进行用户删除、修改和添加操作</p>
 <p><img src="jenkins-security-manage-user.png" width="80%" height="80%" /></p>
-<p>权限控制在Manage Jenkins -&gt; Security -&gt; Configure Global Security -&gt; Authorization下</p>
-<p>可以选择【安全矩阵】（个人权限）或者【项目矩阵】（项目权限）进行权限管理</p>
+<h3 id="用户权限管理"><a href="#用户权限管理" class="headerlink" title="用户权限管理"></a>用户权限管理</h3><p>可以使用 Matrix Authorization Strategy 插件对用户权限进行管理。</p>
+<p>进入Manage Jenkins -&gt; Security -&gt; Configure Global Security -&gt; Authorization</p>
+<p>可以选择【安全矩阵】（个人权限）对用户进行权限管理。</p>
 <p><img src="jenkins-security-matrix.png" width="80%" height="80%" /></p>
-<h3 id="项目权限配置"><a href="#项目权限配置" class="headerlink" title="项目权限配置"></a>项目权限配置</h3><h2 id="关闭跨站请求伪造保护（CSRF）"><a href="#关闭跨站请求伪造保护（CSRF）" class="headerlink" title="关闭跨站请求伪造保护（CSRF）"></a>关闭跨站请求伪造保护（CSRF）</h2><p>Jenkins高版本不能再web页面关闭CSRF。</p>
+<h3 id="项目权限配置"><a href="#项目权限配置" class="headerlink" title="项目权限配置"></a>项目权限配置</h3><p>如果要对项目进行授权管理，让不同的用户管理不同的项目，一种方式是勾选【项目矩阵】：<br><img src="jenkins-job-security-matrix.png" width="80%" height="80%" /></p>
+<p>配置好后，在项目内可以配置用户权限，选择一个job，进入项目配置，可以配置项目权限：<br><img src="jenkins-job-security-matrix2.png" width="80%" height="80%" /></p>
+<p>除了这种方式外，还有一种方式就是对用户进行角色管理，这个功能由Role-based Authorization Strategy插件提供，先安装这个插件。<br><img src="jenkins-security-role-based-authorization-strategy.png" width="80%" height="80%" /></p>
+<p>进入Manage Jenkins -&gt; Security -&gt; Configure Global Security -&gt; Authorization，勾选Role-Based Strategy：<br><img src="jenkins-security-role-based-strategy.png" width="80%" height="80%" /></p>
+<p>在Mange Jenkins -&gt; Security中会出现Manage and Assign Roles，<br><img src="jenkins-security-manage-and-assign-roles.png" width="80%" height="80%" /></p>
+<p>点击Manage and Assign Roles，发现可以管理和分配角色。<br><img src="jenkins-security-manage-and-assign-roles2.png" width="80%" height="80%" /></p>
+<p>先进入【Manage Roles】，添加tester和developer两个Global roles，分配一些权限。<br><img src="jenkins-security-manage-roles.png" width="80%" height="80%" /></p>
+<p>添加Item roles，<br><img src="jenkins-security-manage-roles-item-roles.png" width="80%" height="80%" /></p>
+<p>添加Node roles，<br><img src="jenkins-security-manage-roles-node-roles.png" width="80%" height="80%" /></p>
+<p>配置完成后，添加tester1和developer1两个用户。</p>
+<p>进入【Assign Roles】，配置Global roles<br><img src="jenkins-security-assign-roles-global-roles.png" width="80%" height="80%" /></p>
+<p>配置Item roles<br><img src="jenkins-security-assign-roles-item-roles.png" width="80%" height="80%" /></p>
+<p>配置Node roles<br><img src="jenkins-security-assign-roles-node-roles.png" width="80%" height="80%" /></p>
+<p>配置完成后可以登录不同角色用户来测试一下。</p>
+<h2 id="关闭跨站请求伪造保护（CSRF）"><a href="#关闭跨站请求伪造保护（CSRF）" class="headerlink" title="关闭跨站请求伪造保护（CSRF）"></a>关闭跨站请求伪造保护（CSRF）</h2><p>Jenkins高版本不能再web页面关闭CSRF。</p>
 <p>一种方法是在Jenkins启动时加入取消保护的参数：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">-Dhudson.security.csrf.GlobalCrumbIssuerConfiguration=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <p>第二种方法是修改Jenkins容器中的/usr/local/bin/jenkins.sh文件：</p>
@@ -420,14 +441,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart jenkins </span><br></pre></td></tr></table></figure>
 <p>然后在【全局安全配置】中可以看到 跨站请求伪造保护 已经关闭</p>
 <p><img src="csrf-disabled.png" width="80%" height="80%" /></p>
-<h1 id="slave节点管理"><a href="#slave节点管理" class="headerlink" title="slave节点管理"></a>slave节点管理</h1><p>在实际工作中，考虑到宿主机资源限制，可以采用多节点的方式，将任务分配到其他节点执行。通过添加多个Jenkins slave节点来执行Jenkins任务， Jenkins运行的主机称为 master节点：</p>
+<h1 id="执行机管理"><a href="#执行机管理" class="headerlink" title="执行机管理"></a>执行机管理</h1><p>在实际工作中，考虑到宿主机资源限制，可以采用多节点的方式，将任务分配到其他节点执行。通过添加多个Jenkins Nodes来执行Jenkins任务， Jenkins运行的主机称为Built-In Node：</p>
 <ul>
 <li>节点上需要配置Java运行环境, Java_Version&gt;1.5</li>
 <li>节点支持Windows, Linux，Mac系统</li>
 </ul>
 <p>先查看是否配置了Java运行环境：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@server /]<span class="comment"># java -version</span></span><br><span class="line">openjdk version <span class="string">&quot;1.8.0_252&quot;</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_252-b09)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)</span><br><span class="line">[root@server /]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
 <p>进入Manage Jenkins -&gt; System Configuration -&gt; Manage Nodes and Clouds</p>
-<h2 id="添加Linux节点"><a href="#添加Linux节点" class="headerlink" title="添加Linux节点"></a>添加Linux节点</h2><p>配置节点（注意我配置的slave节点为宿主机）：<br><img src="jenkins-slave-node-configure.png" width="80%" height="80%" /><br>发现节点连接不成功<br><img src="jenkins-manage-node.png" width="80%" height="80%" /></p>
+<h2 id="添加Linux节点"><a href="#添加Linux节点" class="headerlink" title="添加Linux节点"></a>添加Linux节点</h2><p>配置节点（注意我配置的agent节点为宿主机）：<br><img src="jenkins-slave-node-configure.png" width="80%" height="80%" /><br>发现节点连接不成功<br><img src="jenkins-manage-node.png" width="80%" height="80%" /></p>
 <p>查看日志，发现没有known_hosts<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/jenkins_home/.ssh/known_hosts [SSH] No Known Hosts file was found at /var/jenkins_home/.ssh/known_hosts. Please ensure one is created at this path and that Jenkins can <span class="built_in">read</span> it.</span><br></pre></td></tr></table></figure><br>一种解决方法是，设置认证策略为手动信任<br><img src="jenkins-slave-node-verfication-strategy.png" width="80%" height="80%" /></p>
 <p>上线成功<br><img src="jenkins-slave-status.png" width="80%" height="80%" /></p>
 <h2 id="添加Windows节点"><a href="#添加Windows节点" class="headerlink" title="添加Windows节点"></a>添加Windows节点</h2><p>windows节点配置<br><img src="jenkins-windows-node-configure.png" width="80%" height="80%" /></p>
@@ -471,6 +492,28 @@
 </ul>
 <h2 id="构建完成"><a href="#构建完成" class="headerlink" title="构建完成"></a>构建完成</h2><p><img src="jenkins-build-now.png" width="80%" height="80%" /></p>
 <h2 id="查看控制台输出"><a href="#查看控制台输出" class="headerlink" title="查看控制台输出"></a>查看控制台输出</h2><p><img src="jenkins-console-output.png" width="80%" height="80%" /></p>
+<h1 id="SVN源码管理报错"><a href="#SVN源码管理报错" class="headerlink" title="SVN源码管理报错"></a>SVN源码管理报错</h1><p>配置SVN源码管理时可能报如下错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.tmatesoft.svn.core.SVNException: svn: E175002: SSL handshake failed: <span class="string">&#x27;The server selected protocol version TLS10 is not accepted by client preferences [TLS12]&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>原因是，TLS 1.0易受中间人（man-in-the-middle）攻击，服务器和客户端之间发送数据的完整性和身份验证存在风险。1.0和1.1版本的一些实现也容易受到POODLE(Padding Oracle on Downgraded Legacy Encryption)攻击，因为它们在解密后接受了一个不正确的填充结构。所以TLSv1和TLSv1.1在java安全配置文件中被禁用了。</p>
+<p>解决方案：<a target="_blank" rel="noopener" href="https://asyncstream.com/tutorials/java-tlsv10-not-accepted-by-client-preferences/">https://asyncstream.com/tutorials/java-tlsv10-not-accepted-by-client-preferences/</a></p>
+<ol>
+<li><p>编辑 <code>/opt/java/openjdk/conf/security/java.security</code> 文件，将 <code>security.overridePropertiesFile</code> 设置为 <code>true</code> 。</p>
+</li>
+<li><p>创建名为 <code>enableLegacyTLS.security</code> 的文件，将<code>java.security</code> 文件中的 <code>jdk.tls.disabledAlgorithms</code> 属性和值复制到文件中。</p>
+</li>
+<li><p>删除 <code>enableLegacyTLS.security</code> 的文件中的 <code>TLSv1</code> 和  <code>TLSv1.1</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, DES, MD5withRSA, \</span><br><span class="line">    DH keySize &lt; 1024, EC keySize &lt; 224, 3DES_EDE_CBC, anon, NULL, \</span><br><span class="line">    include jdk.disabled.namedCurves</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加 <code>-Djava.security.properties=&quot;/opt/java/openjdk/conf/security/enableLegacyTLS.security&quot;</code> 参数到 <code>/usr/local/bin/jenkins.sh</code> 文件</p>
+</li>
+<li><p>如果是Windows代理机，编辑 <code>C:\Program Files\Java\jdk1.8.0_311\jre\lib\security\java.security</code> 文件，删除<code>jdk.tls.disabledAlgorithms</code>中的 <code>TLSv1</code> 和  <code>TLSv1.1</code>，Linux类似。</p>
+</li>
+</ol>
+<h1 id="Windows节点无法执行bat命令"><a href="#Windows节点无法执行bat命令" class="headerlink" title="Windows节点无法执行bat命令"></a>Windows节点无法执行bat命令</h1><p>在Windows执行机上执行bat脚本时，可能报如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Pipeline] bat</span><br><span class="line"><span class="string">&#x27;cmd&#x27;</span> is not recognized as an internal or external <span class="built_in">command</span>,</span><br><span class="line">operable program or batch file.</span><br></pre></td></tr></table></figure>
+<p>解决方法：在Windows节点配置中添加环境变量</p>
+<p><img src="windows-node-configure.png" width="80%" height="80%" /></p>
+<p>添加完成后重启Jenkins就可以了。</p>
 <h1 id="Jenkins父子多任务运行"><a href="#Jenkins父子多任务运行" class="headerlink" title="Jenkins父子多任务运行"></a>Jenkins父子多任务运行</h1><p>任务启动的触发条件：其他任务的运行结果</p>
 <ul>
 <li>前驱任务成功的条件下被触发</li>
@@ -532,9 +575,9 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>本文标题:</span>持续集成平台Jenkins介绍</a></p>
+  <p><span>本文标题:</span>持续集成平台Jenkins配置方法介绍</a></p>
   <p><span>文章作者:</span>hiyo</a></p>
-  <p><span>文章链接:</span><a href="/posts/continuous-integration-for-jenkins/" title="持续集成平台Jenkins介绍">https://hiyongz.github.io/posts/continuous-integration-for-jenkins/</a>
+  <p><span>文章链接:</span><a href="/posts/continuous-integration-for-jenkins/" title="持续集成平台Jenkins配置方法介绍">https://hiyongz.github.io/posts/continuous-integration-for-jenkins/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
@@ -635,7 +678,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">持续集成简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">Jenkins介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">Jenkins更新</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-jenkins-war-%E4%BD%8D%E7%BD%AE%E6%9F%A5%E7%9C%8B"><span class="nav-number">3.1.</span> <span class="nav-text">1. jenkins.war 位置查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9B%B4%E6%96%B0%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84war%E5%8C%85"><span class="nav-number">3.2.</span> <span class="nav-text">2. 更新容器中的war包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%87%8D%E5%90%AFJenkins"><span class="nav-number">3.3.</span> <span class="nav-text">3. 重启Jenkins</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">Jenkins配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">系统配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Shell"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置 Shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">插件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-number">4.3.</span> <span class="nav-text">用户权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-number">4.3.1.</span> <span class="nav-text">用户权限管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE"><span class="nav-number">4.3.2.</span> <span class="nav-text">项目权限配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E4%BF%9D%E6%8A%A4%EF%BC%88CSRF%EF%BC%89"><span class="nav-number">4.4.</span> <span class="nav-text">关闭跨站请求伪造保护（CSRF）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#slave%E8%8A%82%E7%82%B9%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">slave节点管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0Linux%E8%8A%82%E7%82%B9"><span class="nav-number">5.1.</span> <span class="nav-text">添加Linux节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0Windows%E8%8A%82%E7%82%B9"><span class="nav-number">5.2.</span> <span class="nav-text">添加Windows节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEwindows%E8%8A%82%E7%82%B9%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8"><span class="nav-number">5.3.</span> <span class="nav-text">设置windows节点开机自动启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E6%B7%BB%E5%8A%A0%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.3.1.</span> <span class="nav-text">方法1：添加任务计划程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-number">5.3.2.</span> <span class="nav-text">方法2：自动运行启动脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.</span> <span class="nav-text">Jenkins创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9Freestyle-project"><span class="nav-number">6.2.</span> <span class="nav-text">选择Freestyle project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">6.3.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%88%90"><span class="nav-number">6.4.</span> <span class="nav-text">构建完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="nav-number">6.5.</span> <span class="nav-text">查看控制台输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E7%88%B6%E5%AD%90%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C"><span class="nav-number">7.</span> <span class="nav-text">Jenkins父子多任务运行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE%E6%88%90%E5%8A%9F%E4%BB%BB%E5%8A%A1%E5%85%B3%E8%81%94"><span class="nav-number">7.1.</span> <span class="nav-text">Jenkins配置成功任务关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE%E5%A4%B1%E8%B4%A5%E4%BB%BB%E5%8A%A1%E5%85%B3%E8%81%94"><span class="nav-number">7.2.</span> <span class="nav-text">Jenkins配置失败任务关联</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6"><span class="nav-number">8.</span> <span class="nav-text">Jenkins邮件报警</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE-Email"><span class="nav-number">8.1.</span> <span class="nav-text">Jenkins配置 Email</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%82%AE%E4%BB%B6%E6%A8%A1%E6%9D%BF%E9%85%8D%E7%BD%AE"><span class="nav-number">8.2.</span> <span class="nav-text">Jenkins邮件模板配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E6%8A%A5%E8%AD%A6%E8%A7%84%E5%88%99"><span class="nav-number">8.3.</span> <span class="nav-text">Jenkins报警规则</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">持续集成简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">Jenkins介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">Jenkins配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">系统配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">插件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-number">3.3.</span> <span class="nav-text">用户权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">3.3.1.</span> <span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-number">3.3.2.</span> <span class="nav-text">用户权限管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.3.</span> <span class="nav-text">项目权限配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E4%BF%9D%E6%8A%A4%EF%BC%88CSRF%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">关闭跨站请求伪造保护（CSRF）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%9C%BA%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">执行机管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0Linux%E8%8A%82%E7%82%B9"><span class="nav-number">4.1.</span> <span class="nav-text">添加Linux节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0Windows%E8%8A%82%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">添加Windows节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEwindows%E8%8A%82%E7%82%B9%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8"><span class="nav-number">4.3.</span> <span class="nav-text">设置windows节点开机自动启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E6%B7%BB%E5%8A%A0%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.3.1.</span> <span class="nav-text">方法1：添加任务计划程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9A%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-number">4.3.2.</span> <span class="nav-text">方法2：自动运行启动脚本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.</span> <span class="nav-text">Jenkins创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">5.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9Freestyle-project"><span class="nav-number">5.2.</span> <span class="nav-text">选择Freestyle project</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%AE%8C%E6%88%90"><span class="nav-number">5.4.</span> <span class="nav-text">构建完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%8E%A7%E5%88%B6%E5%8F%B0%E8%BE%93%E5%87%BA"><span class="nav-number">5.5.</span> <span class="nav-text">查看控制台输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SVN%E6%BA%90%E7%A0%81%E7%AE%A1%E7%90%86%E6%8A%A5%E9%94%99"><span class="nav-number">6.</span> <span class="nav-text">SVN源码管理报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows%E8%8A%82%E7%82%B9%E6%97%A0%E6%B3%95%E6%89%A7%E8%A1%8Cbat%E5%91%BD%E4%BB%A4"><span class="nav-number">7.</span> <span class="nav-text">Windows节点无法执行bat命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E7%88%B6%E5%AD%90%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C"><span class="nav-number">8.</span> <span class="nav-text">Jenkins父子多任务运行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE%E6%88%90%E5%8A%9F%E4%BB%BB%E5%8A%A1%E5%85%B3%E8%81%94"><span class="nav-number">8.1.</span> <span class="nav-text">Jenkins配置成功任务关联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE%E5%A4%B1%E8%B4%A5%E4%BB%BB%E5%8A%A1%E5%85%B3%E8%81%94"><span class="nav-number">8.2.</span> <span class="nav-text">Jenkins配置失败任务关联</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6"><span class="nav-number">9.</span> <span class="nav-text">Jenkins邮件报警</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%85%8D%E7%BD%AE-Email"><span class="nav-number">9.1.</span> <span class="nav-text">Jenkins配置 Email</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E9%82%AE%E4%BB%B6%E6%A8%A1%E6%9D%BF%E9%85%8D%E7%BD%AE"><span class="nav-number">9.2.</span> <span class="nav-text">Jenkins邮件模板配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jenkins%E6%8A%A5%E8%AD%A6%E8%A7%84%E5%88%99"><span class="nav-number">9.3.</span> <span class="nav-text">Jenkins报警规则</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -712,12 +755,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">828k</span>
+    <span title="站点总字数">830k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:33</span>
+    <span title="站点阅读时长">12:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
