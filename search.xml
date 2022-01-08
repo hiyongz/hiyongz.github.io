@@ -9456,7 +9456,7 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
 <li>易于定位项目进度，使项目更加透明。</li>
 <li>导致更快的发布</li>
 </ul>
-<h1 id="Jenkins介绍"><a href="#Jenkins介绍" class="headerlink" title="Jenkins介绍"></a>Jenkins介绍</h1><p>Jenkins官网：<a href="https://www.jenkins.io/">https://www.jenkins.io/</a></p>
+<h1 id="Jenkins简介"><a href="#Jenkins简介" class="headerlink" title="Jenkins简介"></a>Jenkins简介</h1><p>Jenkins官网：<a href="https://www.jenkins.io/">https://www.jenkins.io/</a></p>
 <p>Jenkins官网文档：<a href="https://www.jenkins.io/doc/">https://www.jenkins.io/doc/</a></p>
 <p>Jenkins是免费开源的持续集成管理工具，基于Java开发，可以跨平台运行，提供持续集成和持续交付服务 ( continuous integration or continuous delivery，CI/CD)，自动化软件开发流程中的构建、测试和部署工作。Jenkins插件丰富，有超过1000个插件来支持构建、部署自动化，满足任何项目的需要。</p>
 <p>持续集成工具比较：<a href="https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software">https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software</a></p>
