@@ -31,6 +31,61 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Robot Framework robot命令</title>
+    <url>/posts/test-framework-for-robotframework-pybot-options/</url>
+    <content><![CDATA[<p>在进行持续测试中，如果使用Robot Framework执行自动化用例，可以使用robot命令来执行用例，本文简单介绍robot命令的部分选项参数的用法。</p>
+<a id="more"></a>
+<h1 id="robot命令选项"><a href="#robot命令选项" class="headerlink" title="robot命令选项"></a>robot命令选项</h1><p>可以执行 <code>robot -h</code> 命令查看robot选项参数。或者访问 <a href="https://robot-framework.readthedocs.io/en/2.8/_modules/robot/run.html">https://robot-framework.readthedocs.io/en/2.8/_modules/robot/run.html</a></p>
+<p>robot命令语法格式</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">robot [options] paths</span><br><span class="line">python -m robot [options] paths</span><br><span class="line">python path/to/robot [options] paths</span><br><span class="line">java -jar robotframework.jar [options] paths</span><br></pre></td></tr></table></figure>
+<p>robot部分选项参数：</p>
+<ul>
+<li><code>-t --test name *</code>：通过用例名选择测试用例</li>
+<li><code>-s --suite name *</code>：通过套件名选择测试用例，通过 <code>*</code> 匹配任意用例，<code>?</code> 匹配任意字符</li>
+<li><code>-i --include tag *</code>：通过标签名选择测试用例，支持3种方式：①单个标签，比如<code>tag*</code>、<code>tag1</code>；②<code>AND</code>或者<code>&amp;</code>连接多个标签，例如<code>tag1&amp;tag2</code>；③<code>NOT</code>连接多个标签，例如<code>tag*NOTtag1</code>，表示所有标签以<code>tag</code>开头的用例，但不包括<code>tag1</code>。</li>
+<li><code>-e --exclude tag *</code>：不运行的标签用例。比<code>include</code>参数优先级高。</li>
+<li><code>-d --outputdir dir</code>：设置测试输出路径</li>
+<li><code>-l --log file</code>：指定HTML log文件名，默认为log.html</li>
+<li><code>-r --report file</code>：指定HTML report文件名，默认为report.html</li>
+<li><code>-T --timestampoutputs</code>：时间戳形式的日志文件名</li>
+<li><code>-A --argumentfile path *</code>：从文件中读取参数</li>
+</ul>
+<h1 id="robot使用实例"><a href="#robot使用实例" class="headerlink" title="robot使用实例"></a>robot使用实例</h1><p>RF测试用例如下图：</p>
+<p><img src="rf-testcases-demo.png" width="80%" height="80%" /></p>
+<p>下面以这些测试用例为例，介绍如何使用robot命令执行指定用例。</p>
+<h2 id="执行整个项目"><a href="#执行整个项目" class="headerlink" title="执行整个项目"></a>执行整个项目</h2><p>语法格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">robot 项目路径</span><br></pre></td></tr></table></figure>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> D:\ProgramWorkspace\DevTest-Notes\RobotFramework</span><br><span class="line">$ robot -d D:/rf_results PO_demo/01_测试用例</span><br></pre></td></tr></table></figure></p>
+<h2 id="执行某个测试套件"><a href="#执行某个测试套件" class="headerlink" title="执行某个测试套件"></a>执行某个测试套件</h2><p>语法格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pybot 测试套件路径</span><br></pre></td></tr></table></figure>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ robot -d D:/rf_results PO_demo/01_测试用例/登录测试-错误用户名+密码.robot</span><br><span class="line">==============================================================================</span><br><span class="line">登录测试-错误用户名+密码</span><br><span class="line">==============================================================================</span><br><span class="line">case_1.1_错误用户名+密码                                              | PASS |</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">case_1.2_错误用户名+正确密码                                          | PASS |</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">case_1.3_正确用户名+错误密码                                          | PASS |</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">登录测试-错误用户名+密码                                              | PASS |</span><br><span class="line">3 critical tests, 3 passed, 0 failed</span><br><span class="line">3 tests total, 3 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">Output:  D:\rf_results\output.xml</span><br><span class="line">Log:     D:\rf_results\log.html</span><br><span class="line">Report:  D:\rf_results\report.html</span><br></pre></td></tr></table></figure></p>
+<h2 id="执行某个标签用例"><a href="#执行某个标签用例" class="headerlink" title="执行某个标签用例"></a>执行某个标签用例</h2><p>语法格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pybot --include 标签名 项目路径</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ robot -d D:/rf_results --include login PO_demo/01_测试用例</span><br><span class="line">部分日志...</span><br><span class="line">==============================================================================</span><br><span class="line">01 测试用例                                                           | PASS |</span><br><span class="line">4 critical tests, 4 passed, 0 failed</span><br><span class="line">4 tests total, 4 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">Output:  D:\rf_results\output.xml</span><br><span class="line">Log:     D:\rf_results\log.html</span><br><span class="line">Report:  D:\rf_results\report.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="执行某个用例"><a href="#执行某个用例" class="headerlink" title="执行某个用例"></a>执行某个用例</h2><p>语法格式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pybot --suite 测试套件路径 --<span class="built_in">test</span> 测试用例名称 项目路径</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ robot -d D:/rf_results --suite 01_测试用例.登录测试-错误用 户名+密码 --<span class="built_in">test</span> case_*.2* PO_demo</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo.01 测试用例</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo.01 测试用例.登录测试-错误用户名+密码</span><br><span class="line">==============================================================================</span><br><span class="line">case_1.2_错误用户名+正确密码                                          | PASS |</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">PO demo.01 测试用例.登录测试-错误用户名+密码                          | PASS |</span><br><span class="line">1 critical <span class="built_in">test</span>, 1 passed, 0 failed</span><br><span class="line">1 <span class="built_in">test</span> total, 1 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo.01 测试用例                                                   | PASS |</span><br><span class="line">1 critical <span class="built_in">test</span>, 1 passed, 0 failed</span><br><span class="line">1 <span class="built_in">test</span> total, 1 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo                                                               | PASS |</span><br><span class="line">1 critical <span class="built_in">test</span>, 1 passed, 0 failed</span><br><span class="line">1 <span class="built_in">test</span> total, 1 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">Output:  D:\rf_results\output.xml</span><br><span class="line">Log:     D:\rf_results\log.html</span><br><span class="line">Report:  D:\rf_results\report.html</span><br></pre></td></tr></table></figure>
+<h2 id="参数文件"><a href="#参数文件" class="headerlink" title="参数文件"></a>参数文件</h2><p>如果参数很多，可以将他们放在一个文件中，使用 <code>-A | --argumentfile</code> 参数来指定。</p>
+<p>语法格式：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pybot --argumentfile 参数文件路径 项目路径</span><br></pre></td></tr></table></figure></p>
+<p>举例：<br>编写一个参数文件argfile.txt，内容如下：<br><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">-T</span><br><span class="line">--suite </span><br><span class="line">01_测试用例.登录测试-错误用户名+密码 </span><br><span class="line">--test </span><br><span class="line">case_*.2*</span><br></pre></td></tr></table></figure><br>执行：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ robot -d D:/rf_results --argumentfile D:\rf_results\argfile.txt PO_demo</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo.01 测试用例</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo.01 测试用例.登录测试-错误用户名+密码</span><br><span class="line">==============================================================================</span><br><span class="line">case_1.2_错误用户名+正确密码                                          | PASS |</span><br><span class="line">------------------------------------------------------------------------------</span><br><span class="line">PO demo.01 测试用例.登录测试-错误用户名+密码                          | PASS |</span><br><span class="line">1 critical <span class="built_in">test</span>, 1 passed, 0 failed</span><br><span class="line">1 <span class="built_in">test</span> total, 1 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo.01 测试用例                                                   | PASS |</span><br><span class="line">1 critical <span class="built_in">test</span>, 1 passed, 0 failed</span><br><span class="line">1 <span class="built_in">test</span> total, 1 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">PO demo                                                               | PASS |</span><br><span class="line">1 critical <span class="built_in">test</span>, 1 passed, 0 failed</span><br><span class="line">1 <span class="built_in">test</span> total, 1 passed, 0 failed</span><br><span class="line">==============================================================================</span><br><span class="line">Output:  D:\rf_results\output-20220102-163828.xml</span><br><span class="line">Log:     D:\rf_results\log-20220102-163828.html</span><br><span class="line">Report:  D:\rf_results\report-20220102-163828.html</span><br></pre></td></tr></table></figure></p>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>井蛙不可以语于海者，拘于虚也；夏虫不可以语于冰者，笃于时也。——《庄子·外篇·秋水》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>测试框架</category>
+      </categories>
+      <tags>
+        <tag>Robot Framework</tag>
+        <tag>测试框架</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅谈自动化测试</title>
     <url>/posts/software-testing-for-auto-test-architecture/</url>
     <content><![CDATA[<p>从事自动化测试工作有一段时间了，今天来简单聊聊。</p>
