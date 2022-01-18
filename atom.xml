@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2022-01-17T08:46:50.737Z</updated>
+  <updated>2022-01-18T23:48:09.456Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Jenkins集成Robot Framework</title>
+    <link href="https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/"/>
+    <id>https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/</id>
+    <published>2022-01-18T12:16:00.000Z</published>
+    <updated>2022-01-18T23:48:09.456Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文介绍Jenkins如何集成Robot Framework。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+    
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+      <category term="Robot Framework" scheme="https://hiyongz.github.io/tags/Robot-Framework/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Robot Framework robot命令</title>
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-pybot-options/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-pybot-options/</id>
     <published>2022-01-11T12:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.737Z</updated>
+    <updated>2022-01-18T23:48:09.596Z</updated>
     
     <summary type="html">
     
@@ -46,7 +71,7 @@
     <link href="https://hiyongz.github.io/posts/software-testing-for-auto-test-architecture/"/>
     <id>https://hiyongz.github.io/posts/software-testing-for-auto-test-architecture/</id>
     <published>2022-01-04T12:12:00.000Z</published>
-    <updated>2022-01-17T08:46:50.705Z</updated>
+    <updated>2022-01-18T23:48:09.568Z</updated>
     
     <summary type="html">
     
@@ -67,7 +92,7 @@
     <link href="https://hiyongz.github.io/posts/my-2021-annual-summary/"/>
     <id>https://hiyongz.github.io/posts/my-2021-annual-summary/</id>
     <published>2021-12-31T21:26:00.000Z</published>
-    <updated>2022-01-17T08:46:50.641Z</updated>
+    <updated>2022-01-18T23:48:09.504Z</updated>
     
     <summary type="html">
     
@@ -88,7 +113,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/</id>
     <published>2021-12-28T12:16:00.000Z</published>
-    <updated>2022-01-17T08:46:50.605Z</updated>
+    <updated>2022-01-18T23:48:09.468Z</updated>
     
     <summary type="html">
     
@@ -115,7 +140,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/</id>
     <published>2021-12-21T12:12:00.000Z</published>
-    <updated>2022-01-17T08:46:50.685Z</updated>
+    <updated>2022-01-18T23:48:09.548Z</updated>
     
     <summary type="html">
     
@@ -140,7 +165,7 @@
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/</id>
     <published>2021-12-09T12:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.737Z</updated>
+    <updated>2022-01-18T23:48:09.596Z</updated>
     
     <summary type="html">
     
@@ -163,7 +188,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-context-manager/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-context-manager/</id>
     <published>2021-12-07T12:12:00.000Z</published>
-    <updated>2022-01-17T08:46:50.685Z</updated>
+    <updated>2022-01-18T23:48:09.544Z</updated>
     
     <summary type="html">
     
@@ -186,7 +211,7 @@
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-12-02T20:12:00.000Z</published>
-    <updated>2022-01-17T08:46:50.637Z</updated>
+    <updated>2022-01-18T23:48:09.496Z</updated>
     
     <summary type="html">
     
@@ -209,7 +234,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/</id>
     <published>2021-12-02T09:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.749Z</updated>
+    <updated>2022-01-18T23:48:09.608Z</updated>
     
     <summary type="html">
     
@@ -232,7 +257,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/</id>
     <published>2021-11-30T12:12:00.000Z</published>
-    <updated>2022-01-17T08:46:50.685Z</updated>
+    <updated>2022-01-18T23:48:09.544Z</updated>
     
     <summary type="html">
     
@@ -255,7 +280,7 @@
     <link href="https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/"/>
     <id>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</id>
     <published>2021-11-25T12:12:00.000Z</published>
-    <updated>2022-01-17T08:46:50.745Z</updated>
+    <updated>2022-01-18T23:48:09.608Z</updated>
     
     <summary type="html">
     
@@ -284,7 +309,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
     <published>2021-11-23T09:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.749Z</updated>
+    <updated>2022-01-18T23:48:09.608Z</updated>
     
     <summary type="html">
     
@@ -307,7 +332,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2022-01-17T08:46:50.693Z</updated>
+    <updated>2022-01-18T23:48:09.556Z</updated>
     
     <summary type="html">
     
@@ -328,7 +353,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2022-01-17T08:46:50.693Z</updated>
+    <updated>2022-01-18T23:48:09.556Z</updated>
     
     <summary type="html">
     
@@ -349,7 +374,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.753Z</updated>
+    <updated>2022-01-18T23:48:09.612Z</updated>
     
     <summary type="html">
     
@@ -374,7 +399,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/</id>
     <published>2021-11-16T19:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.749Z</updated>
+    <updated>2022-01-18T23:48:09.608Z</updated>
     
     <summary type="html">
     
@@ -397,7 +422,7 @@
     <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
     <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
     <published>2021-11-16T12:06:00.000Z</published>
-    <updated>2022-01-17T08:46:50.625Z</updated>
+    <updated>2022-01-18T23:48:09.488Z</updated>
     
     <summary type="html">
     
@@ -420,7 +445,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2022-01-17T08:46:50.749Z</updated>
+    <updated>2022-01-18T23:48:09.608Z</updated>
     
     <summary type="html">
     
@@ -445,7 +470,7 @@
     <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
     <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
     <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2022-01-17T08:46:50.665Z</updated>
+    <updated>2022-01-18T23:48:09.528Z</updated>
     
     <summary type="html">
     
@@ -462,27 +487,6 @@
       <category term="GitHub Pages" scheme="https://hiyongz.github.io/tags/GitHub-Pages/"/>
     
       <category term="Gitee Pages" scheme="https://hiyongz.github.io/tags/Gitee-Pages/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>读书笔记 | “错误”的行为</title>
-    <link href="https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/"/>
-    <id>https://hiyongz.github.io/posts/reading-notes-for-misbehaving-the-making-of-behavioral/</id>
-    <published>2021-11-06T09:26:00.000Z</published>
-    <updated>2022-01-17T08:46:50.693Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《“错误”的行为》是理查德·塞勒的个人学术自传，展现了行为经济学的大致发展脉络。如果想大致了解他关于行为经济学的主要工作，阅读这本书就可以了。下面整理一下这本书的部分内容。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="阅读" scheme="https://hiyongz.github.io/categories/%E9%98%85%E8%AF%BB/"/>
-    
-    
-      <category term="读书笔记" scheme="https://hiyongz.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
