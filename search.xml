@@ -9794,6 +9794,10 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
 <p><img src="jenkins-job-email-notification2.png" width="80%" height="80%" /></p>
 <p>配置完成后，构建项目，查看控制台输出<br><img src="jenkins-email-build.png" width="80%" height="80%" /></p>
 <p>查看邮箱，发送成功！<br><img src="jenkins-email.png" width="80%" height="80%" /></p>
+<h1 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h1><h2 id="删除构建历史"><a href="#删除构建历史" class="headerlink" title="删除构建历史"></a>删除构建历史</h2><p>点击【系统管理】-&gt; 【脚本命令行】</p>
+<p>输入如下脚本：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> jobName = <span class="string">&quot;test_shell&quot;</span></span><br><span class="line"><span class="keyword">def</span> job = Jenkins.instance.getItem(jobName)</span><br><span class="line">job.getBuilds().each &#123; </span><br><span class="line">    it.delete() </span><br><span class="line">&#125;</span><br><span class="line">job.nextBuildNumber = <span class="number">1</span></span><br><span class="line">job.save()</span><br></pre></td></tr></table></figure>
+<p>点击运行，job名为 <code>test_shell</code> 的构建历史都会被删除，重新构建时构建序号会从1开始。</p>
 <center><b>--THE END--<b></center>
 
 ]]></content>
