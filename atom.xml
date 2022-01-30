@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2022-01-22T07:09:02.523Z</updated>
+  <updated>2022-01-30T04:52:48.488Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>容器技术介绍之docker核心技术概述</title>
+    <link href="https://hiyongz.github.io/posts/container-docker-architecture-introduction/"/>
+    <id>https://hiyongz.github.io/posts/container-docker-architecture-introduction/</id>
+    <published>2022-01-30T12:16:00.000Z</published>
+    <updated>2022-01-30T04:52:48.488Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;容器简单来说是一种沙盒技术，将应用“装”进沙盒中，像集装箱一样，把应用封装起来，使得应用之间不会相互干扰，而放进沙盒中的应用也方便“搬家”。本文基于docker来介绍容器相关核心技术。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="容器技术" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="容器" scheme="https://hiyongz.github.io/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+      <category term="docker" scheme="https://hiyongz.github.io/tags/docker/"/>
+    
+      <category term="PaaS" scheme="https://hiyongz.github.io/tags/PaaS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Jenkins集成Robot Framework</title>
     <link href="https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/</id>
     <published>2022-01-18T12:16:00.000Z</published>
-    <updated>2022-01-22T07:09:02.523Z</updated>
+    <updated>2022-01-30T04:52:48.524Z</updated>
     
     <summary type="html">
     
@@ -46,7 +73,7 @@
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-pybot-options/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-pybot-options/</id>
     <published>2022-01-11T12:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.687Z</updated>
+    <updated>2022-01-30T04:52:48.692Z</updated>
     
     <summary type="html">
     
@@ -71,7 +98,7 @@
     <link href="https://hiyongz.github.io/posts/software-testing-for-auto-test-architecture/"/>
     <id>https://hiyongz.github.io/posts/software-testing-for-auto-test-architecture/</id>
     <published>2022-01-04T12:12:00.000Z</published>
-    <updated>2022-01-22T07:09:02.651Z</updated>
+    <updated>2022-01-30T04:52:48.656Z</updated>
     
     <summary type="html">
     
@@ -92,7 +119,7 @@
     <link href="https://hiyongz.github.io/posts/my-2021-annual-summary/"/>
     <id>https://hiyongz.github.io/posts/my-2021-annual-summary/</id>
     <published>2021-12-31T21:26:00.000Z</published>
-    <updated>2022-01-22T07:09:02.575Z</updated>
+    <updated>2022-01-30T04:52:48.580Z</updated>
     
     <summary type="html">
     
@@ -113,7 +140,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/</id>
     <published>2021-12-28T12:16:00.000Z</published>
-    <updated>2022-01-22T07:09:02.531Z</updated>
+    <updated>2022-01-30T04:52:48.536Z</updated>
     
     <summary type="html">
     
@@ -140,7 +167,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/</id>
     <published>2021-12-21T12:12:00.000Z</published>
-    <updated>2022-01-22T07:09:02.627Z</updated>
+    <updated>2022-01-30T04:52:48.632Z</updated>
     
     <summary type="html">
     
@@ -165,7 +192,7 @@
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/</id>
     <published>2021-12-09T12:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.687Z</updated>
+    <updated>2022-01-30T04:52:48.692Z</updated>
     
     <summary type="html">
     
@@ -188,7 +215,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-context-manager/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-context-manager/</id>
     <published>2021-12-07T12:12:00.000Z</published>
-    <updated>2022-01-22T07:09:02.623Z</updated>
+    <updated>2022-01-30T04:52:48.628Z</updated>
     
     <summary type="html">
     
@@ -211,7 +238,7 @@
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-12-02T20:12:00.000Z</published>
-    <updated>2022-01-22T07:09:02.567Z</updated>
+    <updated>2022-01-30T04:52:48.572Z</updated>
     
     <summary type="html">
     
@@ -234,7 +261,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/</id>
     <published>2021-12-02T09:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.699Z</updated>
+    <updated>2022-01-30T04:52:48.704Z</updated>
     
     <summary type="html">
     
@@ -257,7 +284,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/</id>
     <published>2021-11-30T12:12:00.000Z</published>
-    <updated>2022-01-22T07:09:02.627Z</updated>
+    <updated>2022-01-30T04:52:48.628Z</updated>
     
     <summary type="html">
     
@@ -280,7 +307,7 @@
     <link href="https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/"/>
     <id>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</id>
     <published>2021-11-25T12:12:00.000Z</published>
-    <updated>2022-01-22T07:09:02.695Z</updated>
+    <updated>2022-01-30T04:52:48.700Z</updated>
     
     <summary type="html">
     
@@ -309,7 +336,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
     <published>2021-11-23T09:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.699Z</updated>
+    <updated>2022-01-30T04:52:48.704Z</updated>
     
     <summary type="html">
     
@@ -332,7 +359,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2022-01-22T07:09:02.639Z</updated>
+    <updated>2022-01-30T04:52:48.644Z</updated>
     
     <summary type="html">
     
@@ -353,7 +380,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2022-01-22T07:09:02.635Z</updated>
+    <updated>2022-01-30T04:52:48.640Z</updated>
     
     <summary type="html">
     
@@ -374,7 +401,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.703Z</updated>
+    <updated>2022-01-30T04:52:48.708Z</updated>
     
     <summary type="html">
     
@@ -399,7 +426,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/</id>
     <published>2021-11-16T19:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.699Z</updated>
+    <updated>2022-01-30T04:52:48.704Z</updated>
     
     <summary type="html">
     
@@ -422,7 +449,7 @@
     <link href="https://hiyongz.github.io/posts/github-skills-for-shields-build/"/>
     <id>https://hiyongz.github.io/posts/github-skills-for-shields-build/</id>
     <published>2021-11-16T12:06:00.000Z</published>
-    <updated>2022-01-22T07:09:02.555Z</updated>
+    <updated>2022-01-30T04:52:48.560Z</updated>
     
     <summary type="html">
     
@@ -445,7 +472,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</id>
     <published>2021-11-11T09:30:36.000Z</published>
-    <updated>2022-01-22T07:09:02.699Z</updated>
+    <updated>2022-01-30T04:52:48.704Z</updated>
     
     <summary type="html">
     
@@ -462,31 +489,6 @@
       <category term="playwright" scheme="https://hiyongz.github.io/tags/playwright/"/>
     
       <category term="元素定位" scheme="https://hiyongz.github.io/tags/%E5%85%83%E7%B4%A0%E5%AE%9A%E4%BD%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>电子书创建：Sphinx + Github + ReadTheDocs</title>
-    <link href="https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/"/>
-    <id>https://hiyongz.github.io/posts/personal-blog-for-sphinx-readthedocs-and-github-guide/</id>
-    <published>2021-11-09T09:52:00.000Z</published>
-    <updated>2022-01-22T07:09:02.603Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我写博客的初衷是为了系统的构建自己的知识体系，目前使用的平台有微信公众号，CSDN，博客园，GitHub Pages和Gitee Pages，他们都各有优缺点，整理的笔记多了之后发现这些平台不是很方便，比如公众号，CSDN和博客园，每次写完文章后，还需要再平台上进行编辑再发布，比较麻烦；GitHub Pages和Gitee Pages虽然可以快速发布，但是在文章系统管理上不是很方便。我希望将笔记整理成类似电子书一样，方便搜索和管理，经过查询资料，发现了ReadTheDocs这个文档管理工具，比较符合我的需求。可以使用 Sphinx 生成文档，GitHub 托管文档，然后导入到 ReadtheDocs进行展示，本文记录一下搭建过程。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="其它" scheme="https://hiyongz.github.io/categories/%E5%85%B6%E5%AE%83/"/>
-    
-    
-      <category term="Hexo" scheme="https://hiyongz.github.io/tags/Hexo/"/>
-    
-      <category term="GitHub Pages" scheme="https://hiyongz.github.io/tags/GitHub-Pages/"/>
-    
-      <category term="Gitee Pages" scheme="https://hiyongz.github.io/tags/Gitee-Pages/"/>
     
   </entry>
   
