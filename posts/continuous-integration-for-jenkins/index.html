@@ -57,6 +57,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-windows-node-connect.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-windows-node-run.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-windows-slave-status.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/inbound-tcp-agent-protocol.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/windows-plan-task.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/windows-plan-task2.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/windows-plan-task3.png">
@@ -92,7 +93,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-email.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-discard-old-builds.png">
 <meta property="article:published_time" content="2021-03-05T12:12:00.000Z">
-<meta property="article:modified_time" content="2022-02-10T11:00:26.002Z">
+<meta property="article:modified_time" content="2022-02-10T14:05:03.889Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
@@ -346,7 +347,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.6k</span>
+              <span>9.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -457,6 +458,10 @@
 <p>第二种方式：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -jar agent.jar -jnlpUrl http://192.168.30.8:8080/computer/slave2/jenkins-agent.jnlp -secret 626402e3eee37788fa41ffa7353a2cc14f269028672a0af206b0f92e6578f364 -workDir <span class="string">&quot;D:\ProgramWorkspace\TestingDemo\jenkins&quot;</span></span><br><span class="line"><span class="comment"># Run from agent command line, with the secret stored in a file:</span></span><br><span class="line"><span class="built_in">echo</span> 626402e3eee37788fa41ffa7353a2cc14f269028672a0af206b0f92e6578f364 &gt; secret-file</span><br><span class="line">java -jar agent.jar -jnlpUrl http://192.168.30.8:8080/computer/slave2/jenkins-agent.jnlp -secret @secret-file -workDir <span class="string">&quot;D:\ProgramWorkspace\TestingDemo\jenkins&quot;</span></span><br></pre></td></tr></table></figure></p>
 <p>启动jenkins时，开启了8080和50000端口（<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/113819992">Docker搭建持续集成平台Jenkins</a>），8080端口是jenkins服务器对外URL地址，50000端口为slave节点与jenkins的通讯端口，在默认情况下，基于JNLP的Jenkins代理通过TCP端口50000与Jenkins主站进行通信。</p>
 <p>Windows查看50000端口占用：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\10287&gt;netstat -aon | findstr <span class="string">&quot;50000&quot;</span></span><br><span class="line">  TCP    127.0.0.1:50000        0.0.0.0:0              LISTENING       8644</span><br><span class="line">  TCP    192.168.30.100:52297   192.168.30.8:50000     ESTABLISHED     10028</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>Linux查看端口占用情况：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@server /]<span class="comment"># lsof -i:8080</span></span><br><span class="line">COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">docker-pr 2787 root    4u  IPv4  51423      0t0  TCP *:webcache (LISTEN)</span><br><span class="line">[root@server /]<span class="comment"># lsof -i:50000</span></span><br><span class="line">COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">docker-pr 2775 root    4u  IPv4  50675      0t0  TCP *:50000 (LISTEN)</span><br><span class="line">[root@server /]<span class="comment"># netstat -aptn | grep 50000</span></span><br><span class="line">tcp        0      0 0.0.0.0:50000           0.0.0.0:*               LISTEN      2775/docker-proxy   </span><br><span class="line">[root@haiyong jenkins_home]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
+<p>启动windows节点时可能会报如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Exception: The server rejected the connection: None of the protocols were accepted<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+<p>解决方案：进入Manage Jenkins -&gt; Configure Global Security -&gt; Agents -&gt; Agent protocols，勾选Inbound TCP Agent Protocol/4 (TLS encryption)</p>
+<p><img src="inbound-tcp-agent-protocol.png" width="80%" height="80%" /></p>
 <h2 id="设置windows节点开机自动启动"><a href="#设置windows节点开机自动启动" class="headerlink" title="设置windows节点开机自动启动"></a>设置windows节点开机自动启动</h2><p>下面介绍2种方法。</p>
 <h3 id="方法1：添加任务计划程序"><a href="#方法1：添加任务计划程序" class="headerlink" title="方法1：添加任务计划程序"></a>方法1：添加任务计划程序</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/landhu/p/6758197.html">https://www.cnblogs.com/landhu/p/6758197.html</a></p>
 <p>进入控制面板 -&gt; 管理工具 -&gt; 任务计划程序</p>
