@@ -31,6 +31,88 @@
 ]]></content>
   </entry>
   <entry>
+    <title>持续集成：Jenkins邮件通知配置方法介绍</title>
+    <url>/posts/continuous-integration-for-jenkins-email-ext/</url>
+    <content><![CDATA[<p>Jenkins的邮件提醒功能主要通过<a href="https://plugins.jenkins.io/email-ext/">Email Extension</a>插件来实现，它是对<a href="https://plugins.jenkins.io/mailer">Mailer Plugin</a>的扩展，我在<a href="https://blog.csdn.net/u010698107/article/details/113823608">持续集成平台Jenkins配置方法介绍</a>中简要介绍了Jenkins的邮件配置方法，本文介绍jenkins邮件的更多玩法。</p>
+<a id="more"></a>
+<h1 id="Jenkins邮件配置"><a href="#Jenkins邮件配置" class="headerlink" title="Jenkins邮件配置"></a>Jenkins邮件配置</h1><p>Jenkins可以配置邮件通知，比如在Jenkins构建任务之后发送邮件通知，错误报警等。</p>
+<p>安装插件：Email Extension和Email Extension Template，<br><img src="jenkins-email-extension.png" width="80%" height="80%" /></p>
+<h2 id="Jenkins配置-Email"><a href="#Jenkins配置-Email" class="headerlink" title="Jenkins配置 Email"></a>Jenkins配置 Email</h2><p>进入Manage Jenkins -&gt; System Configuration -&gt; Configure System 配置系统管理员e-mail地址<br><img src="jenkins-email-address.png" width="80%" height="80%" /></p>
+<p>配置Extended E-mail Notification，注意SMTP Password不是邮箱密码，为你的邮箱授权码<br><img src="jenkins-extend-email-notification.png" width="80%" height="80%" /><br>拉到最下面，配置邮件通知，配置完成后，可以发一个测试邮件，查看是否配置成功<br><img src="jenkins-email-notification.png" width="80%" height="80%" /></p>
+<p><img src="jenkins-test-email.png" width="80%" height="80%" /></p>
+<h2 id="Jenkins报警规则"><a href="#Jenkins报警规则" class="headerlink" title="Jenkins报警规则"></a>Jenkins报警规则</h2><p>在模板设置的下方有个 Default Triggers 按钮，点击后，设定报警规则</p>
+<p><img src="jenkins-email-default-triggers.png" width="80%" height="80%" /></p>
+<p>在job的<strong>构建后操作</strong>步骤选择” Editable Email Notification “<br><img src="jenkins-job-email-notification.png" width="80%" height="80%" /></p>
+<p><img src="jenkins-job-email-notification2.png" width="80%" height="80%" /></p>
+<p>配置完成后，构建项目，查看控制台输出<br><img src="jenkins-email-build.png" width="80%" height="80%" /></p>
+<p>查看邮箱，发送成功！<br><img src="jenkins-email.png" width="80%" height="80%" /></p>
+<h1 id="Jenkins-通用邮件模板"><a href="#Jenkins-通用邮件模板" class="headerlink" title="Jenkins 通用邮件模板"></a>Jenkins 通用邮件模板</h1><p>Jenkins可以根据你配置的邮件模板格式来发送结果邮件，通过Jenkins的参数定制自己的Email模板，常用的参数key值如下:</p>
+<ul>
+<li>$BUILD_STATUS ：构建结果</li>
+<li>$PROJECT_NAME ：构建脚本名称</li>
+<li>$BUILD_NUMBER ：构建脚本编号</li>
+<li>$JOB_DESCRIPTION ：构建项目描述</li>
+<li>$CAUSE ：脚本启动原因</li>
+<li>$BUILD_URL ：脚本构建详情URL地址</li>
+</ul>
+<p>可以进行全局邮件配置，进入Manage Jenkins -&gt; System Configuration -&gt; Configure System，配置邮件默认模板。</p>
+<p>Default Subject</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">Jenkins构建提醒：$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!</span><br></pre></td></tr></table></figure>
+<p>Default Content</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span>(自动化构建邮件，无需回复！)<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">hr</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">项目名称：$PROJECT_NAME<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">项目描述：$JOB_DESCRIPTION<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">运行编号：$BUILD_NUMBER<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">运行结果：$BUILD_STATUS<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">触发原因：$&#123;CAUSE&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">构建日志地址：<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;BUILD_URL&#125;console&quot;</span>&gt;</span>$&#123;BUILD_URL&#125;console<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">构建地址：<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;$BUILD_URL&quot;</span>&gt;</span>$BUILD_URL<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">详情：$&#123;JELLY_SCRIPT,template=&quot;html&quot;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="jenkins-email-content.png" width="80%" height="80%" /></p>
+<p>也可以使用HTML模板，将模板内容保存为HTML文件，使用如下方式来引用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$&#123;FILE,path=&quot;email.html&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在pipeline中使用emailext方法发送邮件：Declarative pipeline</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">post &#123;</span><br><span class="line">	always &#123;</span><br><span class="line">        emailext (</span><br><span class="line">            subject: <span class="string">&#x27;\&#x27;</span>构建通知:<span class="variable">$&#123;PROJECT_NAME&#125;</span> - Build <span class="comment"># $&#123;BUILD_NUMBER&#125; - $&#123;BUILD_STATUS&#125;\&#x27;&#x27;,</span></span><br><span class="line">            body: <span class="string">&#x27;&#x27;</span><span class="string">&#x27;$&#123;FILE,path=&quot;email.html&quot;&#125;&#x27;</span><span class="string">&#x27;&#x27;</span>,</span><br><span class="line">            to: <span class="string">&quot;XXXXXXX@qq.cn&quot;</span>,    </span><br><span class="line">            )</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Groovy-脚本模板"><a href="#Groovy-脚本模板" class="headerlink" title="Groovy 脚本模板"></a>Groovy 脚本模板</h1><p><a href="https://plugins.jenkins.io/email-ext/">Email Extension</a>插件支持Groovy 脚本模板，主要步骤如下：</p>
+<p>1、创建Groovy 脚本模板</p>
+<p>使用Groovy+HTML语言编写，可参考<a href="https://plugins.jenkins.io/email-ext/">Email Extension</a>提供的示例模板文件：</p>
+<ul>
+<li><a href="https://github.com/jenkinsci/email-ext-plugin/blob/master/src/main/resources/hudson/plugins/emailext/templates/groovy-html.template"><code>groovy-html.template</code></a></li>
+<li><a href="https://github.com/jenkinsci/email-ext-plugin/blob/master/docs/templates/jenkins-matrix-email-html.template"><code>jenkins-matrix-email-html.template</code></a></li>
+<li><a href="https://github.com/jenkinsci/email-ext-plugin/blob/master/docs/templates/jenkins-generic-matrix-email-html.template"><code>jenkins-generic-matrix-email-html.template</code></a></li>
+</ul>
+<p>2、将脚本放到  <code>$&#123;JENKINS_HOME&#125;/email-templates/</code>目录下。</p>
+<p>我的JENKINS_HOME路径为 <code>/var/jenkins_home</code>，将写好的template文件放入 <code>/var/jenkins_home/email-templates</code> 目录下并添加权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker cp Pipeline-html.template jenkins:/var/jenkins_home/email-templates/Pipeline-html.template</span><br><span class="line">$ docker <span class="built_in">exec</span> -u root -it jenkins /bin/bash</span><br><span class="line">root@87f12fbcc4be:/<span class="comment"># cd /var/jenkins_home/email-templates/</span></span><br><span class="line">root@87f12fbcc4be:/var/jenkins_home/email-templates<span class="comment"># chmod 777 Pipeline-html-test.template</span></span><br></pre></td></tr></table></figure>
+<p>3、使用模板</p>
+<p>使用方法如下:</p>
+<ul>
+<li><p>纯文本 Groovy 脚本</p>
+<p><code>$&#123;SCRIPT, template=&quot;groovy-text.template&quot;&#125;</code></p>
+</li>
+<li><p>HTML Groovy 脚本</p>
+<p><code>$&#123;SCRIPT, template=&quot;groovy-html.template&quot;&#125;</code></p>
+</li>
+</ul>
+<p>比如，在pipeline中使用emailext发送邮件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emailext (</span><br><span class="line">    subject: <span class="string">&#x27;\&#x27;</span>构建通知:<span class="variable">$&#123;PROJECT_NAME&#125;</span> - Build <span class="comment"># $&#123;BUILD_NUMBER&#125; - $&#123;BUILD_STATUS&#125;\&#x27;&#x27;,</span></span><br><span class="line">    body: <span class="string">&#x27;&#x27;</span><span class="string">&#x27;$&#123;SCRIPT,template=&quot;groovy-html.template&quot;&#125;&#x27;</span><span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    to: <span class="string">&quot;XXXXXXX@qq.cn&quot;</span>,    </span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构建时，邮件报如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Exception raised during template rendering: Failed to parse template script (your template may contain an error or be trying to use expressions not currently supported): Failed to create Script instance <span class="keyword">for</span> class: class SimpleTemplateScript13. Reason: java.lang.SecurityException: Rejecting unsandboxed super constructor call: hudson.plugins.emailext.plugins.content.EmailExtScript() groovy.lang.GroovyRuntimeException: Failed to parse template script (your template may contain an error or be trying to use expressions not currently supported)</span><br></pre></td></tr></table></figure>
+<p>解决方案：<a href="https://stackoverflow.com/questions/40129455/jenkins-pipeline-getting-a-security-error-how-can-i-prevent-the-error-from-be">https://stackoverflow.com/questions/40129455/jenkins-pipeline-getting-a-security-error-how-can-i-prevent-the-error-from-be</a></p>
+<p>手动同意使用的模板方法签名，进入Manage Jenkins -&gt; In-process Script Approval 手动同意模板文件就可以了。</p>
+<p>参考文档：</p>
+<ol>
+<li><a href="https://github.com/jenkinsci/email-ext-plugin">https://github.com/jenkinsci/email-ext-plugin</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+
+<blockquote>
+<p>不自见，故明；不自是，故彰；不自伐，故有功；不自矜，故长。——《道德经》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>测试开发</category>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>获取Python函数信息的方法</title>
     <url>/posts/python-notes-for-getting-function-attribution/</url>
     <content><![CDATA[<p>Python的反射机制可以动态获取对象信息以及动态调用对象，<a href="https://blog.csdn.net/u010698107/article/details/117600196">Python反射介绍</a> 介绍了Python常用的反射函数使用方法，本文介绍如何获取对象中的函数注释信息以及参数信息。</p>
