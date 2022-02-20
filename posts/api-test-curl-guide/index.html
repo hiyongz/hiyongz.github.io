@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/api-test-curl-guide/curl-header.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/api-test-curl-guide/copy_as_curl.png">
 <meta property="article:published_time" content="2021-01-14T12:02:00.000Z">
-<meta property="article:modified_time" content="2022-02-20T12:27:01.856Z">
+<meta property="article:modified_time" content="2022-02-20T12:36:52.169Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="cURL">
 <meta name="twitter:card" content="summary">
@@ -288,7 +288,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -322,28 +322,22 @@
 </ul>
 <p>其他参数用法：</p>
 <ul>
-<li>-H： “Content-type: application/json”  添加 HTTP 请求头 <code>curl -H &#39;Content-type: application/json&#39; $url</code></li>
-<li>-G： 把data数据当成get请求的参数发送，用来构造 URL 的查询字符串，与—data-urlencode结合使用</li>
-<li>-X：指定 HTTP 请求的方法 <code>curl -X POST $url</code></li>
-<li>-d： 发送post请求数据，@file表示来自于文件</li>
-<li>—data-urlencode：发送post请求数据，会对内容进行url编码</li>
-<li>-u： username:password用户认证</li>
-<li>-o： 写文件，将服务器的响应保存成文件</li>
-<li>-v： verbose，打印更详细日志 </li>
-<li>-s： 关闭一些提示输出，不输出错误和进度信息。</li>
-<li>-S：只输出错误信息</li>
+<li><code>-H</code>： “Content-type: application/json”  添加 HTTP 请求头 <code>curl -H &#39;Content-type: application/json&#39; $url</code></li>
+<li><code>-G</code>： 把data数据当成get请求的参数发送，用来构造 URL 的查询字符串，与—data-urlencode结合使用</li>
+<li><code>-X</code>：指定 HTTP 请求的方法 <code>curl -X POST $url</code></li>
+<li><code>-d</code>： 发送post请求数据，@file表示来自于文件</li>
+<li><code>--data-urlencode</code>：发送post请求数据，会对内容进行url编码</li>
+<li><code>-u</code>： username:password用户认证</li>
+<li><code>-o</code>： 写文件，将服务器的响应保存成文件</li>
+<li><code>-v</code>： verbose，打印更详细日志 </li>
+<li><code>-s, --silent</code>： 关闭一些提示输出，不输出错误和进度信息。</li>
+<li><code>-S</code>：只输出错误信息</li>
+<li><code>-k</code>：使用SSL时允许不安全的服务器连接</li>
+<li><code>-L</code>：跟随跳转链接</li>
 </ul>
-<h1 id="curl实例"><a href="#curl实例" class="headerlink" title="curl实例"></a>curl实例</h1><ol>
-<li><p>请求 <a target="_blank" rel="noopener" href="http://www.baidu.com，">http://www.baidu.com，</a> 将服务器的响应保存为html文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /tmp/baidu.html http://www.baidu.com</span><br></pre></td></tr></table></figure>
-<p><img src="curl-baidu.png" width="80%" height="80%" /></p>
-</li>
-<li><p>curl设置自定义 header 信息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&#x27;Content-type: application/json&#x27;</span> -H <span class="string">&#x27;Accept-Language:US&#x27;</span> -H <span class="string">&#x27;Cookie:ID=1234&#x27;</span> -v https://www.baidu.com/</span><br></pre></td></tr></table></figure>
-<p><img src="curl-header.png" width="80%" height="80%" /></p>
+<h1 id="curl实例"><a href="#curl实例" class="headerlink" title="curl实例"></a>curl实例</h1><p>1、请求 <a target="_blank" rel="noopener" href="http://www.baidu.com，">http://www.baidu.com，</a> 将服务器的响应保存为html文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /tmp/baidu.html http://www.baidu.com</span><br></pre></td></tr></table></figure><br><img src="curl-baidu.png" width="80%" height="80%" /></p>
+<p>2、curl设置自定义 header 信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&#x27;Content-type: application/json&#x27;</span> -H <span class="string">&#x27;Accept-Language:US&#x27;</span> -H <span class="string">&#x27;Cookie:ID=1234&#x27;</span> -v https://www.baidu.com/</span><br></pre></td></tr></table></figure><br><img src="curl-header.png" width="80%" height="80%" /></p>
 <h1 id="copy-as-curl"><a href="#copy-as-curl" class="headerlink" title="copy as curl"></a>copy as curl</h1><p>打开chrome浏览器的开发者工具：<br><img src="copy_as_curl.png" width="80%" height="80%" /></p>
-</li>
-</ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="string">&quot;https://clients5.google.com/pagead/drt/ne?di=^%^5B^%^2220140509-01^%^22^%^2C320^%^2C0^%^2C550^%^5D&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;authority: clients5.google.com&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;x-requested-with: XMLHttpRequest&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;accept: */*&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;x-client-data: CK21yQEIjrbJAQijtskBCMS2yQEIqZ3KAQiWrMoBCJfCygEIrsLKAQisx8oBCPbHygEI98fKAQi0y8oBCKTNygEIos/KAQjc1coBCMKcywEIxZzLAQjVnMsBGOy4ygE=&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;sec-fetch-site: same-origin&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;sec-fetch-mode: cors&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;sec-fetch-dest: empty&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;referer: https://clients5.google.com/pagead/drt/dn/&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;accept-language: zh-CN,zh;q=0.9&quot;</span> ^</span><br><span class="line">  -H <span class="string">&quot;cookie: CONSENT=YES+GB.zh-CN+V14+BX; HSID=ApIaHMWrytTvjqMEY; SSID=AygJZayBnP28BxFf8; APISID=UmyTkS9N9ChWmnBG/AiX66wI9xuFNodxDq; SAPISID=2RDZPon8mmYFUeFe/AH2H3UhsBS56EVzlz; __Secure-3PAPISID=2RDZPon8mmYFUeFe/AH2H3UhsBS56EVzlz; SID=3wecPbBT_8ICWEMZ5LIHO8U6mUJK2S89ijFYUnIkyW21xGDb-NBvF2GLkodON3gjyG3pTA.; __Secure-3PSID=3wecPbBT_8ICWEMZ5LIHO8U6mUJK2S89ijFYUnIkyW21xGDbqY5AvmtkqB83SkM4W5Afuw.; NID=204=FqAz385UbUYitAfQlLxpoWdqs1wFoatEH6GwJPuJ4Am0zybAYk_jUN1hCp7sSUxQ9g2XpEJ6pXByvz4z9p9V4dYnFhsSJ48mVJite-Zz1-vhgXewIS3NeK8_rnW6BT0X6dxcKDd5GiG6A3EdN7YuWZXCWVOi_QmARqfLrqzROWzk0u54chsvJOc0MQjKQX3eQUgNM9ATMFDgayrkUu95mRETP5XiqGkL--jPKV49482QfQFjL-oomZ7yzJpzax3h62uOkqP3m0k; 1P_JAR=2020-12-15-13; SIDCC=AJi4QfGElscF8CoJohJbugG-XFh1nPnYTmwvm-mnyMsiq0BVDeYqfb-JgqXBhoGNBTTjYv3hUw; __Secure-3PSIDCC=AJi4QfF2K4Rz5-Sl_Q6p9GM8H-h_4Q43LiFHs9mLuqsP1lYjpNoH7KTpTJDgAIApoafgbq8ZNtc&quot;</span> ^</span><br><span class="line">  --compressed</span><br></pre></td></tr></table></figure>
 <center><b>--THE END--<b></center>
 
