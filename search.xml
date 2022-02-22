@@ -31,6 +31,61 @@
 ]]></content>
   </entry>
   <entry>
+    <title>持续集成：Jenkins Pipeline共享库定义和使用</title>
+    <url>/posts/continuous-integration-jenkins-for-pipeline-shared-libraries/</url>
+    <content><![CDATA[<p>通常情况下多个流水线项目需要使用相同的功能，流水线支持创建 “共享库” ，把这些公共的方法类定义在一个仓库中，使多个pipeline项目可以共享这些库，这有助于减少代码冗余。</p>
+<a id="more"></a>
+<p>下面来介绍Jenkins如何配置和使用Pipeline共享库。</p>
+<h1 id="Pipeline-共享库定义"><a href="#Pipeline-共享库定义" class="headerlink" title="Pipeline 共享库定义"></a>Pipeline 共享库定义</h1><p>共享库（shared library）是一些 Groovy 脚本的集合，可以在外部源代码控制仓库（Git 或者Subversion）中托管Pipeline共享库。配置好共享库之后，可以在Pipeline项目中对它进行调用。</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>将共享库放到SVN或者Git服务器上，其目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(root)</span><br><span class="line">+- src                     <span class="comment"># Groovy source files</span></span><br><span class="line">|   +- org</span><br><span class="line">|       +- foo</span><br><span class="line">|           +- Bar.groovy  <span class="comment"># for org.foo.Bar class</span></span><br><span class="line">+- vars</span><br><span class="line">|   +- foo.groovy          <span class="comment"># for global &#x27;foo&#x27; variable</span></span><br><span class="line">|   +- foo.txt             <span class="comment"># help for &#x27;foo&#x27; variable</span></span><br><span class="line">+- resources               <span class="comment"># resource files (external libraries only)</span></span><br><span class="line">|   +- org</span><br><span class="line">|       +- foo</span><br><span class="line">|           +- bar.json    <span class="comment"># static helper data for org.foo.Bar</span></span><br></pre></td></tr></table></figure>
+<p><code>src</code> 目录和标准的Java源代码目录一样，主要提供类库，存放具体实现方法。</p>
+<p><code>vars</code> 目录存放脚本文件的变量可以在pipeline中使用，也就是全局变量，文件的名称是Pipeline中变量的名称。</p>
+<p><code>resources</code> 目录存放一些配置文件，允许从外部库使用 <code>libraryResource</code> 步骤来加载相关的非groovy文件。目前，内部库不支持此功能。</p>
+<h2 id="创建共享库"><a href="#创建共享库" class="headerlink" title="创建共享库"></a>创建共享库</h2><p>目录结构如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">\---1.0</span><br><span class="line">    +---resources</span><br><span class="line">    +---src</span><br><span class="line">    |   \---com</span><br><span class="line">    |       \---hiyongz</span><br><span class="line">    |               MyLib.groovy</span><br><span class="line">    |</span><br><span class="line">    \---vars</span><br><span class="line">            log.groovy</span><br></pre></td></tr></table></figure>
+<p>MyLib.groovy脚本内容：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取时间 格式：20201208200419</span></span><br><span class="line"><span class="keyword">def</span> getTime() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Date().format(<span class="string">&#x27;yyyy-MM-ddHHmmss&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> getJenkinsHome()&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;$&#123;JENKINS_HOME&#125;&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>log.groovy脚本：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> info(message) &#123;</span><br><span class="line">    echo <span class="string">&quot;INFO: $&#123;message&#125;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置-Global-Shared-Libraries"><a href="#配置-Global-Shared-Libraries" class="headerlink" title="配置 Global Shared Libraries"></a>配置 Global Shared Libraries</h2><p>进入<em>Manage Jenkins » Configure System » Global Pipeline Libraries</em>，点击Add</p>
+<p>下面介绍SVN和GitHub两种共享库配置方法。</p>
+<h3 id="SVN库配置"><a href="#SVN库配置" class="headerlink" title="SVN库配置"></a>SVN库配置</h3><p>SVN源码库svn://192.168.30.8/project/pipelinelibs 下存放上面介绍的共享库。</p>
+<p><img src="global-pipeline-lib1.png" width="80%" height="80%" /></p>
+<p><img src="global-pipeline-lib2.png" width="80%" height="80%" /></p>
+<h3 id="GitHub库配置"><a href="#GitHub库配置" class="headerlink" title="GitHub库配置"></a>GitHub库配置</h3><p>也可以将共享库放到github上，路径为 <code>DevTest-Notes/CI/jenkins/pipelinelib/pipelinelibs/</code> 。</p>
+<p>和SVN配置方法类似，选择GitHub</p>
+<p><img src="global-pipeline-github-lib1.png" width="80%" height="80%" /></p>
+<p><img src="global-pipeline-github-lib2.png" width="80%" height="80%" /></p>
+<p>其它Git仓库配置方法类似。</p>
+<h1 id="使用共享库"><a href="#使用共享库" class="headerlink" title="使用共享库"></a>使用共享库</h1><p>配置好共享库后就可以在pipeline中调用其中提供的方法了，新建一个pipeline库，脚本如下：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @Library(&#x27;pipelinelibs@1.0&#x27;) _  // SVN库 </span></span><br><span class="line"><span class="meta">@Library</span>(<span class="string">&#x27;pipelinelibs2@main&#x27;</span>) _  <span class="comment">// Github库 </span></span><br><span class="line"><span class="keyword">import</span> com.hiyongz.MyLib</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> mylib = <span class="keyword">new</span> MyLib();</span><br><span class="line"></span><br><span class="line">println mylib.getTime();</span><br><span class="line">println mylib.getJenkinsHome();</span><br><span class="line">log.info <span class="string">&quot;中文&quot;</span></span><br></pre></td></tr></table></figure>
+<p>上述脚本中的下划线 <code>_</code>可以省略，如果 <code>@Libray</code> 后面紧接的一行不是 <code>import</code> 语句，就需要这个下划线。</p>
+<p>构建日志如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Pipeline] Start of Pipeline</span><br><span class="line">[Pipeline] <span class="built_in">echo</span></span><br><span class="line">2022-02-12 20:30:23</span><br><span class="line">[Pipeline] <span class="built_in">echo</span></span><br><span class="line">/var/jenkins_home</span><br><span class="line">[Pipeline] <span class="built_in">echo</span> (hide)</span><br><span class="line">INFO: 中文</span><br></pre></td></tr></table></figure>
+<p>参考文档：</p>
+<ol>
+<li><p><a href="https://www.jenkins.io/doc/book/pipeline/shared-libraries/">https://www.jenkins.io/doc/book/pipeline/shared-libraries/</a> </p>
+</li>
+<li><p><a href="https://www.jenkins.io/zh/doc/book/pipeline/shared-libraries/">https://www.jenkins.io/zh/doc/book/pipeline/shared-libraries/</a></p>
+</li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>疾如风，徐如林，侵略如火，不动如山，难知如阴，动如雷霆。——《孙子兵法》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>Pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>持续集成：Jenkins邮件通知配置方法介绍</title>
     <url>/posts/continuous-integration-for-jenkins-email-ext/</url>
     <content><![CDATA[<p>Jenkins的邮件提醒功能主要通过<a href="https://plugins.jenkins.io/email-ext/">Email Extension</a>插件来实现，它是对<a href="https://plugins.jenkins.io/mailer">Mailer Plugin</a>的扩展，我在<a href="https://blog.csdn.net/u010698107/article/details/113823608">持续集成平台Jenkins配置方法介绍</a>中简要介绍了Jenkins的邮件配置方法，本文介绍jenkins邮件的更多玩法。</p>

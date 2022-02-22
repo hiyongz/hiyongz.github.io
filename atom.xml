@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2022-02-20T12:36:52.241Z</updated>
+  <updated>2022-02-22T12:34:54.763Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>持续集成：Jenkins Pipeline共享库定义和使用</title>
+    <link href="https://hiyongz.github.io/posts/continuous-integration-jenkins-for-pipeline-shared-libraries/"/>
+    <id>https://hiyongz.github.io/posts/continuous-integration-jenkins-for-pipeline-shared-libraries/</id>
+    <published>2022-02-22T12:16:00.000Z</published>
+    <updated>2022-02-22T12:34:54.763Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通常情况下多个流水线项目需要使用相同的功能，流水线支持创建 “共享库” ，把这些公共的方法类定义在一个仓库中，使多个pipeline项目可以共享这些库，这有助于减少代码冗余。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+    
+      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
+    
+      <category term="Pipeline" scheme="https://hiyongz.github.io/tags/Pipeline/"/>
+    
+  </entry>
+  
+  <entry>
     <title>持续集成：Jenkins邮件通知配置方法介绍</title>
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-email-ext/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-email-ext/</id>
     <published>2022-02-15T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.241Z</updated>
+    <updated>2022-02-22T12:34:54.743Z</updated>
     
     <summary type="html">
     
@@ -46,7 +71,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-getting-function-attribution/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-getting-function-attribution/</id>
     <published>2022-02-09T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.353Z</updated>
+    <updated>2022-02-22T12:34:54.843Z</updated>
     
     <summary type="html">
     
@@ -69,7 +94,7 @@
     <link href="https://hiyongz.github.io/posts/container-docker-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/container-docker-architecture-introduction/</id>
     <published>2022-01-30T12:16:00.000Z</published>
-    <updated>2022-02-20T12:36:52.225Z</updated>
+    <updated>2022-02-22T12:34:54.727Z</updated>
     
     <summary type="html">
     
@@ -96,7 +121,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/</id>
     <published>2022-01-18T12:16:00.000Z</published>
-    <updated>2022-02-20T12:36:52.265Z</updated>
+    <updated>2022-02-22T12:34:54.763Z</updated>
     
     <summary type="html">
     
@@ -121,7 +146,7 @@
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-pybot-options/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-pybot-options/</id>
     <published>2022-01-11T12:30:36.000Z</published>
-    <updated>2022-02-20T12:36:52.405Z</updated>
+    <updated>2022-02-22T12:34:54.887Z</updated>
     
     <summary type="html">
     
@@ -146,7 +171,7 @@
     <link href="https://hiyongz.github.io/posts/software-testing-for-auto-test-architecture/"/>
     <id>https://hiyongz.github.io/posts/software-testing-for-auto-test-architecture/</id>
     <published>2022-01-04T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.373Z</updated>
+    <updated>2022-02-22T12:34:54.855Z</updated>
     
     <summary type="html">
     
@@ -167,7 +192,7 @@
     <link href="https://hiyongz.github.io/posts/my-2021-annual-summary/"/>
     <id>https://hiyongz.github.io/posts/my-2021-annual-summary/</id>
     <published>2021-12-31T21:26:00.000Z</published>
-    <updated>2022-02-20T12:36:52.309Z</updated>
+    <updated>2022-02-22T12:34:54.803Z</updated>
     
     <summary type="html">
     
@@ -188,7 +213,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/</id>
     <published>2021-12-28T12:16:00.000Z</published>
-    <updated>2022-02-20T12:36:52.273Z</updated>
+    <updated>2022-02-22T12:34:54.771Z</updated>
     
     <summary type="html">
     
@@ -215,7 +240,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-ocr-with-tesseract/</id>
     <published>2021-12-21T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.353Z</updated>
+    <updated>2022-02-22T12:34:54.843Z</updated>
     
     <summary type="html">
     
@@ -240,7 +265,7 @@
     <link href="https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/"/>
     <id>https://hiyongz.github.io/posts/test-framework-for-robotframework-skills/</id>
     <published>2021-12-09T12:30:36.000Z</published>
-    <updated>2022-02-20T12:36:52.405Z</updated>
+    <updated>2022-02-22T12:34:54.887Z</updated>
     
     <summary type="html">
     
@@ -263,7 +288,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-context-manager/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-context-manager/</id>
     <published>2021-12-07T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.353Z</updated>
+    <updated>2022-02-22T12:34:54.843Z</updated>
     
     <summary type="html">
     
@@ -286,7 +311,7 @@
     <link href="https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/"/>
     <id>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</id>
     <published>2021-12-02T20:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.305Z</updated>
+    <updated>2022-02-22T12:34:54.795Z</updated>
     
     <summary type="html">
     
@@ -309,7 +334,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-javascript-expression/</id>
     <published>2021-12-02T09:30:36.000Z</published>
-    <updated>2022-02-20T12:36:52.417Z</updated>
+    <updated>2022-02-22T12:34:54.895Z</updated>
     
     <summary type="html">
     
@@ -332,7 +357,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-file-and-direction-handling/</id>
     <published>2021-11-30T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.353Z</updated>
+    <updated>2022-02-22T12:34:54.843Z</updated>
     
     <summary type="html">
     
@@ -355,7 +380,7 @@
     <link href="https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/"/>
     <id>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</id>
     <published>2021-11-25T12:12:00.000Z</published>
-    <updated>2022-02-20T12:36:52.413Z</updated>
+    <updated>2022-02-22T12:34:54.895Z</updated>
     
     <summary type="html">
     
@@ -384,7 +409,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-dialogs-page-and-popup/</id>
     <published>2021-11-23T09:30:36.000Z</published>
-    <updated>2022-02-20T12:36:52.417Z</updated>
+    <updated>2022-02-22T12:34:54.895Z</updated>
     
     <summary type="html">
     
@@ -407,7 +432,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</id>
     <published>2021-11-22T18:26:00.000Z</published>
-    <updated>2022-02-20T12:36:52.361Z</updated>
+    <updated>2022-02-22T12:34:54.847Z</updated>
     
     <summary type="html">
     
@@ -428,7 +453,7 @@
     <link href="https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/"/>
     <id>https://hiyongz.github.io/posts/reading-notes-for-feynman-technique/</id>
     <published>2021-11-21T08:26:00.000Z</published>
-    <updated>2022-02-20T12:36:52.361Z</updated>
+    <updated>2022-02-22T12:34:54.847Z</updated>
     
     <summary type="html">
     
@@ -449,7 +474,7 @@
     <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/"/>
     <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-webelement-operate/</id>
     <published>2021-11-18T09:30:36.000Z</published>
-    <updated>2022-02-20T12:36:52.421Z</updated>
+    <updated>2022-02-22T12:34:54.899Z</updated>
     
     <summary type="html">
     
@@ -466,29 +491,6 @@
       <category term="playwright" scheme="https://hiyongz.github.io/tags/playwright/"/>
     
       <category term="元素操作" scheme="https://hiyongz.github.io/tags/%E5%85%83%E7%B4%A0%E6%93%8D%E4%BD%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Web自动化测试之playwright：设置浏览器语言</title>
-    <link href="https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/"/>
-    <id>https://hiyongz.github.io/posts/web-testing-with-playwright-for-browser-language/</id>
-    <published>2021-11-16T19:30:36.000Z</published>
-    <updated>2022-02-20T12:36:52.417Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;playwright支持基于Chromium内核的Google Chrome 和 Microsoft Edge浏览器, WebKit内核的Apple Safari 和 Mozilla Firefox浏览器，可以对浏览器的语言进行设置，可用来测试产品的语言自适应功能。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="Web自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/Web%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-    
-      <category term="playwright" scheme="https://hiyongz.github.io/tags/playwright/"/>
     
   </entry>
   
