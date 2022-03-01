@@ -31,6 +31,255 @@
 ]]></content>
   </entry>
   <entry>
+    <title>持续集成：Jenkins Pipeline语法介绍</title>
+    <url>/posts/continuous-integration-for-jenkins-pipeline/</url>
+    <content><![CDATA[<p>Pipeline在Unix/Linux系统中经常用到，Pipeline将一个命令/程序/进程的输出发送到另一个命令/程序/进程，以进行进一步处理。比如：<code>cat test.txt | grep test1</code>。Jenkins 中的Pipeline借用了Unix/Linux中的 Pipeline思路，实现像流水线一样来调度Jenkins任务，通过Jenkinsfile来描述整个持续集成流程。</p>
+<a id="more"></a>
+<h1 id="一个简单的-Pipeline项目"><a href="#一个简单的-Pipeline项目" class="headerlink" title="一个简单的 Pipeline项目"></a>一个简单的 Pipeline项目</h1><p>先来看看如何在Jenkins上创建一个简单的Pipeline。</p>
+<h2 id="新建pipeline任务"><a href="#新建pipeline任务" class="headerlink" title="新建pipeline任务"></a>新建pipeline任务</h2><p>新建一个pipeline任务<br><img src="jenkins-pipeline-build.png" width="80%" height="80%" /></p>
+<p>可以设置构建触发方式。</p>
+<p>接下来开始编写Pipeline脚本，可选择Pipline script或者Pipline script from SCM。</p>
+<ul>
+<li>Pipline script模式是将脚本写在下面的输入框中</li>
+<li>Pipline script from SCM是将Pipeline script放到Git或者SVN上，执行的时候从上面拉下来执行。</li>
+</ul>
+<h2 id="Pipeline-Script"><a href="#Pipeline-Script" class="headerlink" title="Pipeline Script"></a>Pipeline Script</h2><p>选择 Pipeline Script，编写如下代码:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#39;begin&#39;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &#39;Hello pipeline&#39;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    post &#123;</span><br><span class="line">        always &#123;</span><br><span class="line">            echo &#39;say goodbay&#39;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>stages：添加执行步骤</li>
+<li>post：任务执行完成后执行的操作</li>
+</ul>
+<p><img src="jenkins-pipeline-script.png" width="80%" height="80%" /></p>
+<h2 id="Pipeline-Script-from-SCM"><a href="#Pipeline-Script-from-SCM" class="headerlink" title="Pipeline Script from SCM"></a>Pipeline Script from SCM</h2><p>Pipeline Script除了写在jenkins界面以外，也可以放入git源码库进行管理</p>
+<p>在 Jenkins Pipeline任务中选择 Pipeline script from SCM<br><img src="jenkins-pipeline-scm.png" width="80%" height="80%" /></p>
+<p>添加git源码地址，在 Script Path中填写需要运行的Jenkinsfile文件所在的地址<br><img src="jenkins-pipeline-scm2.png" width="80%" height="80%" /></p>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><p>创建完成后保存，点击Build Now，我们可以看到不同构建阶段进度<br><img src="jenkins-pipeline-build-now.png" width="80%" height="80%" /></p>
+<p>构建日志：<br><img src="jenkins-pipeline-console.png" width="80%" height="80%" /></p>
+<h1 id="Jenkinsfile语法"><a href="#Jenkinsfile语法" class="headerlink" title="Jenkinsfile语法"></a>Jenkinsfile语法</h1><p>Jenkinsfile支持两种语法形式:</p>
+<ul>
+<li>Scripted pipeline - 脚本式流水线语法，基于 <a href="http://groovy-lang.org/syntax.html">Groovy</a>语言构建的通用 DSL（Domain-specific language，领域特定语言）</li>
+<li>Declarative pipeline - 声明式流水线语法，在v2.5之后引入，支持结构化方式，提供了更丰富的语法特性。</li>
+</ul>
+<blockquote>
+<p>DSL是专注于某个应用领域的计算机语言。和Python、Java等这种通用语言（General-purpose Language, GPL）不同的是，DSL是一种为了特定领域而设计的开发语言，比如Web 应用使用的HTML、可扩展标记语言XML、SQL语言等。</p>
+</blockquote>
+<p>通常情况下，流水线中声明式和脚本式语法结合使用。</p>
+<h2 id="Declarative-pipeline"><a href="#Declarative-pipeline" class="headerlink" title="Declarative pipeline"></a>Declarative pipeline</h2><p>声明式流水线语法必须包含在一个 pipeline块内: </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pipeline &#123; </span><br><span class="line">	&#x2F;* Declarative Pipeline *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>pipeline块中主要由<a href="https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-sections">Sections</a>, <a href="https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-directives">Directives</a>, <a href="https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-steps">Steps</a>, 或者赋值语句组成。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;begin&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Hello pipeline&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    post &#123;</span><br><span class="line">        always &#123;</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&#x27;say goodbay&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Sections"><a href="#Sections" class="headerlink" title="Sections"></a>Sections</h3><p>Sections包括agent、stages、steps和post。</p>
+<h4 id="agent"><a href="#agent" class="headerlink" title="agent"></a>agent</h4><p>agent定义 pipeline执行节点，必须在<code>pipeline</code> 块的顶层定义。</p>
+<p>主要参数：</p>
+<ul>
+<li><code>any</code>：可以在任意可用的 agent上执行pipeline</li>
+<li><code>none</code>：pipeline将不分配全局agent，每个 stage分配自己的agent</li>
+<li><code>label</code>：指定运行节点agent的 Label</li>
+<li><code>node</code>：自定义运行节点配置,<ul>
+<li>指定 label</li>
+<li>指定 customWorkspace</li>
+</ul>
+</li>
+<li><code>docker</code>：使用给定的容器执行流水线。</li>
+<li><code>dockerfile</code>：使用源码库中包含的Dockerfile构建的容器来执行Pipeline。</li>
+<li><code>kubernetes</code>：在kubernetes集群执行Pipeline</li>
+</ul>
+<p>上述参数也可以用于stage中。</p>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        node &#123;</span><br><span class="line">            label <span class="string">&quot;myslave&quot;</span></span><br><span class="line">            customWorkspace <span class="string">&quot;myWorkspace&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="stages"><a href="#stages" class="headerlink" title="stages"></a>stages</h4><p>包含一个或多个 stage, Pipeline的大部分工作在此执行。stages也是必须指定的指令，没有参数。此外，每个 pipeline块中必须只有一个 stages。</p>
+<p>stage也必须指定，需要定义stage的名字：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;init&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="steps"><a href="#steps" class="headerlink" title="steps"></a>steps</h4><p>steps位于stage块中，也是必须设置的指令，无参数。</p>
+<p>steps块中可以包含script块，可用于存放<a href="https://www.jenkins.io/doc/book/pipeline/syntax/#scripted-pipeline">Scripted Pipeline</a> 脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Example&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line"></span><br><span class="line">                script &#123;</span><br><span class="line">                    def browsers = [<span class="string">&#x27;chrome&#x27;</span>, <span class="string">&#x27;firefox&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> (int i = 0; i &lt; browsers.size(); ++i) &#123;</span><br><span class="line">                        <span class="built_in">echo</span> <span class="string">&quot;Testing the <span class="variable">$&#123;browsers[i]&#125;</span> browser&quot;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="post"><a href="#post" class="headerlink" title="post"></a>post</h4><p>post是在Pipeline或者 stage执行结束后的操作，不是必须出现的指令，可设置以下触发条件：</p>
+<ul>
+<li><code>always</code>：无论 Pipeline或者stage运行完成的状态如何都会运行</li>
+<li><code>changed</code>：只有当前 Pipeline或者stage运行的状态与先前运行状态不同时才能运行</li>
+<li><code>fixed</code>：只有当前一次构建失败或者不稳定，而当前 Pipeline或者stage运行成功时运行</li>
+<li><code>regression</code>：前一次运行成功，而当前Pipeline或者stage运行状态为failure, unstable 或者 aborted时运行</li>
+<li><code>aborted</code>：只有当前 Pipeline或者stage处于“aborted”状态时才能运行。通常是手动终止。</li>
+<li><code>failure</code>：当前 Pipeline或者stage处于“failed”状态时才运行</li>
+<li><code>success</code>：当前 Pipeline或者stage具有“success”状态时才运行</li>
+<li><code>unstable</code>：当前 Pipeline或者stage具有“unstable”状态才运行</li>
+<li><code>unsuccessful</code>：当前 Pipeline或者stage不是“success”状态时运行</li>
+<li><code>cleanup</code>：不管Pipeline或stage的状态如何，在每一个post条件被执行之后运行。</li>
+</ul>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;init&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    post &#123;</span><br><span class="line">        success &#123;</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&#x27;success!&#x27;</span></span><br><span class="line">            sleep 2        </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        always &#123;</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&#x27;goodbye&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Directives"><a href="#Directives" class="headerlink" title="Directives"></a>Directives</h3><p>Declarative pipeline也包含了各种指令，比如environment，options，parameters，triggers等，指令不是必须出现的指令。</p>
+<h4 id="environment"><a href="#environment" class="headerlink" title="environment"></a>environment</h4><p>定义 Pipeline或stage运行时的环境变量，位于pipeline块顶部的 <code>environment</code> 定义的环境变量适用于流水线中的所有步骤，<code>stage</code> 中定义的 <code>environment</code> 只能应用于 <code>stage</code> 中的步骤。<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    environment &#123; </span><br><span class="line">        CC = <span class="string">&#x27;clang&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Example&#x27;</span>) &#123;</span><br><span class="line">            environment &#123; </span><br><span class="line">                hlw = <span class="string">&#x27;hello world&#x27;</span>    </span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> hlw</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="options"><a href="#options" class="headerlink" title="options"></a>options</h4><p>options指令允许在Pipeline内部定义 pipeline专有属性。</p>
+<p>pipeline可用选项：</p>
+<ul>
+<li><code>buildDiscarder</code>：保持构建的最大个数，超过最大构建数后会丢弃以前的构建。</li>
+<li><code>checkoutToSubdirectory</code>：在工作区的子目录中执行自动源代码控制checkout 。</li>
+<li><code>disableConcurrentBuilds</code>：禁止并行执行 pipeline任务，可用于防止同时访问共享资源。</li>
+<li><code>disableResume</code>：如果控制器重启，不允许管道恢复。</li>
+<li><code>newContainerPerStage</code>：与docker或dockerfile顶级代理一起使用。指定后，每个阶段将运行在同一节点上的新容器实例中，而不是所有阶段都运行在同一个容器实例中。</li>
+<li><code>overrideIndexTriggers</code>：允许重写分支索引触发器的默认处理方法。如果分支索引触发器在多分支或组织标签处被禁用，<code>options &#123; overrideIndexTriggers(true) &#125;</code>将仅为该job启用。否则，<code>options &#123; overrideIndexTriggers(false) &#125;</code>将只禁用该job的分支索引触发器。</li>
+<li><code>preserveStashes</code>：保留已完成构建的stashes ，以便在stage 重启时使用。例如: <code>options &#123;preserveStashes()&#125;</code>用于保存最近完成构建的stashes ，或者<code>options &#123;preserveStashes(buildCount: 5)&#125;</code>用于保存最近完成构建的五个堆栈。</li>
+<li><code>quietPeriod</code>：为Pipeline设置静默期(以秒为单位)，覆盖全局默认值。例如: <code>options &#123;quietPeriod(30)&#125;</code></li>
+<li><code>skipDefaultCheckout</code>：在agent指令中，默认情况下跳过从源代码Checkout代码。例如: <code>options &#123;skipDefaultCheckout()&#125;</code></li>
+<li><code>skipStagesAfterUnstable</code>：一旦构建状态变为 “Unstable“ 状态，就跳过stages。例如: <code>options &#123;skipstagesafterstable ()&#125;</code></li>
+<li><code>retry</code>：失败后，重试整个 Pipeline的次数例如: <code>options &#123; retry(3) &#125;</code></li>
+<li><code>timeout</code>：为Pipeline的运行设置一个超时时间，在此之后，Jenkins就中止Pipeline。例如: <code>options &#123;timeout(time: 1, unit: &#39;HOURS&#39;)&#125;</code> </li>
+<li><code>timestamps</code>：在所有由Pipeline运行生成的控制台输出前加上间。例如: <code>options &#123;timestamp ()&#125;</code></li>
+<li><code>parallelsAlwaysFailFast</code>：将流水线中所有后续并行阶段的failfast设置为true，用于并行执行stage中。例如: <code>options &#123;parallelsAlwaysFailFast()&#125;</code></li>
+</ul>
+<p>stage的options指令类似于Pipeline的options指令。然而，stage选项只能包含<code>retry</code>, <code>timeout</code>, 或 <code>timestamps</code> 的步骤，或者与stage相关的声明性选项，比如<code>skipDefaultCheckout</code>。</p>
+<p>在stage中，在进入agent或检查任何 when条件之前调用options指令中的步骤。</p>
+<p>stage 可用选项：</p>
+<ul>
+<li><code>skipDefaultCheckout</code></li>
+<li><code>timeout</code>：为当前stage的运行设置一个超时时间</li>
+<li><code>retry</code></li>
+<li><code>timestamps</code></li>
+</ul>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">    	timeout (time: 1, unit: <span class="string">&#x27;HOURS&#x27;</span>)</span><br><span class="line">    	buildDiscarder(logRotator(numToKeepStr: <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    	retry(5)</span><br><span class="line">	&#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;init&#x27;</span>) &#123;</span><br><span class="line">            options &#123;</span><br><span class="line">                timeout(time: 30, unit: <span class="string">&#x27;SECONDS&#x27;</span>) </span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="parameters"><a href="#parameters" class="headerlink" title="parameters"></a>parameters</h4><p><code>parameters</code> 指令定义 pipeline的专有参数列表，支持参数类型: </p>
+<ul>
+<li><code>string</code>：字符串类型</li>
+<li><code>text</code>：文本, 可包括多行</li>
+<li><code>booleanParam</code>：布尔参数</li>
+<li><code>choice</code>：choice 参数</li>
+<li><code>password</code>：密码参数</li>
+</ul>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    parameters &#123;</span><br><span class="line">        string(name: <span class="string">&#x27;DEPLOY_ENV&#x27;</span>, defaultValue: <span class="string">&#x27;staging&#x27;</span>, description: <span class="string">&#x27;&#x27;</span>) </span><br><span class="line">        text(name: <span class="string">&#x27;DEPLOY_TEXT&#x27;</span>, defaultValue: <span class="string">&#x27;One\nTwo\nThree\n&#x27;</span>, description: <span class="string">&#x27;&#x27;</span>) </span><br><span class="line">        booleanParam(name: <span class="string">&#x27;DEBUG_BUILD&#x27;</span>, defaultValue: <span class="literal">true</span>, description: <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        choice(name: <span class="string">&#x27;CHOICES&#x27;</span>, choices: [<span class="string">&#x27;one&#x27;</span>, <span class="string">&#x27;two&#x27;</span>, <span class="string">&#x27;three&#x27;</span>], description: <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        password(name: <span class="string">&#x27;PASSWORD&#x27;</span>, defaultValue: <span class="string">&#x27;SECRET&#x27;</span>, description: <span class="string">&#x27;A secret password&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Example&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;params.DEPLOY_ENV&#125;</span>&quot;</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;params.PASSWORD&#125;</span>&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="triggers"><a href="#triggers" class="headerlink" title="triggers"></a>triggers</h4><p><code>triggers</code> 指令定义了 Pipeline自动化触发的方式，主要包括3种触发器：</p>
+<ul>
+<li><code>cron</code>：接受一个cron样式的字符串来定义 Pipeline触发的间隔周期，例如: <code>triggers &#123; cron(&#39;H */4 * * 1-5&#39;) &#125;</code></li>
+<li><code>pollSCM</code>：接受一个cron样式的字符串来定义 Jenkins检查SCM源码更新的常规间隔；如果存在新的更改，Pipeline将被重新触发。例如: <code>triggers &#123; pollSCM(&#39;H */4 * * 1-5&#39;) &#125;</code></li>
+<li><code>upstream</code>：接受以逗号分隔的job字符串和阈值。当字符串中的任何作业以最小阈值完成时，将重新触发Pipeline。例如: <code>triggers &#123; upstream(upstreamProjects: &#39;job1,job2&#39;, threshold: hudson.model.Result.SUCCESS) &#125;</code></li>
+</ul>
+<p>更多cron表达式语法介绍可参考 <a href="https://blog.csdn.net/u010698107/article/details/121593309">Linux cron定时介绍</a>。</p>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    triggers &#123;</span><br><span class="line">        cron(<span class="string">&#x27;H */4 * * 1-5&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;init&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="stage"><a href="#stage" class="headerlink" title="stage"></a>stage</h4><p>前面介绍过，stage指令位于stages块中，也是必须设置的指令，应至少包含一个。</p>
+<h4 id="tools"><a href="#tools" class="headerlink" title="tools"></a>tools</h4><p>定义自动安装和<code>PATH</code>上的工具。如果没有指定agent，则忽略此参数。</p>
+<p>支持如下工具：</p>
+<ul>
+<li>maven</li>
+<li>jdk</li>
+<li>gradle</li>
+</ul>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    tools &#123;</span><br><span class="line">        maven <span class="string">&#x27;apache-maven-3.0.1&#x27;</span> </span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Example&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&#x27;mvn --version&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中工具名 <code>apache-maven-3.0.1</code> 必须在jenkins中预先配置：Manage Jenkins -&gt; Global Tool Configuration 。</p>
+<h4 id="input"><a href="#input" class="headerlink" title="input"></a>input</h4><p><code>stage</code> 的 <code>input</code> 指令允许使用 <a href="https://jenkins.io/doc/pipeline/steps/pipeline-input-step/#input-wait-for-interactive-input"><code>input</code> step</a>提示输入。 在应用了此 <code>options</code> 后，进入 <code>stage</code> 的 <code>agent</code> 或评估 <code>when</code> 条件前， <code>stage</code> 将暂停。 如果 <code>input</code> 被同意, <code>stage</code> 将会继续。</p>
+<p>可配置选项如下：</p>
+<ul>
+<li><code>message</code>：必须指定，是呈现给用户的信息。</li>
+<li><code>id</code>：可选标识符， 默认为 <code>stage</code> 名称。</li>
+<li><code>ok</code>： “ok”按钮的可选文本。</li>
+<li><code>submitter</code>：以逗号分隔的用户列表或允许提交 <code>input</code> 的外部组名。默认允许任何用户。</li>
+<li><code>submitterParameter</code>：环境变量的可选名称。如果存在，用 <code>submitter</code> 名称设置。</li>
+<li><code>parameters</code>：提示提交者提供的一个可选的参数列表。 和前面介绍的<code>parameters</code> 指令定义方法一样。</li>
+</ul>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Example&#x27;</span>) &#123;</span><br><span class="line">            input &#123;</span><br><span class="line">                message <span class="string">&quot;Should we continue?&quot;</span></span><br><span class="line">                ok <span class="string">&quot;Yes, we should.&quot;</span></span><br><span class="line">                submitter <span class="string">&quot;alice,bob&quot;</span></span><br><span class="line">                parameters &#123;</span><br><span class="line">                    string(name: <span class="string">&#x27;PERSON&#x27;</span>, defaultValue: <span class="string">&#x27;Mr Jenkins&#x27;</span>, description: <span class="string">&#x27;Who should I say hello to?&#x27;</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;Hello, <span class="variable">$&#123;PERSON&#125;</span>, nice to meet you.&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="when"><a href="#when" class="headerlink" title="when"></a>when</h4><p><code>when</code> 指令位于stage指令中，允许流水线根据给定的条件决定是否应该执行阶段，必须包含至少一个条件。</p>
+<p>支持以下嵌套条件：</p>
+<ul>
+<li><p>branch：当正在构建的分支与分支模式匹配时执行这个阶段, 例如: <code>when &#123; branch &#39;master&#39; &#125;</code>。注意，只适用于多分支流水线。</p>
+</li>
+<li><p><code>buildingTag</code>：当构建正在构建标记时执行该阶段。例如: <code>when &#123;buildingTag()&#125;</code></p>
+</li>
+<li><p>environment：当指定的环境变量是给定的值时，执行这个步骤, 例如: <code>when &#123; environment name: &#39;DEPLOY_TO&#39;, value: &#39;production&#39; &#125;</code></p>
+</li>
+<li><p><code>changelog</code>：如果构建的SCM变更日志包含一个给定的正则表达式模式，则执行该阶段，例如: <code>when &#123; changelog &#39;.*^\\[DEPENDENCY\\] .+$&#39; &#125;</code></p>
+</li>
+<li><p><code>changeset</code>：如果构建的SCM变更集包含一个或多个匹配给定模式的文件，则执行该阶段。例如: <code>when &#123; changeset &quot;**/*.js&quot; &#125;</code></p>
+</li>
+<li><p><code>changeRequest</code>：如果当前构建是为了一个“change request”(比如GitHub的Pull request, GitLab上的Merge request, Gerrit中的change等)时执行这个阶段。如果没有传递参数，stage在每次变更请求上运行，例如: <code>when &#123; changeRequest() &#125;</code></p>
+</li>
+<li><p><code>environment</code>：当指定的环境变量设置为给定的值时执行，例如: <code>when &#123; environment name: &#39;DEPLOY_TO&#39;, value: &#39;production&#39; &#125;</code></p>
+</li>
+<li><p><code>equals</code>：当期望值与实际值相等时执行，例如: <code>when &#123; equals expected: 2, actual: currentBuild.number &#125;</code></p>
+</li>
+<li><p><code>expression</code>：当指定的Groovy表达式为true时执行, 例如: <code>when &#123; expression &#123; return params.DEBUG_BUILD &#125; &#125;</code>。注意，当表达式返回字符串时，它们必须转换为布尔值，或者返回null来计算为false。简单地返回“0”或“false”仍然会被计算为“true”。</p>
+</li>
+<li><p><code>tag</code>：如果<code>TAG_NAME</code>变量与给定的模式匹配则执行该阶段。例如: <code>when &#123; tag &quot;release-*&quot; &#125;</code>。如果提供了一个空模式，那么如果存在TAG_NAME变量，则该阶段将执行(与 <code>buildingTag()</code> 相同)。</p>
+</li>
+<li><p><code>not</code>：当嵌套条件是 <code>false</code> 时执行这个阶段，它必须包含一个条件，例如: <code>when &#123; not &#123; branch &#39;master&#39; &#125; &#125;</code></p>
+</li>
+<li><p><code>allOf</code>：当所有的嵌套条件都为 <code>true</code> 时执行，必须包含至少一个条件，例如: <code>when &#123; allOf &#123; branch &#39;master&#39;; environment name: &#39;DEPLOY_TO&#39;, value: &#39;production&#39; &#125; &#125;</code></p>
+</li>
+<li><p><code>anyOf</code>：当至少有一个嵌套条件为 <code>true</code> 时执行，必须包含至少一个条件，例如: <code>when &#123; anyOf &#123; branch &#39;master&#39;; branch &#39;staging&#39; &#125; &#125;</code></p>
+</li>
+<li><p><code>triggeredBy</code>：当当前构建被给定的参数触发时执行。例如: </p>
+<ul>
+<li><code>when &#123; triggeredBy &#39;SCMTrigger&#39; &#125;</code></li>
+<li><code>when &#123; triggeredBy &#39;TimerTrigger&#39; &#125;</code></li>
+<li><code>when &#123; triggeredBy &#39;BuildUpstreamCause&#39; &#125;</code></li>
+<li><code>when &#123; triggeredBy cause: &quot;UserIdCause&quot;, detail: &quot;vlinde&quot; &#125;</code></li>
+</ul>
+</li>
+</ul>
+<p>在进入 <code>stage</code> 的 <code>agent</code> 前评估 <code>when</code></p>
+<ul>
+<li>默认情况下，如果定义了该<code>stage</code> 的 <code>agent</code> ，则<code>stage</code>的 <code>when</code> 条件将在进入该<code>stage</code>的<code>agent</code>之后计算。但是，这可以通过在 <code>when</code> 块中指定 <code>beforeAgent</code> 选项来更改。如果 <code>beforeAgent</code> 设置为 <code>true</code> ，则首先计算 <code>when</code> 条件，只有当条件计算为 <code>true</code> 时才进入 <code>agent</code>。</li>
+</ul>
+<p>在 <code>input</code> 指令之前评估 <code>when</code></p>
+<ul>
+<li>默认情况下，如果定义了 <code>stage</code> 的 <code>when</code> 条件，则不会在 <code>input</code> 之前求值。但是，这可以通过在 <code>when</code> 块中指定 <code>beforeInput</code> 选项来更改。如果 <code>beforeInput</code> 设置为 <code>true</code> , <code>when</code> 条件将首先计算，只有当条件计算为true时才会进入<code>input</code>。</li>
+<li><code>beforeInput true</code>优先级高于<code>beforeAgent true</code>。</li>
+</ul>
+<p>在 <code>options</code> 指令之前评估 <code>when</code></p>
+<ul>
+<li>默认情况下，如果<code>stage</code>定义了任何 <code>options</code> ，<code>stage</code> 的 <code>when</code> 条件将在进入该<code>stage</code>的<code>options</code>之后计算。但是，这可以通过在 <code>when</code> 块中指定 <code>beforeOptions</code> 选项来更改。如果 <code>beforeOptions</code> 设置为true，则首先计算 <code>when</code> 条件，只有当条件计算为 <code>true</code> 时才会进入 <code>options</code>。</li>
+<li><code>beforeOptions true</code>优先级高于<code>beforeInput true</code>和<code>beforeAgent true</code>。</li>
+</ul>
+<p>示例脚本：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Example Build&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Hello World&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        stage(<span class="string">&#x27;Deploy1&#x27;</span>) &#123;</span><br><span class="line">            when &#123;</span><br><span class="line">                branch <span class="string">&#x27;production1&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Deploying1&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        stage(<span class="string">&#x27;Deploy2&#x27;</span>) &#123;</span><br><span class="line">            when &#123;</span><br><span class="line">                allOf &#123;</span><br><span class="line">                    branch <span class="string">&#x27;production2&#x27;</span></span><br><span class="line">                    environment name: <span class="string">&#x27;DEPLOY_TO&#x27;</span>, value: <span class="string">&#x27;production2&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Deploying2&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        stage(<span class="string">&#x27;Deploy3&#x27;</span>) &#123;</span><br><span class="line">            when &#123;</span><br><span class="line">                beforeInput <span class="literal">true</span></span><br><span class="line">                branch <span class="string">&#x27;production3&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">            input &#123;</span><br><span class="line">                message <span class="string">&quot;Deploy to production3?&quot;</span></span><br><span class="line">                id <span class="string">&quot;simple-input&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;Deploying3&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="并行执行"><a href="#并行执行" class="headerlink" title="并行执行"></a>并行执行</h3><p>声明式流水线支持多阶段并行执行，<code>Parallel</code> 块中，当其中任何一个阶段失败时，可以通过添加<code>failFast true</code>来强制所有并行阶段都中止。也可以在管道定义中添加一个<code>options</code> : <code>options &#123;parallelsAlwaysFailFast() &#125;</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Non-Parallel Stage&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&#x27;This stage will be executed first.&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(<span class="string">&#x27;Parallel Stage&#x27;</span>) &#123;</span><br><span class="line">            when &#123;</span><br><span class="line">                branch <span class="string">&#x27;master&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">            failFast <span class="literal">true</span></span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(<span class="string">&#x27;Branch A&#x27;</span>) &#123;</span><br><span class="line">                    agent &#123;</span><br><span class="line">                        label <span class="string">&quot;for-branch-a&quot;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        <span class="built_in">echo</span> <span class="string">&quot;On Branch A&quot;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(<span class="string">&#x27;Branch B&#x27;</span>) &#123;</span><br><span class="line">                    agent &#123;</span><br><span class="line">                        label <span class="string">&quot;for-branch-b&quot;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        <span class="built_in">echo</span> <span class="string">&quot;On Branch B&quot;</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>声明式流水线可以将stage放入矩阵单元中，Matrix可以定义一个多维的 name-value组合矩阵，并将其并行运行。具体使用方法可以参考<a href="https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-matrix">官方文档</a>。</p>
+<h2 id="Scripted-pipeline"><a href="#Scripted-pipeline" class="headerlink" title="Scripted pipeline"></a>Scripted pipeline</h2><p>Scripted pipeline是基于groovy语法定制的一种DSL语言，它的灵活性更高，具有更好的可扩展性。</p>
+<p>使用它需要了解一定的groovy语法知识，可参考如下文档：</p>
+<ul>
+<li><a href="http://groovy-lang.org/syntax.html">http://groovy-lang.org/syntax.html</a></li>
+<li><a href="https://www.w3cschool.cn/groovy/">https://www.w3cschool.cn/groovy/</a></li>
+</ul>
+<p>请看下面的Scripted pipeline脚本，使用了if/else和try/catch/finally流程控制方法，无论构建状态是什么都发送邮件：<br><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">node(<span class="string">&#x27;win_agent&#x27;</span>) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        // 自动化测试 </span><br><span class="line">        stage(<span class="string">&#x27;Test&#x27;</span>) &#123;</span><br><span class="line">            TEST_STATU = bat (</span><br><span class="line">                script: <span class="string">&#x27;&#x27;</span><span class="string">&#x27;echo autotest&#x27;</span><span class="string">&#x27;&#x27;</span>,</span><br><span class="line">                returnStatus: <span class="literal">true</span></span><br><span class="line">            ) == 0</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;<span class="variable">$&#123;TEST_STATU&#125;</span>&quot;</span> == <span class="string">&quot;false&quot;</span>) &#123;</span><br><span class="line">                catchError(stageResult: <span class="string">&#x27;FAILURE&#x27;</span>) &#123;</span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">&quot;测试未通过&quot;</span></span><br><span class="line">                    env.LOG = <span class="string">&quot;测试未通过&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;测试通过&quot;</span></span><br><span class="line">                env.LOG = <span class="string">&quot;测试通过&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (exc) &#123;</span><br><span class="line">    	currentBuild.result = <span class="string">&#x27;FAILURE&#x27;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Something failed, I&#x27;m in the catch block.&quot;</span></span><br><span class="line">  	&#125; finally &#123;</span><br><span class="line">    	stage(<span class="string">&quot;email&quot;</span>) &#123;</span><br><span class="line">            emailext (</span><br><span class="line">                subject: <span class="string">&#x27;\&#x27;</span>构建通知:<span class="variable">$&#123;PROJECT_NAME&#125;</span> - Build <span class="comment"># $&#123;BUILD_NUMBER&#125; - $&#123;BUILD_STATUS&#125;\&#x27;&#x27;,</span></span><br><span class="line">                to: <span class="string">&quot;XXXXXXXX@163.com&quot;</span>, </span><br><span class="line">                body: <span class="string">&#x27;$&#123;FILE,path=&quot;email.html&quot;&#125;&#x27;</span>,</span><br><span class="line">                )</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="DSL方法步骤"><a href="#DSL方法步骤" class="headerlink" title="DSL方法步骤"></a>DSL方法步骤</h1><p>前面介绍Declarative pipeline和Scripted pipeline语法的实例中，使用到了一些方法步骤，比如<code>sh</code>、<code>echo</code>、<code>emailext</code>等，它们是jenkins插件提供的一些方法步骤，下面举2个例子：</p>
+<p>1、bat/sh方法：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">STATU = bat (</span><br><span class="line">                <span class="symbol">script:</span> <span class="string">&#x27;&#x27;&#x27;echo 666&#x27;&#x27;&#x27;</span>,</span><br><span class="line">                <span class="symbol">returnStatus:</span> <span class="literal">true</span></span><br><span class="line">            ) == <span class="number">0</span></span><br><span class="line">echo $&#123;STATU&#125;</span><br></pre></td></tr></table></figure>
+<p>2、catchError方法：捕获到异常后，设置当前构建或者阶段状态设置为FAILURE，并继续执行Pipeline后面的步骤:</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">stage(<span class="string">&#x27;Test&#x27;</span>) &#123;</span><br><span class="line">    STATU = bat (</span><br><span class="line">                <span class="symbol">script:</span> <span class="string">&#x27;&#x27;&#x27;echo 666&#x27;&#x27;&#x27;</span>,</span><br><span class="line">                <span class="symbol">returnStatus:</span> <span class="literal">true</span></span><br><span class="line">            ) == <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;$&#123;TEST&#125;&quot;</span> == <span class="string">&quot;false&quot;</span>) &#123;</span><br><span class="line">        catchError(<span class="attr">stageResult:</span> <span class="string">&#x27;FAILURE&#x27;</span>) &#123;</span><br><span class="line">            echo <span class="string">&quot;测试未通过&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        echo <span class="string">&quot;测试通过&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以用<code>try-catch</code>来实现。</p>
+<p>当前jenkins平台支持的更多步骤可以访问 <a href="http://&lt;host&gt;:&lt;port&gt;/pipeline-syntax/html">http://<host>:<port>/pipeline-syntax/html</a> 查看。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本文介绍了两种pipeline脚本语法，使用pipeline脚本可以使任务调度更加灵活，特别是对于比较复杂的项目。</p>
+<p>另外，这两种pipeline脚本语法通常会一起使用，为了让代码更加简洁，建议使用pipeline共享库，将groovy脚本放到共享库中，这样多个pipeline项目就可以共用这些方法，大大减少代码冗余。</p>
+<p>参考文档：</p>
+<ol>
+<li><a href="https://www.jenkins.io/zh/doc/book/pipeline/">https://www.jenkins.io/zh/doc/book/pipeline/</a></li>
+<li><a href="https://www.jenkins.io/doc/book/pipeline/syntax/">https://www.jenkins.io/doc/book/pipeline/syntax/</a></li>
+<li><a href="https://www.jenkins.io/zh/doc/book/pipeline/syntax">https://www.jenkins.io/zh/doc/book/pipeline/syntax</a></li>
+<li><a href="https://www.jenkins.io/blog/2019/12/02/matrix-building-with-scripted-pipeline/">https://www.jenkins.io/blog/2019/12/02/matrix-building-with-scripted-pipeline/</a></li>
+<li><a href="https://www.jenkins.io/blog/2016/07/01/html-publisher-plugin/#snippet-generator-to-the-rescue">https://www.jenkins.io/blog/2016/07/01/html-publisher-plugin/#snippet-generator-to-the-rescue</a></li>
+<li><a href="https://www.jenkins.io/doc/pipeline/examples/">https://www.jenkins.io/doc/pipeline/examples/</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>夫唯不争，故天下莫能与之争。——《道德经》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>测试开发</category>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>Pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>持续集成：Jenkins Pipeline共享库定义和使用</title>
     <url>/posts/continuous-integration-jenkins-for-pipeline-shared-libraries/</url>
     <content><![CDATA[<p>通常情况下多个流水线项目需要使用相同的功能，流水线支持创建 “共享库” ，把这些公共的方法类定义在一个仓库中，使多个pipeline项目可以共享这些库，这有助于减少代码冗余。</p>
