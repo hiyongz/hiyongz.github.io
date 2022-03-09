@@ -31,6 +31,167 @@
 ]]></content>
   </entry>
   <entry>
+    <title>持续集成：Jenkins API使用方法详细介绍</title>
+    <url>/posts/continuous-integration-for-jenkins-api-2/</url>
+    <content><![CDATA[<p>在<a href="https://blog.csdn.net/u010698107/article/details/115102811">持续集成：Jenkins API简单使用</a>中介绍了使用Python requests 和 jenkinsapi 库来请求Jenkins API。本文将更全面的介绍Jenkins API以及使用方法。</p>
+<a id="more"></a>
+<h1 id="Jenkins-API简介"><a href="#Jenkins-API简介" class="headerlink" title="Jenkins API简介"></a>Jenkins API简介</h1><p>我们可以使用jenkins API来获取jenkins平台相关信息、触发构建、创建/删除job等，这些API使得jenkins具备了很强的扩展性，比如集成其它平台。</p>
+<p>Jenkins API采用的是REST架构设计风格，支持以下3种方式：</p>
+<ul>
+<li>XML API：<code>.../api/xml</code></li>
+<li>JSON API：<code>.../api/json</code></li>
+<li>Python API：比如有 <a href="https://pypi.python.org/pypi/jenkinsapi">JenkinsAPI</a>, <a href="https://pypi.python.org/pypi/python-jenkins/">Python-Jenkins</a>, <a href="https://pypi.org/project/api4jenkins/">api4jenkins</a>, <a href="https://pypi.org/project/aiojenkins/">aiojenkins</a> Python库。</li>
+</ul>
+<p>Jenkins的很多页面都提供了远程访问API，你可以在当前页面URL后添加 <code>/api</code> 查看当前接口说明。</p>
+<p>除了在服务器上手动重启jenkins外，还可以通过API进行重启（POST请求）：</p>
+<ul>
+<li>重启： <code>&lt;Jenkins-Url&gt;/restart</code>，立即重启</li>
+<li>安全重启： <code>&lt;Jenkins-Url&gt;/safeRestart</code>，Jenkins会在所有正在运行的job完成后再重新启动。</li>
+</ul>
+<h1 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h1><p>以下面这个页面为例：</p>
+<p><img src="jenkins-rf-results-page.png" width="70%" height="70%" /></p>
+<p>在URL后面添加 <code>api</code> 返回如下页面：</p>
+<p><img src="jenkins-job-api.png" width="70%" height="70%" /></p>
+<h2 id="XML-API"><a href="#XML-API" class="headerlink" title="XML API"></a>XML API</h2><p>在URL后添加<code>/api/xml</code>，效果如下：</p>
+<p><img src="jenkins-rf-results-api-xml.png" width="70%" height="70%" /></p>
+<p>下面介绍过滤xml信息的方法。</p>
+<p><strong>1、使用xpath语法</strong></p>
+<p>读取测试结果：<code>.../api/xml?xpath=/*/*[4]</code> 或者 <code>/api/xml?xpath=/*/action[4]</code></p>
+<p><img src="jenkins-rf-results-api-xml-xpath1.png" width="70%" height="70%" /></p>
+<p>读取用例总数totalCount：<code>/api/xml?xpath=/*/action/totalCount</code> 或者 <code>/api/xml?xpath=//totalCount</code></p>
+<p><img src="jenkins-rf-results-api-xml-xpath2.png" width="70%" height="70%" /></p>
+<p>还有更多的xpath语法可以使用，比如：</p>
+<ul>
+<li>contains方法：<code>xpath=//urlName[contains(text(),&#39;robot&#39;)]</code></li>
+<li>后面的邻居节点following-sibling：<code>xpath=//failCount/following-sibling::*</code></li>
+</ul>
+<p>更详细的xpath语法介绍可参考 <a href="https://blog.csdn.net/u010698107/article/details/111415888">Web自动化测试：xpath &amp; CSS Selector定位</a>。</p>
+<p><strong>2、exclude语法排除节点</strong></p>
+<p>排除action节点：<code>/api/xml?exclude=/*/action</code></p>
+<p><img src="jenkins-rf-results-api-xml-exclude1.png" width="70%" height="70%" /></p>
+<p><strong>3、depth指定深度</strong></p>
+<p>指定深度为1：<code>/api/xml?depth=1</code></p>
+<p><img src="jenkins-rf-results-api-xml-depth1.png" width="70%" height="70%" /></p>
+<p><strong>4、tree参数</strong></p>
+<p>可以使用tree参数来提取以及组合指定字段：<code>/api/xml?pretty=true&amp;tree=building,displayName,id,url,previousBuild[url]</code></p>
+<p><img src="jenkins-rf-results-api-xml-tree.png" width="70%" height="70%" /></p>
+<p>如果返回多组结果，可以指定范围（索引从0开始）：</p>
+<ul>
+<li><strong>{M,N}</strong>: 从第M个元素到第N个元素</li>
+<li><strong>{M,}</strong>: 从第M个元素到最后一个元素</li>
+<li><strong>{,N}</strong>: 从第1个元素到第N个元素，等价于 <code>&#123;0,N&#125;</code></li>
+<li><strong>{N}</strong>: 第N个元素，等价于 <code>&#123;N,N+1&#125;</code></li>
+</ul>
+<p>比如下面的页面：</p>
+<p><img src="jenkins-jobs-api-xml.png" width="70%" height="70%" /></p>
+<p>获取第1个到第2个元素：<code>.../api/xml?tree=jobs[name]&#123;1,3&#125;</code></p>
+<p><img src="jenkins-jobs-api-xml-range-specifier.png" width="70%" height="70%" /></p>
+<p><strong>5、组合</strong></p>
+<p>可以使用 <code>&amp;</code> 来组合多个表达式，比如：<code>/api/xml?exclude=/*/action&amp;xpath=//fullDisplayName</code></p>
+<p><img src="jenkins-rf-results-api-xml-exclude-xpath1.png" width="70%" height="70%" /></p>
+<p><strong>6、wrapper方法整合多个结果</strong></p>
+<p>过滤后可能有多个结果，需要使用wrapper方法来组合，例如：<code>/api/xml?depth=2&amp;xpath=//fullDisplayName&amp;wrapper=jobname</code></p>
+<p><img src="jenkins-rf-results-api-xml-wrapper.png" width="70%" height="70%" /></p>
+<h2 id="JSON-API"><a href="#JSON-API" class="headerlink" title="JSON API"></a>JSON API</h2><p>JSON API返回json样式的数据，在URL后添加<code>/api/json</code>。它也支持depth参数，默认为最小深度。</p>
+<p>来看一下效果：<code>...3/api/json?pretty=true</code></p>
+<p><img src="jenkins-rf-results-api-json1.png" width="70%" height="70%" /></p>
+<p>JSON API也可以使用tree参数来过滤：<code>/api/json?pretty=true&amp;tree=building,displayName,id,url,previousBuild[url]</code></p>
+<p><img src="jenkins-rf-results-api-json-tree.png" width="70%" height="70%" /></p>
+<h2 id="请求信息"><a href="#请求信息" class="headerlink" title="请求信息"></a>请求信息</h2><p>由于jenkins API采用的是REST架构风格，所以支持REST API的请求方法，比如常用的POST、GET、DELETE等方法。</p>
+<p>获取job的构建Number的API：</p>
+<ul>
+<li>获取最近的job buildNumber： <code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/lastBuild/buildNumber</code></li>
+<li>最近完成构建job的buildNumber： <code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/lastCompletedBuild/buildNumber</code></li>
+<li>最近失败job的 buildNumber：<code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/lastFailedBuild/buildNumber</code></li>
+<li>最近稳定job的buildNumber：<code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/lastStableBuild/buildNumber</code></li>
+<li>最近成功job的buildNumber：<code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/lastSuccessfulBuild/buildNumber</code></li>
+<li>最近不成功（除成功以外的状态）job的buildNumber：<code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/lastUnsuccessfulBuild/buildNumber</code></li>
+</ul>
+<p>介绍两种方式请求api，第一种方法是curl工具，第二种是Python的requests库。</p>
+<h3 id="curl请求"><a href="#curl请求" class="headerlink" title="curl请求"></a>curl请求</h3><p>使用如下curl命令发送GET请求：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -k --silent -L --user 用户名:API Token JENKINS_URL/job/JOB_NAME</span><br></pre></td></tr></table></figure>
+<p>API Token可以在用户配置中生成。</p>
+<p>还是以下面这个页面为例：</p>
+<p><img src="jenkins-rf-results-page.png" width="70%" height="70%" /></p>
+<p><strong>1、解析xml结果</strong></p>
+<p>使用xpath过滤robot测试结果：<code>/api/xml?xpath=//action[@_class=&#39;hudson.plugins.robot.RobotBuildAction&#39;]</code></p>
+<p><img src="jenkins-rf-results-api-xml-xpath3.png" width="70%" height="70%" /></p>
+<p>shell脚本中，可以对返回的信息进行进一步处理，比如，读取totalCount：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -k --silent -L --user admin:11f8790b23a9983c0a218ba125aa855f61 http://192.168.30.8:8080/view/demo/job/RF-Pipeline-Demo/3/api/xml?xpath=//action[@_class=\<span class="string">&#x27;hudson.plugins.robot.RobotBuildAction\&#x27;</span>] | tr <span class="string">&#x27;&lt;&#x27;</span> <span class="string">&#x27;\n&#x27;</span> | egrep <span class="string">&#x27;^totalCount&gt;&#x27;</span> | sed <span class="string">&#x27;s/.*&gt;//g&#x27;</span></span><br><span class="line">4</span><br><span class="line">$ </span><br></pre></td></tr></table></figure>
+<p>读取 failCount 和 totalCount：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -k --silent -L --user admin:11f8790b23a9983c0a218ba125aa855f61 http://192.168.30.8:8080/view/demo/job/RF-Pipeline-Demo/3/api/xml?xpath=//action[@_class=\<span class="string">&#x27;hudson.plugins.robot.RobotBuildAction\&#x27;</span>] | tr <span class="string">&#x27;&lt;&#x27;</span> <span class="string">&#x27;\n&#x27;</span> | egrep <span class="string">&#x27;^totalCount&gt;|^failCount&gt;&#x27;</span> | sed <span class="string">&#x27;s/&gt;/:/g&#x27;</span>  | sed -e <span class="string">&#x27;1s/$/,/g&#x27;</span> | tr -d <span class="string">&#x27;\n&#x27;</span></span><br><span class="line">failCount:0,totalCount:4</span><br></pre></td></tr></table></figure>
+<p>在需要读取多个值的时候，可以一个一个的请求，我的习惯是只请求一次，然后进行二次处理，比如在groovy脚本中：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="comment">// curl读取测试结果</span></span><br><span class="line"><span class="keyword">def</span> WORKFLOW_XML = sh ( <span class="attr">script:</span> <span class="string">&quot;API_XML=\$(curl -k --silent -L --user admin:11f8790b23a9983c0a218ba125aa855f61 http://192.168.30.8:8080/view/demo/job/RF-Pipeline-Demo/3/api/xml?xpath=//action[@_class=\&#x27;hudson.plugins.robot.RobotBuildAction\&#x27;] | tr &#x27;&lt;&#x27; &#x27;\n&#x27; | egrep &#x27;^totalCount&gt;|^failCount&gt;&#x27; | sed &#x27;s/&gt;/:/g&#x27;  | sed -e &#x27;1s/\$/,/g&#x27; | tr -d &#x27;\n&#x27;); echo \$&#123;API_XML&#125;&quot;</span>, <span class="attr">returnStdout:</span> <span class="literal">true</span> ).trim();</span><br><span class="line"></span><br><span class="line">rf_results = WORKFLOW_XML.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (rf_results[<span class="number">0</span>]) &#123;</span><br><span class="line">    <span class="keyword">for</span> ( res <span class="keyword">in</span> rf_results ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (res.contains(<span class="string">&quot;failCount&quot;</span>)) &#123;</span><br><span class="line">            failCount = res.split(<span class="string">&quot;failCount:&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res.contains(<span class="string">&quot;totalCount&quot;</span>)) &#123;</span><br><span class="line">            totalCount = res.split(<span class="string">&quot;totalCount:&quot;</span>)[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    passCount = totalCount.toInteger() - failCount.toInteger();</span><br><span class="line">    passPercentage = passCount/totalCount.toInteger() * <span class="number">100</span>;</span><br><span class="line">    passPercentage = Math.round(passPercentage * <span class="number">100</span>) <span class="regexp">/ 100; /</span>/ 保留<span class="number">2</span>位小数</span><br><span class="line">    passRatio = passCount + <span class="string">&quot; / &quot;</span> + totalCount;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    passPercentage = <span class="string">&#x27;null&#x27;</span>; </span><br><span class="line">    passRatio = <span class="string">&#x27;null&#x27;</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2、解析json结果</strong></p>
+<p>获取json格式数据和xml类似，json数据的进一步提取可以结合jq命令来使用。这里介绍一个在groovy中处理json数据的方法。</p>
+<p>groovy脚本中可以使用readJSON 方法将json字符串反序列化为json对象，然后提取对应的值。</p>
+<p>注意：在jenkins pipeline中使用readJSON 方法需要安装插件 <a href="https://plugins.jenkins.io/pipeline-utility-steps/">Pipeline Utility Steps Plugin</a> 。</p>
+<p>代码如下：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> WORKFLOW_JSON = sh ( <span class="attr">script:</span> <span class="string">&quot;API_JSON=\$(curl -k --silent -L --user admin:11f8790b23a9983c0a218ba125aa855f61 http://192.168.30.8:8080/view/demo/job/RF-Pipeline-Demo/3/api/json); echo \$&#123;API_JSON&#125;&quot;</span>, <span class="attr">returnStdout:</span> <span class="literal">true</span> ).trim()</span><br><span class="line"><span class="keyword">def</span> jsonObj = readJSON <span class="attr">text:</span> WORKFLOW_JSON;   </span><br><span class="line"><span class="keyword">def</span> failCount = (jsonObj.actions.failCount - <span class="literal">null</span>)[<span class="number">0</span>]; <span class="comment">// 去掉list中的null</span></span><br><span class="line"><span class="keyword">def</span> totalCount = (jsonObj.actions.totalCount - <span class="literal">null</span>)[<span class="number">0</span>]; </span><br></pre></td></tr></table></figure>
+<h3 id="Python-requests"><a href="#Python-requests" class="headerlink" title="Python requests"></a>Python requests</h3><p>介绍第二种请求REST API的工具Python requests库，举几个例子：</p>
+<p>获取build number：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.30.8:8080/job/RF-Pipeline-Demo/lastBuild/buildNumber&quot;</span></span><br><span class="line">ret = requests.get(url)</span><br><span class="line">print(ret.text)</span><br></pre></td></tr></table></figure>
+<p>读取failCount：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://192.168.30.8:8080/view/demo/job/RF-Pipeline-Demo/3/api/json&quot;</span></span><br><span class="line">ret = requests.get(url)</span><br><span class="line">res = ret.json()</span><br><span class="line">print(res[<span class="string">&quot;actions&quot;</span>][<span class="number">3</span>][<span class="string">&quot;failCount&quot;</span>])</span><br><span class="line">print(json.dumps(ret.json(),indent=<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>查看当前job是否正在构建：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkBuilding</span>(<span class="params">self,jobname</span>):</span></span><br><span class="line">    <span class="comment"># 查看当前job是否正在构建</span></span><br><span class="line">    url = <span class="string">&quot;http://192.168.30.8:8080/job/&#123;jobname&#125;/api/json?tree=lastCompletedBuild[number],lastBuild[number]&quot;</span></span><br><span class="line">    res = requests.get(url)</span><br><span class="line">    res = res.json()</span><br><span class="line">    <span class="keyword">if</span> res[<span class="string">&quot;lastBuild&quot;</span>][<span class="string">&quot;number&quot;</span>] == res[<span class="string">&quot;lastCompletedBuild&quot;</span>][<span class="string">&quot;number&quot;</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">f&quot;<span class="subst">&#123;jobname&#125;</span>正在构建中...&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h1 id="触发构建"><a href="#触发构建" class="headerlink" title="触发构建"></a>触发构建</h1><p>通常使用POST请求在触发构建Job，请求地址为：<code>&lt;jenkins url&gt;/job/&lt;job name&gt;/build</code></p>
+<h2 id="无参数构建"><a href="#无参数构建" class="headerlink" title="无参数构建"></a>无参数构建</h2><p><strong>1、curl命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -k --silent -L -X POST --USER admin:11f8790b23a9983c0a218ba125aa855f61 http://192.168.30.8:8080/job/RF-Pipeline-Demo/build</span><br></pre></td></tr></table></figure>
+<p><strong>2、Python requests库</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://192.168.30.8:8080/job/RF-Pipeline-Demo/build&quot;</span></span><br><span class="line">username = <span class="string">&quot;admin&quot;</span></span><br><span class="line">api_token = <span class="string">&quot;11f8790b23a9983c0a218ba125aa855f61&quot;</span></span><br><span class="line">res = requests.post(url, auth=(username, api_token), verify=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="参数化构建"><a href="#参数化构建" class="headerlink" title="参数化构建"></a>参数化构建</h2><p>对RF-Pipeline-Demo进行参数化构建配置，添加两个字符串参数param1和param2。</p>
+<p>注意：参数化构建功能需要安装插件 <a href="https://plugins.jenkins.io/parameterized-trigger/">Parameterized Trigger</a>。</p>
+<p><strong>1、curl命令</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 字符参数</span></span><br><span class="line">$ curl -k --silent -L -X POST --data param1=1 --data param2=2 --user admin:11f8790b23a9983c0a218ba125aa855f61 http://192.168.30.8:8080/job/RF-Pipeline-Demo/buildWithParameters</span><br><span class="line">$ </span><br></pre></td></tr></table></figure>
+<p><strong>2、Python requests库</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">jenkins_params = &#123;<span class="string">&#x27;param1&#x27;</span>: <span class="string">&#x27;value11&#x27;</span>,</span><br><span class="line">                  <span class="string">&#x27;param2&#x27;</span>: <span class="string">&#x27;value22&#x27;</span>&#125;</span><br><span class="line">url = <span class="string">&quot;http://192.168.30.8:8080/job/RF-Pipeline-Demo/buildWithParameters&quot;</span></span><br><span class="line">username = <span class="string">&quot;admin&quot;</span></span><br><span class="line">api_token = <span class="string">&quot;11f8790b23a9983c0a218ba125aa855f61&quot;</span></span><br><span class="line">res = requests.post(url, auth=(username, api_token), params=jenkins_params, verify=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h1><p>删除操作使用POST请求：</p>
+<ul>
+<li>删除Job某次构建：<code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/&lt;buildNumber&gt;/doDelete</code>，</li>
+<li>删除Job：<code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/doDelete</code>，POST请求</li>
+</ul>
+<p>禁用和启用Job：</p>
+<ul>
+<li>禁用指定job： <code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/disable</code></li>
+<li>启用指定job： <code>&lt;Jenkins-Url&gt;/job/&lt;Job-Name&gt;/enable</code></li>
+</ul>
+<p>前面已经介绍了常见的Jenkins API以及使用方法，Python、Ruby和Java都对jenkins API 进行了封装，使我们使用起来更加方便。下面简单介绍Python JenkinsAPI库的使用方法。</p>
+<h1 id="Python-API"><a href="#Python-API" class="headerlink" title="Python API"></a>Python API</h1><p>可以在URL后添加 <code>/api/python</code> 获取json格式数据：<code>/api/python?pretty=true&amp;tree=building,displayName,id,url,previousBuild[url]</code></p>
+<p><img src="jenkins-rf-results-python-api.png" width="70%" height="70%" /></p>
+<p><a href="https://pypi.python.org/pypi/jenkinsapi">JenkinsAPI</a>, <a href="https://pypi.python.org/pypi/python-jenkins/">Python-Jenkins</a>, <a href="https://pypi.org/project/api4jenkins/">api4jenkins</a>, <a href="https://pypi.org/project/aiojenkins/">aiojenkins</a>等Python库封装了许多jenkins REST API，下面以JenkinsAPI库为例。</p>
+<p>直接来看代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> jenkinsapi.jenkins <span class="keyword">import</span> Jenkins</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JenkinsApiDemo</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, job_name, chose=<span class="string">&#x27;jenkins&#x27;</span></span>):</span></span><br><span class="line">        self.jenkins_host = <span class="string">&#x27;192.168.30.8&#x27;</span></span><br><span class="line">        self.jenkins_port = <span class="string">&#x27;8080&#x27;</span></span><br><span class="line">        self.username = <span class="string">&#x27;admin&#x27;</span></span><br><span class="line">        self.pwd = <span class="string">&#x27;admin&#x27;</span></span><br><span class="line">        self.jenkins_url = <span class="string">f&quot;http://<span class="subst">&#123;self.jenkins_host&#125;</span>:<span class="subst">&#123;self.jenkins_port&#125;</span>&quot;</span></span><br><span class="line">        self.job_name = job_name</span><br><span class="line">        self.jenkins_server = Jenkins(self.jenkins_url, username=self.username, password=self.pwd, useCrumb=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GetJenkinsVersion</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(self.jenkins_server.version)</span><br><span class="line">        <span class="keyword">return</span> self.jenkins_server.version</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">jobBuild</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.jenkins_server.has_job(self.job_name):</span><br><span class="line">            myjob = self.jenkins_server.get_job(self.job_name)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> myjob.is_queued_or_running():</span><br><span class="line">                self.jenkins_server.build_job(self.job_name)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">disableJob</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Disable a Jenkins job&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> self.jenkins_server.has_job(self.job_name):</span><br><span class="line">            job_instance = self.jenkins_server.get_job(self.job_name)</span><br><span class="line">            job_instance.disable()</span><br><span class="line">            print(<span class="string">&#x27;Job %s Is Enabled ?:%s&#x27;</span> % (self.job_name, job_instance.is_enabled()))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">enableJob</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;Disable a Jenkins job&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> self.jenkins_server.has_job(self.job_name):</span><br><span class="line">            job_instance = self.jenkins_server.get_job(self.job_name)</span><br><span class="line">            job_instance.enable()</span><br><span class="line">            print(<span class="string">&#x27;Job %s Is Enabled ?:%s&#x27;</span> % (self.job_name, job_instance.is_enabled()))</span><br><span class="line">            </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getJobInfo</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.jenkins_server.has_job(self.job_name):</span><br><span class="line">            myjob = self.jenkins_server.get_job(self.job_name)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> myjob.is_queued_or_running():</span><br><span class="line">                last_buildnumber = myjob.get_last_buildnumber()</span><br><span class="line">                print(<span class="string">&quot;last_buildnumber: &quot;</span>, last_buildnumber)</span><br><span class="line"></span><br><span class="line">                last_build = myjob.get_build(last_buildnumber)</span><br><span class="line">                <span class="comment"># 获取开始时间</span></span><br><span class="line">                start_time = last_build.get_timestamp() + datetime.timedelta(hours=<span class="number">8</span>)</span><br><span class="line">                print(<span class="string">&quot;start_time: &quot;</span>, start_time)</span><br><span class="line">                print(<span class="string">&quot;status: &quot;</span>, last_build.get_status())</span><br><span class="line">                print(<span class="string">&quot;build_url: &quot;</span>, last_build.get_build_url())</span><br><span class="line">                print(<span class="string">&quot;duration: &quot;</span>, last_build.get_duration())</span><br><span class="line">                print(<span class="string">&quot;causes: &quot;</span>, last_build.get_causes()[<span class="number">0</span>][<span class="string">&quot;shortDescription&quot;</span>])</span><br><span class="line">                print(<span class="string">&quot;change: &quot;</span>, last_build.get_changeset_items())</span><br><span class="line">                print(<span class="string">&quot;console_log: &quot;</span>, last_build.get_console())</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(self.job_name + <span class="string">&quot; is running&quot;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;没有 &quot;</span> + self.job_name + <span class="string">&quot; 这个job&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    jobname = <span class="string">&quot;RF-Pipeline-Demo&quot;</span></span><br><span class="line">    jk = JenkinsApiDemo(jobname)</span><br><span class="line">    jk.GetJenkinsVersion()</span><br><span class="line">    <span class="comment"># jk.jobBuild()</span></span><br><span class="line">    jk.disableJob()</span><br><span class="line">    jk.enableJob()</span><br><span class="line">    jk.getJobInfo()</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">2.326</span></span><br><span class="line">last_buildnumber:  <span class="number">20</span></span><br><span class="line">start_time:  <span class="number">2022</span>-01-<span class="number">20</span> <span class="number">18</span>:<span class="number">22</span>:<span class="number">12</span>+<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">status:  SUCCESS</span><br><span class="line">build_url:  http://<span class="number">192.168</span><span class="number">.30</span><span class="number">.8</span>:<span class="number">8080</span>/job/RF-Pipeline-Demo/<span class="number">20</span>/</span><br><span class="line">duration:  <span class="number">0</span>:<span class="number">00</span>:<span class="number">02.620000</span></span><br><span class="line">causes:  Started by user admin</span><br><span class="line">change:  []</span><br><span class="line">console_log:  Started by user admin</span><br><span class="line">[Pipeline] Start of Pipeline</span><br><span class="line">[Pipeline] node</span><br><span class="line">.............</span><br></pre></td></tr></table></figure>
+<p>上述代码仅展示了部分方法，还可以创建、删除、复制job，创建、删除节点，重启等。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">jenkins_server.create_job(jobname, xml)</span><br><span class="line">jenkins_server.copy_job(jobname, newjobname)</span><br><span class="line">jenkins_server.create_node(name)</span><br><span class="line">jenkins_server.delete_job(jobname)</span><br><span class="line">jenkins_server.delete_node(nodename)</span><br><span class="line">jenkins_server.safe_restart()</span><br><span class="line">jenkins_server.shutdown()</span><br></pre></td></tr></table></figure>
+<p>更多方法可以查看库的相关函数。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://stackoverflow.com/questions/36194316/how-to-get-the-build-user-in-jenkins-when-job-triggered-by-timer">How to get the BUILD_USER in Jenkins when job triggered by timer? - Stack Overflow</a></li>
+<li><a href="https://www.jenkins.io/doc/book/system-administration/authenticating-scripted-clients/">Authenticating scripted clients (jenkins.io)</a></li>
+<li><a href="https://www.jenkins.io/doc/book/using/remote-access-api/">https://www.jenkins.io/doc/book/using/remote-access-api/</a></li>
+<li><a href="https://jenkinsapi.readthedocs.io/en/latest/api.html">https://jenkinsapi.readthedocs.io/en/latest/api.html</a></li>
+<li><a href="https://medium.com/@rathourarvi/remote-access-to-your-jenkins-using-rest-api-3d0c0bdb48a">https://medium.com/@rathourarvi/remote-access-to-your-jenkins-using-rest-api-3d0c0bdb48a</a></li>
+<li>groovy保留两位小数：<a href="https://stackoverflow.com/questions/4560546/how-do-i-round-a-number-in-groovy/18354167">https://stackoverflow.com/questions/4560546/how-do-i-round-a-number-in-groovy/18354167</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>上德不德，是以有德；下德不失德，是以无德。——《道德经》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>测试开发</category>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>持续集成：Jenkins Pipeline语法介绍</title>
     <url>/posts/continuous-integration-for-jenkins-pipeline/</url>
     <content><![CDATA[<p>Pipeline在Unix/Linux系统中经常用到，Pipeline将一个命令/程序/进程的输出发送到另一个命令/程序/进程，以进行进一步处理。比如：<code>cat test.txt | grep test1</code>。Jenkins 中的Pipeline借用了Unix/Linux中的 Pipeline思路，实现像流水线一样来调度Jenkins任务，通过Jenkinsfile来描述整个持续集成流程。</p>
