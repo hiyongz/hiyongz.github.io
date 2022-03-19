@@ -204,6 +204,126 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/api-test-mitmproxy-guide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/api-test-mitmproxy-guide/" class="post-title-link" itemprop="url">mitmproxy 代理工具介绍：rewrite和map local实现</a>
+        </h2>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-14 12:02:00" itemprop="dateCreated datePublished" datetime="2021-02-14T12:02:00+00:00">2021-02-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">接口测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/api-test-mitmproxy-guide/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/api-test-mitmproxy-guide/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在接口测试中，会用到抓包工具或者代理工具，常用代理工具包括charles、 burpsuite、 fiddler、mitmproxy等，<code>ssh -D参数</code> 可实现socks5代理。网络嗅探工具可以使用tcpdump 和 wireshark。Charles工具可以实现mock测试（参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/112728913">接口测试代理工具charles mock测试</a>），如果要自动化实现这些功能，mitmproxy工具是个不错的选择，本文主要内容包括简要介绍mitmproxy代理工具、mitmproxy安装、SSL 证书安装以及实现和charles一样的功能：rewrite和map local。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/api-test-mitmproxy-guide/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/mitmproxy/" rel="tag"><i class="fa fa-tag"></i> mitmproxy</a>              
+		  <a href="/tags/mock/" rel="tag"><i class="fa fa-tag"></i> mock</a>              
+		  <a href="/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/" rel="tag"><i class="fa fa-tag"></i> 接口测试</a>              
+		  <a href="/tags/%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 代理工具</a>
+	  </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/api-test-charles-guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1785,125 +1905,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/linux-regular-expression-and-python-regex/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
-      <meta itemprop="name" content="HiYo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HiYong">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/linux-regular-expression-and-python-regex/" class="post-title-link" itemprop="url">Python正则表达式</a>
-        </h2>
-
-        <div class="post-meta">
-          
-          
-
-            <span class="post-time">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-04 12:02:00" itemprop="dateCreated datePublished" datetime="2021-01-04T12:02:00+00:00">2021-01-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/posts/linux-regular-expression-and-python-regex/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/linux-regular-expression-and-python-regex/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>正则表达式（Regular expression）是组成搜索模式的一组字符序列，是<strong>记录文本规则</strong>的代码，用来检查文本中是否包含指定模式的字符串，通过定义一个规则来匹配字符串。正则表达式广泛应用于在字符串查找和处理中，大多文本编辑器基本都支持正则表达式查找。本文将简要介绍正则表达式语法，然后介绍Python语言中正则表达式使用方法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/linux-regular-expression-and-python-regex/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-
-    
-    
-    
-	  
-	  <div class="post-tags">              
-		  <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>              
-		  <a href="/tags/shell/" rel="tag"><i class="fa fa-tag"></i> shell</a>              
-		  <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 正则表达式</a>
-	  </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1975,7 +1976,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">205</span>
+          <span class="site-state-item-count">206</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2036,12 +2037,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">906k</span>
+    <span title="站点总字数">914k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:43</span>
+    <span title="站点阅读时长">13:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
