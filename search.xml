@@ -2066,7 +2066,10 @@
 <p>Out：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
 <p><code>os.access(newfilepath,os.F_OK)</code> 也可以用于判断文件是否存在。</p>
-<h2 id="4-打开文件"><a href="#4-打开文件" class="headerlink" title="4. 打开文件"></a>4. 打开文件</h2><p>打开文本文件或者二进制文件可以使用 <code>open()</code> 方法:</p>
+<h2 id="4-获取文件后缀"><a href="#4-获取文件后缀" class="headerlink" title="4. 获取文件后缀"></a>4. 获取文件后缀</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fname, fextension = os.path.splitext(<span class="string">&quot;D:\\newfile.txt&quot;</span>)</span><br><span class="line">print(fname)</span><br><span class="line">print(fextension)</span><br></pre></td></tr></table></figure>
+<p>Out：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">D:\newfile</span><br><span class="line">.txt</span><br></pre></td></tr></table></figure>
+<h2 id="5-打开文件"><a href="#5-打开文件" class="headerlink" title="5. 打开文件"></a>5. 打开文件</h2><p>打开文本文件或者二进制文件可以使用 <code>open()</code> 方法:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(filename, mode)</span><br></pre></td></tr></table></figure>
 <p>几种文件打开模式：</p>
 <ul>
@@ -2084,7 +2087,7 @@
 <p><code>open()</code>方法的默认模式为 <code>rt</code> 模式，也就是读文本文件。</p>
 <p>另外需要注意filename的写法，比如文件路径是：<code>D:\test.txt</code> ，其中<code>\t</code> 可能会被转义，需要自前面加一个 <code>r</code> ：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">r&quot;D:\test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="5-写文件"><a href="#5-写文件" class="headerlink" title="5. 写文件"></a>5. 写文件</h2><p>读写文件都需要先打开文件，返回一个文件对象，然后对文件对象进行读写操作。写文件需要设置写权限，比如 <code>w</code>、<code>w+</code>、<code>a</code> 模式。</p>
+<h2 id="6-写文件"><a href="#6-写文件" class="headerlink" title="6. 写文件"></a>6. 写文件</h2><p>读写文件都需要先打开文件，返回一个文件对象，然后对文件对象进行读写操作。写文件需要设置写权限，比如 <code>w</code>、<code>w+</code>、<code>a</code> 模式。</p>
 <p>写文件主要包括两种方法：</p>
 <ul>
 <li><code>file.write(str)</code>：写入字符串</li>
@@ -2094,7 +2097,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">text1 = <span class="string">&quot;Hello World!\n你好，世界！\r&quot;</span></span><br><span class="line">file.write(text1)  <span class="comment"># 写入内容信息</span></span><br><span class="line"></span><br><span class="line">text2 = [<span class="string">&quot;To the time to life, \n&quot;</span>, <span class="string">&quot;rather than to life in time.\r&quot;</span>]</span><br><span class="line">file.writelines(text2)</span><br><span class="line"></span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
 <p><code>w</code> 模式会删除先前文件中的内容，如果不想删除，需要直接追加到后面，可以使用<code>a</code> 和 <code>a+</code> 模式：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="6-读文件"><a href="#6-读文件" class="headerlink" title="6. 读文件"></a>6. 读文件</h2><p>常见的读取文件方法有以下几种：</p>
+<h2 id="7-读文件"><a href="#7-读文件" class="headerlink" title="7. 读文件"></a>7. 读文件</h2><p>常见的读取文件方法有以下几种：</p>
 <ul>
 <li>in操作符</li>
 <li>read()：读取所有数据，返回一个字符串。</li>
@@ -2105,7 +2108,7 @@
 <p>执行结果：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Hello World!</span><br><span class="line"></span><br><span class="line">你好，世界！</span><br><span class="line"></span><br><span class="line">To the time to life, </span><br><span class="line"></span><br><span class="line">rather than to life <span class="keyword">in</span> time.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Hello</span><br><span class="line"></span><br><span class="line">Hello World!</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;Hello World!\n&#x27;</span>, <span class="string">&#x27;你好，世界！\n&#x27;</span>, <span class="string">&#x27;To the time to life, \n&#x27;</span>, <span class="string">&#x27;rather than to life in time.\n&#x27;</span>]</span><br></pre></td></tr></table></figure>
 <p>读取file对象的所有内容后，文本的光标会移动到最后，再次读取file需要将光标移到前面，使用 <code>file.seek(0, 0)</code> 方法可以将光标移到前面。还有一种解决方案是将读取的内容存一个在局部变量中。</p>
-<h2 id="7-with语句"><a href="#7-with语句" class="headerlink" title="7. with语句"></a>7. with语句</h2><p>with语句可用于异常处理，可以确保资源的适当获取及自动释放。使用with语句后就不需要调用<code>file.close()</code> 语句了，它会自动释放。</p>
+<h2 id="8-with语句"><a href="#8-with语句" class="headerlink" title="8. with语句"></a>8. with语句</h2><p>with语句可用于异常处理，可以确保资源的适当获取及自动释放。使用with语句后就不需要调用<code>file.close()</code> 语句了，它会自动释放。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text1 = <span class="string">&quot;Hello World!\n你好，世界！\r&quot;</span></span><br><span class="line">text2 = [<span class="string">&quot;To the time to life, \n&quot;</span>, <span class="string">&quot;rather than to life in time.\r&quot;</span>]</span><br><span class="line"><span class="comment"># 写</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    file.write(text1)</span><br><span class="line">    file.writelines(text2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;newfile.txt&quot;</span>, <span class="string">&quot;r+&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">	print(file.read())</span><br></pre></td></tr></table></figure>
 <p>with语句对处理大文件非常有用，比如10G大小的文件， with语句会进行上下文管理。</p>
 <center><b>--THE END--<b></center>
