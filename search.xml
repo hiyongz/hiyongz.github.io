@@ -9784,7 +9784,7 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
   </entry>
   <entry>
     <title>Netdiscover网络扫描工具</title>
-    <url>/posts/api-test-security-testing-netdiscover-tool/</url>
+    <url>/posts/penetration-testing-for-netdiscover-tool/</url>
     <content><![CDATA[<p>Netdiscover是一种网络扫描工具，通过ARP扫描发现活动主机，可以通过主动和被动两种模式进行ARP扫描。通过主动发送ARP请求检查网络ARP流量，通过自动扫描模式扫描网络地址。本文介绍Netdiscover的安装和使用方法。</p>
 <a id="more"></a>
 <h1 id="Netdiscover安装"><a href="#Netdiscover安装" class="headerlink" title="Netdiscover安装"></a>Netdiscover安装</h1><p>Kali Linux提供的网络扫描工具<br>github地址：<a href="https://github.com/alexxy/netdiscover">https://github.com/alexxy/netdiscover</a></p>
@@ -10006,7 +10006,7 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
   </entry>
   <entry>
     <title>hydra暴力破解工具</title>
-    <url>/posts/api-test-security-testing-hydra-tool/</url>
+    <url>/posts/penetration-testing-for-hydra-tool/</url>
     <content><![CDATA[<p>Hydra是一款暴力破解工具，进行并行登录破解，破解远程服务的用户名密码，由黑客组织<a href="https://www.thc.org/">THC</a>开发，它可以对超过50个协议进行快速字典攻击，包括telnet、ftp、http(s)、smb、MySQL、SMTP等。</p>
 <a id="more"></a>
 <h1 id="Hydra安装"><a href="#Hydra安装" class="headerlink" title="Hydra安装"></a>Hydra安装</h1><p>官方github地址：<a href="https://github.com/vanhauser-thc/thc-hydra">https://github.com/vanhauser-thc/thc-hydra</a><br>Kali Linux中自带Hydra，下面介绍其它系统安装方法。</p>
@@ -10241,7 +10241,7 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
   </entry>
   <entry>
     <title>Nmap扫描工具介绍</title>
-    <url>/posts/api-test-security-testing-nmap-tool/</url>
+    <url>/posts/penetration-testing-for-nmap-tool/</url>
     <content><![CDATA[<p>Nmap (Network Mapper) 是在渗透测试中常用的扫描工具，可用于扫描网络中的 IP 地址和端口，并检测已安装的应用程序。无论是作为网络安全工具还是黑客工具，Nmap 是一个很强大的工具，在《黑客帝国2》电影中就有出现，用于入侵发电站的能源管理系统。本文将介绍 Nmap 的安装和常用命令。</p>
 <a id="more"></a>
 <h1 id="Nmap简介及安装"><a href="#Nmap简介及安装" class="headerlink" title="Nmap简介及安装"></a>Nmap简介及安装</h1><p>Nmap官网地址：<a href="https://nmap.org/">https://nmap.org/</a></p>
