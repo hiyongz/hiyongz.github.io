@@ -31,6 +31,108 @@
 ]]></content>
   </entry>
   <entry>
+    <title>禅道二次开发（一）：开发环境配置</title>
+    <url>/posts/zentao-extension-for-dev-environment-configuration/</url>
+    <content><![CDATA[<p>禅道是一个开源的项目管理软件，作为测试人员最常用的功能就是用例管理和bug管理。目前的禅道开源版可能无法满足业务需求，可以基于禅道进行二次开发。先来介绍下如何配置禅道开发环境。</p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>禅道项目管理软件主要使用PHP语言，是基于zentaoPHP框架进行开发的。要对禅道进行二次开发需要对PHP语言、zentaoPHP框架、前端ZUI框架、MySQL数据库、HTML、JavaScript等有一定的了解。后续我会陆续发布一些禅道二次开发的相关笔记，文章不会对这些基础进行过多介绍，关于禅道二次开发的相关资料可滑到文章末尾查看，都是禅道官方提供的资料，介绍的比较详细。</p>
+<p>下面介绍我是如何配置禅道开发环境的。</p>
+<h1 id="禅道环境部署"><a href="#禅道环境部署" class="headerlink" title="禅道环境部署"></a>禅道环境部署</h1><p>在Windows中部署PHP环境可以使用XAMPP，它是一个Apache发行版，其中包含了MariaDB、PHP和Perl。下载地址：</p>
+<ul>
+<li><a href="https://www.apachefriends.org/index.html">https://www.apachefriends.org/index.html</a></li>
+<li><a href="https://www.apachefriends.org/zh_cn/download.html">https://www.apachefriends.org/zh_cn/download.html</a></li>
+</ul>
+<p>由于我们的禅道部署在Linux系统上，我选择在Linux上部署环境。Linux也可以使用XAMPP部署，我觉得太麻烦就没有使用它，而是直接在Linux上安装禅道，因为禅道安装包内置了apache、php、mysql这些应用程序，不需要再单独安装部署。直接在禅道目录中进行二次开发就可以了。</p>
+<h2 id="禅道安装"><a href="#禅道安装" class="headerlink" title="禅道安装"></a>禅道安装</h2><p>在linux中使用禅道一键安装包安装禅道，下载地址：<a href="https://www.zentao.net/download.html">https://www.zentao.net/download.html</a> ，我下载的是<a href="https://www.zentao.net/dynamic/zentaopms16.4-80496.html">禅道16.4版本</a>。</p>
+<p><strong>1、将禅道一键安装包解压到<code>/opt</code>目录下</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo tar -zxvf  ZenTaoPMS.16.4.zbox_64.tar.gz -C /opt</span><br></pre></td></tr></table></figure>
+<p>解压完成后可以查看PHP的版本：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$  /opt/zbox/bin/php -v</span><br><span class="line">PHP 7.2.33 (cli) (built: Jul 14 2021 12:01:31) ( ZTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies</span><br><span class="line">    with the ionCube PHP Loader + ionCube24 v10.4.4, Copyright (c) 2002-2020, by ionCube Ltd.</span><br><span class="line">    with Zend OPcache v7.2.33, Copyright (c) 1999-2018, by Zend Technologies</span><br></pre></td></tr></table></figure></p>
+<p><strong>2、设置Apache和MySQL的端口号</strong></p>
+<p>可以使用 <code>/opt/zbox/zbox -h</code> 命令查看帮助信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /opt/zbox/zbox -h</span><br><span class="line">Usage: zbox.php &#123;start|stop|restart|status&#125;</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">    -h --<span class="built_in">help</span> Show <span class="built_in">help</span>.</span><br><span class="line">    -ap --aport Apache port, default 80.</span><br><span class="line">    -mp --mport Mysql port, default 3306.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>设置端口：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /opt/zbox/zbox -ap 8080 -mp 3306</span><br></pre></td></tr></table></figure>
+<p>其中 <code>-ap</code> 参数设置Apache端口，<code>-mp</code> 参数设置Mysql端口。</p>
+<p><strong>3、关闭防火墙</strong></p>
+<p>查看防⽕火墙状态 </p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ systemctl status firewalld</span><br><span class="line">$ systemctl status firewalld.service</span><br></pre></td></tr></table></figure>
+<p>停⽌止firewall</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<p>禁止firewall开机启动</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">$ systemctl <span class="built_in">disable</span> firewalld.service </span><br></pre></td></tr></table></figure>
+<p>关闭selinux：<code>vi /etc/selinux/config</code>，注释掉 <code>SELINUX=enforcing</code>，添加 <code>SELINUX=disabled</code></p>
+<p><strong>4、启动禅道</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /opt/zbox/zbox start</span><br><span class="line">Start Apache success</span><br><span class="line">Start Mysql success</span><br></pre></td></tr></table></figure>
+<p>停止禅道命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /opt/zbox/zbox stop</span><br></pre></td></tr></table></figure></p>
+<p>重启：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /opt/zbox/zbox restart</span><br></pre></td></tr></table></figure>
+<p>可以设置一下开机自动启动，把 <code>/opt/zbox/zbox restart</code> 命令添加<code>/etc/rc.d/rc.local</code> 文件，并添加执行权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ chmod +x /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+<p>禅道启动成功后，浏览器访问：<a href="http://192.168.30.9:8080/">http://192.168.30.9:8080/</a> ，其中192.168.30.9为我的服务器地址，8080为apache端口。</p>
+<p><img src="zentao-start.png" width="80%" height="80%" /></p>
+<p>禅道默认管理员帐号是 admin，密码 123456。登录后需要修改登录密码：</p>
+<p><img src="zentao-change-pwd.png" width="80%" height="80%" /></p>
+<h2 id="禅道升级"><a href="#禅道升级" class="headerlink" title="禅道升级"></a>禅道升级</h2><p>如果禅道使用linux一键安装包安装，可按照以下步骤升级：</p>
+<p>1、下载新版本的源码包 ZenTaoPMS.16.4.zip</p>
+<p>2、解压缩后得到zentaopms文件夹，将zentaopms/下面的所有文件复制到 <code>/opt/zbox/app/zentao/</code> 下面，覆盖同名文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ unzip ZenTaoPMS.16.4.zip</span><br><span class="line">$ sudo cp -rf zentaopms/* /opt/zbox/app/zentao/</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">3、访问 `http:/192.168.30.9:8080/zentao/upgrade.php`，按照页面提示进行升级。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接数据库</span></span><br><span class="line"></span><br><span class="line">下面介绍使用Mysql Workbench客户端工具来连接数禅道据库，其它数据库管理工具类似。</span><br><span class="line"></span><br><span class="line">1、先添加一个数据库管理用户，设置密码</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">$ ./opt/zbox/auth/adduser.sh</span><br><span class="line">This tool is used to add user to access adminer</span><br><span class="line">Account: root</span><br><span class="line">Password: Adding password <span class="keyword">for</span> user root</span><br></pre></td></tr></table></figure>
+<p>2、打开Mysql Workbench客户端工具，新建连接</p>
+<p>先用SSH通道连接上服务器，再连接禅道数据库</p>
+<p><img src="zentao-mysql-workbench-connect.png" width="80%" height="80%" /></p>
+<p>3、连接数据库</p>
+<p><img src="zentao-mysql-zentao-table.png" width="80%" height="80%" /></p>
+<p>这样就可以对禅道数据库进行操作了。</p>
+<p>命令行连接和导入数据库方法：</p>
+<ul>
+<li><p>登录数据库：<code>/opt/zbox/bin/mysql -u root -P 3306 -p</code></p>
+</li>
+<li><p>导入数据库：<code>/opt/zbox/bin/mysql -u root -P 3306 -p zentao &lt; zentao.sql</code></p>
+</li>
+</ul>
+<h1 id="配置linux和windows文件共享"><a href="#配置linux和windows文件共享" class="headerlink" title="配置linux和windows文件共享"></a>配置linux和windows文件共享</h1><p>为了方便开发，我选择在Windows上使用vscode编辑器进行开发。我的解决方案是使用samba来配置linux和windows的文件共享。安装方法可参考<a href="https://blog.csdn.net/u010698107/article/details/119850227">使用samba实现linux和windows文件共享</a>。</p>
+<p><code>vi /etc/samba/smb.conf</code> ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[global]</span><br><span class="line">        workgroup = ZENTAO</span><br><span class="line">        security = user</span><br><span class="line"></span><br><span class="line">        passdb backend = tdbsam</span><br><span class="line"></span><br><span class="line">        printing = cups</span><br><span class="line">[zentao]</span><br><span class="line">        comment = ZENTAO Projects</span><br><span class="line">        path = /opt/zbox</span><br><span class="line">        public = yes</span><br><span class="line">        writable = yes</span><br><span class="line">        browseable = yes</span><br><span class="line">        guest ok = yes</span><br><span class="line">        <span class="built_in">read</span> only = no</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>设置用户名和密码：<code>smbpasswd -a root</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ smbpasswd -a root</span><br><span class="line">New SMB password:</span><br><span class="line">Retype new SMB password:</span><br><span class="line">Added user root.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>启动 <em>smb.service</em> 和 <em>nmb.service</em>两个服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start smb.service</span><br><span class="line">systemctl start nmb.service</span><br></pre></td></tr></table></figure>
+<p>设置开机启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> smb.service</span><br><span class="line">systemctl <span class="built_in">enable</span> nmb.service</span><br></pre></td></tr></table></figure>
+<p>windows访问地址 <a href="\\192.168.168.226\zentao">\\192.168.30.9\zentao</a></p>
+<p><img src="zentao-samba-share.png" width="80%" height="80%" /></p>
+<h1 id="Vscode-配置PHP开发环境"><a href="#Vscode-配置PHP开发环境" class="headerlink" title="Vscode 配置PHP开发环境"></a>Vscode 配置PHP开发环境</h1><p>如果要在Windows中编写PHP脚本，需要配置一下settings.json文件，配置PHP执行文件php.exe的路径。</p>
+<p>点击VSCode的 文件 -&gt; 首选项 -&gt; 设置，搜索php</p>
+<p><img src="vscode-php-config.png" width="80%" height="80%" /></p>
+<p>点击setting.json，添加配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;php.validate.executablePath&quot;</span>: <span class="string">&quot;D:/xampp/php/php.exe&quot;</span>,</span><br></pre></td></tr></table></figure>
+<p>安装插件PHP Debug用于PHP调试，如果是禅道二次开发可以不用配置它，修改代码后刷新禅道页面，会看到修改后的效果。</p>
+<p>另外推荐安装PHP Intelephense插件，可用于方法跳转。</p>
+<p>接下来可以在Vscode中打开共享的zentao文件夹：</p>
+<p><img src="zentao-vscode.png" width="80%" height="80%" /></p>
+<p>为了方便开发建议对zentao目录进行版本管理。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li>禅道官网：<a href="https://www.zentao.net/">https://www.zentao.net/</a> </li>
+<li>禅道下载：<a href="https://www.zentao.net/download">https://www.zentao.net/download</a></li>
+<li>禅道安装教程：<a href="https://www.zentao.net/book/zentaopmshelp/90.html">https://www.zentao.net/book/zentaopmshelp/90.html</a></li>
+<li>禅道升级：<a href="https://www.zentao.net/book/zentaopmshelp/41.html">https://www.zentao.net/book/zentaopmshelp/41.html</a></li>
+<li>禅道二次开发讲解：<a href="https://www.zentao.net/publicclass/80237.html">https://www.zentao.net/publicclass/80237.html</a></li>
+<li>二次开发机制：<a href="https://www.zentao.net/book/zentaopmshelp/225.html">https://www.zentao.net/book/zentaopmshelp/225.html</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>世间所有的相遇，都是久别重逢。——《一代宗师》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>禅道</category>
+      </categories>
+      <tags>
+        <tag>zentao</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>持续集成：Jenkins中获取Robot Framework插件返回的Robot变量</title>
     <url>/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/</url>
     <content><![CDATA[<p>在 <a href="https://blog.csdn.net/u010698107/article/details/122278661">Jenkins集成Robot Framework</a> 中介绍了Jenkins如何集成Robot Framework测试框架，本文介绍如何在邮件报告中显示测试结果（比如通过率、测试报告链接等参数）。</p>
