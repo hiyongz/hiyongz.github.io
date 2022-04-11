@@ -12189,7 +12189,8 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
     <url>/posts/python-vscode-jupyter-notebook/</url>
     <content><![CDATA[<p>VSCode Python开发环境配置<br><a id="more"></a></p>
 <h1 id="Visual-Studio-Code-下载安装"><a href="#Visual-Studio-Code-下载安装" class="headerlink" title="Visual Studio Code 下载安装"></a>Visual Studio Code 下载安装</h1><p>Visual Studio Code下载地址: <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a></p>
-<p>安装Visual Studio Code后，打开Visual Studio Code，安装python：<br><img src="vscode-python.png" alt="png"></p>
+<p>如果下载速度很慢，可以将下载地址：<code>https://az764295.vo.msecnd.net/stable/8dfae7a5cd50421d10cd99cb873990460525a898/VSCodeUserSetup-x64-1.66.1.exe</code> 的 <code>az764295.vo.msecnd.net</code> 部分替换为国内镜像地址 <code>vscode.cdn.azure.cn</code> 。</p>
+<p>安装完Visual Studio Code后，打开Visual Studio Code，安装python：<br><img src="vscode-python.png" alt="png"></p>
 <h1 id="设置-Python-环境"><a href="#设置-Python-环境" class="headerlink" title="设置 Python 环境"></a>设置 Python 环境</h1><p>Ctrl+Shift+P<br><img src="vscode-python2.png" alt="png"></p>
 <p>输入>python select Interpreter<br><img src="vscode-python-interpreter.png" alt="png"></p>
 <p>会列出系统所有python解释器，选择对应的解释器：<br><img src="vscode-python-interpreter2.png" alt="png"></p>
@@ -12222,6 +12223,9 @@ count，发送报文数，默认发送一个报文<br>iface，指定接口</li>
 </ol>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>VSCode Jupyter Notebook插件安装：<br>搜索Jupyter，安装<br><img src="vscode-python-jupyter.png" alt="png"><br>插件安装成功后，新建*.ipynb文件：<br><img src="vscode-python-ipynb.png" alt="png"></p>
 <h2 id="将ipynb文件转换为markdown"><a href="#将ipynb文件转换为markdown" class="headerlink" title="将ipynb文件转换为markdown"></a>将ipynb文件转换为markdown</h2><p>将ipynb文件转换为markdown<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jupyter nbconvert --to markdown <span class="string">&quot;文件名.ipynb&quot;</span></span><br><span class="line"><span class="comment"># 批量转换</span></span><br><span class="line">jupyter nbconvert --to markdown *.ipynb </span><br></pre></td></tr></table></figure></p>
+<h1 id="其它插件"><a href="#其它插件" class="headerlink" title="其它插件"></a>其它插件</h1><p>Live2D看板娘：<a href="https://github.com/iCharlesZ/vscode-live2d">https://github.com/iCharlesZ/vscode-live2d</a></p>
+<p><a href="https://github.com/iCharlesZ/vscode-live2d-models">https://github.com/iCharlesZ/vscode-live2d-models</a></p>
+<p>GitHub Copilot：基于AI算法进行代码补全，功能非常强大，推荐安装。</p>
 <center><b>--THE END--<b></center>]]></content>
       <categories>
         <category>编程语言</category>
