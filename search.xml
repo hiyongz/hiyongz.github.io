@@ -31,6 +31,54 @@
 ]]></content>
   </entry>
   <entry>
+    <title>PHP笔记（一）：开发环境配置</title>
+    <url>/posts/php-notes-for-dev-environment-install/</url>
+    <content><![CDATA[<p>本文记录如何在Windows系统配置简单的PHP开发环境。</p>
+<a id="more"></a>
+<h1 id="PHP环境部署"><a href="#PHP环境部署" class="headerlink" title="PHP环境部署"></a>PHP环境部署</h1><p>PHP适用于Web应用程序开发，这里介绍使用XAMPP来配置开发环境，它是一个免费的Apache发行版，包含了MariaDB、PHP和Perl。</p>
+<p>由于用不到数据库，本文不介绍数据库安装和配置方法。</p>
+<h2 id="下载安装XAMPP"><a href="#下载安装XAMPP" class="headerlink" title="下载安装XAMPP"></a>下载安装XAMPP</h2><p>XAMPP下载地址：</p>
+<ul>
+<li><a href="https://www.apachefriends.org/index.html">https://www.apachefriends.org/index.html</a></li>
+<li><a href="https://www.apachefriends.org/zh_cn/download.html">https://www.apachefriends.org/zh_cn/download.html</a></li>
+</ul>
+<p>双击运行目录内的setup_xampp.bat初始化xampp。</p>
+<p>将php安装路径<code>D:\tools\xampp\php</code> 加入环境变量，测试是否设置成功：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ php -v</span><br><span class="line">PHP 8.1.1 (cli) (built: Dec 15 2021 10:31:43) (ZTS Visual C++ 2019 x64)</span><br><span class="line">Copyright (c) The PHP Group</span><br><span class="line">Zend Engine v4.1.1, Copyright (c) Zend Technologies</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置XAMPP"><a href="#配置XAMPP" class="headerlink" title="配置XAMPP"></a>配置XAMPP</h2><p>Apache配置：</p>
+<p>修改 <code>D:\tools\xampp\apache\conf\httpd.conf</code>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Listen 8081</span><br></pre></td></tr></table></figure>
+<p>修改 <code>D:\tools\xampp\apache\conf\extra\httpd-ssl.conf</code>，将443修改为4433：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Listen 4433</span><br></pre></td></tr></table></figure>
+<p>启动Apache</p>
+<p><img src="xampp_control_panel.png" width="70%" height="70%" /></p>
+<p>访问 <a href="http://localhost:8081/dashboard/">http://localhost:8081/dashboard/</a></p>
+<p><img src="xampp_dashboard.png" width="70%" height="70%" /></p>
+<h1 id="Vscode-配置PHP"><a href="#Vscode-配置PHP" class="headerlink" title="Vscode 配置PHP"></a>Vscode 配置PHP</h1><h2 id="配置PHP-可执行文件"><a href="#配置PHP-可执行文件" class="headerlink" title="配置PHP 可执行文件"></a>配置PHP 可执行文件</h2><p>点击VSCode的 文件-首选项-设置，查找php</p>
+<p><img src="vscode-php-config.png" width="70%" height="70%" /></p>
+<p>点击setting.json，添加以下一行配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;php.validate.executablePath&quot;</span>: <span class="string">&quot;D:/tools/xampp/php/php.exe&quot;</span>,</span><br></pre></td></tr></table></figure>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>1、PHP Intelephense插件：可实现方法跳转。</p>
+<p>2、PHP Debug插件：调试</p>
+<p>3、GitHub Copilot：基于AI算法进行代码补全，功能非常强大，推荐安装。</p>
+<h1 id="PHP代码示例"><a href="#PHP代码示例" class="headerlink" title="PHP代码示例"></a>PHP代码示例</h1><p>在 <code>D:\tools\xampp\htdocs\</code> 目录下新建文件夹demo，创建文件index.php，编写代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;hello world!&#x27;</span> <span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;zh-CN&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;utf-8&quot;</span> /&gt;</span><br><span class="line">    &lt;title&gt; PHP Demo <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;演示&#x27;</span>; <span class="meta">?&gt;</span>&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;br /&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;To the time to life, &#x27;</span> <span class="meta">?&gt;</span></span><br><span class="line">    &lt;br /&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;rather than to life in time.&#x27;</span>;<span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>浏览器访问： <a href="http://localhost:8081/demo/">http://localhost:8081/demo/</a></p>
+<p><img src="php-demo.png" width="70%" height="70%" /></p>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>给岁月以文明，而不是给文明以岁月。——刘慈欣《三体2：黑暗森林》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>禅道二次开发（一）：开发环境配置</title>
     <url>/posts/zentao-extension-for-dev-environment-configuration/</url>
     <content><![CDATA[<p>禅道是一个开源的项目管理软件，作为测试人员最常用的功能就是用例管理和bug管理。目前的禅道开源版可能无法满足业务需求，可以基于禅道进行二次开发。先来介绍下如何配置禅道开发环境。</p>
