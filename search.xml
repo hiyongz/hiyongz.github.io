@@ -10938,7 +10938,6 @@ logo可以选择Simple Icons：[https://simpleicons.org/](https://simpleicons.or
 <p>然后进行插件的安装更新操作， 插件的安装方法，在Available中的输入框输入要安装的插件名称关键字进行搜索，选择要安装的插件，点击“Download now and install after  restart”进行下载安装。</p>
 <p>Jenkins推荐插件：</p>
 <ul>
-<li>Multiple SCMs plugin</li>
 <li>Rebuilder</li>
 <li>Safe Restart Plugin</li>
 <li>Pipeline</li>
