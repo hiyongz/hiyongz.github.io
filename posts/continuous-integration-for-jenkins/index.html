@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-email.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-discard-old-builds.png">
 <meta property="article:published_time" content="2021-03-05T12:12:00.000Z">
-<meta property="article:modified_time" content="2022-04-17T23:42:45.782Z">
+<meta property="article:modified_time" content="2022-04-19T10:21:57.935Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
@@ -347,7 +347,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.8k</span>
+              <span>9.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -567,6 +567,10 @@
 <p>删除所有构建：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> jobName = <span class="string">&quot;test_shell&quot;</span></span><br><span class="line"><span class="keyword">def</span> job = Jenkins.instance.getItem(jobName)</span><br><span class="line">job.getBuilds().each &#123; </span><br><span class="line">    it.delete() </span><br><span class="line">&#125;</span><br><span class="line">job.nextBuildNumber = <span class="number">1</span></span><br><span class="line">job.save()</span><br></pre></td></tr></table></figure>
 <p>点击运行，job名为 <code>test_shell</code> 的构建历史都会被删除，重新构建时构建序号会从1开始。</p>
+<p>参考资料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://martinfowler.com/articles/continuousIntegration.html">https://martinfowler.com/articles/continuousIntegration.html</a></li>
+</ol>
 <center><b>--THE END--<b></center>
 
 
