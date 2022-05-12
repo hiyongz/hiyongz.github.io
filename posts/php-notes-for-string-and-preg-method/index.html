@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文记录PHP处理字符串的方法，包括普通字符串处理以及正则表达式处理字符串方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP笔记（二）：字符串处理相关方法">
+<meta property="og:url" content="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="本文记录PHP处理字符串的方法，包括普通字符串处理以及正则表达式处理字符串方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/php-demo-hello-world.png">
+<meta property="article:published_time" content="2022-04-28T12:12:00.000Z">
+<meta property="article:modified_time" content="2022-05-12T13:24:19.719Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/php-demo-hello-world.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PHP笔记（二）：字符串处理相关方法 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz/DevTest-Notes" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP笔记（二）：字符串处理相关方法
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-28 12:12:00" itemprop="dateCreated datePublished" datetime="2022-04-28T12:12:00+00:00">2022-04-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/php-notes-for-string-and-preg-method/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/php-notes-for-string-and-preg-method/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文记录PHP处理字符串的方法，包括普通字符串处理以及正则表达式处理字符串方法。</p>
+<a id="more"></a>
+<p>更详细PHP语法和函数介绍可参考官方文档：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/">https://www.php.net/manual/zh/</a>，本文仅记录了部分我使用到的一些方法。</p>
+<p>本文使用的PHP版本为PHP 8.1.1</p>
+<h1 id="PHP基本语法"><a href="#PHP基本语法" class="headerlink" title="PHP基本语法"></a>PHP基本语法</h1><p>1、PHP语言标记</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="comment">//开始</span></span><br><span class="line"><span class="meta">?&gt;</span> <span class="comment">//结束</span></span><br></pre></td></tr></table></figure>
+<p>2、PHP代码可以嵌入到html代码中</p>
+<p>3、使用分号分隔指令，文件末尾的 PHP 代码段结束标记可以不要，结束标志 <code>?&gt;</code> 隐含了一个分号。</p>
+<p>4、注释</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//单行注释</span></span><br></pre></td></tr></table></figure>
+<p>示例代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;hello world!&#x27;</span> <span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;zh-CN&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;utf-8&quot;</span> /&gt;</span><br><span class="line">    &lt;title&gt; PHP Demo <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;演示&#x27;</span>; <span class="meta">?&gt;</span>&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;br /&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;To the time to life, &#x27;</span> <span class="meta">?&gt;</span></span><br><span class="line">    &lt;br /&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="string">&#x27;rather than to life in time.&#x27;</span>;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    多行注释</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">//单行注释</span></span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>浏览器访问地址 <a target="_blank" rel="noopener" href="http://localhost:8081/demo/">http://localhost:8081/demo/</a></p>
+<p><img src="php-demo-hello-world.png" width="70%" height="70%" /></p>
+<h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><p>PHP提供了很多字符串处理相关函数，这里记录我使用到的部分方法。</p>
+<h2 id="1-字符串分割"><a href="#1-字符串分割" class="headerlink" title="1. 字符串分割"></a>1. 字符串分割</h2><p>语法：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.explode.php">explode</a>(string <code>$separator</code>, string <code>$string</code>, int <code>$limit</code> = <strong><code>PHP_INT_MAX</code></strong>): array，返回字符串数组</p>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line">print_r(explode(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$str</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">print_r(explode(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$str</span>,<span class="number">2</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$str1</span> = <span class="string">&#x27;one</span></span><br><span class="line"><span class="string">         two</span></span><br><span class="line"><span class="string">         three&#x27;</span>;</span><br><span class="line">print_r(explode(PHP_EOL,<span class="variable">$str1</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Array</span> ( [<span class="number">0</span>] =&gt; one [<span class="number">1</span>] =&gt; two [<span class="number">2</span>] =&gt; three )</span><br><span class="line"><span class="keyword">Array</span> ( [<span class="number">0</span>] =&gt; one [<span class="number">1</span>] =&gt; two,three )</span><br><span class="line"><span class="keyword">Array</span> ( [<span class="number">0</span>] =&gt; one [<span class="number">1</span>] =&gt; two [<span class="number">2</span>] =&gt; three )</span><br></pre></td></tr></table></figure>
+<h2 id="2-用字符串连接数组元素"><a href="#2-用字符串连接数组元素" class="headerlink" title="2. 用字符串连接数组元素"></a>2. 用字符串连接数组元素</h2><p>implode支持将数组元素拼接成字符串：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.implode.php">implode</a>(string <code>$separator</code>, array <code>$array</code>): string</p>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* implode */</span></span><br><span class="line"><span class="variable">$array</span> = [<span class="string">&#x27;one&#x27;</span>, <span class="string">&#x27;two&#x27;</span>, <span class="string">&#x27;three&#x27;</span>];</span><br><span class="line">print_r(implode(<span class="string">&quot;,&quot;</span>, <span class="variable">$array</span>)); </span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">one,two,three</span><br></pre></td></tr></table></figure>
+<h2 id="3-字符串切片"><a href="#3-字符串切片" class="headerlink" title="3. 字符串切片"></a>3. 字符串切片</h2><p>使用 <code>substr</code> 方法来返回字符串的子串。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.substr.php">substr</a>(<code>$string</code>,  <code>$offset</code>, <code>$length</code> = <strong><code>null</code></strong>)</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* substr */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;abcdefgh&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> substr(<span class="variable">$str</span>, <span class="number">-2</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;     <span class="comment">// gh</span></span><br><span class="line"><span class="keyword">echo</span> substr(<span class="variable">$str</span>, <span class="number">-2</span>, <span class="number">1</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;  <span class="comment">// g</span></span><br><span class="line"><span class="keyword">echo</span> substr(<span class="variable">$str</span>, <span class="number">0</span>, <span class="number">1</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;   <span class="comment">// a</span></span><br><span class="line"><span class="keyword">echo</span> substr(<span class="variable">$str</span>, <span class="number">0</span>, <span class="number">-1</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;  <span class="comment">// abcdefg</span></span><br><span class="line"><span class="keyword">echo</span> substr(<span class="variable">$str</span>, <span class="number">2</span>, <span class="number">3</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;   <span class="comment">// cde</span></span><br><span class="line"><span class="keyword">echo</span> substr(<span class="variable">$str</span>, <span class="number">-3</span>, <span class="number">-1</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>; <span class="comment">// fg</span></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-字符替换"><a href="#4-字符替换" class="headerlink" title="4. 字符替换"></a>4. 字符替换</h2><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.str-replace.php">str_replace</a>(mixed <code>$search</code>, mixed <code>$replace</code>, mixed <code>$subject</code>, int <code>&amp;$count</code> = ?): mixed - 字符替换，区分大小写。</p>
+<p> <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.str-ireplace.php">str_ireplace()</a> - 不区分大小写的替换。</p>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* str_replace */</span></span><br><span class="line"><span class="variable">$str</span>=<span class="string">&quot;one,two,three&quot;</span>;</span><br><span class="line">print_r(str_replace(<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="variable">$str</span>,<span class="variable">$count</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$count</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* str_ireplace */</span></span><br><span class="line"><span class="variable">$str</span>=<span class="string">&quot;one,two,Three&quot;</span>;</span><br><span class="line">print_r(str_ireplace(<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="variable">$str</span>,<span class="variable">$count</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one,Two,Three</span><br><span class="line"><span class="number">2</span></span><br><span class="line">one,<span class="number">3</span>wo,<span class="number">3</span>hree</span><br></pre></td></tr></table></figure>
+<h2 id="5-大小写转换"><a href="#5-大小写转换" class="headerlink" title="5. 大小写转换"></a>5. 大小写转换</h2><p>常用大小写转换方法：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strtolower.php">strtolower</a> - 将字母字符转换为小写。</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strtoupper.php">strtoupper</a> - 将字母字符转换为大写。</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.ucfirst.php">ucfirst</a> -  首字母转换为大写。</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.lcfirst.php">lcfirst</a> - 首字母转换为小写。</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.ucwords.php">ucwords</a>  - 将字符串每个单词的首字符转换成大写。</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* strtolower */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;One,Two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> strtolower(<span class="variable">$str</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strtoupper */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> strtoupper(<span class="variable">$str</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* ucfirst */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> ucfirst(<span class="variable">$str</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* lcfirst */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;One,Two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> lcfirst(<span class="variable">$str</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* ucwords */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> ucwords(<span class="variable">$str</span>,<span class="string">&#x27;,&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">one,two,three</span><br><span class="line">ONE,TWO,THREE</span><br><span class="line">One,two,three</span><br><span class="line">one,Two,Three</span><br><span class="line">One,Two,Three</span><br></pre></td></tr></table></figure>
+<h2 id="6-字符ASCII-码相互转换"><a href="#6-字符ASCII-码相互转换" class="headerlink" title="6. 字符ASCII 码相互转换"></a>6. 字符ASCII 码相互转换</h2><p>① 字符转ASCII 码：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.ord.php">ord</a>(<code>$string</code>)</p>
+<p>② ASCII 码转字符：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.chr.php">chr</a>(<code>$ascii</code>)</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.sprintf.php">sprintf</a>(“%c”, <code>$ascii</code>)</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* ord */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Char: &quot;</span>. <span class="variable">$str</span> .<span class="string">&quot;, ASCII: &quot;</span> .ord(<span class="variable">$str</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* chr */</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Char: &quot;</span>. chr(ord(<span class="variable">$str</span>) + <span class="number">1</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* sprintf */</span></span><br><span class="line"><span class="keyword">echo</span> sprintf(<span class="string">&quot;Char: %c &lt;br /&gt;\n&quot;</span>, ord(<span class="variable">$str</span>) + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Char: A, ASCII: <span class="number">65</span></span><br><span class="line">Char: B</span><br><span class="line">Char: C</span><br></pre></td></tr></table></figure>
+<h2 id="7-将字符串解析成多个变量"><a href="#7-将字符串解析成多个变量" class="headerlink" title="7. 将字符串解析成多个变量"></a>7. 将字符串解析成多个变量</h2><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.parse-str.php">parse_str</a> - 一般用于解析URL中的参数。</p>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* parse_str */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one=1&amp;two=2&amp;arr[]=3&amp;arr[]=4&#x27;</span>;</span><br><span class="line">parse_str(<span class="variable">$str</span>, <span class="variable">$output</span>);</span><br><span class="line"></span><br><span class="line">print_r(<span class="variable">$output</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$output</span>[<span class="string">&#x27;arr&#x27;</span>]);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Array</span> ( [one] =&gt; <span class="number">1</span> [two] =&gt; <span class="number">2</span> [arr] =&gt; <span class="keyword">Array</span> ( [<span class="number">0</span>] =&gt; <span class="number">3</span> [<span class="number">1</span>] =&gt; <span class="number">4</span> ) )</span><br><span class="line"><span class="keyword">Array</span> ( [<span class="number">0</span>] =&gt; <span class="number">3</span> [<span class="number">1</span>] =&gt; <span class="number">4</span> )</span><br></pre></td></tr></table></figure>
+<h2 id="8-字符查询"><a href="#8-字符查询" class="headerlink" title="8. 字符查询"></a>8. 字符查询</h2><p>几种字符串查询方法：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.substr-count.php">substr_count</a>( <code>$haystack</code>, <code>$needle</code>,  <code>$offset</code> = 0,  <code>$length</code> = <strong><code>null</code></strong>) - 计算子串出现的次数</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strstr.php">strstr</a>( <code>$haystack</code>, <code>$needle</code>,  <code>$before_needle</code> = <strong><code>false</code></strong>) - 查找字符串的首次出现</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strrchr.php">strrchr</a>( <code>$haystack</code>, <code>$needle</code>) - 查找指定字符在字符串中的最后一次出现</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strpos.php">strpos</a>(<code>$haystack</code>,  <code>$needle</code>, <code>$offset</code> = 0) - 查找字符串首次出现的位置（区分大小写）</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.stripos.php">stripos</a>(<code>$haystack</code>,  <code>$needle</code>, <code>$offset</code> = 0) - 查找字符串首次出现的位置（不区分大小写）</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strrpos.php">strrpos</a>(<code>$haystack</code>,  <code>$needle</code>, <code>$offset</code> = 0) - 计算指定字符串在目标字符串中最后一次出现的位置（区分大小写）</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strripos.php">strripos</a>(<code>$haystack</code>,  <code>$needle</code>, <code>$offset</code> = 0) - 计算指定字符串在目标字符串中最后一次出现的位置（不区分大小写）</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.strpbrk.php">strpbrk</a>(<code>$haystack</code>,  <code>$char_list</code>) - 在字符串中查找一组字符的任何一个字符</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* substr_count */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;substr_count: &quot;</span> . substr_count(<span class="variable">$str</span>,<span class="string">&#x27;,&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strstr */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strstr: &quot;</span> . strstr(<span class="variable">$str</span>,<span class="string">&#x27;,&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strstr: &quot;</span> . strstr(<span class="variable">$str</span>,<span class="string">&#x27;,&#x27;</span>, <span class="literal">true</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strrchr */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strrchr: &quot;</span> . strrchr(<span class="variable">$str</span>,<span class="string">&#x27;,&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strpos */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strpos: &quot;</span> . strpos(<span class="variable">$str</span>,<span class="string">&#x27;T&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* stripos */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;stripos: &quot;</span> . stripos(<span class="variable">$str</span>,<span class="string">&#x27;T&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strrpos */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strrpos: &quot;</span> . strrpos(<span class="variable">$str</span>,<span class="string">&#x27;t&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strripos */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strripos: &quot;</span> . strripos(<span class="variable">$str</span>,<span class="string">&#x27;t&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* strpbrk */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,Three&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;strpbrk: &quot;</span> . strpbrk(<span class="variable">$str</span>,<span class="string">&#x27;nt&#x27;</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">substr_count: <span class="number">2</span></span><br><span class="line">strstr: ,two,three</span><br><span class="line">strstr: one</span><br><span class="line">strrchr: ,three</span><br><span class="line">strpos: <span class="number">8</span></span><br><span class="line">stripos: <span class="number">4</span></span><br><span class="line">strrpos: <span class="number">4</span></span><br><span class="line">strripos: <span class="number">8</span></span><br><span class="line">strpbrk: ne,two,Three</span><br></pre></td></tr></table></figure>
+<h2 id="9-HTML字符转换"><a href="#9-HTML字符转换" class="headerlink" title="9. HTML字符转换"></a>9. HTML字符转换</h2><p>① <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.htmlspecialchars-decode.php">htmlspecialchars_decode</a>(<code>$string</code>, <code>$flags</code> = ENT_COMPAT | ENT_HTML401) — 将特殊的 HTML 实体转换回普通字符</p>
+<p>② <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.htmlspecialchars.php">htmlspecialchars</a> ( <code>$string</code>, <code>$flags</code> = ENT_COMPAT | ENT_HTML401, <code>$encoding</code> = ini_get(“default_charset”),   <code>$double_encode</code> = <strong><code>true</code></strong>) - 将特殊字符转换为 HTML 实体</p>
+<p> 举例：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/* htmlspecialchars_decode */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;&amp;quot;http://www.baidu.com&amp;quot;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> htmlspecialchars_decode(<span class="variable">$str</span>) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="string">&quot;http://www.baidu.com&quot;</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="10-过滤变量"><a href="#10-过滤变量" class="headerlink" title="10. 过滤变量"></a>10. 过滤变量</h2><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.filter-var.php">filter_var</a> - 使用特定的过滤器过滤一个变量</p>
+<p>举例：提取字符串中的数字</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法1</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;one,two,Three,4&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;number: &quot;</span> . filter_var(<span class="variable">$str</span>, FILTER_SANITIZE_NUMBER_INT) . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"><span class="comment">// 方法2</span></span><br><span class="line">preg_match_all(<span class="string">&#x27;!\d+!&#x27;</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"><span class="comment">// 方法3</span></span><br><span class="line"><span class="variable">$str2</span> = preg_replace(<span class="string">&#x27;/[^0-9]/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;number: &quot;</span> . <span class="variable">$str2</span> . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">number: <span class="number">4</span></span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; <span class="number">4</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line">number: <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h1 id="正则表达式处理字符串"><a href="#正则表达式处理字符串" class="headerlink" title="正则表达式处理字符串"></a>正则表达式处理字符串</h1><h2 id="1-正则匹配"><a href="#1-正则匹配" class="headerlink" title="1. 正则匹配"></a>1. 正则匹配</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.preg-match.php">preg_match</a> - 正则表达式匹配</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.preg-match-all.php">preg_match_all</a> - 全局正则表达式匹配</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* preg_match */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;http://www.baidu.com/ https://www.qq.com/&#x27;</span>;</span><br><span class="line"><span class="variable">$pattern</span> = <span class="string">&#x27;/(https|http):\/\//&#x27;</span>;</span><br><span class="line"><span class="variable">$isMatched</span> = preg_match(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* preg_match_all */</span></span><br><span class="line"><span class="variable">$isMatched</span> = preg_match_all(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$isMatched</span> = preg_match_all(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>, PREG_SET_ORDER);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$isMatched</span> = preg_match_all(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>, PREG_PATTERN_ORDER);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;&lt;img src=&quot;/zentao/file-read-95.png&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;/zentao/file-read-96.png&quot; alt=&quot;&quot; /&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$pattern</span> = <span class="string">&#x27;/src=\&quot;.*?([0-9]+).(.*?)\&quot;/&#x27;</span>;</span><br><span class="line">preg_match_all(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="variable">$diagrams</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$diagrams</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; http:<span class="comment">//</span></span><br><span class="line">    [<span class="number">1</span>] =&gt; http</span><br><span class="line">)</span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; http:<span class="comment">//</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; https:<span class="comment">//</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; http</span><br><span class="line">            [<span class="number">1</span>] =&gt; https</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; http:<span class="comment">//</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; http</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; https:<span class="comment">//</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; https</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; http:<span class="comment">//</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; https:<span class="comment">//</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; http</span><br><span class="line">            [<span class="number">1</span>] =&gt; https</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; src=<span class="string">&quot;/zentao/file-read-95.png&quot;</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; src=<span class="string">&quot;/zentao/file-read-96.png&quot;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; <span class="number">95</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; <span class="number">96</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">2</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; png</span><br><span class="line">            [<span class="number">1</span>] =&gt; png</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="2-分割字符串"><a href="#2-分割字符串" class="headerlink" title="2. 分割字符串"></a>2. 分割字符串</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.preg-split.php">preg_split</a>(string <code>$pattern</code>,  string <code>$subject</code>,  int <code>$limit</code> = -1,  int <code>$flags</code> = 0): array</li>
+</ul>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* preg_split */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;http://www.baidu.com/ https://www.qq.com/&#x27;</span>;</span><br><span class="line"><span class="variable">$pattern</span> = <span class="string">&#x27;/(https|http):\/\//&#x27;</span>;</span><br><span class="line"><span class="variable">$chars</span> = preg_split(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="number">-1</span>, PREG_SPLIT_NO_EMPTY);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$chars</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$chars</span> = preg_split(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="number">-1</span>, PREG_SPLIT_DELIM_CAPTURE);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$chars</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$chars</span> = preg_split(<span class="variable">$pattern</span>, <span class="variable">$str</span>, <span class="number">-1</span>, PREG_SPLIT_OFFSET_CAPTURE);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$chars</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; www.baidu.com/ </span><br><span class="line">    [<span class="number">1</span>] =&gt; www.qq.com/</span><br><span class="line">)</span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; </span><br><span class="line">    [<span class="number">1</span>] =&gt; http</span><br><span class="line">    [<span class="number">2</span>] =&gt; www.baidu.com/ </span><br><span class="line">    [<span class="number">3</span>] =&gt; https</span><br><span class="line">    [<span class="number">4</span>] =&gt; www.qq.com/</span><br><span class="line">)</span><br><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; </span><br><span class="line">            [<span class="number">1</span>] =&gt; <span class="number">0</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; www.baidu.com/ </span><br><span class="line">            [<span class="number">1</span>] =&gt; <span class="number">7</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">2</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; www.qq.com/</span><br><span class="line">            [<span class="number">1</span>] =&gt; <span class="number">30</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; src=<span class="string">&quot;/zentao/file-read-95.png&quot;</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; src=<span class="string">&quot;/zentao/file-read-96.png&quot;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; <span class="number">95</span></span><br><span class="line">            [<span class="number">1</span>] =&gt; <span class="number">96</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">2</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; png</span><br><span class="line">            [<span class="number">1</span>] =&gt; png</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="3-正则替换"><a href="#3-正则替换" class="headerlink" title="3. 正则替换"></a>3. 正则替换</h2><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.preg-replace.php">preg_replace</a> 可以进行正则表达式的搜索和替换。</p>
+<p>举例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/* preg_replace */</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&#x27;http://www.baidu.com/ https://www.qq.com/&#x27;</span>;</span><br><span class="line"><span class="variable">$pattern</span> = <span class="string">&#x27;/(https|http):\/\//&#x27;</span>;</span><br><span class="line"><span class="variable">$replacement</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$newStr</span> = preg_replace(<span class="variable">$pattern</span>, <span class="variable">$replacement</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$newStr</span> . <span class="string">&quot;&lt;br /&gt;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com/ www.qq.com/</span><br></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<ol>
+<li>字符串函数：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.strings.php">https://www.php.net/manual/zh/ref.strings.php</a></li>
+<li>正则表达式函数：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.pcre.php">https://www.php.net/manual/zh/ref.pcre.php</a></li>
+<li>PHP官方文档：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/">https://www.php.net/manual/zh/</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+
+
+
+
+
+
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>PHP笔记（二）：字符串处理相关方法</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/php-notes-for-string-and-preg-method/" title="PHP笔记（二）：字符串处理相关方法">https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/php-notes-for-dev-environment-install/" rel="prev" title="PHP笔记（一）：开发环境配置">
+      <i class="fa fa-chevron-left"></i> PHP笔记（一）：开发环境配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/continuous-integration-for-source-control-jenkinsfile/" rel="next" title="持续集成：Jenkinsfile使用方法介绍">
+      持续集成：Jenkinsfile使用方法介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">PHP基本语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%86%E5%89%B2"><span class="nav-number">2.1.</span> <span class="nav-text">1. 字符串分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0"><span class="nav-number">2.2.</span> <span class="nav-text">2. 用字符串连接数组元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87"><span class="nav-number">2.3.</span> <span class="nav-text">3. 字符串切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%AD%97%E7%AC%A6%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">4. 字符替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.5.</span> <span class="nav-text">5. 大小写转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AD%97%E7%AC%A6ASCII-%E7%A0%81%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">6. 字符ASCII 码相互转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E6%9E%90%E6%88%90%E5%A4%9A%E4%B8%AA%E5%8F%98%E9%87%8F"><span class="nav-number">2.7.</span> <span class="nav-text">7. 将字符串解析成多个变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%AD%97%E7%AC%A6%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.8.</span> <span class="nav-text">8. 字符查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-HTML%E5%AD%97%E7%AC%A6%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.9.</span> <span class="nav-text">9. HTML字符转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E8%BF%87%E6%BB%A4%E5%8F%98%E9%87%8F"><span class="nav-number">2.10.</span> <span class="nav-text">10. 过滤变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%A4%84%E7%90%86%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.</span> <span class="nav-text">正则表达式处理字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D"><span class="nav-number">3.1.</span> <span class="nav-text">1. 正则匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%86%E5%89%B2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.2.</span> <span class="nav-text">2. 分割字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%AD%A3%E5%88%99%E6%9B%BF%E6%8D%A2"><span class="nav-number">3.3.</span> <span class="nav-text">3. 正则替换</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">213</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">180</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/DevTest-Notes/" title="GitHub → https://github.com/hiyongz/DevTest-Notes/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">952k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:26</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
