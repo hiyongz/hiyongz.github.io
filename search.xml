@@ -31,6 +31,58 @@
 ]]></content>
   </entry>
   <entry>
+    <title>持续集成：Jenkins插件Blue Ocean介绍</title>
+    <url>/posts/continuous-integration-for-blue-ocean-plugin/</url>
+    <content><![CDATA[<p>Blue Ocean插件是为Jenkins Pipeline设计的一个聚合工具，当然也兼容自由风格项目。它图形化了pipeline的流程，使流水线更加直观。</p>
+<a id="more"></a>
+<h2 id="Blue-Ocean安装"><a href="#Blue-Ocean安装" class="headerlink" title="Blue Ocean安装"></a>Blue Ocean安装</h2><p>进入jenkins插件管理页面安装Blue Ocean插件<br><img src="blue-ocean-plugin-install.png" width="80%" height="80%" /></p>
+<p>安装完成后就可以在jenkins页面看到Blue Ocean：</p>
+<p><img src="blue-ocean.png" width="80%" height="80%" /></p>
+<p>除了点击【打开Blue Ocean】进入Blue Ocean页面外，也可以访问<code>&lt;Jenkins-Url&gt;/blue</code> 进入。</p>
+<p><img src="blue-ocean-page.png" width="80%" height="80%" /></p>
+<h2 id="创建Pipeline"><a href="#创建Pipeline" class="headerlink" title="创建Pipeline"></a>创建Pipeline</h2><p>Blue Ocean中也可以创建Pipeline。</p>
+<p>1、点击【创建流水线】，选择代码仓库</p>
+<p><img src="blue-ocean-pipeline-create1.png" width="80%" height="80%" /></p>
+<p>以Github为例。</p>
+<p>2、输入github access token，选择有jenkinsfile文件的仓库</p>
+<p><img src="blue-ocean-pipeline-create2.png" width="80%" height="80%" /></p>
+<p>3、等待生成流水线</p>
+<p><img src="blue-ocean-pipeline-create4.png" width="80%" height="80%" /></p>
+<p>Blue Ocean会创建一个多分支流水线项目，我这里生成了一个main分支。</p>
+<h2 id="查看pipeline执行情况"><a href="#查看pipeline执行情况" class="headerlink" title="查看pipeline执行情况"></a>查看pipeline执行情况</h2><p>点击项目可以查看pipeline执行细节</p>
+<p><img src="blue-ocean-pipeline-create5.png" width="80%" height="80%" /></p>
+<p>可以看到Blue Ocean可视化了pipeline的运行流程，可以看到每一个阶段的执行状态以及日志。</p>
+<h2 id="pipeline编辑"><a href="#pipeline编辑" class="headerlink" title="pipeline编辑"></a>pipeline编辑</h2><p>Blue Ocean除了可以创建pipeline项目，还可以对pipeline项目进行编辑。需要注意的是，只能编辑使用Blue Ocean创建的pipeline项目，使用经典页面创建的pipeline项目无法在Blue Ocean中编辑。</p>
+<p>点击编辑：</p>
+<p><img src="blue-ocean-pipeline-edit1.png" width="80%" height="80%" /></p>
+<p>进入编辑页面后就可以对pipeline步骤进行编辑、新增stage：</p>
+<p><img src="blue-ocean-pipeline-edit2.png" width="80%" height="80%" /></p>
+<p>编辑完成后点击保存，提交更改</p>
+<p><img src="blue-ocean-pipeline-edit3.png" width="80%" height="80%" /></p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.jenkins.io/doc/book/blueocean/">https://www.jenkins.io/doc/book/blueocean/</a></li>
+<li><a href="https://www.jenkins.io/doc/book/blueocean/pipeline-editor/">https://www.jenkins.io/doc/book/blueocean/pipeline-editor/</a></li>
+<li><a href="https://www.jenkins.io/projects/blueocean/">https://www.jenkins.io/projects/blueocean/</a></li>
+<li><a href="https://plugins.jenkins.io/blueocean/">https://plugins.jenkins.io/blueocean/</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>常快活，便是功夫。——《传习录》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>自动化测试</category>
+        <category>测试开发</category>
+        <category>持续集成</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>Pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PHP笔记（三）：数组相关操作方法</title>
     <url>/posts/php-notes-for-array-method/</url>
     <content><![CDATA[<p>本文记录一些PHP数组处理的方法。</p>
