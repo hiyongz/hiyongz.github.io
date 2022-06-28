@@ -135,13 +135,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/typora-picture-host-setting-with-picgo-and-gitee/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -163,7 +156,28 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/web-testing-with-playwright-for-locator/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-software-testing/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/test-theory-for-white-box-testing/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-testing-platform/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -184,14 +198,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/test-theory-for-software-testing/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/test-theory-for-testing-platform/</loc>
+    <loc>https://hiyongz.github.io/posts/test-theory-for-black-box-testing/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -219,21 +226,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_transport-layer/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/test-theory-for-black-box-testing/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_link-layer/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/tcp-ip-protocol-architecture-model_transport-layer/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -373,6 +373,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/selenium-select/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/selenium-switch_to/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -415,42 +422,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/selenium-select/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/reading-notes-for-wangyangming-life-story/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/selenium-appium-keycode/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/selenium-architecture-introduce/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/selenium-appium-webdriver-wait/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/selenium-actionchains-touchaction/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -500,6 +472,34 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/reading-notes-for-the-attention-merchants/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/selenium-appium-keycode/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/selenium-architecture-introduce/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/selenium-appium-webdriver-wait/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/selenium-actionchains-touchaction/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -667,6 +667,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/pytest-plugin/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/python-notes-for-datetime/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -688,21 +695,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/pytest-xunit-style-of-setup-teardown/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/pytest-plugin/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/pytest-parametrize/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/pytest-xunit-style-of-setup-teardown/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -723,21 +723,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/pytest-allure-report/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/php-notes-for-array-method/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -752,6 +745,13 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/personal-blog-hexo-construction-guide2/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/pytest-allure-report/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -856,21 +856,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/linux-svn-install-in-centos7/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/macos-bigsur-hackintosh-installation-tutorial/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-tools-for-samba/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -884,21 +870,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-performance-command-guide/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/linux-shell-networking-management-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/linux-svn-install-in-centos7/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -940,6 +912,13 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/linux-tools-for-samba/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-for-getopt/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -948,6 +927,27 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/linux-shell-bash-programing/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-programming-grep-sed-awk/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-performance-command-guide/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/linux-shell-networking-management-guide/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1087,14 +1087,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/git-generate-ssh-public-key-guide/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/git-generate-ssh-public-key-guide/</loc>
+    <loc>https://hiyongz.github.io/posts/git-install-and-guide/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1122,13 +1122,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/database-for-mysql-advance/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-skills-for-cron-expression/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -1136,14 +1129,7 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/</loc>
+    <loc>https://hiyongz.github.io/posts/database-for-mysql-advance/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1157,7 +1143,21 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/continuous-integration-jenkins-for-pipeline-shared-libraries/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-jenkins-plugin-for-robotframework/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1185,14 +1185,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-email-ext/</loc>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-example/</loc>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-email-ext/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1206,14 +1206,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</loc>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-2/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-2/</loc>
+    <loc>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1241,6 +1241,20 @@
   </url>
   
   <url>
+    <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/container-docker-architecture-introduction/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hiyongz.github.io/posts/container-docker-dockerfile/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -1256,20 +1270,6 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/container-docker-command/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/blog-navigation/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hiyongz.github.io/posts/container-docker-architecture-introduction/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1325,13 +1325,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/appium-android-controls/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -1339,14 +1332,21 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/appium-adb/</loc>
+    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-facebook-wda/</loc>
+    <loc>https://hiyongz.github.io/posts/app-testing-tools-for-uiautomator2/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/appium-adb/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1451,14 +1451,14 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-linear-list/</loc>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-sorting-algorithms/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
@@ -1486,13 +1486,6 @@
   </url>
   
   <url>
-    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-binary-search/</loc>
-    
-    <lastmod>2022-06-28</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dfs-bfs/</loc>
     
     <lastmod>2022-06-28</lastmod>
@@ -1508,6 +1501,13 @@
   
   <url>
     <loc>https://hiyongz.github.io/posts/algorithm-notes-for-dynamic-programming/</loc>
+    
+    <lastmod>2022-06-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiyongz.github.io/posts/algorithm-notes-for-binary-search/</loc>
     
     <lastmod>2022-06-28</lastmod>
     
