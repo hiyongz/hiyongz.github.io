@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文介绍PhpSpreadsheet读写excel文件的一些使用方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PhpSpreadsheet读写Excel文件">
+<meta property="og:url" content="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="本文介绍PhpSpreadsheet读写excel文件的一些使用方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-28T18:12:00.000Z">
+<meta property="article:modified_time" content="2022-06-28T14:22:48.807Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="PhpSpreadsheet">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PhpSpreadsheet读写Excel文件 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz/DevTest-Notes" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PhpSpreadsheet读写Excel文件
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-28 18:12:00" itemprop="dateCreated datePublished" datetime="2022-06-28T18:12:00+00:00">2022-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/php-notes-for-phpspreadsheet/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/php-notes-for-phpspreadsheet/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文介绍PhpSpreadsheet读写excel文件的一些使用方法。</p>
+<a id="more"></a>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>PhpSpreadsheet要求PHP 7.3及以上版本，是PHPExcel库的扩展版本，可用来读写xls、xlsx、CSV、HTML等格式文件。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Reading</th>
+<th>Writing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open Document Format/OASIS (.ods)</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Office Open XML (.xlsx) Excel 2007 and above</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>BIFF 8 (.xls) Excel 97 and above</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>BIFF 5 (.xls) Excel 95</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>SpreadsheetML (.xml) Excel 2003</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>Gnumeric</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>SYLK</td>
+<td>✓</td>
+<td></td>
+</tr>
+<tr>
+<td>CSV</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>PDF (using either the TCPDF, Dompdf or mPDF libraries, which need to be installed separately)</td>
+<td></td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>PhpSpreadsheet安装方法可参考<a href="">禅道二次开发（四）：集成PhpSpreadsheet解析Excel文件</a></p>
+<p>下面来介绍PhpSpreadsheet读写excel格式文件方法。</p>
+<h1 id="写入excel文件"><a href="#写入excel文件" class="headerlink" title="写入excel文件"></a>写入excel文件</h1><p>以写入Xlsx格式文件为例，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;vendor/autoload.php&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Spreadsheet</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Writer</span>\<span class="title">Xlsx</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 写入excel */</span></span><br><span class="line"><span class="variable">$fileName</span> = <span class="string">&#x27;./test.xlsx&#x27;</span>;</span><br><span class="line"><span class="variable">$spreadsheet</span> = <span class="keyword">new</span> Spreadsheet();</span><br><span class="line"><span class="variable">$sheet</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet();</span><br><span class="line"><span class="variable">$sheet</span>-&gt;setCellValue(<span class="string">&#x27;A1&#x27;</span>, <span class="string">&#x27;Hello World !&#x27;</span>);</span><br><span class="line"><span class="variable">$sheet</span>-&gt;setCellValue(<span class="string">&#x27;C3&#x27;</span>, <span class="string">&#x27;你好 !&#x27;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="variable">$writer</span> = <span class="keyword">new</span> Xlsx(<span class="variable">$spreadsheet</span>);</span><br><span class="line"><span class="variable">$writer</span>-&gt;save(<span class="variable">$fileName</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="工作表默认样式"><a href="#工作表默认样式" class="headerlink" title="工作表默认样式"></a>工作表默认样式</h2><p>可以设置工作表默认样式，比如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$spreadsheet</span>-&gt;getDefaultStyle()-&gt;getFont()-&gt;setName(<span class="string">&#x27;宋体&#x27;</span>); <span class="comment">// 字体</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getDefaultStyle()-&gt;getFont()-&gt;setSize(<span class="number">8</span>); <span class="comment">// 字体大小</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getDefaultStyle()-&gt;getAlignment()-&gt;setWrapText(<span class="literal">true</span>); <span class="comment">// 自动换行</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getDefaultStyle()-&gt;getAlignment()-&gt;setVertical(Alignment::VERTICAL_CENTER); <span class="comment">//垂直居中</span></span><br></pre></td></tr></table></figure>
+<h2 id="单元格样式"><a href="#单元格样式" class="headerlink" title="单元格样式"></a>单元格样式</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Style</span>\<span class="title">Alignment</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&#x27;A1:D4&#x27;</span>)-&gt;getAlignment()-&gt;setWrapText(<span class="literal">true</span>); <span class="comment">// 自动换行</span></span><br><span class="line"><span class="variable">$caseSpreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&#x27;A1:D4&#x27;</span>)-&gt;getAlignment()-&gt;setVertical(Alignment::VERTICAL_CENTER); <span class="comment">//垂直居中</span></span><br></pre></td></tr></table></figure>
+<p>单元格对齐方式包括水平对齐和垂直对齐：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 水平对齐样式</span></span><br><span class="line">HORIZONTAL_GENERA</span><br><span class="line">HORIZONTAL_LEFT</span><br><span class="line">HORIZONTAL_RIGHT</span><br><span class="line">HORIZONTAL_CENTER</span><br><span class="line">HORIZONTAL_CENTER_CONTINUOUS</span><br><span class="line">HORIZONTAL_JUSTIFY </span><br><span class="line">HORIZONTAL_FILL</span><br><span class="line">HORIZONTAL_DISTRIBUTED <span class="comment">// Excel2007 only</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 垂直对齐样式</span></span><br><span class="line">VERTICAL_BOTTOM</span><br><span class="line">VERTICAL_TOP</span><br><span class="line">VERTICAL_CENTER</span><br><span class="line">VERTICAL_JUSTIFY</span><br><span class="line">VERTICAL_DISTRIBUTED  <span class="comment">// Excel2007 only</span></span><br></pre></td></tr></table></figure>
+<p>除了设置单元格的字体，还可以设置边框，填充颜色等样式信息。</p>
+<p>比如设置单元格背景颜色：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&#x27;E2&#x27;</span>)-&gt;getFill()</span><br><span class="line">    -&gt;setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)</span><br><span class="line">    -&gt;getStartColor()-&gt;setARGB(<span class="string">&#x27;FFFF0000&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个单元格，如果设置多个单元格推荐此方法，性能更优。</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&#x27;B3:B7&#x27;</span>)-&gt;getFill()</span><br><span class="line">    -&gt;setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)</span><br><span class="line">    -&gt;getStartColor()-&gt;setARGB(<span class="string">&#x27;FFFF0000&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>注意：颜色代码为ARGB，带了Alpha通道。</p>
+<p>设置单元格高度，某一行高度：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getRowDimension(<span class="string">&#x27;10&#x27;</span>)-&gt;setRowHeight(<span class="number">100</span>);</span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getDefaultRowDimension()-&gt;setRowHeight(<span class="number">15</span>); <span class="comment">// 默认行高</span></span><br></pre></td></tr></table></figure>
+<p>设置某列：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置列宽</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()</span><br><span class="line">            -&gt;getColumnDimension(<span class="string">&#x27;A&#x27;</span>) </span><br><span class="line">            -&gt;setWidth(<span class="number">30</span>);</span><br><span class="line">            </span><br><span class="line"><span class="comment">// 自动列宽</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()</span><br><span class="line">            -&gt;getColumnDimension(<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">            -&gt;setAutoSize(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认列宽</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()</span><br><span class="line">            -&gt;getDefaultColumnDimension() </span><br><span class="line">            -&gt;setWidth(<span class="number">12</span>); </span><br></pre></td></tr></table></figure>
+<h2 id="单元格数据类型"><a href="#单元格数据类型" class="headerlink" title="单元格数据类型"></a>单元格数据类型</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Cell</span>\<span class="title">DataType</span>;</span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;setCellValueExplicit(<span class="string">&quot;A1&quot;</span>, <span class="string">&quot;123&quot;</span>, DataType::TYPE_STRING);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">TYPE_STRING2</span></span><br><span class="line"><span class="comment">TYPE_STRING</span></span><br><span class="line"><span class="comment">TYPE_FORMULA</span></span><br><span class="line"><span class="comment">TYPE_NUMERIC</span></span><br><span class="line"><span class="comment">TYPE_BOO</span></span><br><span class="line"><span class="comment">TYPE_NULL</span></span><br><span class="line"><span class="comment">TYPE_INLINE</span></span><br><span class="line"><span class="comment">TYPE_ERROR</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>数字添加引号前缀：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;setCellValueExplicit(<span class="string">&quot;A1&quot;</span>, <span class="string">&quot;123&quot;</span>, DataType::TYPE_STRING);</span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&quot;A1&quot;</span>)-&gt;setQuotePrefix(<span class="literal">true</span>);</span><br><span class="line"><span class="comment">// $spreadsheet-&gt;getActiveSheet()-&gt;getStyle(&quot;A1&quot;)-&gt;getNumberFormat()-&gt;setFormatCode(NumberFormat::FORMAT_TEXT);</span></span><br></pre></td></tr></table></figure>
+<p>设置数据有效性：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Cell</span>\<span class="title">DataValidation</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$objValidation</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getCell(<span class="string">&#x27;C1&#x27;</span>)-&gt;getDataValidation(); <span class="comment">// 设置数据有效性的单元格</span></span><br><span class="line"><span class="variable">$objValidation</span> -&gt; setType(DataValidation::TYPE_LIST)</span><br><span class="line">    -&gt; setErrorStyle(DataValidation::STYLE_INFORMATION)</span><br><span class="line">    -&gt; setAllowBlank(<span class="literal">false</span>)</span><br><span class="line">    -&gt; setShowInputMessage(<span class="literal">true</span>)</span><br><span class="line">    -&gt; setShowErrorMessage(<span class="literal">true</span>)</span><br><span class="line">    -&gt; setShowDropDown(<span class="literal">true</span>)</span><br><span class="line">    -&gt; setErrorTitle(<span class="string">&#x27;错误提示&#x27;</span>)</span><br><span class="line">    -&gt; setError(<span class="string">&#x27;您输入的值有误&#x27;</span>)</span><br><span class="line">    -&gt; setPromptTitle(<span class="string">&#x27;结果&#x27;</span>)</span><br><span class="line">    -&gt; setFormula1(<span class="string">&#x27;&quot;成功,失败&quot;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="冻结单元格"><a href="#冻结单元格" class="headerlink" title="冻结单元格"></a>冻结单元格</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sheet</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet();</span><br><span class="line"><span class="variable">$sheet</span>-&gt;freezePane(<span class="string">&#x27;A2&#x27;</span>); <span class="comment">// 冻结第一行</span></span><br><span class="line"><span class="variable">$sheet</span>-&gt;freezePane(<span class="string">&#x27;B1&#x27;</span>); <span class="comment">// 冻结第一列</span></span><br><span class="line"><span class="variable">$sheet</span>-&gt;freezePane(<span class="string">&#x27;B3&#x27;</span>); <span class="comment">// 冻结B3单元格</span></span><br></pre></td></tr></table></figure>
+<h2 id="单元格条件格式"><a href="#单元格条件格式" class="headerlink" title="单元格条件格式"></a>单元格条件格式</h2><p>可以设置单元格的条件格式，可以对满足某个条件的单元格设置样式，比如设置大于80的单元格：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conditional</span> = <span class="keyword">new</span> \PhpOffice\PhpSpreadsheet\Style\Conditional();</span><br><span class="line"><span class="variable">$conditional</span>-&gt;setConditionType(\PhpOffice\PhpSpreadsheet\Style\Conditional::CONDITION_CELLIS);</span><br><span class="line"><span class="variable">$conditional</span>-&gt;setOperatorType(\PhpOffice\PhpSpreadsheet\Style\Conditional::OPERATOR_GREATERTHAN);</span><br><span class="line"><span class="variable">$conditional</span>-&gt;addCondition(<span class="number">80</span>);</span><br><span class="line"><span class="variable">$conditional</span>-&gt;getStyle()-&gt;getFont()-&gt;getColor()-&gt;setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_DARKGREEN);</span><br><span class="line"><span class="variable">$conditional</span>-&gt;getStyle()-&gt;getFill()-&gt;setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);</span><br><span class="line"><span class="variable">$conditional</span>-&gt;getStyle()-&gt;getFill()-&gt;getStartColor()-&gt;setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_GREEN);</span><br><span class="line"></span><br><span class="line"><span class="variable">$conditionalStyles</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&#x27;A1:A10&#x27;</span>)-&gt;getConditionalStyles();</span><br><span class="line"><span class="variable">$conditionalStyles</span>[] = <span class="variable">$conditional</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getStyle(<span class="string">&#x27;A1:A10&#x27;</span>)-&gt;setConditionalStyles(<span class="variable">$conditionalStyles</span>);</span><br></pre></td></tr></table></figure>
+<p>可以使用的条件及操作符：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Condition types</span></span><br><span class="line">CONDITION_NONE</span><br><span class="line">CONDITION_CELLIS</span><br><span class="line">CONDITION_CONTAINSTEXT</span><br><span class="line">CONDITION_EXPRESSION</span><br><span class="line">CONDITION_CONTAINSBLANKS</span><br><span class="line">CONDITION_NOTCONTAINSBLANKS</span><br><span class="line">CONDITION_DATABAR</span><br><span class="line">CONDITION_NOTCONTAINSTEXT</span><br><span class="line"></span><br><span class="line"><span class="comment">// Operator types</span></span><br><span class="line">OPERATOR_NONE</span><br><span class="line">OPERATOR_BEGINSWITH</span><br><span class="line">OPERATOR_ENDSWITH</span><br><span class="line">OPERATOR_EQUA</span><br><span class="line">OPERATOR_GREATERTHAN</span><br><span class="line">OPERATOR_GREATERTHANOREQUAL</span><br><span class="line">OPERATOR_LESSTHAN</span><br><span class="line">OPERATOR_LESSTHANOREQUAL</span><br><span class="line">OPERATOR_NOTEQUAL</span><br><span class="line">OPERATOR_CONTAINSTEXT</span><br><span class="line">OPERATOR_NOTCONTAINS</span><br><span class="line">OPERATOR_BETWEEN</span><br><span class="line">OPERATOR_NOTBETWEEN</span><br></pre></td></tr></table></figure>
+<h2 id="写入图片"><a href="#写入图片" class="headerlink" title="写入图片"></a>写入图片</h2><p>将图片写入某个单元格中：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$drawing</span> = <span class="keyword">new</span> \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setName(<span class="string">&#x27;Logo&#x27;</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setDescription(<span class="string">&#x27;Logo&#x27;</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setPath(<span class="variable">$diagramPath</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setHeight(<span class="number">120</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setCoordinates(<span class="string">&quot;D2&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$drawing</span>-&gt;setOffsetX(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setRotation(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;getShadow()-&gt;setVisible(<span class="literal">true</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;getShadow()-&gt;setDirection(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$drawing</span>-&gt;setWorksheet(<span class="variable">$spreadsheet</span>-&gt;getActiveSheet());</span><br></pre></td></tr></table></figure>
+<h2 id="设置超链接"><a href="#设置超链接" class="headerlink" title="设置超链接"></a>设置超链接</h2><p>给单元格设置超链接：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getCell(<span class="string">&#x27;B2&#x27;</span>)-&gt;getHyperlink()-&gt;setUrl(<span class="string">&quot;sheet://&#x27;Sheetname&#x27;!A1&quot;</span>); <span class="comment">// 当前文档位置</span></span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getCell(<span class="string">&#x27;B2&#x27;</span>)-&gt;getHyperlink()-&gt;setUrl(<span class="string">&quot;https://www.baidu.com/&quot;</span>); <span class="comment">// 外链地址</span></span><br></pre></td></tr></table></figure>
+<h1 id="读取excel文件"><a href="#读取excel文件" class="headerlink" title="读取excel文件"></a>读取excel文件</h1><p>下面介绍读取excel文件方法。</p>
+<h2 id="读取文本数据"><a href="#读取文本数据" class="headerlink" title="读取文本数据"></a>读取文本数据</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;vendor/autoload.php&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Spreadsheet</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Writer</span>\<span class="title">Xlsx</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 读取excel */</span></span><br><span class="line"><span class="comment">// $reader = new Xlsx();</span></span><br><span class="line"><span class="comment">// $spreadsheet = $reader-&gt;load($fileName);</span></span><br><span class="line"><span class="variable">$reader</span> = IOFactory::createReader(<span class="string">&#x27;Xlsx&#x27;</span>);</span><br><span class="line"><span class="variable">$spreadsheet</span> = <span class="variable">$reader</span>-&gt;load(<span class="variable">$fileName</span>);</span><br><span class="line"><span class="comment">// $reader-&gt;setReadDataOnly(true); // 设置后无法获取excel中的图片</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$worksheet</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet();</span><br><span class="line"><span class="comment">// $worksheet   = $spreadsheet-&gt;getSheetByName(&#x27;testcase&#x27;);</span></span><br><span class="line"><span class="comment">// $rawCasedata = $worksheet-&gt;toArray();</span></span><br><span class="line"><span class="variable">$highestRow</span>  = <span class="variable">$worksheet</span>-&gt;getHighestRow(); <span class="comment">// 取得总行数</span></span><br><span class="line"><span class="variable">$highestColumn</span> = <span class="variable">$worksheet</span>-&gt;getHighestColumn(); <span class="comment">// 取得总列数</span></span><br><span class="line"><span class="variable">$highestColumnIndex</span> = Coordinate::columnIndexFromString(<span class="variable">$highestColumn</span>); <span class="comment">// 取得总列数</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$excelData</span> = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$row</span> = <span class="number">1</span>; <span class="variable">$row</span> &lt;= <span class="variable">$highestRow</span>; <span class="variable">$row</span>++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$col</span> = <span class="number">1</span>; <span class="variable">$col</span> &lt;= <span class="variable">$highestColumnIndex</span>; <span class="variable">$col</span>++) &#123;</span><br><span class="line">        <span class="variable">$excelData</span>[<span class="variable">$row</span>][] = (<span class="keyword">string</span>)<span class="variable">$worksheet</span>-&gt;getCellByColumnAndRow(<span class="variable">$col</span>, <span class="variable">$row</span>)-&gt;getValue();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">print_r(<span class="variable">$excelData</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">1</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; Hello World !</span><br><span class="line">            [<span class="number">1</span>] =&gt; </span><br><span class="line">            [<span class="number">2</span>] =&gt; </span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">2</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; </span><br><span class="line">            [<span class="number">1</span>] =&gt; </span><br><span class="line">            [<span class="number">2</span>] =&gt; </span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    [<span class="number">3</span>] =&gt; <span class="keyword">Array</span></span><br><span class="line">        (</span><br><span class="line">            [<span class="number">0</span>] =&gt; </span><br><span class="line">            [<span class="number">1</span>] =&gt; </span><br><span class="line">            [<span class="number">2</span>] =&gt; 你好 !</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="读取图片"><a href="#读取图片" class="headerlink" title="读取图片"></a>读取图片</h2><p>读取Excel文件中的图片，支持png、gif和jpg格式图片：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;vendor/autoload.php&#x27;</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Spreadsheet</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Writer</span>\<span class="title">Xlsx</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">IOFactory</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Cell</span>\<span class="title">Coordinate</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$fileName</span> = <span class="string">&#x27;./test.xlsx&#x27;</span>;</span><br><span class="line"><span class="variable">$reader</span> = IOFactory::createReader(<span class="string">&#x27;Xlsx&#x27;</span>);</span><br><span class="line"><span class="variable">$spreadsheet</span> = <span class="variable">$reader</span>-&gt;load(<span class="variable">$fileName</span>);</span><br><span class="line"><span class="variable">$worksheet</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 读取excel中的图片 */</span></span><br><span class="line"><span class="variable">$imgpath</span> = <span class="string">&#x27;./&#x27;</span>;</span><br><span class="line"><span class="variable">$imgArray</span> = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$worksheet</span>-&gt;getDrawingCollection() <span class="keyword">as</span> <span class="variable">$drawing</span>) &#123;</span><br><span class="line">    <span class="keyword">list</span>(<span class="variable">$startColumn</span>, <span class="variable">$startRow</span>) = Coordinate::coordinateFromString(<span class="variable">$drawing</span>-&gt;getCoordinates());</span><br><span class="line">    print_r(<span class="variable">$startColumn</span>);</span><br><span class="line">    print_r(<span class="variable">$startRow</span>);</span><br><span class="line">    <span class="keyword">switch</span> (<span class="variable">$drawing</span>-&gt;getExtension()) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;jpeg&#x27;</span>:</span><br><span class="line">        <span class="variable">$source</span> = imagecreatefromjpeg(<span class="variable">$drawing</span>-&gt;getPath());</span><br><span class="line">        <span class="variable">$imgname</span> = <span class="variable">$imgpath</span> . <span class="variable">$drawing</span>-&gt;getCoordinates() . <span class="string">&#x27;.jpg&#x27;</span>;</span><br><span class="line">        imagejpeg(<span class="variable">$source</span>, <span class="variable">$imgname</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;png&#x27;</span>:</span><br><span class="line">        <span class="variable">$source</span> = imagecreatefrompng(<span class="variable">$drawing</span>-&gt;getPath());</span><br><span class="line">        <span class="variable">$imgname</span> = <span class="variable">$imgpath</span> . <span class="variable">$drawing</span>-&gt;getCoordinates() . <span class="string">&#x27;.png&#x27;</span>;</span><br><span class="line">        imagepng(<span class="variable">$source</span>, <span class="variable">$imgname</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:  </span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Unsupported file type: &quot;</span> . <span class="variable">$drawing</span>-&gt;getExtension() . <span class="string">&quot;\n&quot;</span>;;              </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="读取超链接"><a href="#读取超链接" class="headerlink" title="读取超链接"></a>读取超链接</h2><p>读取超链接：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$spreadsheet</span> = <span class="variable">$reader</span>-&gt;load(<span class="variable">$fileName</span>);</span><br><span class="line"><span class="variable">$worksheet</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet();</span><br><span class="line"><span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getCell(<span class="string">&#x27;A1&#x27;</span>)-&gt;hasHyperlink();  <span class="comment">// 判断是否有超链接</span></span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet()-&gt;getCell(<span class="string">&#x27;A1&#x27;</span>)-&gt;getHyperlink()-&gt;getUrl(); <span class="comment">// 读取超链接</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h1><p>在服务器上创建了excel文件后，可以将它下载到客户端。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// redirect output to client browser</span></span><br><span class="line">header(<span class="string">&#x27;Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#x27;</span>);</span><br><span class="line">header(<span class="string">&quot;Content-Disposition: attachment;filename=<span class="subst">$downloadFileName</span>&quot;</span>);</span><br><span class="line">header(<span class="string">&#x27;Cache-Control: max-age=0&#x27;</span>);</span><br><span class="line"><span class="variable">$writer</span>    = <span class="keyword">new</span> PhpOffice\PhpSpreadsheet\Writer\Xlsx(<span class="variable">$spreadsheet</span>);</span><br><span class="line"><span class="variable">$writer</span>-&gt;save(<span class="string">&#x27;php://output&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>当然也可以下载已经生成的xlsx格式文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$FileName</span> = basename(<span class="variable">$FilePath</span>);</span><br><span class="line">header(<span class="string">&quot;Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;</span>); </span><br><span class="line">header(<span class="string">&quot;Content-Disposition: attachment; filename=<span class="subst">$FileName</span>&quot;</span>);</span><br><span class="line">header(<span class="string">&quot;Content-length: &quot;</span> . filesize(<span class="variable">$FilePath</span>));</span><br><span class="line">header(<span class="string">&quot;Pragma: no-cache&quot;</span>); </span><br><span class="line">header(<span class="string">&quot;Expires: 0&quot;</span>); </span><br><span class="line">readfile(<span class="string">&quot;<span class="subst">$FilePath</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>xls格式文件类型为：<code>application/vnd.ms-excel</code> 。</p>
+<p>这里就介绍这么多了，PhpSpreadsheet的更多使用方法可参考官方文档：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/">https://phpspreadsheet.readthedocs.io/en/latest/</a>。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li>github地址：<a target="_blank" rel="noopener" href="https://github.com/PHPOffice/PhpSpreadsheet">https://github.com/PHPOffice/PhpSpreadsheet</a></li>
+<li>PhpSpreadsheet文档地址：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/">https://phpspreadsheet.readthedocs.io/en/latest/</a></li>
+<li>设置自动换行：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#alignment-and-wrap-text">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#alignment-and-wrap-text</a></li>
+<li><a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#formatting-cells">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#formatting-cells</a></li>
+<li>某一行高度：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#setting-a-rows-height">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#setting-a-rows-height</a></li>
+<li>默认高度：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#setting-the-default-row-height">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#setting-the-default-row-height</a></li>
+<li>写入图片：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#add-a-drawing-to-a-worksheet">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#add-a-drawing-to-a-worksheet</a></li>
+<li><a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#conditional-formatting-a-cell">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#conditional-formatting-a-cell</a></li>
+<li><a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/conditional-formatting/">https://phpspreadsheet.readthedocs.io/en/latest/topics/conditional-formatting/</a></li>
+<li>下载excel文件：<a target="_blank" rel="noopener" href="https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#redirect-output-to-a-clients-web-browser">https://phpspreadsheet.readthedocs.io/en/latest/topics/recipes/#redirect-output-to-a-clients-web-browser</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>说人坏话只能说明自己也同样抱有小气的本性。——太宰治《人间失格》</p>
+</blockquote>
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>              
+		  <a href="/tags/PhpSpreadsheet/" rel="tag"><i class="fa fa-tag"></i> PhpSpreadsheet</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>PhpSpreadsheet读写Excel文件</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/php-notes-for-phpspreadsheet/" title="PhpSpreadsheet读写Excel文件">https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/markdown-syntax-for-flowchart2/" rel="prev" title="markdown图表语法Mermaid介绍">
+      <i class="fa fa-chevron-left"></i> markdown图表语法Mermaid介绍
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%85%A5excel%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">写入excel文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E8%A1%A8%E9%BB%98%E8%AE%A4%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">工作表默认样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">单元格样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">单元格数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%BB%E7%BB%93%E5%8D%95%E5%85%83%E6%A0%BC"><span class="nav-number">2.4.</span> <span class="nav-text">冻结单元格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%A0%BC%E6%9D%A1%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.5.</span> <span class="nav-text">单元格条件格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E5%9B%BE%E7%89%87"><span class="nav-number">2.6.</span> <span class="nav-text">写入图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">2.7.</span> <span class="nav-text">设置超链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96excel%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">读取excel文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">读取文本数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E5%9B%BE%E7%89%87"><span class="nav-number">3.2.</span> <span class="nav-text">读取图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">3.3.</span> <span class="nav-text">读取超链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">下载文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">216</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">181</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/DevTest-Notes/" title="GitHub → https://github.com/hiyongz/DevTest-Notes/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">967k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:39</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
