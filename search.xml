@@ -1113,6 +1113,151 @@
       </tags>
   </entry>
   <entry>
+    <title>禅道二次开发（二）：禅道框架介绍</title>
+    <url>/posts/zentao-extension-for-zentao-framework-introduction/</url>
+    <content><![CDATA[<p>进行禅道二次开发前有必要学习一下禅道使用的框架，本文将简单介绍zentaoPHP框架以及禅道的目录结构。</p>
+<a id="more"></a>
+<h1 id="zentaoPHP框架"><a href="#zentaoPHP框架" class="headerlink" title="zentaoPHP框架"></a>zentaoPHP框架</h1><p>禅道项目使用zentaoPHP框架，基于b/s架构开发。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>zentaoPHP框架支持MVC（Model-View-Controller）软件架构模式，把软件系统分为三个基本部分：</p>
+<ul>
+<li>模型（Model）：实现程序的功能、数据管理和数据库设计。对数据库的增删改查可以放在这一层。</li>
+<li>控制器（Controller）：负责转发用户请求，对请求进行处理，组织各种业务逻辑，准备数据。</li>
+<li>视图（View）：负责渲染数据，图形界面设计，通过HTML方式呈现给用户。</li>
+</ul>
+<p>zentaoPHP框架的基本原理：</p>
+<ol>
+<li>通过apache服务将请求转交给index.php（<code>\zentao\app\htdocs\index.php</code>），由它来进行资源调度。</li>
+<li>index.php加载框架文件，初始化应用，解析URI请求，得到请求对应对模块名、方法和参数。比如URL：<code>&lt;zentao-url&gt;/zentao/testcase-browse-1.html</code> 模块名为testcase，方法名为browse，1为参数。</li>
+<li>然后加载相应模块的control方法，model方法，然后渲染模板（view文件）、呈献给用户。</li>
+</ol>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><p>zentaoPHP框架提供了用于操作数据库的对象类DAO，在<code>\lib\dao\dao.class.php</code> 中定义，加载框架时会自动生成 <code>$this-&gt;dao</code> 对象，可以在control, model，view层直接使用 <code>$this-&gt;dao</code> 来执行各种方法。</p>
+<p>查询数据库使用 <code>fetch</code> 系列方法，增删改相关方法使用 <code>exec()</code> 方法。</p>
+<p>比如禅道中查询所有用例：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;select(<span class="string">&#x27;*&#x27;</span>)-&gt;from(TABLE_CASE)</span><br><span class="line">    -&gt;where(<span class="string">&#x27;deleted&#x27;</span>)-&gt;eq(<span class="number">0</span>)</span><br><span class="line">    -&gt;fetchAll(<span class="string">&#x27;id&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>插入用例：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;insert(TABLE_CASE)-&gt;data(<span class="variable">$case</span>)-&gt;autoCheck()-&gt;exec();</span><br></pre></td></tr></table></figure>
+<p>更新用例：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;update(TABLE_CASE)-&gt;data(<span class="variable">$case</span>)-&gt;autoCheck()-&gt;where(<span class="string">&#x27;id&#x27;</span>)-&gt;eq((<span class="keyword">int</span>)<span class="variable">$caseID</span>)-&gt;exec();</span><br></pre></td></tr></table></figure>
+<p>删除用例：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;delete()-&gt;from(TABLE_CASE)-&gt;where(<span class="string">&#x27;id&#x27;</span>)-&gt;eq(<span class="variable">$Caseid</span>)-&gt;exec();</span><br></pre></td></tr></table></figure>
+<h2 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h2><p>zentaoPHP将数据验证放在了model层，提供了数据过滤的方法，包括了数据修正和数据验证。过滤方法在 <code>\lib\filter\filter.class.php</code> 文件中定义。</p>
+<p>数据修正以禅道testcase模块创建用例方法为例，查看<code>\module\testcase\model.php</code>中的create方法：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$case</span>   = fixer::input(<span class="string">&#x27;post&#x27;</span>)</span><br><span class="line">    -&gt;add(<span class="string">&#x27;status&#x27;</span>, <span class="variable">$status</span>)</span><br><span class="line">    -&gt;add(<span class="string">&#x27;version&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">    -&gt;add(<span class="string">&#x27;fromBug&#x27;</span>, <span class="variable">$bugID</span>)</span><br><span class="line">    -&gt;setDefault(<span class="string">&#x27;openedBy&#x27;</span>, <span class="keyword">$this</span>-&gt;app-&gt;user-&gt;account)</span><br><span class="line">    -&gt;setDefault(<span class="string">&#x27;openedDate&#x27;</span>, <span class="variable">$now</span>)</span><br><span class="line">    -&gt;setIF(<span class="keyword">$this</span>-&gt;config-&gt;systemMode == <span class="string">&#x27;new&#x27;</span> <span class="keyword">and</span> <span class="keyword">$this</span>-&gt;app-&gt;tab == <span class="string">&#x27;project&#x27;</span>, <span class="string">&#x27;project&#x27;</span>, <span class="keyword">$this</span>-&gt;session-&gt;project)</span><br><span class="line">    -&gt;setIF(<span class="keyword">$this</span>-&gt;app-&gt;tab == <span class="string">&#x27;execution&#x27;</span>, <span class="string">&#x27;execution&#x27;</span>, <span class="keyword">$this</span>-&gt;session-&gt;execution)</span><br><span class="line">    -&gt;setIF(<span class="keyword">$this</span>-&gt;post-&gt;story != <span class="literal">false</span>, <span class="string">&#x27;storyVersion&#x27;</span>, <span class="keyword">$this</span>-&gt;loadModel(<span class="string">&#x27;story&#x27;</span>)-&gt;getVersion((<span class="keyword">int</span>)<span class="keyword">$this</span>-&gt;post-&gt;story))</span><br><span class="line">    -&gt;remove(<span class="string">&#x27;steps,expects,files,labels,stepType,forceNotReview&#x27;</span>)</span><br><span class="line">    -&gt;setDefault(<span class="string">&#x27;story&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">    -&gt;cleanInt(<span class="string">&#x27;story,product,branch,module&#x27;</span>)</span><br><span class="line">    -&gt;join(<span class="string">&#x27;stage&#x27;</span>, <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">    -&gt;get();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>首先调用fixer类的input方法，参数post表示是从<code>$_POST</code> 这个变量中获取数据。</li>
+<li><code>add()</code>方法是向数据中增加变量。</li>
+<li><code>setDefault()</code>方法表示当这个变量没有传值的时候，设成默认值。</li>
+<li><code>setIF()</code> 方法第一个参数是判断条件，后面两个分别是key和value。当条件为true时，设置<code>$key = $value</code>。</li>
+<li><code>remove()</code> 方法用于删除不需要的字段。</li>
+<li><code>cleanInt()</code>将变量转换为int类型。</li>
+<li><code>join(&#39;stage&#39;, &#39;,&#39;)</code>将stage使用<code>,</code>连接起来。</li>
+<li>get方法返回一个经过修正的数据集合。</li>
+</ul>
+<p>数据验证使用check相关方法：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;insert(TABLE_CASE)-&gt;data(<span class="variable">$case</span>)</span><br><span class="line">    -&gt;autoCheck()</span><br><span class="line">    -&gt;batchCheck(<span class="keyword">$this</span>-&gt;config-&gt;testcase-&gt;create-&gt;requiredFields, <span class="string">&#x27;notempty&#x27;</span>)</span><br><span class="line">    -&gt;exec();</span><br></pre></td></tr></table></figure>
+<p>data方法将修正过的数据传递给dao对象，然后通过autoCheck()对其进行自动检查。batchCheck()方法会对一批字段进行非空的验证。</p>
+<p>使用<code>dao::isError()</code>判断是否有错误，<code>dao::getError()</code>方法获取报错信息。</p>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>以测试用例浏览页面为例，在testcase模块的control文件中的browse方法完成分页的功能，相关代码如下：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">browse</span>(<span class="params"><span class="variable">$recTotal</span>, <span class="variable">$recPerPage</span>, <span class="variable">$pageID</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* Load pager. */</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;loadClass(<span class="string">&#x27;pager&#x27;</span>, <span class="variable">$static</span> = <span class="literal">true</span>);</span><br><span class="line">    <span class="variable">$pager</span> = <span class="keyword">new</span> pager(<span class="variable">$recTotal</span>, <span class="variable">$recPerPage</span>, <span class="variable">$pageID</span>);</span><br><span class="line">    <span class="variable">$sort</span>  = common::appendOrder(<span class="variable">$orderBy</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Get test cases. */</span></span><br><span class="line">    <span class="variable">$cases</span> = <span class="keyword">$this</span>-&gt;testcase-&gt;getTestCases(<span class="variable">$productID</span>, <span class="variable">$branch</span>, <span class="variable">$browseType</span>, <span class="variable">$browseType</span> == <span class="string">&#x27;bysearch&#x27;</span> ? <span class="variable">$queryID</span> : <span class="variable">$suiteID</span>, <span class="variable">$moduleID</span>, <span class="variable">$sort</span>, <span class="variable">$pager</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$cases</span>) <span class="keyword">and</span> <span class="variable">$pageID</span> &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$pager</span> = pager::init(<span class="number">0</span>, <span class="variable">$recPerPage</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="variable">$cases</span> = <span class="keyword">$this</span>-&gt;testcase-&gt;getTestCases(<span class="variable">$productID</span>, <span class="variable">$branch</span>, <span class="variable">$browseType</span>, <span class="variable">$browseType</span> == <span class="string">&#x27;bysearch&#x27;</span> ? <span class="variable">$queryID</span> : <span class="variable">$suiteID</span>, <span class="variable">$moduleID</span>, <span class="variable">$sort</span>, <span class="variable">$pager</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分页相关的参数主要包括recTotal, recPerPage和pageID这三个参数。</p>
+<p>在model中定义的<code>getTestCases</code>方法，接收<code>pager</code>对象，并在dao查询的时候，调用<code>pager($pager)</code>方法来生成分页语句，返回用例数据: </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTestCases</span>(<span class="params"><span class="variable">$pager</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;dao-&gt;select(*)-&gt;from(TABLE_PROJECTCASE)-&gt;page(<span class="variable">$pager</span>)-&gt;fetchAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后将pager对象和用例数据赋值给view模板：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">browse</span>(<span class="params"><span class="variable">$recTotal</span>, <span class="variable">$recPerPage</span>, <span class="variable">$pageID</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* Load pager. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Get test cases. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 赋值到模板。*/</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;view-&gt;pager           = <span class="variable">$pager</span>;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;view-&gt;cases           = <span class="variable">$cases</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在view模板中调用show()方法显示分页链接：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$pager</span>-&gt;show(<span class="string">&#x27;right&#x27;</span>, <span class="string">&#x27;pagerjs&#x27;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>zentaoPHP还提供了一些方法，比如生成链接方法<code>createLink()</code>，重定向<code>locate()</code>，加载指定模块<code>loadModel()</code> 等。</p>
+<p>还提供了html，js和css类，其中html类可用于生成html标签：</p>
+<ul>
+<li><code>html::a($href, $title, $target, $misc)</code>，生成超链接。</li>
+<li><code>html::input($name, $value, $attr)</code> 生成文本框。</li>
+<li><code>html::select($name, $options, $selected, $attr)</code>，生成select标签。</li>
+<li>……</li>
+</ul>
+<p>JS类提供了一些js方法，比如：</p>
+<ul>
+<li><code>js::alert($message)</code>：生成一个警告框。</li>
+<li><code>js::locate($url, $target)</code>：页面跳转。</li>
+<li><code>js::reload($window)</code>：窗口重载。</li>
+</ul>
+<p>上面仅对zentaoPHP框架进行了简单介绍，更详细内容可参考官方文档，</p>
+<p>下面介绍禅道的基本目录结构。</p>
+<h1 id="禅道目录结构"><a href="#禅道目录结构" class="headerlink" title="禅道目录结构"></a>禅道目录结构</h1><p>在<a href="https://blog.csdn.net/u010698107/article/details/123319019">禅道二次开发（一）：开发环境配置</a>中介绍了在Linux中安装禅道的方法，这里介绍一下它的主要目录结构。</p>
+<h2 id="顶级目录"><a href="#顶级目录" class="headerlink" title="顶级目录"></a>顶级目录</h2><p>进入<code>/opt/zbox/app/zentao</code> 目录，禅道目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── api</span><br><span class="line">├── bin</span><br><span class="line">├── config</span><br><span class="line">├── db</span><br><span class="line">├── doc</span><br><span class="line">├── framework</span><br><span class="line">├── lib</span><br><span class="line">├── module</span><br><span class="line">├── sdk</span><br><span class="line">├── tmp</span><br><span class="line">└── www</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>api</code>：接口目录。</li>
+<li><code>bin</code>：存放禅道的一些命令行脚本。</li>
+<li><code>config</code>：存放禅道运行的主配置文件和数据库配置文件。</li>
+<li><code>db</code>：历次升级的数据库脚本和完整的建库脚本。</li>
+<li><code>doc</code>：文档。</li>
+<li><code>framework</code>：框架核心目录，禅道php框架的核心类文件，里面包含了router, control, model和helper的定义文件。</li>
+<li><code>lib</code>：常用的类。比如html，js和css类、数据库DAO类、数据验证fixer类等。</li>
+<li><code>module</code>：模块目录，存放具体的功能模块。</li>
+<li><code>sdk</code>：PHP sdk类。</li>
+<li><code>tmp</code>：存放禅道程序运行时的临时文件。</li>
+<li><code>www</code>：存放各种样式表文件，js文件，图片文件，以及禅道的入口程序<code>index.php</code>。</li>
+</ul>
+<h2 id="config目录"><a href="#config目录" class="headerlink" title="config目录"></a>config目录</h2><p><code>config</code> 目录存放禅道配置文件。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── config.php</span><br><span class="line">├── ext</span><br><span class="line">├── filter.php</span><br><span class="line">├── index.html</span><br><span class="line">├── my.php</span><br><span class="line">├── routes.php</span><br><span class="line">├── timezones.php</span><br><span class="line">└── zentaopms.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>config.php</code>：ZenTaoPHP的config文件</li>
+<li><code>ext</code>：扩展目录</li>
+<li><code>filter.php</code>：数据过滤规则文件</li>
+<li><code>my.php</code>：可以覆盖config.php中的配置</li>
+<li><code>routes.php</code>：API路由</li>
+<li><code>timezones.php</code>：时区</li>
+<li><code>zentaopms.php</code>：配置文件，存放了数据库的定义。</li>
+</ul>
+<h2 id="www目录"><a href="#www目录" class="headerlink" title="www目录"></a>www目录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── api.php</span><br><span class="line">├── checktable.php</span><br><span class="line">├── data</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── index.php</span><br><span class="line">├── init.php</span><br><span class="line">├── js</span><br><span class="line">├── ok.txt</span><br><span class="line">├── robots.txt</span><br><span class="line">├── theme</span><br><span class="line">├── tip4japanese.html</span><br><span class="line">└── x.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>data</code>：上传附件所在的目录。</li>
+<li><code>js</code>：存放js脚本文件，禅道用到的各种jquery插件和相应的功能函数。</li>
+<li><code>theme</code>：主题文件，包含了css文件和图片文件。</li>
+<li><code>.htaccess</code>：apache下面使用的url重写规则文件。</li>
+<li><code>favicon.ico</code>：禅道图标文件</li>
+<li><code>index.php</code>：整个禅道的入口程序，所有的请求都是通过index.php来进行转发。</li>
+</ul>
+<h2 id="module目录"><a href="#module目录" class="headerlink" title="module目录"></a>module目录</h2><p>module目录下面的模块分别对应了禅道里面的某一个功能模块。整个禅道的功能，就是由这些模块组合而成。部分功能模块：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── bug</span><br><span class="line">├── caselib</span><br><span class="line">├── common</span><br><span class="line">├── execution</span><br><span class="line">├── task</span><br><span class="line">├── qa</span><br><span class="line">├── testcase</span><br><span class="line">├── testreport</span><br><span class="line">├── testsuite</span><br><span class="line">└── testtask</span><br></pre></td></tr></table></figure>
+<h3 id="testcase模块"><a href="#testcase模块" class="headerlink" title="testcase模块"></a>testcase模块</h3><p>以测试用例模块testcase为例，目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── config.php</span><br><span class="line">├── control.php</span><br><span class="line">├── css</span><br><span class="line">├── ext</span><br><span class="line">├── js</span><br><span class="line">├── lang</span><br><span class="line">├── model.php</span><br><span class="line">└── view</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>config.php</code>：存放当前模块的配置项，也可以覆盖全局性的配置。</li>
+<li><code>control.php</code>：模块对应的控制器类文件。是整个testcase模块所有页面的入口。也就是说，testcase相关的页面浏览都可以在这个文件里面找到相应的方法定义。</li>
+<li><code>model.php</code>：模块对应的业务逻辑类文件，提供testcase相关数据库操作方法。</li>
+<li><code>view</code>：存放的各个方法的视图文件。比如testcase浏览页面，对应的模板就是browse.html.php。</li>
+<li><code>css</code>：testcase模块的样式表文件。</li>
+<li><code>js</code>：testcase模块的Javascript脚本文件。</li>
+<li><code>lang</code>：存放testcase模块的语言文件。zh-cn对应中文简体，zh-tw中文繁体，以此类推。如果需要修改禅道里面某些字段的名称或者配置，修改相应的文件即可。</li>
+<li><code>ext</code>：二次开发文件存放目录</li>
+</ul>
+<h3 id="common公用模块"><a href="#common公用模块" class="headerlink" title="common公用模块"></a>common公用模块</h3><p>common公用模块里面存储的是禅道的公用功能，比如公用的语言文件、模板文件、model文件等。</p>
+<ul>
+<li><code>common/model.php</code> 提供了其他模块都有可能用到的一些方法。比如权限检查<code>hasPriv()</code>，菜单打印<code>printMainMenu()</code>等功能。</li>
+<li><code>common/view</code> 目录提供了公用的模板。比如 <code>header.html.php</code> 是模板公用的头文件；<code>footer.html.php</code>是模板公用的页脚文件；<code>error.html.php</code> 则是公用的出错信息提示的模板文件。还包含了各种jquery插件的初始化代码模板，比如<code>colorbox.html.php</code> 。</li>
+<li><code>common/lang</code>设置了公用的语言项。<code>lang/zh-ch.php</code>存储公用的语言文件。</li>
+</ul>
+<p><strong>参考资料：</strong></p>
+<ol>
+<li>zentaoPHP框架：<a href="https://devel.easycorp.cn/book/zentaophphelp/about-10.html">https://devel.easycorp.cn/book/zentaophphelp/about-10.html</a></li>
+<li><a href="https://www.zentao.net/book/zentaopmshelp/40.html">https://www.zentao.net/book/zentaopmshelp/40.html</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>给时光以生命，而不是给生命以时光。——帕斯卡</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>禅道</category>
+      </categories>
+      <tags>
+        <tag>zentao</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>持续集成：Jenkins中获取Robot Framework插件返回的Robot变量</title>
     <url>/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/</url>
     <content><![CDATA[<p>在 <a href="https://blog.csdn.net/u010698107/article/details/122278661">Jenkins集成Robot Framework</a> 中介绍了Jenkins如何集成Robot Framework测试框架，本文介绍如何在邮件报告中显示测试结果（比如通过率、测试报告链接等参数）。</p>

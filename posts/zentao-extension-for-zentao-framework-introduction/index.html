@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="进行禅道二次开发前有必要学习一下禅道使用的框架，本文将简单介绍zentaoPHP框架以及禅道的目录结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="禅道二次开发（二）：禅道框架介绍">
+<meta property="og:url" content="https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="进行禅道二次开发前有必要学习一下禅道使用的框架，本文将简单介绍zentaoPHP框架以及禅道的目录结构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-06T12:12:00.000Z">
+<meta property="article:modified_time" content="2022-07-10T08:46:59.515Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="zentao">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>禅道二次开发（二）：禅道框架介绍 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz/DevTest-Notes" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          禅道二次开发（二）：禅道框架介绍
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-06 12:12:00" itemprop="dateCreated datePublished" datetime="2022-04-06T12:12:00+00:00">2022-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">测试开发</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E7%A6%85%E9%81%93/" itemprop="url" rel="index"><span itemprop="name">禅道</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/zentao-extension-for-zentao-framework-introduction/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/zentao-extension-for-zentao-framework-introduction/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>进行禅道二次开发前有必要学习一下禅道使用的框架，本文将简单介绍zentaoPHP框架以及禅道的目录结构。</p>
+<a id="more"></a>
+<h1 id="zentaoPHP框架"><a href="#zentaoPHP框架" class="headerlink" title="zentaoPHP框架"></a>zentaoPHP框架</h1><p>禅道项目使用zentaoPHP框架，基于b/s架构开发。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>zentaoPHP框架支持MVC（Model-View-Controller）软件架构模式，把软件系统分为三个基本部分：</p>
+<ul>
+<li>模型（Model）：实现程序的功能、数据管理和数据库设计。对数据库的增删改查可以放在这一层。</li>
+<li>控制器（Controller）：负责转发用户请求，对请求进行处理，组织各种业务逻辑，准备数据。</li>
+<li>视图（View）：负责渲染数据，图形界面设计，通过HTML方式呈现给用户。</li>
+</ul>
+<p>zentaoPHP框架的基本原理：</p>
+<ol>
+<li>通过apache服务将请求转交给index.php（<code>\zentao\app\htdocs\index.php</code>），由它来进行资源调度。</li>
+<li>index.php加载框架文件，初始化应用，解析URI请求，得到请求对应对模块名、方法和参数。比如URL：<code>&lt;zentao-url&gt;/zentao/testcase-browse-1.html</code> 模块名为testcase，方法名为browse，1为参数。</li>
+<li>然后加载相应模块的control方法，model方法，然后渲染模板（view文件）、呈献给用户。</li>
+</ol>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><p>zentaoPHP框架提供了用于操作数据库的对象类DAO，在<code>\lib\dao\dao.class.php</code> 中定义，加载框架时会自动生成 <code>$this-&gt;dao</code> 对象，可以在control, model，view层直接使用 <code>$this-&gt;dao</code> 来执行各种方法。</p>
+<p>查询数据库使用 <code>fetch</code> 系列方法，增删改相关方法使用 <code>exec()</code> 方法。</p>
+<p>比如禅道中查询所有用例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;select(<span class="string">&#x27;*&#x27;</span>)-&gt;from(TABLE_CASE)</span><br><span class="line">    -&gt;where(<span class="string">&#x27;deleted&#x27;</span>)-&gt;eq(<span class="number">0</span>)</span><br><span class="line">    -&gt;fetchAll(<span class="string">&#x27;id&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>插入用例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;insert(TABLE_CASE)-&gt;data(<span class="variable">$case</span>)-&gt;autoCheck()-&gt;exec();</span><br></pre></td></tr></table></figure>
+<p>更新用例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;update(TABLE_CASE)-&gt;data(<span class="variable">$case</span>)-&gt;autoCheck()-&gt;where(<span class="string">&#x27;id&#x27;</span>)-&gt;eq((<span class="keyword">int</span>)<span class="variable">$caseID</span>)-&gt;exec();</span><br></pre></td></tr></table></figure>
+<p>删除用例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;delete()-&gt;from(TABLE_CASE)-&gt;where(<span class="string">&#x27;id&#x27;</span>)-&gt;eq(<span class="variable">$Caseid</span>)-&gt;exec();</span><br></pre></td></tr></table></figure>
+<h2 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h2><p>zentaoPHP将数据验证放在了model层，提供了数据过滤的方法，包括了数据修正和数据验证。过滤方法在 <code>\lib\filter\filter.class.php</code> 文件中定义。</p>
+<p>数据修正以禅道testcase模块创建用例方法为例，查看<code>\module\testcase\model.php</code>中的create方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$case</span>   = fixer::input(<span class="string">&#x27;post&#x27;</span>)</span><br><span class="line">    -&gt;add(<span class="string">&#x27;status&#x27;</span>, <span class="variable">$status</span>)</span><br><span class="line">    -&gt;add(<span class="string">&#x27;version&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">    -&gt;add(<span class="string">&#x27;fromBug&#x27;</span>, <span class="variable">$bugID</span>)</span><br><span class="line">    -&gt;setDefault(<span class="string">&#x27;openedBy&#x27;</span>, <span class="keyword">$this</span>-&gt;app-&gt;user-&gt;account)</span><br><span class="line">    -&gt;setDefault(<span class="string">&#x27;openedDate&#x27;</span>, <span class="variable">$now</span>)</span><br><span class="line">    -&gt;setIF(<span class="keyword">$this</span>-&gt;config-&gt;systemMode == <span class="string">&#x27;new&#x27;</span> <span class="keyword">and</span> <span class="keyword">$this</span>-&gt;app-&gt;tab == <span class="string">&#x27;project&#x27;</span>, <span class="string">&#x27;project&#x27;</span>, <span class="keyword">$this</span>-&gt;session-&gt;project)</span><br><span class="line">    -&gt;setIF(<span class="keyword">$this</span>-&gt;app-&gt;tab == <span class="string">&#x27;execution&#x27;</span>, <span class="string">&#x27;execution&#x27;</span>, <span class="keyword">$this</span>-&gt;session-&gt;execution)</span><br><span class="line">    -&gt;setIF(<span class="keyword">$this</span>-&gt;post-&gt;story != <span class="literal">false</span>, <span class="string">&#x27;storyVersion&#x27;</span>, <span class="keyword">$this</span>-&gt;loadModel(<span class="string">&#x27;story&#x27;</span>)-&gt;getVersion((<span class="keyword">int</span>)<span class="keyword">$this</span>-&gt;post-&gt;story))</span><br><span class="line">    -&gt;remove(<span class="string">&#x27;steps,expects,files,labels,stepType,forceNotReview&#x27;</span>)</span><br><span class="line">    -&gt;setDefault(<span class="string">&#x27;story&#x27;</span>, <span class="number">0</span>)</span><br><span class="line">    -&gt;cleanInt(<span class="string">&#x27;story,product,branch,module&#x27;</span>)</span><br><span class="line">    -&gt;join(<span class="string">&#x27;stage&#x27;</span>, <span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">    -&gt;get();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>首先调用fixer类的input方法，参数post表示是从<code>$_POST</code> 这个变量中获取数据。</li>
+<li><code>add()</code>方法是向数据中增加变量。</li>
+<li><code>setDefault()</code>方法表示当这个变量没有传值的时候，设成默认值。</li>
+<li><code>setIF()</code> 方法第一个参数是判断条件，后面两个分别是key和value。当条件为true时，设置<code>$key = $value</code>。</li>
+<li><code>remove()</code> 方法用于删除不需要的字段。</li>
+<li><code>cleanInt()</code>将变量转换为int类型。</li>
+<li><code>join(&#39;stage&#39;, &#39;,&#39;)</code>将stage使用<code>,</code>连接起来。</li>
+<li>get方法返回一个经过修正的数据集合。</li>
+</ul>
+<p>数据验证使用check相关方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;dao-&gt;insert(TABLE_CASE)-&gt;data(<span class="variable">$case</span>)</span><br><span class="line">    -&gt;autoCheck()</span><br><span class="line">    -&gt;batchCheck(<span class="keyword">$this</span>-&gt;config-&gt;testcase-&gt;create-&gt;requiredFields, <span class="string">&#x27;notempty&#x27;</span>)</span><br><span class="line">    -&gt;exec();</span><br></pre></td></tr></table></figure>
+<p>data方法将修正过的数据传递给dao对象，然后通过autoCheck()对其进行自动检查。batchCheck()方法会对一批字段进行非空的验证。</p>
+<p>使用<code>dao::isError()</code>判断是否有错误，<code>dao::getError()</code>方法获取报错信息。</p>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>以测试用例浏览页面为例，在testcase模块的control文件中的browse方法完成分页的功能，相关代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">browse</span>(<span class="params"><span class="variable">$recTotal</span>, <span class="variable">$recPerPage</span>, <span class="variable">$pageID</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* Load pager. */</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;app-&gt;loadClass(<span class="string">&#x27;pager&#x27;</span>, <span class="variable">$static</span> = <span class="literal">true</span>);</span><br><span class="line">    <span class="variable">$pager</span> = <span class="keyword">new</span> pager(<span class="variable">$recTotal</span>, <span class="variable">$recPerPage</span>, <span class="variable">$pageID</span>);</span><br><span class="line">    <span class="variable">$sort</span>  = common::appendOrder(<span class="variable">$orderBy</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Get test cases. */</span></span><br><span class="line">    <span class="variable">$cases</span> = <span class="keyword">$this</span>-&gt;testcase-&gt;getTestCases(<span class="variable">$productID</span>, <span class="variable">$branch</span>, <span class="variable">$browseType</span>, <span class="variable">$browseType</span> == <span class="string">&#x27;bysearch&#x27;</span> ? <span class="variable">$queryID</span> : <span class="variable">$suiteID</span>, <span class="variable">$moduleID</span>, <span class="variable">$sort</span>, <span class="variable">$pager</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$cases</span>) <span class="keyword">and</span> <span class="variable">$pageID</span> &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">$pager</span> = pager::init(<span class="number">0</span>, <span class="variable">$recPerPage</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="variable">$cases</span> = <span class="keyword">$this</span>-&gt;testcase-&gt;getTestCases(<span class="variable">$productID</span>, <span class="variable">$branch</span>, <span class="variable">$browseType</span>, <span class="variable">$browseType</span> == <span class="string">&#x27;bysearch&#x27;</span> ? <span class="variable">$queryID</span> : <span class="variable">$suiteID</span>, <span class="variable">$moduleID</span>, <span class="variable">$sort</span>, <span class="variable">$pager</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分页相关的参数主要包括recTotal, recPerPage和pageID这三个参数。</p>
+<p>在model中定义的<code>getTestCases</code>方法，接收<code>pager</code>对象，并在dao查询的时候，调用<code>pager($pager)</code>方法来生成分页语句，返回用例数据: </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTestCases</span>(<span class="params"><span class="variable">$pager</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;dao-&gt;select(*)-&gt;from(TABLE_PROJECTCASE)-&gt;page(<span class="variable">$pager</span>)-&gt;fetchAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后将pager对象和用例数据赋值给view模板：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">browse</span>(<span class="params"><span class="variable">$recTotal</span>, <span class="variable">$recPerPage</span>, <span class="variable">$pageID</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* Load pager. */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Get test cases. */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 赋值到模板。*/</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;view-&gt;pager           = <span class="variable">$pager</span>;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;view-&gt;cases           = <span class="variable">$cases</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在view模板中调用show()方法显示分页链接：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$pager</span>-&gt;show(<span class="string">&#x27;right&#x27;</span>, <span class="string">&#x27;pagerjs&#x27;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>zentaoPHP还提供了一些方法，比如生成链接方法<code>createLink()</code>，重定向<code>locate()</code>，加载指定模块<code>loadModel()</code> 等。</p>
+<p>还提供了html，js和css类，其中html类可用于生成html标签：</p>
+<ul>
+<li><code>html::a($href, $title, $target, $misc)</code>，生成超链接。</li>
+<li><code>html::input($name, $value, $attr)</code> 生成文本框。</li>
+<li><code>html::select($name, $options, $selected, $attr)</code>，生成select标签。</li>
+<li>……</li>
+</ul>
+<p>JS类提供了一些js方法，比如：</p>
+<ul>
+<li><code>js::alert($message)</code>：生成一个警告框。</li>
+<li><code>js::locate($url, $target)</code>：页面跳转。</li>
+<li><code>js::reload($window)</code>：窗口重载。</li>
+</ul>
+<p>上面仅对zentaoPHP框架进行了简单介绍，更详细内容可参考官方文档，</p>
+<p>下面介绍禅道的基本目录结构。</p>
+<h1 id="禅道目录结构"><a href="#禅道目录结构" class="headerlink" title="禅道目录结构"></a>禅道目录结构</h1><p>在<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/123319019">禅道二次开发（一）：开发环境配置</a>中介绍了在Linux中安装禅道的方法，这里介绍一下它的主要目录结构。</p>
+<h2 id="顶级目录"><a href="#顶级目录" class="headerlink" title="顶级目录"></a>顶级目录</h2><p>进入<code>/opt/zbox/app/zentao</code> 目录，禅道目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── api</span><br><span class="line">├── bin</span><br><span class="line">├── config</span><br><span class="line">├── db</span><br><span class="line">├── doc</span><br><span class="line">├── framework</span><br><span class="line">├── lib</span><br><span class="line">├── module</span><br><span class="line">├── sdk</span><br><span class="line">├── tmp</span><br><span class="line">└── www</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>api</code>：接口目录。</li>
+<li><code>bin</code>：存放禅道的一些命令行脚本。</li>
+<li><code>config</code>：存放禅道运行的主配置文件和数据库配置文件。</li>
+<li><code>db</code>：历次升级的数据库脚本和完整的建库脚本。</li>
+<li><code>doc</code>：文档。</li>
+<li><code>framework</code>：框架核心目录，禅道php框架的核心类文件，里面包含了router, control, model和helper的定义文件。</li>
+<li><code>lib</code>：常用的类。比如html，js和css类、数据库DAO类、数据验证fixer类等。</li>
+<li><code>module</code>：模块目录，存放具体的功能模块。</li>
+<li><code>sdk</code>：PHP sdk类。</li>
+<li><code>tmp</code>：存放禅道程序运行时的临时文件。</li>
+<li><code>www</code>：存放各种样式表文件，js文件，图片文件，以及禅道的入口程序<code>index.php</code>。</li>
+</ul>
+<h2 id="config目录"><a href="#config目录" class="headerlink" title="config目录"></a>config目录</h2><p><code>config</code> 目录存放禅道配置文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── config.php</span><br><span class="line">├── ext</span><br><span class="line">├── filter.php</span><br><span class="line">├── index.html</span><br><span class="line">├── my.php</span><br><span class="line">├── routes.php</span><br><span class="line">├── timezones.php</span><br><span class="line">└── zentaopms.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>config.php</code>：ZenTaoPHP的config文件</li>
+<li><code>ext</code>：扩展目录</li>
+<li><code>filter.php</code>：数据过滤规则文件</li>
+<li><code>my.php</code>：可以覆盖config.php中的配置</li>
+<li><code>routes.php</code>：API路由</li>
+<li><code>timezones.php</code>：时区</li>
+<li><code>zentaopms.php</code>：配置文件，存放了数据库的定义。</li>
+</ul>
+<h2 id="www目录"><a href="#www目录" class="headerlink" title="www目录"></a>www目录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── api.php</span><br><span class="line">├── checktable.php</span><br><span class="line">├── data</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── index.php</span><br><span class="line">├── init.php</span><br><span class="line">├── js</span><br><span class="line">├── ok.txt</span><br><span class="line">├── robots.txt</span><br><span class="line">├── theme</span><br><span class="line">├── tip4japanese.html</span><br><span class="line">└── x.php</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>data</code>：上传附件所在的目录。</li>
+<li><code>js</code>：存放js脚本文件，禅道用到的各种jquery插件和相应的功能函数。</li>
+<li><code>theme</code>：主题文件，包含了css文件和图片文件。</li>
+<li><code>.htaccess</code>：apache下面使用的url重写规则文件。</li>
+<li><code>favicon.ico</code>：禅道图标文件</li>
+<li><code>index.php</code>：整个禅道的入口程序，所有的请求都是通过index.php来进行转发。</li>
+</ul>
+<h2 id="module目录"><a href="#module目录" class="headerlink" title="module目录"></a>module目录</h2><p>module目录下面的模块分别对应了禅道里面的某一个功能模块。整个禅道的功能，就是由这些模块组合而成。部分功能模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bug</span><br><span class="line">├── caselib</span><br><span class="line">├── common</span><br><span class="line">├── execution</span><br><span class="line">├── task</span><br><span class="line">├── qa</span><br><span class="line">├── testcase</span><br><span class="line">├── testreport</span><br><span class="line">├── testsuite</span><br><span class="line">└── testtask</span><br></pre></td></tr></table></figure>
+<h3 id="testcase模块"><a href="#testcase模块" class="headerlink" title="testcase模块"></a>testcase模块</h3><p>以测试用例模块testcase为例，目录结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── config.php</span><br><span class="line">├── control.php</span><br><span class="line">├── css</span><br><span class="line">├── ext</span><br><span class="line">├── js</span><br><span class="line">├── lang</span><br><span class="line">├── model.php</span><br><span class="line">└── view</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>config.php</code>：存放当前模块的配置项，也可以覆盖全局性的配置。</li>
+<li><code>control.php</code>：模块对应的控制器类文件。是整个testcase模块所有页面的入口。也就是说，testcase相关的页面浏览都可以在这个文件里面找到相应的方法定义。</li>
+<li><code>model.php</code>：模块对应的业务逻辑类文件，提供testcase相关数据库操作方法。</li>
+<li><code>view</code>：存放的各个方法的视图文件。比如testcase浏览页面，对应的模板就是browse.html.php。</li>
+<li><code>css</code>：testcase模块的样式表文件。</li>
+<li><code>js</code>：testcase模块的Javascript脚本文件。</li>
+<li><code>lang</code>：存放testcase模块的语言文件。zh-cn对应中文简体，zh-tw中文繁体，以此类推。如果需要修改禅道里面某些字段的名称或者配置，修改相应的文件即可。</li>
+<li><code>ext</code>：二次开发文件存放目录</li>
+</ul>
+<h3 id="common公用模块"><a href="#common公用模块" class="headerlink" title="common公用模块"></a>common公用模块</h3><p>common公用模块里面存储的是禅道的公用功能，比如公用的语言文件、模板文件、model文件等。</p>
+<ul>
+<li><code>common/model.php</code> 提供了其他模块都有可能用到的一些方法。比如权限检查<code>hasPriv()</code>，菜单打印<code>printMainMenu()</code>等功能。</li>
+<li><code>common/view</code> 目录提供了公用的模板。比如 <code>header.html.php</code> 是模板公用的头文件；<code>footer.html.php</code>是模板公用的页脚文件；<code>error.html.php</code> 则是公用的出错信息提示的模板文件。还包含了各种jquery插件的初始化代码模板，比如<code>colorbox.html.php</code> 。</li>
+<li><code>common/lang</code>设置了公用的语言项。<code>lang/zh-ch.php</code>存储公用的语言文件。</li>
+</ul>
+<p><strong>参考资料：</strong></p>
+<ol>
+<li>zentaoPHP框架：<a target="_blank" rel="noopener" href="https://devel.easycorp.cn/book/zentaophphelp/about-10.html">https://devel.easycorp.cn/book/zentaophphelp/about-10.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zentao.net/book/zentaopmshelp/40.html">https://www.zentao.net/book/zentaopmshelp/40.html</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>给时光以生命，而不是给生命以时光。——帕斯卡</p>
+</blockquote>
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/zentao/" rel="tag"><i class="fa fa-tag"></i> zentao</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>禅道二次开发（二）：禅道框架介绍</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/zentao-extension-for-zentao-framework-introduction/" title="禅道二次开发（二）：禅道框架介绍">https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/" rel="prev" title="持续集成：Jenkins中获取Robot Framework插件返回的Robot变量">
+      <i class="fa fa-chevron-left"></i> 持续集成：Jenkins中获取Robot Framework插件返回的Robot变量
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/zentao-extension-for-dev-environment-configuration/" rel="next" title="禅道二次开发（一）：开发环境配置">
+      禅道二次开发（一）：开发环境配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zentaoPHP%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">zentaoPHP框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">数据库操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"><span class="nav-number">1.3.</span> <span class="nav-text">数据验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">1.4.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">1.5.</span> <span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A6%85%E9%81%93%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">禅道目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B6%E7%BA%A7%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.</span> <span class="nav-text">顶级目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config%E7%9B%AE%E5%BD%95"><span class="nav-number">2.2.</span> <span class="nav-text">config目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#www%E7%9B%AE%E5%BD%95"><span class="nav-number">2.3.</span> <span class="nav-text">www目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#module%E7%9B%AE%E5%BD%95"><span class="nav-number">2.4.</span> <span class="nav-text">module目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#testcase%E6%A8%A1%E5%9D%97"><span class="nav-number">2.4.1.</span> <span class="nav-text">testcase模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#common%E5%85%AC%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="nav-number">2.4.2.</span> <span class="nav-text">common公用模块</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">220</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">181</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/DevTest-Notes/" title="GitHub → https://github.com/hiyongz/DevTest-Notes/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">991k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:01</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
