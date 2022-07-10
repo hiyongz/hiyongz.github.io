@@ -473,6 +473,64 @@
       </tags>
   </entry>
   <entry>
+    <title>禅道二次开发（四）：集成PhpSpreadsheet解析Excel文件</title>
+    <url>/posts/zentao-extension-for-phpspreadsheet/</url>
+    <content><![CDATA[<p>PhpSpreadsheet是一个PHP表格文件处理库，可用来读写excel文件，本文介绍如何在禅道中引入PhpSpreadsheet库，可以使用它来解析Excel文件，比如上传excel格式的测试用例、导出测试用例为excel格式等。</p>
+<a id="more"></a>
+<h1 id="安装PhpSpreadsheet"><a href="#安装PhpSpreadsheet" class="headerlink" title="安装PhpSpreadsheet"></a>安装PhpSpreadsheet</h1><p>PhpSpreadsheet要求PHP 7.3及以上版本，如果禅道使用的PHP版本低于7.3请不要使用它来处理excel格式文件。</p>
+<p>由于禅道安装在centos7中，这里介绍如何在centos7中安装PhpSpreadsheet，另外顺便也记录一下在windows系统中安装phpspreadsheet的步骤。</p>
+<h2 id="linux安装"><a href="#linux安装" class="headerlink" title="linux安装"></a>linux安装</h2><p>这里介绍centos7中如何安装PhpSpreadsheet到禅道目录下。</p>
+<h3 id="1-安装composer"><a href="#1-安装composer" class="headerlink" title="1. 安装composer"></a>1. 安装composer</h3><p>需要使用composer进行安装PhpSpreadsheet，先安装一下composer工具。</p>
+<p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下载composer</span></span><br><span class="line">$ curl -sS https://getcomposer.org/installer | php</span><br><span class="line">All settings correct <span class="keyword">for</span> using Composer</span><br><span class="line">Downloading...</span><br><span class="line"></span><br><span class="line">Composer (version 2.2.7) successfully installed to: /root/composer.phar</span><br><span class="line">Use it: php composer.phar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将composer.phar文件移动到bin目录以便全局使用composer命令</span></span><br><span class="line">$ mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换国内源</span></span><br><span class="line">$ composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="2-卸载低版本PHP"><a href="#2-卸载低版本PHP" class="headerlink" title="2. 卸载低版本PHP"></a>2. 卸载低版本PHP</h3><p>卸载原来的低版本PHP：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ rpm -qa|grep php</span><br><span class="line">php-cli-5.4.16-48.el7.x86_64</span><br><span class="line">php-common-5.4.16-48.el7.x86_64</span><br><span class="line">php-5.4.16-48.el7.x86_64</span><br><span class="line">$ rpm -e php-cli-5.4.16-48.el7.x86_64</span><br><span class="line">错误：依赖检测失败：</span><br><span class="line">        php-cli(x86-64) = 5.4.16-48.el7 被 (已安裝) php-5.4.16-48.el7.x86_64 需要</span><br><span class="line">$ rpm -e php-5.4.16-48.el7.x86_64</span><br><span class="line">警告：/etc/httpd/conf.d/php.conf 已另存为 /etc/httpd/conf.d/php.conf.rpmsave</span><br><span class="line">$ rpm -e php-cli-5.4.16-48.el7.x86_64</span><br><span class="line">$ rpm -e php-common-5.4.16-48.el7.x86_64</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将禅道的PHP 加入环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;<span class="variable">$PATH</span>:/opt/zbox/bin/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-安装phpspreadsheet"><a href="#3-安装phpspreadsheet" class="headerlink" title="3. 安装phpspreadsheet"></a>3. 安装phpspreadsheet</h3><p>进入禅道目录安装phpspreadsheet：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /opt/zbox/app/zentao/lib</span><br><span class="line">$ mkdir excel</span><br><span class="line">$ <span class="built_in">cd</span> excel</span><br><span class="line">$ composer require phpoffice/phpspreadsheet</span><br></pre></td></tr></table></figure>
+<p>会自动安装到vendor目录下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/opt/zbox/app/zentao/lib/excel/vendor</span><br><span class="line">$ ls</span><br><span class="line">autoload.php  composer  ezyang  maennchen  markbaker  myclabs  phpoffice  psr  symfony</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="windows安装"><a href="#windows安装" class="headerlink" title="windows安装"></a>windows安装</h2><p>我使用的是XAMPP软件包配置的PHP环境，和linux中一样，先安装PHP依赖管理工具composer。</p>
+<h3 id="1-安装composer-1"><a href="#1-安装composer-1" class="headerlink" title="1. 安装composer"></a>1. 安装composer</h3><p>下载phar文件 <code>composer.phar</code>：<a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a>，复制到<code>D:\tools\xampp\php\pear</code> 目录下，创建 <code>composer.bat</code> 文件，编写代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@php %~dp0composer.phar %*</span><br></pre></td></tr></table></figure>
+<p>然后将 <code>D:\tools\xampp\php\pear</code>  目录添加到环境变量。</p>
+<p>打开cmd窗口，执行 <code>composer -V</code> 查看是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ composer -V</span><br><span class="line">Composer version 2.3.3 2022-04-01 22:15:35</span><br></pre></td></tr></table></figure>
+<p>也可以下载 <a href="https://getcomposer.org/Composer-Setup.exe">Composer-Setup.exe</a> 文件进行安装。</p>
+<h3 id="2-安装phpspreadsheet"><a href="#2-安装phpspreadsheet" class="headerlink" title="2. 安装phpspreadsheet"></a>2. 安装phpspreadsheet</h3><p>进入  <code>D:\tools\xampp\php\pear</code>  目录下，执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer require phpoffice/phpspreadsheet</span><br></pre></td></tr></table></figure>
+<p>如果报如下错误：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Installation failed, deleting ./composer.json.</span><br><span class="line"></span><br><span class="line">In RequireCommand.php line <span class="number">210</span>:</span><br><span class="line"></span><br><span class="line">  No composer.json present in the current <span class="built_in">directory</span> (./composer.json), this may be the cause of the following excepti</span><br><span class="line">  on.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">In PackageDiscoveryTrait.php line <span class="number">308</span>:</span><br><span class="line"></span><br><span class="line">  Package phpoffice/phpspreadsheet has requirements incompatible with your PHP version, PHP extensions <span class="keyword">and</span> Composer v</span><br><span class="line">  ersion:</span><br><span class="line">    - phpoffice/phpspreadsheet <span class="number">1.22</span><span class="number">.0</span> requires ext-gd * but it is not present.</span><br></pre></td></tr></table></figure>
+<p>修改 <code>D:\tools\xampp\php\php.ini</code> 文件，取消 <code>extension=gd</code> 和 <code>extension=fileinfo</code> 的注释。</p>
+<p>安装完成后执行 <code>composer info</code> 可看到安装的 <code>phpoffice/phpspreadsheet</code> 包。</p>
+<h1 id="禅道集成PhpSpreadsheet"><a href="#禅道集成PhpSpreadsheet" class="headerlink" title="禅道集成PhpSpreadsheet"></a>禅道集成PhpSpreadsheet</h1><p>PhpSpreadsheet安装到禅道目录后就可以使用它来处理excel文件了，先在module目录下创建模块excel，然后在<code>/module/excel</code> 创建文件model.php，编写读取Excel文件方法：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;/opt/zbox/app/zentao/lib/excel/vendor/autoload.php&#x27;</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">IOFactory</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Reader</span>\<span class="title">Xlsx</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Reader</span>\<span class="title">Xls</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpOffice</span>\<span class="title">PhpSpreadsheet</span>\<span class="title">Cell</span>\<span class="title">Coordinate</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">excelModel</span> <span class="keyword">extends</span> <span class="title">model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Parse Excel.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  string    $fileName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@access</span> public</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">readexcel</span>(<span class="params"><span class="variable">$fileName</span></span>)    </span>&#123; </span><br><span class="line">        </span><br><span class="line">        <span class="comment">// $reader = new Xlsx();</span></span><br><span class="line">        <span class="comment">// $spreadsheet = $reader-&gt;load($fileName);</span></span><br><span class="line">        <span class="variable">$reader</span> = IOFactory::createReader(<span class="string">&#x27;Xlsx&#x27;</span>);</span><br><span class="line">        <span class="variable">$spreadsheet</span> = <span class="variable">$reader</span>-&gt;load(<span class="variable">$fileName</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// $datas = $spreadsheet-&gt;getActiveSheet()-&gt;toArray();</span></span><br><span class="line">        <span class="variable">$worksheet</span> = <span class="variable">$spreadsheet</span>-&gt;getActiveSheet();</span><br><span class="line">        <span class="variable">$worksheetArray</span> = <span class="variable">$worksheet</span>-&gt;toArray();</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PhpSpreadsheet的更多使用方法可参考官方文档：<a href="https://phpspreadsheet.readthedocs.io/en/latest/">https://phpspreadsheet.readthedocs.io/en/latest/</a> 。</p>
+<h1 id="安装PHPExcel"><a href="#安装PHPExcel" class="headerlink" title="安装PHPExcel"></a>安装PHPExcel</h1><p>简单介绍一下PHPExcel库的安装方法，和PhpSpreadsheet安装类似。</p>
+<p>composer安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">composer require phpoffice/phpexcel</span><br></pre></td></tr></table></figure>
+<p>禅道引用：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&quot;/opt/zbox/app/zentao/lib/phpexcel/vendor/phpoffice/phpexcel/Classes/PHPExcel.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$reader</span>= PHPExcel_IOFactory::createReaderForFile(<span class="variable">$fileName</span>);</span><br><span class="line"><span class="variable">$spreadsheet</span> = <span class="variable">$reader</span>-&gt;load(<span class="variable">$fileName</span>);</span><br><span class="line"><span class="variable">$worksheet</span>  = <span class="variable">$spreadsheet</span>-&gt;getSheetByName(工作表名称);</span><br><span class="line"><span class="variable">$data</span> = <span class="variable">$worksheet</span>-&gt;toArray();</span><br></pre></td></tr></table></figure>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>起风了，要努力活下去吗，不，无须如此。——堀辰雄《起风了》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>测试开发</category>
+        <category>禅道</category>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>zentao</tag>
+        <tag>PHP</tag>
+        <tag>PhpSpreadsheet</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>持续集成：Jenkins插件Blue Ocean介绍</title>
     <url>/posts/continuous-integration-for-blue-ocean-plugin/</url>
     <content><![CDATA[<p>Blue Ocean插件是为Jenkins Pipeline设计的一个聚合工具，当然也兼容自由风格项目。它图形化了pipeline的流程，使流水线更加直观。</p>
