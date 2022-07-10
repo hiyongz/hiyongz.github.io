@@ -1011,6 +1011,94 @@
       </tags>
   </entry>
   <entry>
+    <title>禅道二次开发（三）：二次开发实例</title>
+    <url>/posts/zentao-extension-example/</url>
+    <content><![CDATA[<p>对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。</p>
+<a id="more"></a>
+<p>对禅道进行扩展主要在module目录下进行，在需要扩展的模块下对model、control、view方法以及css、js、lang等进行扩展。下面介绍如何在用例模块中新增一个字段，了解禅道是如何进行扩展的。</p>
+<p>需求是对测试用例新增字段【测试方式】，选项为手工或者自动化，新建用例页面的效果如下：</p>
+<p><img src="zentao-testcase-extension-exectype.png" width="80%" height="80%" /></p>
+<p>下面介绍具体扩展步骤。</p>
+<h1 id="新建用例页面扩展"><a href="#新建用例页面扩展" class="headerlink" title="新建用例页面扩展"></a>新建用例页面扩展</h1><p>对禅道的二次开发一般在对应模块下的 <code>ext</code> 目录中进行扩展，不需要对禅道源码进行修改。先来介绍新建用例页面新增【测试方式】字段的步骤。</p>
+<h2 id="1-定位扩展模块"><a href="#1-定位扩展模块" class="headerlink" title="1. 定位扩展模块"></a>1. 定位扩展模块</h2><p>第一步需要定位到要扩展页面的模块名和方法名。</p>
+<p>点击进入新建用例页面，可以看到URL地址为：<code>http://192.168.30.9:8080/zentao/testcase-create-1-all-0.html</code> 。</p>
+<p>通过URL地址可以得到如下信息：</p>
+<ul>
+<li>模块名为testcase</li>
+<li>方法名为create，可以在<code>\module\testcase\control.php</code> 中找到create方法。</li>
+<li><code>\module\testcase\model.php</code> 文件中存放control可以调用的Model方法。</li>
+<li>对应的view模板文件为 <code>\module\testcase\view\create.html.php</code>。</li>
+<li>后面的<code>1-all-0</code>是create方法的参数，这里的1表示产品ID，具体含义需要查看代码。</li>
+</ul>
+<p>通过这个URL我们知道要扩展testcase模块下的create方法。</p>
+<h2 id="2-view-扩展"><a href="#2-view-扩展" class="headerlink" title="2. view 扩展"></a>2. view 扩展</h2><p>对 view 方法的扩展有两种方式：覆盖扩展和钩子扩展。</p>
+<h3 id="覆盖扩展"><a href="#覆盖扩展" class="headerlink" title="覆盖扩展"></a>覆盖扩展</h3><p>覆盖扩展就是对原来的方法进行重写，直接在 <code>\module\testcase\ext\view</code> 目录下创建与要扩展方法<strong>同名</strong>的文件 <code>create.html.php</code>，复制 <code>\module\testcase\view</code> 目录下 <code>create.html.php</code> 代码，新增【测试方式】相关前端代码。下面直接给出代码（部分关键代码）：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;table-row&#x27;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;table-col&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;stageBox&#x27;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;input-group&#x27;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&#x27;input-group-addon w-80px&#x27;</span>&gt;</span>&lt;?php echo $lang-&gt;testcase-&gt;stage;?&gt;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">			&lt;?php echo html::select(&#x27;stage[]&#x27;, $lang-&gt;testcase-&gt;stageList, $stage, &quot;class=&#x27;form-control chosen&#x27; multiple=&#x27;multiple&#x27;&quot;);?&gt;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;table-col&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;exectypeBox&#x27;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;input-group&#x27;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&#x27;input-group-addon fix-border&#x27;</span>&gt;</span>&lt;?php echo $lang-&gt;testcase-&gt;execType;?&gt;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">			&lt;?php echo html::select(&#x27;execType&#x27;, $lang-&gt;testcase-&gt;execTypeList, $execType, &quot;class=&#x27;form-control chosen&#x27; &quot;);?&gt;</span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于我要将它放在【适用阶段】字段后面，因此对【适用阶段】相关代码也进行了修改。</p>
+<p>我们知道，view模板是由于向用户展现数据的，相关数据是通过control方法获取的。通过参考其它字段，【测试方式】字段需要 <code>$lang-&gt;testcase-&gt;execType</code> 、<code>$lang-&gt;testcase-&gt;execTypeList</code> 和 <code>$execType</code> 这三个数据。前两个变量需要扩展lang文件，最后一个变量需要扩展control层中的create方法。</p>
+<p><strong>view模板的钩子扩展方法稍后介绍。</strong></p>
+<h2 id="3-lang扩展"><a href="#3-lang扩展" class="headerlink" title="3. lang扩展"></a>3. lang扩展</h2><p>在 <code>ext/lang</code> 目录下创建zh-cn文件夹（其它语言类似），然后在zh-cn目录下创建zh-cn.php文件（任意文件名）：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$lang</span>-&gt;testcase-&gt;execType             = <span class="string">&#x27;测试方式&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Define the execution types. */</span></span><br><span class="line"><span class="variable">$lang</span>-&gt;testcase-&gt;execTypeList[<span class="string">&#x27;&#x27;</span>]            = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="variable">$lang</span>-&gt;testcase-&gt;execTypeList[<span class="string">&#x27;manual&#x27;</span>]      = <span class="string">&#x27;手工&#x27;</span>;</span><br><span class="line"><span class="variable">$lang</span>-&gt;testcase-&gt;execTypeList[<span class="string">&#x27;auto&#x27;</span>]        = <span class="string">&#x27;自动化&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="4-control方法扩展"><a href="#4-control方法扩展" class="headerlink" title="4. control方法扩展"></a>4. control方法扩展</h2><p>接下来扩展 testcase 的control方法里面的 create 方法，在<code>\module\testcase\ext</code> 目录下创建一个control目录，然后在<code>control</code> 目录下创建create.php文件（注意：<strong>创建的文件名要小写。</strong>），参数和control.php中的create方法一样：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;../../control.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myTestcase</span> <span class="keyword">extends</span> <span class="title">testcase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Create a test case.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span>        $productID</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> string $branch</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> int    $moduleID</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> string $from</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> int    $param</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> int    $storyID</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> string $extras</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@access</span> public</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"><span class="variable">$productID</span>, <span class="variable">$branch</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$moduleID</span> = <span class="number">0</span>, <span class="variable">$from</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$param</span> = <span class="number">0</span>, <span class="variable">$storyID</span> = <span class="number">0</span>, <span class="variable">$extras</span> = <span class="string">&#x27;&#x27;</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">/* Init vars. */</span></span><br><span class="line">        <span class="variable">$execType</span>    = <span class="string">&#x27;manual&#x27;</span>; <span class="comment">// 测试方式，manual:手工, auto: 自动的</span></span><br><span class="line">       </span><br><span class="line">        <span class="keyword">$this</span>-&gt;view-&gt;execType        = <span class="variable">$execType</span>;        </span><br><span class="line"></span><br><span class="line">        <span class="built_in">parent</span>:: create(<span class="variable">$productID</span>, <span class="variable">$branch</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$moduleID</span> = <span class="number">0</span>, <span class="variable">$from</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$param</span> = <span class="number">0</span>, <span class="variable">$storyID</span> = <span class="number">0</span>, <span class="variable">$extras</span> = <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>新增的两行代码会自动扩展到control.php中的create方法中。也可以复制源码，在源码中修改，如果全部复制过来就不要用parent方法了。</p>
+<p>由于新增了一个字段，需要对case表新增一个字段execType：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`zentao`</span>.<span class="string">`zt_case`</span> </span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> <span class="string">`execType`</span> <span class="built_in">CHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;manual&#x27;</span> <span class="keyword">AFTER</span> <span class="string">`lastRunResult`</span>;</span><br></pre></td></tr></table></figure>
+<p>目前不需要对model方法进行扩展，到这里已经完成了对新建用例页面的扩展。</p>
+<p>这里介绍一下model方法扩展方式。</p>
+<h2 id="5-model方法扩展"><a href="#5-model方法扩展" class="headerlink" title="5. model方法扩展"></a>5. model方法扩展</h2><p>在 <code>\testcase\ext</code> 目录下创建model目录。然后在<code>\testcase\ext\model</code> 目录下进行model方法扩展，主要有3种扩展方式：</p>
+<ul>
+<li>覆盖扩展：创建*.php文件</li>
+<li>钩子扩展：创建hook目录，在hook目录下创建 <code>扩展方法名.扩展名.php</code> 文件</li>
+<li>class目录：加密使用的方式</li>
+</ul>
+<h3 id="覆盖扩展-1"><a href="#覆盖扩展-1" class="headerlink" title="覆盖扩展"></a>覆盖扩展</h3><p> model方法扩展直接写要扩展的方法名即可，不用像control方法扩展那样新声明类，在<code>\testcase\ext\model</code> 目录下创建test.php:</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create a case.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> int $bugID</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@access</span> public</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"><span class="variable">$bugID</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">parent</span>::create(<span class="variable">$bugID</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="钩子扩展"><a href="#钩子扩展" class="headerlink" title="钩子扩展"></a>钩子扩展</h3><p>在<code>\testcase\ext\model\hook</code> 目录下创建 <code>扩展方法名.扩展名.php</code> ，框架会把扩展方法的所有钩子代码合并到最终的代码中。</p>
+<p>在 <code>\testcase\ext\model\hook\</code>目录下创建create.test.php文件</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 直接编写代码逻辑</span></span><br><span class="line"><span class="keyword">die</span>(<span class="string">&quot;6666&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>查看效果：创建用例，点击保存</p>
+<p><img src="zentao-testcase-extension-model-create.png" width="80%" height="80%" /></p>
+<h1 id="用例浏览页面扩展"><a href="#用例浏览页面扩展" class="headerlink" title="用例浏览页面扩展"></a>用例浏览页面扩展</h1><p>在创建用例页面新增了【测试方式】字段之后，如果想在用例浏览页面查看每条用例的测试方式，需要对browse页面进行扩展。</p>
+<p><img src="zentao-testcase-extension-browse.png" width="80%" height="80%" /></p>
+<p>具体步骤不介绍了，思路和新建用例页面扩展一样。效果如下图：</p>
+<p><img src="zentao-testcase-extension-exectype2.png" width="80%" height="80%" /></p>
+<h1 id="用例编辑页面扩展"><a href="#用例编辑页面扩展" class="headerlink" title="用例编辑页面扩展"></a>用例编辑页面扩展</h1><p>用例编辑页面也要添加【测试方式】字段，这里介绍一下view方法的钩子扩展方式。</p>
+<h2 id="view方法钩子扩展"><a href="#view方法钩子扩展" class="headerlink" title="view方法钩子扩展"></a>view方法钩子扩展</h2><p>将【测试方式】字段放到【适用阶段】后面：</p>
+<p><img src="zentao-testcase-extension-edit-exectype.png" width="80%" height="80%" /></p>
+<p>文件命名方式：<code>方法名.扩展名.html.hook.php</code>，钩子的内容会追加到主干对应view文件末尾。在<code>\module\testcase\ext\view</code> 目录下创建 <code>create.test.html.hook.php</code> 文件：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="comment">// 测试方式</span></span><br><span class="line"><span class="variable">$html</span>   = <span class="string">&#x27;&lt;tr&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$html</span>  .= <span class="string">&#x27;&lt;th&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$html</span>  .= <span class="variable">$lang</span>-&gt;testcase-&gt;execType;</span><br><span class="line"><span class="variable">$html</span>  .= <span class="string">&#x27;&lt;/th&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$html</span>  .= <span class="string">&#x27;&lt;td&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$html</span>  .= html::select(<span class="string">&#x27;execType&#x27;</span>, (<span class="keyword">array</span>)<span class="variable">$lang</span>-&gt;testcase-&gt;execTypeList, <span class="variable">$case</span>-&gt;execType, <span class="string">&quot;class=&#x27;form-control chosen&#x27; &quot;</span>); </span><br><span class="line"><span class="variable">$html</span>  .= <span class="string">&#x27;&lt;/td&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$html</span>  .= <span class="string">&#x27;&lt;/tr&gt;&#x27;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> item1 = $(<span class="string">&#x27;div.side-col table tbody tr&#x27;</span>)[<span class="number">4</span>];    </span><br><span class="line">    $(<span class="string">&#x27;#dataform&#x27;</span>).find( item1 ).after(<span class="meta">&lt;?php</span> <span class="keyword">echo</span> json_encode(<span class="variable">$html</span>); <span class="meta">?&gt;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img src="zentao-testcase-extension-edit-exectype2.png" width="80%" height="80%" /></p>
+<h2 id="js-css-lang-config-扩展"><a href="#js-css-lang-config-扩展" class="headerlink" title="js/css/lang/config 扩展"></a>js/css/lang/config 扩展</h2><p>有时候需要对js、css、lang和config文件进行扩展，前面介绍了对lang的扩展。js 和 css 扩展方法和lang一样。</p>
+<ul>
+<li><p>在 <code>ext/js</code> 目录下创建和方法名同名的目录create，进入create目录，创建test.js文件</p>
+</li>
+<li><p>在 <code>ext/css</code> 目录下创建和方法名同名的目录create，进入create目录，创建test.css文件</p>
+</li>
+</ul>
+<p>config扩展是在<code>ext/config</code> 目录下创建php文件即可。</p>
+<p>关于禅道二次开发相关笔记就写到这里了，文章仅介绍了禅道扩展的一个简单示例，更多用法可以阅读源码，欢迎交流讨论。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://www.zentao.net/publicclass/80237.html">https://www.zentao.net/publicclass/80237.html</a></li>
+<li><a href="https://www.zentao.net/book/zentaopmshelp/225.html">https://www.zentao.net/book/zentaopmshelp/225.html</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>弱小和无知不是生存的障碍，傲慢才是。——刘慈欣《三体3：死神永生》</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>测试开发</category>
+        <category>禅道</category>
+      </categories>
+      <tags>
+        <tag>zentao</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>禅道二次开发（一）：开发环境配置</title>
     <url>/posts/zentao-extension-for-dev-environment-configuration/</url>
     <content><![CDATA[<p>禅道是一个开源的项目管理软件，作为测试人员最常用的功能就是用例管理和bug管理。目前的禅道开源版可能无法满足业务需求，可以基于禅道进行二次开发。先来介绍下如何配置禅道开发环境。</p>
