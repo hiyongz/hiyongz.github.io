@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2022-08-23T12:05:37.913Z</updated>
+  <updated>2022-08-25T14:03:15.093Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MySQL锁：全局锁、表级锁和行锁</title>
+    <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
+    <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
+    <published>2022-08-25T12:12:00.000Z</published>
+    <updated>2022-08-25T14:03:15.093Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;事务的实现离不开MySQL数据库的锁机制，设计锁的目的也是为了处理并发访问问题，本文简单介绍MySQL 里面的全局锁、表级锁和行锁三类锁。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>MySQL事务：事务隔离</title>
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.913Z</updated>
+    <updated>2022-08-25T14:03:15.097Z</updated>
     
     <summary type="html">
     
@@ -44,7 +67,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.909Z</updated>
+    <updated>2022-08-25T14:03:15.093Z</updated>
     
     <summary type="html">
     
@@ -67,7 +90,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
     <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.905Z</updated>
+    <updated>2022-08-25T14:03:15.085Z</updated>
     
     <summary type="html">
     
@@ -90,7 +113,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/</id>
     <published>2022-06-28T18:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.989Z</updated>
+    <updated>2022-08-25T14:03:15.173Z</updated>
     
     <summary type="html">
     
@@ -115,7 +138,7 @@
     <link href="https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/"/>
     <id>https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/</id>
     <published>2022-06-28T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.945Z</updated>
+    <updated>2022-08-25T14:03:15.125Z</updated>
     
     <summary type="html">
     
@@ -136,7 +159,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/</id>
     <published>2022-05-24T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:38.085Z</updated>
+    <updated>2022-08-25T14:03:15.265Z</updated>
     
     <summary type="html">
     
@@ -167,7 +190,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/</id>
     <published>2022-05-10T12:16:00.000Z</published>
-    <updated>2022-08-23T12:05:37.849Z</updated>
+    <updated>2022-08-25T14:03:15.033Z</updated>
     
     <summary type="html">
     
@@ -194,7 +217,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-array-method/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-array-method/</id>
     <published>2022-05-06T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.989Z</updated>
+    <updated>2022-08-25T14:03:15.169Z</updated>
     
     <summary type="html">
     
@@ -217,7 +240,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-source-control-jenkinsfile/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-source-control-jenkinsfile/</id>
     <published>2022-04-30T12:16:00.000Z</published>
-    <updated>2022-08-23T12:05:37.885Z</updated>
+    <updated>2022-08-25T14:03:15.065Z</updated>
     
     <summary type="html">
     
@@ -244,7 +267,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/</id>
     <published>2022-04-28T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.989Z</updated>
+    <updated>2022-08-25T14:03:15.173Z</updated>
     
     <summary type="html">
     
@@ -267,7 +290,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-dev-environment-install/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-dev-environment-install/</id>
     <published>2022-04-15T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:37.989Z</updated>
+    <updated>2022-08-25T14:03:15.169Z</updated>
     
     <summary type="html">
     
@@ -290,7 +313,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-example/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-example/</id>
     <published>2022-04-13T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:38.081Z</updated>
+    <updated>2022-08-25T14:03:15.261Z</updated>
     
     <summary type="html">
     
@@ -313,7 +336,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-dev-environment-configuration/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-dev-environment-configuration/</id>
     <published>2022-04-09T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:38.081Z</updated>
+    <updated>2022-08-25T14:03:15.265Z</updated>
     
     <summary type="html">
     
@@ -336,7 +359,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/</id>
     <published>2022-04-06T12:12:00.000Z</published>
-    <updated>2022-08-23T12:05:38.085Z</updated>
+    <updated>2022-08-25T14:03:15.265Z</updated>
     
     <summary type="html">
     
@@ -359,7 +382,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/</id>
     <published>2022-04-03T12:16:00.000Z</published>
-    <updated>2022-08-23T12:05:37.885Z</updated>
+    <updated>2022-08-25T14:03:15.069Z</updated>
     
     <summary type="html">
     
@@ -384,7 +407,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-xls2xlsx-with-pandas/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-xls2xlsx-with-pandas/</id>
     <published>2022-03-27T18:12:00.000Z</published>
-    <updated>2022-08-23T12:05:38.001Z</updated>
+    <updated>2022-08-25T14:03:15.185Z</updated>
     
     <summary type="html">
     
@@ -407,7 +430,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-global-variable-reference/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-global-variable-reference/</id>
     <published>2022-03-15T12:16:00.000Z</published>
-    <updated>2022-08-23T12:05:37.869Z</updated>
+    <updated>2022-08-25T14:03:15.049Z</updated>
     
     <summary type="html">
     
@@ -434,7 +457,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-2/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-2/</id>
     <published>2022-03-08T12:16:00.000Z</published>
-    <updated>2022-08-23T12:05:37.853Z</updated>
+    <updated>2022-08-25T14:03:15.033Z</updated>
     
     <summary type="html">
     
@@ -459,7 +482,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-pipeline/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-pipeline/</id>
     <published>2022-03-01T12:16:00.000Z</published>
-    <updated>2022-08-23T12:05:37.869Z</updated>
+    <updated>2022-08-25T14:03:15.049Z</updated>
     
     <summary type="html">
     
@@ -478,27 +501,6 @@
       <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
     
       <category term="Pipeline" scheme="https://hiyongz.github.io/tags/Pipeline/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux安装和配置SVN服务器</title>
-    <link href="https://hiyongz.github.io/posts/linux-svn-install-in-centos7/"/>
-    <id>https://hiyongz.github.io/posts/linux-svn-install-in-centos7/</id>
-    <published>2022-02-26T12:02:00.000Z</published>
-    <updated>2022-08-23T12:05:37.937Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文记录在centos7系统上搭建SVN服务器步骤。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="https://hiyongz.github.io/categories/Linux/"/>
-    
-    
-      <category term="SVN" scheme="https://hiyongz.github.io/tags/SVN/"/>
     
   </entry>
   
