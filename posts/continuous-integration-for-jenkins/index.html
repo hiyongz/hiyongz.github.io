@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-email.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins/jenkins-discard-old-builds.png">
 <meta property="article:published_time" content="2021-03-05T12:12:00.000Z">
-<meta property="article:modified_time" content="2022-09-18T12:43:35.232Z">
+<meta property="article:modified_time" content="2022-09-18T12:48:12.587Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Jenkins">
 <meta name="twitter:card" content="summary">
@@ -444,7 +444,7 @@
 <p><img src="csrf-disabled.png" width="80%" height="80%" /></p>
 <h1 id="执行机管理"><a href="#执行机管理" class="headerlink" title="执行机管理"></a>执行机管理</h1><p>在实际工作中，考虑到宿主机资源限制，可以采用多节点的方式，将任务分配到其他节点执行。通过添加多个Jenkins Nodes来执行Jenkins任务， Jenkins运行的主机称为Built-In Node：</p>
 <ul>
-<li>节点上需要配置Java运行环境, Java_Version&gt;1.5</li>
+<li>节点上需要配置Java运行环境, Java_Version&gt;1.5，注意：Jenkins 2.357 及 LTS 2.361.1之后的版本要求Java 11 或者 17</li>
 <li>节点支持Windows, Linux，Mac系统</li>
 </ul>
 <p>先查看是否配置了Java运行环境：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@server /]<span class="comment"># java -version</span></span><br><span class="line">openjdk version <span class="string">&quot;1.8.0_252&quot;</span></span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_252-b09)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)</span><br><span class="line">[root@server /]<span class="comment"># </span></span><br></pre></td></tr></table></figure></p>
