@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="通常一个Java项目会引用大量的 jar 包，而jar 包之间可能存在各种依赖关系，如果运行Java项目时仅使用classpath 参数来管理jar包会非常不方便，此外，在项目编译、打包、升级、发布都会非常繁琐。Maven就是一个可以用来管理jar包的工具，可以用它来构建和管理任何基于java的项目，比如代码编译、打包、项目模块化管理、依赖管理等，下面来介绍Maven的安装及配置方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven 安装和配置方法详解">
+<meta property="og:url" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="通常一个Java项目会引用大量的 jar 包，而jar 包之间可能存在各种依赖关系，如果运行Java项目时仅使用classpath 参数来管理jar包会非常不方便，此外，在项目编译、打包、升级、发布都会非常繁琐。Maven就是一个可以用来管理jar包的工具，可以用它来构建和管理任何基于java的项目，比如代码编译、打包、项目模块化管理、依赖管理等，下面来介绍Maven的安装及配置方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-centos-download.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-centos3.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-centos4.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-windows-java.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-windows-download.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-windows2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-windows3.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-windows4.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-windows5.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-centos2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/windows-maven-localrepository.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-m2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/VScode-Extension-Pack-for-Java.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/mmaven-web-1.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-3.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-4.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-5.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-6.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-7.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-8.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-9.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-10.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-web-11.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/import-project.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/import-project2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/import-project3.png">
+<meta property="article:published_time" content="2022-10-14T12:12:00.000Z">
+<meta property="article:modified_time" content="2022-10-31T13:46:48.543Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/java-maven-install-and-configure/maven-centos-download.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/java-maven-install-and-configure/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Maven 安装和配置方法详解 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz/DevTest-Notes" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/java-maven-install-and-configure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Maven 安装和配置方法详解
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-14 12:12:00" itemprop="dateCreated datePublished" datetime="2022-10-14T12:12:00+00:00">2022-10-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/java-maven-install-and-configure/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/java-maven-install-and-configure/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>通常一个Java项目会引用大量的 jar 包，而jar 包之间可能存在各种依赖关系，如果运行Java项目时仅使用classpath 参数来管理jar包会非常不方便，此外，在项目编译、打包、升级、发布都会非常繁琐。Maven就是一个可以用来管理jar包的工具，可以用它来构建和管理任何基于java的项目，比如代码编译、打包、项目模块化管理、依赖管理等，下面来介绍Maven的安装及配置方法。</p>
+<a id="more"></a>
+<h1 id="Maven简介"><a href="#Maven简介" class="headerlink" title="Maven简介"></a>Maven简介</h1><p>maven 包括两部分：Maven 服务端和 Maven 客户端。</p>
+<p>服务器端叫做 maven repo，或者 nexus server。 所有 jar 包都发布到这个仓库，是存放 jar 包的仓库。仓库里每个 jar 包，都有一个唯一的 id， id 是由三部分组成的：group id， artifact id 和 version。</p>
+<p>为了避免每次都从服务器下载jar包，maven 会把下载好的jar包放在本地的文件夹（local repo），下面介绍Maven 客户端的安装配置方法。</p>
+<h1 id="Maven-客户端安装"><a href="#Maven-客户端安装" class="headerlink" title="Maven 客户端安装"></a>Maven 客户端安装</h1><h2 id="Centos7-安装maven"><a href="#Centos7-安装maven" class="headerlink" title="Centos7 安装maven"></a>Centos7 安装maven</h2><h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1. 下载"></a>1. 下载</h3><p>apache maven 下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.html">https://maven.apache.org/download.html</a></p>
+<p><img src="maven-centos-download.png" width="80%" height="80%" /></p>
+<h3 id="2-新建maven目录"><a href="#2-新建maven目录" class="headerlink" title="2. 新建maven目录"></a>2. 新建maven目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Server <span class="built_in">local</span>]<span class="comment"># mkdir maven</span></span><br><span class="line">[root@Server <span class="built_in">local</span>]<span class="comment"># cd maven</span></span><br><span class="line">[root@Server maven]<span class="comment"># mv /home/hiyong/Downloads/apache-maven-3.6.3-bin.tar.gz .</span></span><br><span class="line">[root@Server <span class="built_in">local</span>]<span class="comment"># tar xvzf apache-maven-3.6.3-bin.tar.gz</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3. 配置环境变量"></a>3. 配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+<p>将下面这两行代码拷贝到文件末尾并保存<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MAVEN_HOME=/usr/<span class="built_in">local</span>/maven/apache-maven-3.6.3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;MAVEN_HOME&#125;</span>/bin:<span class="variable">$&#123;PATH&#125;</span></span><br></pre></td></tr></table></figure><br>重载环境变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-查看版本"><a href="#4-查看版本" class="headerlink" title="4. 查看版本"></a>4. 查看版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@Server maven]<span class="comment"># mvn -v</span></span><br><span class="line">Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)</span><br><span class="line">Maven home: /usr/<span class="built_in">local</span>/maven/apache-maven-3.6.3</span><br><span class="line">Java version: 1.8.0_241, vendor: Oracle Corporation, runtime: /usr/<span class="built_in">local</span>/java/jdk1.8.0_241/jre</span><br><span class="line">Default locale: en_US, platform encoding: UTF-8</span><br><span class="line">OS name: <span class="string">&quot;linux&quot;</span>, version: <span class="string">&quot;3.10.0-1062.el7.x86_64&quot;</span>, arch: <span class="string">&quot;amd64&quot;</span>, family: <span class="string">&quot;unix&quot;</span></span><br><span class="line">[root@Server maven]<span class="comment"># tar xvzf apache-maven-3.6.3-bin.tar.gz</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-添加阿里云镜像"><a href="#5-添加阿里云镜像" class="headerlink" title="5. 添加阿里云镜像"></a>5. 添加阿里云镜像</h3><p>配置指南：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/mvn/guide">https://developer.aliyun.com/mvn/guide</a></p>
+<p>加速依赖包下载，在settings.xml添加阿里云镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="built_in">local</span>/maven/apache-maven-3.6.3/conf/settings.xml</span><br></pre></td></tr></table></figure></p>
+<p>找到 <code>&lt;mirrors&gt;&lt;/mirrors&gt;</code> 标签对，添加代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">  &lt;id&gt;aliyunmaven&lt;/id&gt;</span><br><span class="line">  &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;</span><br><span class="line">  &lt;name&gt;阿里云公共仓库&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;</span><br><span class="line">&lt;/mirror&gt;  </span><br></pre></td></tr></table></figure></p>
+<h3 id="6-指定下载资源位置"><a href="#6-指定下载资源位置" class="headerlink" title="6. 指定下载资源位置"></a>6. 指定下载资源位置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;/usr/<span class="built_in">local</span>/maven/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="maven-centos3.png" width="80%" height="80%" /></p>
+<h3 id="7-指定JDK版本"><a href="#7-指定JDK版本" class="headerlink" title="7. 指定JDK版本"></a>7. 指定JDK版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;profile&gt;    </span><br><span class="line">     &lt;id&gt;jdk-1.8&lt;/id&gt;    </span><br><span class="line">     &lt;activation&gt;    </span><br><span class="line">       &lt;activeByDefault&gt;<span class="literal">true</span>&lt;/activeByDefault&gt;    </span><br><span class="line">       &lt;jdk&gt;1.8&lt;/jdk&gt;    </span><br><span class="line">     &lt;/activation&gt;    </span><br><span class="line">       &lt;properties&gt;    </span><br><span class="line">         &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;    </span><br><span class="line">         &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;         &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;    </span><br><span class="line">&lt;/properties&gt;    </span><br></pre></td></tr></table></figure>
+<p><img src="maven-centos4.png" width="80%" height="80%" /></p>
+<h2 id="Windows-安装Maven"><a href="#Windows-安装Maven" class="headerlink" title="Windows 安装Maven"></a>Windows 安装Maven</h2><h3 id="1-检查-Java"><a href="#1-检查-Java" class="headerlink" title="1. 检查 Java"></a>1. 检查 Java</h3><p><code>java -version</code></p>
+<p><img src="maven-windows-java.png" width="80%" height="80%" /></p>
+<h3 id="2-下载，解压"><a href="#2-下载，解压" class="headerlink" title="2. 下载，解压"></a>2. 下载，解压</h3><p>地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
+<p><img src="maven-windows-download.png" width="80%" height="80%" /></p>
+<p><img src="maven-windows2.png" width="80%" height="80%" /></p>
+<h3 id="3-设置-Maven-环境变量"><a href="#3-设置-Maven-环境变量" class="headerlink" title="3. 设置 Maven 环境变量"></a>3. 设置 Maven 环境变量</h3><p>新建系统变量 MAVEN_HOME：</p>
+<p><img src="maven-windows3.png" width="80%" height="80%" /></p>
+<p>编辑系统变量 Path，添加变量值：<code>;%MAVEN_HOME%\bin</code></p>
+<p><img src="maven-windows4.png" width="80%" height="80%" /></p>
+<h3 id="4-查看maven版本"><a href="#4-查看maven版本" class="headerlink" title="4. 查看maven版本"></a>4. 查看maven版本</h3><p><code>mvn -version</code></p>
+<p><img src="maven-windows5.png" width="80%" height="80%" /></p>
+<h3 id="5-添加阿里云镜像-1"><a href="#5-添加阿里云镜像-1" class="headerlink" title="5. 添加阿里云镜像"></a>5. 添加阿里云镜像</h3><p>和前面一样，配置阿里云镜像。maven安装目录下的conf/settings.xml文件，在<code>&lt;mirrors&gt;&lt;/mirrors&gt;</code>标签中添加mirror子节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;</span><br><span class="line">  &lt;id&gt;aliyunmaven&lt;/id&gt;</span><br><span class="line">  &lt;mirrorOf&gt;*&lt;/mirrorOf&gt;</span><br><span class="line">  &lt;name&gt;阿里云公共仓库&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;https://maven.aliyun.com/repository/public&lt;/url&gt;</span><br><span class="line">&lt;/mirror&gt; </span><br></pre></td></tr></table></figure>
+<p><img src="maven-centos2.png" width="80%" height="80%" /></p>
+<h3 id="6-指定下载资源位置-1"><a href="#6-指定下载资源位置-1" class="headerlink" title="6. 指定下载资源位置"></a>6. 指定下载资源位置</h3><p>仓库会默认下载到 <code>C:\Users\&#123;用户名&#125;\.m2\repository</code> 下，可以在conf/settings.xml文件中配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;D:/tools/maven/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="windows-maven-localrepository.png" width="80%" height="80%" /></p>
+<h3 id="7-IDEA-的-maven-settings-配置"><a href="#7-IDEA-的-maven-settings-配置" class="headerlink" title="7. IDEA 的 maven settings 配置"></a>7. IDEA 的 maven settings 配置</h3><p>设置文件默认为 <code>C:\Users\&#123;用户名&#125;\.m2\settings.xml</code></p>
+<p>IntelliJ IDEA的 maven settings 配置如下：</p>
+<p><img src="maven-m2.png" width="80%" height="80%" /></p>
+<h3 id="8-Vscode配置Maven"><a href="#8-Vscode配置Maven" class="headerlink" title="8. Vscode配置Maven"></a>8. Vscode配置Maven</h3><p>安装扩展包：<code>Extension Pack for Java</code></p>
+<p><img src="VScode-Extension-Pack-for-Java.png" width="80%" height="80%" /></p>
+<p>配置vscode设置文件文件settings.json，添加：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;java.configuration.maven.userSettings&quot;: &quot;D:/tools/apache-maven-3.6.3/conf/settings.xml&quot;,</span><br><span class="line">&quot;maven.executable.path&quot;: &quot;D:\\tools\\apache-maven-3.6.3\\bin\\mvn.cmd&quot;,</span><br></pre></td></tr></table></figure>
+<h1 id="创建一个简单的-Maven-项目"><a href="#创建一个简单的-Maven-项目" class="headerlink" title="创建一个简单的 Maven 项目"></a>创建一个简单的 Maven 项目</h1><p>下面是在IDEA中创建Maven 项目的例子。</p>
+<h2 id="创建新-maven-项目"><a href="#创建新-maven-项目" class="headerlink" title="创建新 maven 项目"></a>创建新 maven 项目</h2><p>下面使用maven创建一个Web项目</p>
+<h3 id="1-新建项目"><a href="#1-新建项目" class="headerlink" title="1. 新建项目"></a>1. 新建项目</h3><p>点击【File】 —&gt; 【New】 —&gt; 【Project…】</p>
+<p><img src="mmaven-web-1.png" width="80%" height="80%" /></p>
+<p>点击【Next】</p>
+<p><img src="maven-web-2.png" width="80%" height="80%" /></p>
+<p>点击【Next】</p>
+<p><img src="maven-web-3.png" width="80%" height="80%" /></p>
+<p>点击【Next】</p>
+<p><img src="maven-web-4.png" width="80%" height="80%" /></p>
+<p>点击【Finish】</p>
+<p>开启自动导包</p>
+<p><img src="maven-web-5.png" width="80%" height="80%" /></p>
+<p>等待maven下载依赖…..</p>
+<p><img src="maven-web-6.png" width="80%" height="80%" /></p>
+<p>初始化完成后会生成如下目录结构：</p>
+<p><img src="maven-web-7.png" width="80%" height="80%" /></p>
+<h3 id="2-手动创建目录"><a href="#2-手动创建目录" class="headerlink" title="2. 手动创建目录"></a>2. 手动创建目录</h3><p>点击【File】—&gt; 【Project Structure】，选择【Modules】</p>
+<p><img src="maven-web-8.png" width="80%" height="80%" /></p>
+<p>其中：</p>
+<ul>
+<li>src/main/java —— 一般存放开发代码</li>
+<li>src/main/resources —— 存放项目资源文件</li>
+<li>src/test/java —— 存放单元测试代码</li>
+<li>src/test/resources —— 存放测试资源文件</li>
+</ul>
+<h3 id="3-配置Tomcat容器"><a href="#3-配置Tomcat容器" class="headerlink" title="3. 配置Tomcat容器"></a>3. 配置Tomcat容器</h3><p>点击Add Configuration</p>
+<p><img src="maven-web-9.png" width="80%" height="80%" /></p>
+<h3 id="4-运行"><a href="#4-运行" class="headerlink" title="4. 运行"></a>4. 运行</h3><p>点击运行<br><img src="maven-web-10.png" width="80%" height="80%" /></p>
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:8081/webdemo">http://localhost:8081/webdemo</a></p>
+<p><img src="maven-web-11.png" width="80%" height="80%" /></p>
+<h2 id="导入现有的-maven-项目"><a href="#导入现有的-maven-项目" class="headerlink" title="导入现有的 maven 项目"></a>导入现有的 maven 项目</h2><p><img src="import-project.png" width="80%" height="80%" /></p>
+<p><img src="import-project2.png" width="80%" height="80%" /></p>
+<p><img src="import-project3.png" width="80%" height="80%" /></p>
+<p>在pom.xml目录下，执行<code>mvn install -U</code> 会下载jar包。</p>
+<p>参考文档：</p>
+<ol>
+<li>apache maven 安装：<a target="_blank" rel="noopener" href="https://maven.apache.org/install.html">https://maven.apache.org/install.html</a></li>
+</ol>
+<center><b>--THE END--<b></center>
+
+
+
+
+
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>Maven 安装和配置方法详解</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/java-maven-install-and-configure/" title="Maven 安装和配置方法详解">https://hiyongz.github.io/posts/java-maven-install-and-configure/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/java-maven-install-and-configure/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/continuous-integration-for-jenkins-api-create-job-and-slave/" rel="prev" title="持续集成：通过Jenkins API创建项目和节点">
+      <i class="fa fa-chevron-left"></i> 持续集成：通过Jenkins API创建项目和节点
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Maven简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">Maven 客户端安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Centos7-%E5%AE%89%E8%A3%85maven"><span class="nav-number">2.1.</span> <span class="nav-text">Centos7 安装maven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%96%B0%E5%BB%BAmaven%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 新建maven目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. 配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC"><span class="nav-number">2.1.4.</span> <span class="nav-text">4. 查看版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F"><span class="nav-number">2.1.5.</span> <span class="nav-text">5. 添加阿里云镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%8C%87%E5%AE%9A%E4%B8%8B%E8%BD%BD%E8%B5%84%E6%BA%90%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.1.6.</span> <span class="nav-text">6. 指定下载资源位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%8C%87%E5%AE%9AJDK%E7%89%88%E6%9C%AC"><span class="nav-number">2.1.7.</span> <span class="nav-text">7. 指定JDK版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-%E5%AE%89%E8%A3%85Maven"><span class="nav-number">2.2.</span> <span class="nav-text">Windows 安装Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5-Java"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 检查 Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%8B%E8%BD%BD%EF%BC%8C%E8%A7%A3%E5%8E%8B"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 下载，解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%BE%E7%BD%AE-Maven-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 设置 Maven 环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%9F%A5%E7%9C%8Bmaven%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.4.</span> <span class="nav-text">4. 查看maven版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%B7%BB%E5%8A%A0%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F-1"><span class="nav-number">2.2.5.</span> <span class="nav-text">5. 添加阿里云镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%8C%87%E5%AE%9A%E4%B8%8B%E8%BD%BD%E8%B5%84%E6%BA%90%E4%BD%8D%E7%BD%AE-1"><span class="nav-number">2.2.6.</span> <span class="nav-text">6. 指定下载资源位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-IDEA-%E7%9A%84-maven-settings-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.7.</span> <span class="nav-text">7. IDEA 的 maven settings 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Vscode%E9%85%8D%E7%BD%AEMaven"><span class="nav-number">2.2.8.</span> <span class="nav-text">8. Vscode配置Maven</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84-Maven-%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">创建一个简单的 Maven 项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0-maven-%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.1.</span> <span class="nav-text">创建新 maven 项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. 新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%8B%E5%8A%A8%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 手动创建目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AETomcat%E5%AE%B9%E5%99%A8"><span class="nav-number">3.1.3.</span> <span class="nav-text">3. 配置Tomcat容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%BF%90%E8%A1%8C"><span class="nav-number">3.1.4.</span> <span class="nav-text">4. 运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E7%8E%B0%E6%9C%89%E7%9A%84-maven-%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">导入现有的 maven 项目</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">228</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">183</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/DevTest-Notes/" title="GitHub → https://github.com/hiyongz/DevTest-Notes/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:59</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
