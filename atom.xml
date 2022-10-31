@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2022-10-26T01:07:17.084Z</updated>
+  <updated>2022-10-31T13:21:59.918Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MySQL索引介绍</title>
+    <link href="https://hiyongz.github.io/posts/database-for-mysql-index/"/>
+    <id>https://hiyongz.github.io/posts/database-for-mysql-index/</id>
+    <published>2022-09-07T12:12:00.000Z</published>
+    <updated>2022-10-31T13:21:59.918Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;索引主要是用来提高数据库的查询效率的，它对指定的列或列的集合生成索引，然后可以通过索引来检索目标数据，就像目录一样，缩小了扫描范围，大大提高了查询效率。&lt;/p&gt;
+&lt;p&gt;如果不使用索引，MySQL服务器会从第一行开始查询，直到找到相关行，数据表越大，耗费时间就越多。本文将介绍索引的一些基本原理，了解它是如何优化数据库性能的。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java环境安装配置步骤介绍</title>
     <link href="https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/"/>
     <id>https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/</id>
     <published>2022-09-04T12:02:00.000Z</published>
-    <updated>2022-10-26T01:07:17.084Z</updated>
+    <updated>2022-10-31T13:21:59.946Z</updated>
     
     <summary type="html">
     
@@ -44,7 +68,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
     <published>2022-08-25T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.064Z</updated>
+    <updated>2022-10-31T13:21:59.926Z</updated>
     
     <summary type="html">
     
@@ -67,7 +91,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.068Z</updated>
+    <updated>2022-10-31T13:21:59.930Z</updated>
     
     <summary type="html">
     
@@ -90,7 +114,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.064Z</updated>
+    <updated>2022-10-31T13:21:59.930Z</updated>
     
     <summary type="html">
     
@@ -113,7 +137,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
     <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.056Z</updated>
+    <updated>2022-10-31T13:21:59.918Z</updated>
     
     <summary type="html">
     
@@ -136,7 +160,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/</id>
     <published>2022-06-28T18:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.144Z</updated>
+    <updated>2022-10-31T13:22:00.006Z</updated>
     
     <summary type="html">
     
@@ -161,7 +185,7 @@
     <link href="https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/"/>
     <id>https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/</id>
     <published>2022-06-28T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.096Z</updated>
+    <updated>2022-10-31T13:21:59.962Z</updated>
     
     <summary type="html">
     
@@ -182,7 +206,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/</id>
     <published>2022-05-24T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.236Z</updated>
+    <updated>2022-10-31T13:22:00.102Z</updated>
     
     <summary type="html">
     
@@ -213,7 +237,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/</id>
     <published>2022-05-10T12:16:00.000Z</published>
-    <updated>2022-10-26T01:07:17.004Z</updated>
+    <updated>2022-10-31T13:21:59.866Z</updated>
     
     <summary type="html">
     
@@ -240,7 +264,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-array-method/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-array-method/</id>
     <published>2022-05-06T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.140Z</updated>
+    <updated>2022-10-31T13:22:00.006Z</updated>
     
     <summary type="html">
     
@@ -263,7 +287,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-source-control-jenkinsfile/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-source-control-jenkinsfile/</id>
     <published>2022-04-30T12:16:00.000Z</published>
-    <updated>2022-10-26T01:07:17.036Z</updated>
+    <updated>2022-10-31T13:21:59.898Z</updated>
     
     <summary type="html">
     
@@ -290,7 +314,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/</id>
     <published>2022-04-28T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.144Z</updated>
+    <updated>2022-10-31T13:22:00.006Z</updated>
     
     <summary type="html">
     
@@ -313,7 +337,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-dev-environment-install/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-dev-environment-install/</id>
     <published>2022-04-15T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.140Z</updated>
+    <updated>2022-10-31T13:22:00.006Z</updated>
     
     <summary type="html">
     
@@ -336,7 +360,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-example/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-example/</id>
     <published>2022-04-13T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.232Z</updated>
+    <updated>2022-10-31T13:22:00.098Z</updated>
     
     <summary type="html">
     
@@ -359,7 +383,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-dev-environment-configuration/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-dev-environment-configuration/</id>
     <published>2022-04-09T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.232Z</updated>
+    <updated>2022-10-31T13:22:00.098Z</updated>
     
     <summary type="html">
     
@@ -382,7 +406,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-zentao-framework-introduction/</id>
     <published>2022-04-06T12:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.236Z</updated>
+    <updated>2022-10-31T13:22:00.102Z</updated>
     
     <summary type="html">
     
@@ -405,7 +429,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-jenkins-for-robotframework-plugin-variables/</id>
     <published>2022-04-03T12:16:00.000Z</published>
-    <updated>2022-10-26T01:07:17.040Z</updated>
+    <updated>2022-10-31T13:21:59.902Z</updated>
     
     <summary type="html">
     
@@ -430,7 +454,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-xls2xlsx-with-pandas/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-xls2xlsx-with-pandas/</id>
     <published>2022-03-27T18:12:00.000Z</published>
-    <updated>2022-10-26T01:07:17.156Z</updated>
+    <updated>2022-10-31T13:22:00.018Z</updated>
     
     <summary type="html">
     
@@ -453,7 +477,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-global-variable-reference/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-global-variable-reference/</id>
     <published>2022-03-15T12:16:00.000Z</published>
-    <updated>2022-10-26T01:07:17.020Z</updated>
+    <updated>2022-10-31T13:21:59.882Z</updated>
     
     <summary type="html">
     
@@ -472,31 +496,6 @@
       <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
     
       <category term="Pipeline" scheme="https://hiyongz.github.io/tags/Pipeline/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>持续集成：Jenkins API使用方法详细介绍</title>
-    <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-2/"/>
-    <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-2/</id>
-    <published>2022-03-08T12:16:00.000Z</published>
-    <updated>2022-10-26T01:07:17.004Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在&lt;a href=&quot;https://blog.csdn.net/u010698107/article/details/115102811&quot;&gt;持续集成：Jenkins API简单使用&lt;/a&gt;中介绍了使用Python requests 和 jenkinsapi 库来请求Jenkins API。本文将更全面的介绍Jenkins API以及使用方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
     
   </entry>
   
