@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo_apple-touch-icon-wechat.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo_favicon-32x32-wechat.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo_favicon-16x16-wechat.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="mHoeZbiieuN238tsyMA7DAU6UTZSrTBkXmCT6RO_jAw">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我在持续集成：Jenkins API使用方法详细介绍中介绍了jenkins API的使用方法，比如使用API读取jenkins项目相关信息、触发构建等操作，除此之外，还可以直接使用API来创建项目、新建节点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="持续集成：通过Jenkins API创建项目和节点">
+<meta property="og:url" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/index.html">
+<meta property="og:site_name" content="HiYong">
+<meta property="og:description" content="我在持续集成：Jenkins API使用方法详细介绍中介绍了jenkins API的使用方法，比如使用API读取jenkins项目相关信息、触发构建等操作，除此之外，还可以直接使用API来创建项目、新建节点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/create-linux-node1.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/create-linux-node2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/create-linux-node3.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/admin-api-token.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/node-list1.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/node-list2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/node-win-agent.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/node-win-agent2.png">
+<meta property="og:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/create-job1.png">
+<meta property="article:published_time" content="2022-09-28T12:16:00.000Z">
+<meta property="article:modified_time" content="2022-10-31T13:37:07.704Z">
+<meta property="article:author" content="HiYo">
+<meta property="article:tag" content="Jenkins">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/create-linux-node1.png">
+
+<link rel="canonical" href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>持续集成：通过Jenkins API创建项目和节点 | HiYong</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script src="/live2d-widget/autoload.js"></script>
+<link rel="alternate" href="/atom.xml" title="HiYong" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HiYong</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">此时 此地 此身</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-books">
+
+    <a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书单</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/tools/" rel="section"><i class="fa fa-gavel fa-fw"></i>工具</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/hiyongz/DevTest-Notes" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo_android-chrome-192x192-wechat.png">
+      <meta itemprop="name" content="HiYo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HiYong">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          持续集成：通过Jenkins API创建项目和节点
+        </h1>
+
+        <div class="post-meta">
+          
+          
+
+            <span class="post-time">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-28 12:16:00" itemprop="dateCreated datePublished" datetime="2022-09-28T12:16:00+00:00">2022-09-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">测试开发</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" itemprop="url" rel="index"><span itemprop="name">持续集成</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/continuous-integration-for-jenkins-api-create-job-and-slave/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/continuous-integration-for-jenkins-api-create-job-and-slave/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我在<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010698107/article/details/123036572">持续集成：Jenkins API使用方法详细介绍</a>中介绍了jenkins API的使用方法，比如使用API读取jenkins项目相关信息、触发构建等操作，除此之外，还可以直接使用API来创建项目、新建节点。</p>
+<a id="more"></a>
+<h1 id="创建slave节点"><a href="#创建slave节点" class="headerlink" title="创建slave节点"></a>创建slave节点</h1><h2 id="1-节点配置文件"><a href="#1-节点配置文件" class="headerlink" title="1. 节点配置文件"></a>1. 节点配置文件</h2><p>要通过jenkins REST API创建节点，需要先准备节点的配置文件，例如Windows节点配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;win_slave&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;nodeDescription&quot;</span>: <span class="string">&quot;192.168.30.100&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;numExecutors&quot;</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;remoteFS&quot;</span>: <span class="string">&quot;D:\\jenkins&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;labelString&quot;</span>: <span class="string">&quot;win_slave&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;mode&quot;</span>: <span class="string">&quot;NORMAL&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;hudson.slaves.JNLPLauncher&quot;</span>,</span><br><span class="line">        <span class="string">&quot;hudson.slaves.RetentionStrategy$Always&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">&quot;launcher&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;stapler-class&quot;</span>: <span class="string">&quot;hudson.slaves.JNLPLauncher&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;$class&quot;</span>: <span class="string">&quot;hudson.slaves.JNLPLauncher&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;workDirSettings&quot;</span>: &#123;</span><br><span class="line">            <span class="attr">&quot;disabled&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;workDirPath&quot;</span>: <span class="string">&quot;D:\\jenkins&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;internalDir&quot;</span>: <span class="string">&quot;remoting&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;failIfWorkDirIsMissing&quot;</span>: <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;webSocket&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">&quot;tunnel&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;vmargs&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;retentionStrategy&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;stapler-class&quot;</span>: <span class="string">&quot;hudson.slaves.RetentionStrategy$Always&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;$class&quot;</span>: <span class="string">&quot;hudson.slaves.RetentionStrategy$Always&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;nodeProperties&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;stapler-class-bag&quot;</span>: <span class="string">&quot;true&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;hudson.slaves.DumbSlave&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>节点配置文件可使用抓包工具来获取，比如Charles、fiddler等，也可以直接使用浏览器的开发者工具获取，下面演示如何使用Edge浏览器来获取Linux节点的json格式节点配置文件：</p>
+<p>1、创建新节点</p>
+<p><img src="create-linux-node1.png" width="70%" height="70%" /></p>
+<p>2、填写配置信息</p>
+<p><img src="create-linux-node2.png" width="70%" height="70%" /></p>
+<p>3、打开浏览器开发人员工具控制台</p>
+<p>右键-&gt;点击检查，或者F12</p>
+<p>4、点击保存</p>
+<p>点击保存后，可在控制台中看到doCreateItem这个接口请求：</p>
+<p><img src="create-linux-node3.png" width="70%" height="70%" /></p>
+<p>复制json字段的值即可。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;linux_slave&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;nodeDescription&quot;</span>:<span class="string">&quot;192.168.30.9&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;numExecutors&quot;</span>:<span class="string">&quot;1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;remoteFS&quot;</span>:<span class="string">&quot;/tmp/jenkins_slave&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;labelString&quot;</span>:<span class="string">&quot;linux_slave&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;mode&quot;</span>:<span class="string">&quot;NORMAL&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;&quot;</span>:[</span><br><span class="line">        <span class="string">&quot;hudson.plugins.sshslaves.SSHLauncher&quot;</span>,</span><br><span class="line">        <span class="string">&quot;0&quot;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">&quot;launcher&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;oldCommand&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;stapler-class&quot;</span>:<span class="string">&quot;hudson.plugins.sshslaves.SSHLauncher&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;$class&quot;</span>:<span class="string">&quot;hudson.plugins.sshslaves.SSHLauncher&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;host&quot;</span>:<span class="string">&quot;192.168.30.9&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;includeUser&quot;</span>:<span class="string">&quot;false&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;credentialsId&quot;</span>:<span class="string">&quot;f4d8827c-bd25-41e1-93df-2d32248164f3&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;&quot;</span>:<span class="string">&quot;2&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;sshHostKeyVerificationStrategy&quot;</span>:&#123;</span><br><span class="line">            <span class="attr">&quot;requireInitialManualTrust&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="attr">&quot;stapler-class&quot;</span>:<span class="string">&quot;hudson.plugins.sshslaves.verifiers.ManuallyTrustedKeyVerificationStrategy&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;$class&quot;</span>:<span class="string">&quot;hudson.plugins.sshslaves.verifiers.ManuallyTrustedKeyVerificationStrategy&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;port&quot;</span>:<span class="string">&quot;22&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;javaPath&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;jvmOptions&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;prefixStartSlaveCmd&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;suffixStartSlaveCmd&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;launchTimeoutSeconds&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;maxNumRetries&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;retryWaitTime&quot;</span>:<span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;tcpNoDelay&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;workDir&quot;</span>:<span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;retentionStrategy&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;stapler-class&quot;</span>:<span class="string">&quot;hudson.slaves.RetentionStrategy$Always&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;$class&quot;</span>:<span class="string">&quot;hudson.slaves.RetentionStrategy$Always&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;nodeProperties&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;stapler-class-bag&quot;</span>:<span class="string">&quot;true&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;type&quot;</span>:<span class="string">&quot;hudson.slaves.DumbSlave&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Jenkins-Crumb&quot;</span>:<span class="string">&quot;c05e26bd59fdfb37897cc2ac20d951f43cf077578eb0dbb255106cab05b9fb2d&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-创建节点"><a href="#2-创建节点" class="headerlink" title="2. 创建节点"></a>2. 创建节点</h2><p>使用jenkinsAPI创建节点之前，需要生成一个用户的API Token：</p>
+<p><img src="admin-api-token.png" width="70%" height="70%" /></p>
+<p>下面使用Python的requests库进行接口请求，其它语言类似，下面以添加windows节点为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;win_slave.json&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> load_f:</span><br><span class="line">    postdata = json.load(load_f)</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://admin:11108c1d093a24fcebe11e945de3bcece4@192.168.30.8:8080/computer/doCreateItem?name=win_slave&amp;type=hudson.slaves.DumbSlave&#x27;</span></span><br><span class="line">response = requests.post(url, data=<span class="string">f&#x27;json=<span class="subst">&#123;json.dumps(postdata)&#125;</span>&#x27;</span>, headers=headers)</span><br><span class="line"><span class="keyword">assert</span> response.status_code==<span class="number">200</span></span><br></pre></td></tr></table></figure>
+<p>当前jenkins的节点：</p>
+<p><img src="node-list1.png" width="70%" height="70%" /></p>
+<p>执行脚本后可以看到节点win_slave创建成功了：</p>
+<p><img src="node-list2.png" width="70%" height="70%" /></p>
+<p>进入win_slave节点，可看到提示信息：</p>
+<p><img src="node-win-agent.png" width="70%" height="70%" /></p>
+<p>在节点机上执行命令就可以注册到jenkins了。</p>
+<p><img src="node-win-agent2.png" width="70%" height="70%" /></p>
+<h1 id="获取JNLP节点秘钥"><a href="#获取JNLP节点秘钥" class="headerlink" title="获取JNLP节点秘钥"></a>获取JNLP节点秘钥</h1><p>Windows节点通常是通过JNLP（Java Network Launching Protocol ）的方式注册到jenkins的，要成功连接需要知道jenkins生成的秘钥，也就是前面启动节点中secret:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> e001b3fc14e3f3c1278b45fad750361b64d955841b795245adb1b61a013b749f &gt; secret-file</span><br><span class="line">curl -sO http://192.168.30.8:8080/jnlpJars/agent.jar</span><br><span class="line">java -jar agent.jar -jnlpUrl http://192.168.30.8:8080/manage/computer/win%5Fslave/jenkins-agent.jnlp -secret @secret-file -workDir <span class="string">&quot;D:\jenkins&quot;</span></span><br></pre></td></tr></table></figure>
+<p>通过jenkins API创建windows节点之后，我们可以访问jenkins页面来获取这个秘钥，如果想通过接口的方式获取也是可以的。</p>
+<p>秘钥信息是存储在<code>jenkins-agent.jnlp</code>文件（或者<code>slave-agent.jnlp</code>）中的，路径为<a target="_blank" rel="noopener" href="http://192.168.30.8:8080/manage/computer/win_slave/jenkins-agent.jnlp">http://192.168.30.8:8080/manage/computer/win_slave/jenkins-agent.jnlp</a>，其实就是上面代理机启动命令中的 <code>jnlpUrl</code> 参数值。</p>
+<p><code>jnlp</code>文件内容如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jnlp&gt;&lt;application-desc&gt;&lt;argument&gt;e001b3fc14e3f3c1278b45fad750361b64d955841b795245adb1b61a013b749f&lt;/argument&gt;&lt;argument&gt;win_slave&lt;/argument&gt;&lt;argument&gt;-workDir&lt;/argument&gt;&lt;argument&gt;D:\jenkins&lt;/argument&gt;&lt;argument&gt;-internalDir&lt;/argument&gt;&lt;argument&gt;remoting&lt;/argument&gt;&lt;argument&gt;-url&lt;/argument&gt;&lt;argument&gt;http://192.168.30.8:8080/&lt;/argument&gt;&lt;/application-desc&gt;&lt;/jnlp&gt;</span><br></pre></td></tr></table></figure>
+<p>因此，可以通过解析<code>jnlp</code>文件来获取秘钥值。使用curl命令获取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -L -s -u admin:11108c1d093a24fcebe11e945de3bcece4 -X GET http://192.168.30.8:8080/manage/computer/win_slave/jenkins-agent.jnlp | sed <span class="string">&quot;s/.*&lt;application-desc&gt;&lt;argument&gt;\([a-z0-9]*\).*/\1/&quot;</span></span><br><span class="line">e001b3fc14e3f3c1278b45fad750361b64d955841b795245adb1b61a013b749f</span><br></pre></td></tr></table></figure>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>除了手动在jenkins页面创建项目外，也可以使用jenkins API直接创建jenkins项目（job），下面演示pipeline项目的创建步骤。</p>
+<p>创建项目的curl命令格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST --USER &#123;username&#125;:&#123;api token&#125; &#123;jenkins URL&#125;/createItem?name=&#123;jobName&#125; --header <span class="string">&quot;Content-Type:text/xml&quot;</span> --data-binary @config.xml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>username：用户名</li>
+<li>api token：用户API TOKEN</li>
+<li>jenkins URL：jenkins地址</li>
+<li>jobName为项目名</li>
+</ul>
+<h2 id="1-项目配置文件"><a href="#1-项目配置文件" class="headerlink" title="1. 项目配置文件"></a>1. 项目配置文件</h2><p><code>config.xml</code>配置文件就是pipeline项目配置文件，配置文件可通过如下方式获取：</p>
+<ol>
+<li>手动在jenkins创建一个pipeline项目，例如我创建并配置了一个名为pipeline_demo的job。</li>
+<li>访问<a target="_blank" rel="noopener" href="http://192.168.30.8:8080/job/pipeline_demo/config.xml">192.168.30.8:8080/job/pipeline_demo/config.xml</a>，这个就是pipeline_demo的配置文件，保存到本地，然后修改对应内容即可。</li>
+</ol>
+<p>配置文件内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&#x27;1.1&#x27; encoding=&#x27;UTF-8&#x27;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">flow-definition</span> <span class="attr">plugin</span>=<span class="string">&quot;workflow-job@1232.v5a_4c994312f1&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">actions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction</span> <span class="attr">plugin</span>=<span class="string">&quot;pipeline-model-definition@2.2114.v2654ca_721309&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction</span> <span class="attr">plugin</span>=<span class="string">&quot;pipeline-model-definition@2.2114.v2654ca_721309&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">jobProperties</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">triggers</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">parameters</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">options</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">actions</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>a pipeline demo<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">keepDependencies</span>&gt;</span>false<span class="tag">&lt;/<span class="name">keepDependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hudson.plugins.jira.JiraProjectProperty</span> <span class="attr">plugin</span>=<span class="string">&quot;jira@3.8&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">triggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hudson.triggers.TimerTrigger</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">spec</span>&gt;</span>30 22 * * *<span class="tag">&lt;/<span class="name">spec</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">hudson.triggers.TimerTrigger</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">triggers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">definition</span> <span class="attr">class</span>=<span class="string">&quot;org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition&quot;</span> <span class="attr">plugin</span>=<span class="string">&quot;workflow-cps@2759.v87459c4eea_ca_&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span>pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line"><span class="javascript">        <span class="function"><span class="title">stage</span>(<span class="params">&amp;apos;begin&amp;apos;</span>)</span> &#123;</span></span><br><span class="line">            steps &#123;</span><br><span class="line"><span class="handlebars"><span class="xml">                echo <span class="symbol">&amp;apos;</span>Hello pipeline<span class="symbol">&amp;apos;</span></span></span></span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    post &#123;</span><br><span class="line">        always &#123;</span><br><span class="line"><span class="handlebars"><span class="xml">            echo <span class="symbol">&amp;apos;</span>say goodbay<span class="symbol">&amp;apos;</span></span></span></span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sandbox</span>&gt;</span>true<span class="tag">&lt;/<span class="name">sandbox</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">definition</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">triggers</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">disabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">disabled</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">flow-definition</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2. 创建项目"></a>2. 创建项目</h2><p>执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -X POST --USER admin:11108c1d093a24fcebe11e945de3bcece4 http://192.168.30.8:8080/createItem?name=pipeline_demo2 --header <span class="string">&quot;Content-Type:text/xml&quot;</span> --data-binary @pipeline_demo_config.xml</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ curl -X POST http://admin:11108c1d093a24fcebe11e945de3bcece4@192.168.30.8:8080/createItem?name=pipeline_demo2 --header <span class="string">&quot;Content-Type:text/xml&quot;</span> --data-binary @pipeline_demo_config.xml</span><br></pre></td></tr></table></figure>
+<p>执行完成后访问jenkins可发现创建了一个名为pipeline_demo2的job，配置和配置文件相同：</p>
+<p><img src="create-job1.png" width="70%" height="70%" /></p>
+<h1 id="更新项目"><a href="#更新项目" class="headerlink" title="更新项目"></a>更新项目</h1><p>jenkins API能创建job，当然也能更新job，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -X POST --USER admin:11108c1d093a24fcebe11e945de3bcece4  http://192.168.30.8:8080/job/pipeline_demo2/config.xml --header <span class="string">&quot;Content-Type:text/xml&quot;</span> --data-binary @pipeline_demo_config_new.xml</span><br></pre></td></tr></table></figure>
+<p><code>pipeline_demo_config_new.xml</code>为更新之后的配置文件。</p>
+<p><strong>参考文档：</strong></p>
+<ol>
+<li><p>创建节点：<a target="_blank" rel="noopener" href="https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/creating-node-with-the-rest-api">Creating node with the REST API (cloudbees.com)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/57970708/use-rest-api-call-to-create-a-new-jenkins-slave-using-python">Use rest api call to create a new jenkins slave using python - Stack Overflow</a></p>
+</li>
+<li><p>读取密码：<a target="_blank" rel="noopener" href="https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-to-find-slave-secret-key">How to find JNLP Node’s secret key remotely? (cloudbees.com)</a></p>
+</li>
+<li><p>创建项目：<a target="_blank" rel="noopener" href="https://bootvar.com/how-to-create-jenkins-job-using-api/">How to Create, Update, Delete and Trigger Jenkins job using API? (bootvar.com)</a></p>
+</li>
+</ol>
+<center><b>--THE END--<b></center>
+
+<blockquote>
+<p>其实若真正有才华，运气并不是那么重要。——东野圭吾《解忧杂货店》</p>
+</blockquote>
+
+
+    
+    
+    
+	  
+	  <div class="post-tags">              
+		  <a href="/tags/Jenkins/" rel="tag"><i class="fa fa-tag"></i> Jenkins</a>
+	  </div>
+      <br/>
+      <div>
+          
+              
+<div class="my-post-copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>持续集成：通过Jenkins API创建项目和节点</a></p>
+  <p><span>文章作者:</span>hiyo</a></p>
+  <p><span>文章链接:</span><a href="/posts/continuous-integration-for-jenkins-api-create-job-and-slave/" title="持续集成：通过Jenkins API创建项目和节点">https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客文章除特别声明外，均采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a> 许可协议。转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+          
+      </div>
+      </div>
+      <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+        <img id="wechat_subscriber_qcode" src="/uploads/wechat.jpg" style="width: 200px; max-width: 100%;">
+        <div>关注微信公众号，及时接收最新技术文章！</div>
+      </div>
+      <footer class="post-footer">        
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/continuous-integration-for-jenkins-docker-images-upgrade/" rel="prev" title="持续集成平台Jenkins：docker镜像升级">
+      <i class="fa fa-chevron-left"></i> 持续集成平台Jenkins：docker镜像升级
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAslave%E8%8A%82%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">创建slave节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">1. 节点配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">2. 创建节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96JNLP%E8%8A%82%E7%82%B9%E7%A7%98%E9%92%A5"><span class="nav-number">2.</span> <span class="nav-text">获取JNLP节点秘钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">1. 项目配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2. 创建项目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">更新项目</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="HiYo"
+      src="/images/logo_android-chrome-192x192-wechat.png">
+  <p class="site-author-name" itemprop="name">HiYo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">182</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hiyongz/DevTest-Notes/" title="GitHub → https://github.com/hiyongz/DevTest-Notes/" rel="noopener" target="_blank"><i class="fa fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → /atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HiYo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:56</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '8KjyhsA4WPYNq9lsLNhA1R17-gzGzoHsz',
+      appKey     : 'DbRgPOSj559JVyisJLRhQ42v',
+      placeholder: "欢迎留言！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
