@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"hiyongz.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"giteement","storage":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。">
+  <meta name="description" content="对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。 注：本文基于禅道开源版16.4进行二次开发，禅道16.5+版本升级了扩展机制，具体请参考官方文档：https:&#x2F;&#x2F;devel.easycorp.cn&#x2F;book&#x2F;extension-new&#x2F;intro-52.html 。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="禅道二次开发（三）：二次开发实例">
 <meta property="og:url" content="https://hiyongz.github.io/posts/zentao-extension-example/index.html">
 <meta property="og:site_name" content="HiYong">
-<meta property="og:description" content="对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。">
+<meta property="og:description" content="对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。 注：本文基于禅道开源版16.4进行二次开发，禅道16.5+版本升级了扩展机制，具体请参考官方文档：https:&#x2F;&#x2F;devel.easycorp.cn&#x2F;book&#x2F;extension-new&#x2F;intro-52.html 。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/zentao-extension-example/zentao-testcase-extension-exectype.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/zentao-extension-example/zentao-testcase-extension-model-create.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://hiyongz.github.io/posts/zentao-extension-example/zentao-testcase-extension-edit-exectype.png">
 <meta property="og:image" content="https://hiyongz.github.io/posts/zentao-extension-example/zentao-testcase-extension-edit-exectype2.png">
 <meta property="article:published_time" content="2022-04-13T12:12:00.000Z">
-<meta property="article:modified_time" content="2023-01-17T06:31:01.595Z">
+<meta property="article:modified_time" content="2023-01-17T06:32:04.757Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="zentao">
 <meta name="twitter:card" content="summary">
@@ -286,7 +286,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
+              <span>5.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -306,6 +306,7 @@
 
       
         <p>对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。</p>
+<p><strong>注：</strong>本文基于禅道开源版16.4进行二次开发，禅道16.5+版本升级了扩展机制，具体请参考官方文档：<a target="_blank" rel="noopener" href="https://devel.easycorp.cn/book/extension-new/intro-52.html">https://devel.easycorp.cn/book/extension-new/intro-52.html</a> 。</p>
 <a id="more"></a>
 <p>对禅道进行扩展主要在module目录下进行，在需要扩展的模块下对model、control、view方法以及css、js、lang等进行扩展。下面介绍如何在用例模块中新增一个字段，了解禅道是如何进行扩展的。</p>
 <p>需求是对测试用例新增字段【测试方式】，选项为手工或者自动化，新建用例页面的效果如下：</p>
