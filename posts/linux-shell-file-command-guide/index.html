@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hiyongz.github.io/posts/linux-shell-file-command-guide/linux-shell-file.png">
 <meta property="article:published_time" content="2020-12-24T12:02:00.000Z">
-<meta property="article:modified_time" content="2023-02-05T01:08:41.462Z">
+<meta property="article:modified_time" content="2023-02-07T12:56:47.125Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary">
@@ -277,14 +277,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.9k</span>
+              <span>5.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -383,15 +383,25 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat ./* | wc -l</span><br><span class="line">cat: ./dir1: 是一个目录</span><br><span class="line">20</span><br></pre></td></tr></table></figure>
 <p>统计目录下所有普通文件（包括目录中的文件）的总行数:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 目录下所有文件总行数，包括空行</span></span><br><span class="line">find . -<span class="built_in">type</span> f -<span class="built_in">exec</span> cat &#123;&#125; \; | wc -l</span><br><span class="line">34</span><br><span class="line"><span class="comment"># 目录下指定文件类型总行数，包括空行</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> cat &#123;&#125; \; | wc -l</span><br><span class="line">28</span><br><span class="line">$ find . -<span class="built_in">type</span> f -<span class="built_in">exec</span> wc -l &#123;&#125; \; | awk <span class="string">&#x27;&#123;sum+=$1&#125;END&#123;print sum&#125;&#x27;</span></span><br><span class="line">28</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目录下所有文件总行数，不统计空行</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -<span class="built_in">exec</span> cat &#123;&#125; \; | grep -v <span class="string">&#x27;^$&#x27;</span> | wc -l</span><br><span class="line">24</span><br><span class="line"><span class="comment"># 目录下指定文件类型总行数，不统计空行</span></span><br><span class="line">$ find . -<span class="built_in">type</span> f -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> cat &#123;&#125; \; | grep -v <span class="string">&#x27;^$&#x27;</span> | wc -l</span><br><span class="line">18</span><br></pre></td></tr></table></figure>
-<h1 id="文件解压"><a href="#文件解压" class="headerlink" title="文件解压"></a>文件解压</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf xxx.tar.gz</span><br></pre></td></tr></table></figure>
+<h1 id="文件解压"><a href="#文件解压" class="headerlink" title="文件解压"></a>文件解压</h1><p>tar解压：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf xxx.tar.gz -C /opt</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>-x, --extract</code>：解压文件</li>
 <li><code>-v, --verbose</code>：显示解压日志</li>
 <li><code>-z, --gzip</code>：通过gzip支持压缩或解压缩</li>
 <li><code>-f, --file</code>：指定解压文件</li>
+<li><code>-t, --list</code>：列出压缩包内容</li>
+<li><code>-C, --directory=DIR</code>：压缩到指定目录</li>
 </ul>
-<p>压缩zip:</p>
+<p>压缩为tar.gz文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czf xxx.tar.gz file-name或者DIR</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>-c, --create</code>：创建压缩文件 </li>
+</ul>
+<p>压缩为zip文件:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip -r test.zip <span class="built_in">test</span>/</span><br></pre></td></tr></table></figure>
+<p>查看压缩包文件，不解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ zip tvf test.zip</span><br></pre></td></tr></table></figure>
 <p>解压zip文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ unzip -d /temp test.zip <span class="comment"># 解压到目的目录</span></span><br><span class="line">$ unzip -o test.zip  <span class="comment"># 覆盖已存在的文件</span></span><br><span class="line">$ unzip -n test.zip  <span class="comment"># 不覆盖已存在的文件</span></span><br></pre></td></tr></table></figure>
 <h1 id="du-命令：显示目录或文件的大小"><a href="#du-命令：显示目录或文件的大小" class="headerlink" title="du 命令：显示目录或文件的大小"></a>du 命令：显示目录或文件的大小</h1><p>du（disk usage）命令主要用于显示目录或文件的大小：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ du</span><br><span class="line">du</span><br><span class="line">18760   ./node_exporter-1.1.2.linux-amd64</span><br><span class="line">27792   .</span><br></pre></td></tr></table></figure><br>下面介绍几个选项参数：</p>
