@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2023-02-07T12:56:46.993Z</updated>
+  <updated>2023-02-07T13:13:45.929Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>使用Fiddler抓取手机APP报文</title>
+    <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/"/>
+    <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/</id>
+    <published>2023-01-05T12:02:00.000Z</published>
+    <updated>2023-02-07T13:13:45.929Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Http协议代理工具有很多，比如Burp Suite、Charles、Jmeter、Fiddler等，它们都可以用来抓取APP报文，其中charles和Burp Suite是收费的，Jmeter主要用来做接口测试，而Fiddler提供了免费版，本文记录一下在Windows系统中如何用Fiddler代理工具抓取手机APP报文。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="接口测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="接口测试" scheme="https://hiyongz.github.io/tags/%E6%8E%A5%E5%8F%A3%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="代理工具 - Fiddler" scheme="https://hiyongz.github.io/tags/%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7-Fiddler/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android APP稳定性测试工具Fastbot</title>
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/</id>
     <published>2022-10-16T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:46.993Z</updated>
+    <updated>2023-02-07T13:13:45.981Z</updated>
     
     <summary type="html">
     
@@ -44,7 +69,7 @@
     <link href="https://hiyongz.github.io/posts/java-maven-install-and-configure/"/>
     <id>https://hiyongz.github.io/posts/java-maven-install-and-configure/</id>
     <published>2022-10-14T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.113Z</updated>
+    <updated>2023-02-07T13:13:46.101Z</updated>
     
     <summary type="html">
     
@@ -67,7 +92,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/</id>
     <published>2022-09-28T12:16:00.000Z</published>
-    <updated>2023-02-07T12:56:47.033Z</updated>
+    <updated>2023-02-07T13:13:46.021Z</updated>
     
     <summary type="html">
     
@@ -92,7 +117,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/</id>
     <published>2022-09-21T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.041Z</updated>
+    <updated>2023-02-07T13:13:46.029Z</updated>
     
     <summary type="html">
     
@@ -117,7 +142,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-index/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-index/</id>
     <published>2022-09-07T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.085Z</updated>
+    <updated>2023-02-07T13:13:46.073Z</updated>
     
     <summary type="html">
     
@@ -141,7 +166,7 @@
     <link href="https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/"/>
     <id>https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/</id>
     <published>2022-09-04T12:02:00.000Z</published>
-    <updated>2023-02-07T12:56:47.113Z</updated>
+    <updated>2023-02-07T13:13:46.101Z</updated>
     
     <summary type="html">
     
@@ -164,7 +189,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
     <published>2022-08-25T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.093Z</updated>
+    <updated>2023-02-07T13:13:46.081Z</updated>
     
     <summary type="html">
     
@@ -187,7 +212,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.097Z</updated>
+    <updated>2023-02-07T13:13:46.085Z</updated>
     
     <summary type="html">
     
@@ -210,7 +235,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.093Z</updated>
+    <updated>2023-02-07T13:13:46.085Z</updated>
     
     <summary type="html">
     
@@ -233,7 +258,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
     <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.085Z</updated>
+    <updated>2023-02-07T13:13:46.073Z</updated>
     
     <summary type="html">
     
@@ -256,7 +281,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/</id>
     <published>2022-06-28T18:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.181Z</updated>
+    <updated>2023-02-07T13:13:46.169Z</updated>
     
     <summary type="html">
     
@@ -281,7 +306,7 @@
     <link href="https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/"/>
     <id>https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/</id>
     <published>2022-06-28T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.133Z</updated>
+    <updated>2023-02-07T13:13:46.121Z</updated>
     
     <summary type="html">
     
@@ -302,7 +327,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/</id>
     <published>2022-05-24T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.277Z</updated>
+    <updated>2023-02-07T13:13:46.261Z</updated>
     
     <summary type="html">
     
@@ -333,7 +358,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/</id>
     <published>2022-05-10T12:16:00.000Z</published>
-    <updated>2023-02-07T12:56:47.029Z</updated>
+    <updated>2023-02-07T13:13:46.017Z</updated>
     
     <summary type="html">
     
@@ -360,7 +385,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-array-method/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-array-method/</id>
     <published>2022-05-06T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.177Z</updated>
+    <updated>2023-02-07T13:13:46.165Z</updated>
     
     <summary type="html">
     
@@ -383,7 +408,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-source-control-jenkinsfile/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-source-control-jenkinsfile/</id>
     <published>2022-04-30T12:16:00.000Z</published>
-    <updated>2023-02-07T12:56:47.065Z</updated>
+    <updated>2023-02-07T13:13:46.053Z</updated>
     
     <summary type="html">
     
@@ -410,7 +435,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-string-and-preg-method/</id>
     <published>2022-04-28T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.181Z</updated>
+    <updated>2023-02-07T13:13:46.169Z</updated>
     
     <summary type="html">
     
@@ -433,7 +458,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-dev-environment-install/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-dev-environment-install/</id>
     <published>2022-04-15T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.177Z</updated>
+    <updated>2023-02-07T13:13:46.165Z</updated>
     
     <summary type="html">
     
@@ -456,35 +481,12 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-example/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-example/</id>
     <published>2022-04-13T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.273Z</updated>
+    <updated>2023-02-07T13:13:46.261Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;对禅道框架有初步的了解后就可以开始进行二次开发了，不需要完全搞懂zentaoPHP框架，可以在开发过程中学习。本文记录一下我进行禅道二次开发的其中一个小功能的实现过程。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;注：&lt;/strong&gt;本文基于禅道开源版16.4进行二次开发，禅道16.5+版本升级了扩展机制，具体请参考官方文档：&lt;a href=&quot;https://devel.easycorp.cn/book/extension-new/intro-52.html&quot;&gt;https://devel.easycorp.cn/book/extension-new/intro-52.html&lt;/a&gt; 。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="禅道" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E7%A6%85%E9%81%93/"/>
-    
-    
-      <category term="zentao" scheme="https://hiyongz.github.io/tags/zentao/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>禅道二次开发（一）：开发环境配置</title>
-    <link href="https://hiyongz.github.io/posts/zentao-extension-for-dev-environment-configuration/"/>
-    <id>https://hiyongz.github.io/posts/zentao-extension-for-dev-environment-configuration/</id>
-    <published>2022-04-09T12:12:00.000Z</published>
-    <updated>2023-02-07T12:56:47.273Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;禅道是一个开源的项目管理软件，作为测试人员最常用的功能就是用例管理和bug管理。目前的禅道开源版可能无法满足业务需求，可以基于禅道进行二次开发。先来介绍下如何配置禅道开发环境。&lt;/p&gt;
     
     </summary>
     
