@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2023-03-05T12:56:45.121Z</updated>
+  <updated>2023-03-20T12:53:56.962Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python日志系统logging使用介绍</title>
+    <link href="https://hiyongz.github.io/posts/python-notes-for-logging/"/>
+    <id>https://hiyongz.github.io/posts/python-notes-for-logging/</id>
+    <published>2023-03-20T12:12:00.000Z</published>
+    <updated>2023-03-20T12:53:56.962Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;日志记录对于软件开发调试和运行都非常重要。Python标准库提供了一个日志记录系统，可以很方便的在python项目中添加日志记录。本文将详细介绍如何使用python的 &lt;code&gt;logging&lt;/code&gt; 模块来记录日志。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="编程语言" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="python" scheme="https://hiyongz.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/python/"/>
+    
+    
+      <category term="Python" scheme="https://hiyongz.github.io/tags/Python/"/>
+    
+      <category term="日志" scheme="https://hiyongz.github.io/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>SVN项目迁移到Git方法</title>
     <link href="https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/</id>
     <published>2023-03-02T00:00:00.000Z</published>
-    <updated>2023-03-05T12:56:45.121Z</updated>
+    <updated>2023-03-20T12:53:57.038Z</updated>
     
     <summary type="html">
     
@@ -42,7 +67,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/</id>
     <published>2023-02-15T12:16:00.000Z</published>
-    <updated>2023-03-05T12:56:45.121Z</updated>
+    <updated>2023-03-20T12:53:57.038Z</updated>
     
     <summary type="html">
     
@@ -63,7 +88,7 @@
     <link href="https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/"/>
     <id>https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/</id>
     <published>2023-02-15T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.961Z</updated>
+    <updated>2023-03-20T12:53:56.866Z</updated>
     
     <summary type="html">
     
@@ -86,7 +111,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/</id>
     <published>2023-02-08T12:02:00.000Z</published>
-    <updated>2023-03-05T12:56:44.793Z</updated>
+    <updated>2023-03-20T12:53:56.694Z</updated>
     
     <summary type="html">
     
@@ -113,7 +138,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/</id>
     <published>2023-01-12T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.893Z</updated>
+    <updated>2023-03-20T12:53:56.798Z</updated>
     
     <summary type="html">
     
@@ -142,7 +167,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/</id>
     <published>2023-01-05T12:02:00.000Z</published>
-    <updated>2023-03-05T12:56:44.789Z</updated>
+    <updated>2023-03-20T12:53:56.690Z</updated>
     
     <summary type="html">
     
@@ -167,7 +192,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/</id>
     <published>2022-10-16T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.849Z</updated>
+    <updated>2023-03-20T12:53:56.750Z</updated>
     
     <summary type="html">
     
@@ -190,7 +215,7 @@
     <link href="https://hiyongz.github.io/posts/java-maven-install-and-configure/"/>
     <id>https://hiyongz.github.io/posts/java-maven-install-and-configure/</id>
     <published>2022-10-14T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.973Z</updated>
+    <updated>2023-03-20T12:53:56.882Z</updated>
     
     <summary type="html">
     
@@ -213,7 +238,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/</id>
     <published>2022-09-28T12:16:00.000Z</published>
-    <updated>2023-03-05T12:56:44.889Z</updated>
+    <updated>2023-03-20T12:53:56.794Z</updated>
     
     <summary type="html">
     
@@ -238,7 +263,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/</id>
     <published>2022-09-21T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.897Z</updated>
+    <updated>2023-03-20T12:53:56.802Z</updated>
     
     <summary type="html">
     
@@ -263,7 +288,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-index/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-index/</id>
     <published>2022-09-07T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.945Z</updated>
+    <updated>2023-03-20T12:53:56.850Z</updated>
     
     <summary type="html">
     
@@ -287,7 +312,7 @@
     <link href="https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/"/>
     <id>https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/</id>
     <published>2022-09-04T12:02:00.000Z</published>
-    <updated>2023-03-05T12:56:44.973Z</updated>
+    <updated>2023-03-20T12:53:56.878Z</updated>
     
     <summary type="html">
     
@@ -310,7 +335,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
     <published>2022-08-25T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.953Z</updated>
+    <updated>2023-03-20T12:53:56.858Z</updated>
     
     <summary type="html">
     
@@ -333,7 +358,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.957Z</updated>
+    <updated>2023-03-20T12:53:56.862Z</updated>
     
     <summary type="html">
     
@@ -356,7 +381,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.953Z</updated>
+    <updated>2023-03-20T12:53:56.858Z</updated>
     
     <summary type="html">
     
@@ -379,7 +404,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
     <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.945Z</updated>
+    <updated>2023-03-20T12:53:56.850Z</updated>
     
     <summary type="html">
     
@@ -402,7 +427,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/</id>
     <published>2022-06-28T18:12:00.000Z</published>
-    <updated>2023-03-05T12:56:45.037Z</updated>
+    <updated>2023-03-20T12:53:56.950Z</updated>
     
     <summary type="html">
     
@@ -427,7 +452,7 @@
     <link href="https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/"/>
     <id>https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/</id>
     <published>2022-06-28T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:44.993Z</updated>
+    <updated>2023-03-20T12:53:56.902Z</updated>
     
     <summary type="html">
     
@@ -448,7 +473,7 @@
     <link href="https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/zentao-extension-for-phpspreadsheet/</id>
     <published>2022-05-24T12:12:00.000Z</published>
-    <updated>2023-03-05T12:56:45.137Z</updated>
+    <updated>2023-03-20T12:53:57.058Z</updated>
     
     <summary type="html">
     
@@ -471,33 +496,6 @@
       <category term="PHP" scheme="https://hiyongz.github.io/tags/PHP/"/>
     
       <category term="PhpSpreadsheet" scheme="https://hiyongz.github.io/tags/PhpSpreadsheet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>持续集成：Jenkins插件Blue Ocean介绍</title>
-    <link href="https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/"/>
-    <id>https://hiyongz.github.io/posts/continuous-integration-for-blue-ocean-plugin/</id>
-    <published>2022-05-10T12:16:00.000Z</published>
-    <updated>2023-03-05T12:56:44.885Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Blue Ocean插件是为Jenkins Pipeline设计的一个聚合工具，当然也兼容自由风格项目。它图形化了pipeline的流程，使流水线更加直观。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="持续集成" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-    
-      <category term="Jenkins" scheme="https://hiyongz.github.io/tags/Jenkins/"/>
-    
-      <category term="Pipeline" scheme="https://hiyongz.github.io/tags/Pipeline/"/>
     
   </entry>
   
