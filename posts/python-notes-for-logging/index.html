@@ -30,7 +30,7 @@
 <meta property="og:description" content="日志记录对于软件开发调试和运行都非常重要。Python标准库提供了一个日志记录系统，可以很方便的在python项目中添加日志记录。本文将详细介绍如何使用python的 logging 模块来记录日志。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-20T12:12:00.000Z">
-<meta property="article:modified_time" content="2023-03-26T11:43:35.433Z">
+<meta property="article:modified_time" content="2023-03-28T03:52:54.876Z">
 <meta property="article:author" content="HiYo">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="日志">
@@ -280,14 +280,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>10k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -330,6 +330,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.DEBUG)</span><br><span class="line"></span><br><span class="line">logging.debug(<span class="string">&#x27;Debug 级别日志信息&#x27;</span>)</span><br><span class="line">logging.info(<span class="string">&#x27;Info 级别日志信息&#x27;</span>)</span><br><span class="line">logging.warning(<span class="string">&#x27;Warning 级别日志信息&#x27;</span>)</span><br><span class="line">logging.error(<span class="string">&#x27;Error 级别日志信息&#x27;</span>)</span><br><span class="line">logging.critical(<span class="string">&#x27;Critical 级别日志信息&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>输出：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DEBUG:root:Debug 级别日志信息</span><br><span class="line">INFO:root:Info 级别日志信息</span><br><span class="line">WARNING:root:Warning 级别日志信息</span><br><span class="line">ERROR:root:Error 级别日志信息</span><br><span class="line">CRITICAL:root:Critical 级别日志信息</span><br></pre></td></tr></table></figure>
+<p>可以使用 <code>logging.log(level, msg, *args, **kwargs)</code> 来传入日志级别：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.DEBUG, <span class="built_in">format</span>=<span class="string">&#x27;%(asctime)s - %(message)s&#x27;</span>, datefmt=<span class="string">&#x27;%Y%m%d-%H:%M:%S&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mylog</span>(<span class="params">message, level=<span class="string">&#x27;INFO&#x27;</span></span>):</span></span><br><span class="line">    level = &#123;<span class="string">&#x27;NOTSET&#x27;</span>: logging.NOTSET,</span><br><span class="line">        <span class="string">&#x27;DEBUG&#x27;</span>: logging.DEBUG,</span><br><span class="line">        <span class="string">&#x27;INFO&#x27;</span>: logging.INFO,</span><br><span class="line">        <span class="string">&#x27;WARNING&#x27;</span>: logging.WARNING,</span><br><span class="line">        <span class="string">&#x27;ERROR&#x27;</span>: logging.ERROR,</span><br><span class="line">        <span class="string">&#x27;CRITICAL&#x27;</span>: logging.CRITICAL&#125;[level]</span><br><span class="line">    logging.log(level, message)</span><br><span class="line"></span><br><span class="line">mylog(<span class="string">&#x27;Info 级别日志信息&#x27;</span>, <span class="string">&#x27;INFO&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="保存日志到文件"><a href="#保存日志到文件" class="headerlink" title="保存日志到文件"></a>保存日志到文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(filename=<span class="string">&#x27;test.log&#x27;</span>, filemode=<span class="string">&#x27;w&#x27;</span>, <span class="built_in">format</span>=<span class="string">&#x27;%(name)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">logging.debug(<span class="string">&#x27;Debug 级别日志信息&#x27;</span>)</span><br><span class="line">logging.info(<span class="string">&#x27;Info 级别日志信息&#x27;</span>)</span><br><span class="line">logging.warning(<span class="string">&#x27;Warning 级别日志信息&#x27;</span>)</span><br><span class="line">logging.error(<span class="string">&#x27;Error 级别日志信息&#x27;</span>)</span><br><span class="line">logging.critical(<span class="string">&#x27;Critical 级别日志信息&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><p><code>format</code> 参数用于格式化输出设置，除了默认设置levelname, name和message属性：</p>
 <div class="table-container">
