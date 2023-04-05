@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2023-04-02T13:54:00.128Z</updated>
+  <updated>2023-04-05T09:16:51.597Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>性能测试工具 IxChariot：Tcl脚本调用方法介绍</title>
+    <link href="https://hiyongz.github.io/posts/performance-testing-with-ixchariot/"/>
+    <id>https://hiyongz.github.io/posts/performance-testing-with-ixchariot/</id>
+    <published>2023-04-05T12:12:00.000Z</published>
+    <updated>2023-04-05T09:16:51.597Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ixChariot是一款功能强大的性能测试软件，可用来测试有线和无线性能，可以模拟真实应用程序流量，并提供关键性能指标，包括吞吐量、丢包、抖动、延迟、MOS等。本文简单介绍如何使用IxChariot Tcl API来实现自动化跑流。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="性能测试" scheme="https://hiyongz.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="IxChariot" scheme="https://hiyongz.github.io/tags/IxChariot/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python中 os.popen、os.system和subprocess.popen方法介绍</title>
     <link href="https://hiyongz.github.io/posts/python-notes-for-subprocess/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-subprocess/</id>
     <published>2023-03-26T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.128Z</updated>
+    <updated>2023-04-05T09:16:51.625Z</updated>
     
     <summary type="html">
     
@@ -46,7 +69,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-logging/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-logging/</id>
     <published>2023-03-20T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.128Z</updated>
+    <updated>2023-04-05T09:16:51.621Z</updated>
     
     <summary type="html">
     
@@ -71,7 +94,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/</id>
     <published>2023-03-02T00:00:00.000Z</published>
-    <updated>2023-04-02T13:54:00.188Z</updated>
+    <updated>2023-04-05T09:16:51.685Z</updated>
     
     <summary type="html">
     
@@ -92,7 +115,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/</id>
     <published>2023-02-15T12:16:00.000Z</published>
-    <updated>2023-04-02T13:54:00.184Z</updated>
+    <updated>2023-04-05T09:16:51.685Z</updated>
     
     <summary type="html">
     
@@ -113,7 +136,7 @@
     <link href="https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/"/>
     <id>https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/</id>
     <published>2023-02-15T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.052Z</updated>
+    <updated>2023-04-05T09:16:51.545Z</updated>
     
     <summary type="html">
     
@@ -136,7 +159,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/</id>
     <published>2023-02-08T12:02:00.000Z</published>
-    <updated>2023-04-02T13:53:59.916Z</updated>
+    <updated>2023-04-05T09:16:51.397Z</updated>
     
     <summary type="html">
     
@@ -163,7 +186,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/</id>
     <published>2023-01-12T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.000Z</updated>
+    <updated>2023-04-05T09:16:51.485Z</updated>
     
     <summary type="html">
     
@@ -192,7 +215,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/</id>
     <published>2023-01-05T12:02:00.000Z</published>
-    <updated>2023-04-02T13:53:59.912Z</updated>
+    <updated>2023-04-05T09:16:51.393Z</updated>
     
     <summary type="html">
     
@@ -217,7 +240,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/</id>
     <published>2022-10-16T12:12:00.000Z</published>
-    <updated>2023-04-02T13:53:59.960Z</updated>
+    <updated>2023-04-05T09:16:51.445Z</updated>
     
     <summary type="html">
     
@@ -240,7 +263,7 @@
     <link href="https://hiyongz.github.io/posts/java-maven-install-and-configure/"/>
     <id>https://hiyongz.github.io/posts/java-maven-install-and-configure/</id>
     <published>2022-10-14T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.064Z</updated>
+    <updated>2023-04-05T09:16:51.553Z</updated>
     
     <summary type="html">
     
@@ -263,7 +286,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/</id>
     <published>2022-09-28T12:16:00.000Z</published>
-    <updated>2023-04-02T13:53:59.996Z</updated>
+    <updated>2023-04-05T09:16:51.481Z</updated>
     
     <summary type="html">
     
@@ -288,7 +311,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/</id>
     <published>2022-09-21T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.000Z</updated>
+    <updated>2023-04-05T09:16:51.489Z</updated>
     
     <summary type="html">
     
@@ -313,7 +336,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-index/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-index/</id>
     <published>2022-09-07T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.040Z</updated>
+    <updated>2023-04-05T09:16:51.529Z</updated>
     
     <summary type="html">
     
@@ -337,7 +360,7 @@
     <link href="https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/"/>
     <id>https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/</id>
     <published>2022-09-04T12:02:00.000Z</published>
-    <updated>2023-04-02T13:54:00.064Z</updated>
+    <updated>2023-04-05T09:16:51.553Z</updated>
     
     <summary type="html">
     
@@ -360,7 +383,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
     <published>2022-08-25T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.044Z</updated>
+    <updated>2023-04-05T09:16:51.537Z</updated>
     
     <summary type="html">
     
@@ -383,7 +406,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.048Z</updated>
+    <updated>2023-04-05T09:16:51.541Z</updated>
     
     <summary type="html">
     
@@ -406,7 +429,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.044Z</updated>
+    <updated>2023-04-05T09:16:51.537Z</updated>
     
     <summary type="html">
     
@@ -429,7 +452,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
     <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.040Z</updated>
+    <updated>2023-04-05T09:16:51.529Z</updated>
     
     <summary type="html">
     
@@ -452,7 +475,7 @@
     <link href="https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/"/>
     <id>https://hiyongz.github.io/posts/php-notes-for-phpspreadsheet/</id>
     <published>2022-06-28T18:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.120Z</updated>
+    <updated>2023-04-05T09:16:51.613Z</updated>
     
     <summary type="html">
     
@@ -469,27 +492,6 @@
       <category term="PHP" scheme="https://hiyongz.github.io/tags/PHP/"/>
     
       <category term="PhpSpreadsheet" scheme="https://hiyongz.github.io/tags/PhpSpreadsheet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>markdown图表语法Mermaid介绍</title>
-    <link href="https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/"/>
-    <id>https://hiyongz.github.io/posts/markdown-syntax-for-flowchart2/</id>
-    <published>2022-06-28T12:12:00.000Z</published>
-    <updated>2023-04-02T13:54:00.080Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Markdown是一种轻量级标记语言，除了编辑文字外，还支持插入图片、表格、公式，它是很流行的一种文档编辑语言，很多博客平台都支持使用Markdown来编辑文章。Markdown还有一个好用的功能是画流程图，基于Mermaid库来渲染流程图，语法比较简洁，本文将介绍Markdown的Mermaid简单使用方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="其它" scheme="https://hiyongz.github.io/categories/%E5%85%B6%E5%AE%83/"/>
-    
-    
-      <category term="markdown" scheme="https://hiyongz.github.io/tags/markdown/"/>
     
   </entry>
   
