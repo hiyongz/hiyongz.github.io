@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2023-05-15T06:19:33.404Z</updated>
+  <updated>2023-05-16T14:43:31.661Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://hiyongz.github.io/posts/devtest-notes-for-gerrit-install/"/>
     <id>https://hiyongz.github.io/posts/devtest-notes-for-gerrit-install/</id>
     <published>2023-04-27T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.404Z</updated>
+    <updated>2023-05-16T14:43:31.661Z</updated>
     
     <summary type="html">
     
@@ -44,7 +44,7 @@
     <link href="https://hiyongz.github.io/posts/performance-testing-with-ixchariot/"/>
     <id>https://hiyongz.github.io/posts/performance-testing-with-ixchariot/</id>
     <published>2023-04-05T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.468Z</updated>
+    <updated>2023-05-16T14:43:31.721Z</updated>
     
     <summary type="html">
     
@@ -67,7 +67,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-subprocess/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-subprocess/</id>
     <published>2023-03-26T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.492Z</updated>
+    <updated>2023-05-16T14:43:31.749Z</updated>
     
     <summary type="html">
     
@@ -92,7 +92,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-logging/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-logging/</id>
     <published>2023-03-20T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.492Z</updated>
+    <updated>2023-05-16T14:43:31.745Z</updated>
     
     <summary type="html">
     
@@ -117,7 +117,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/</id>
     <published>2023-03-02T00:00:00.000Z</published>
-    <updated>2023-05-15T06:19:33.556Z</updated>
+    <updated>2023-05-16T14:43:31.809Z</updated>
     
     <summary type="html">
     
@@ -138,7 +138,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/</id>
     <published>2023-02-15T12:16:00.000Z</published>
-    <updated>2023-05-15T06:19:33.552Z</updated>
+    <updated>2023-05-16T14:43:31.809Z</updated>
     
     <summary type="html">
     
@@ -159,7 +159,7 @@
     <link href="https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/"/>
     <id>https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/</id>
     <published>2023-02-15T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.412Z</updated>
+    <updated>2023-05-16T14:43:31.669Z</updated>
     
     <summary type="html">
     
@@ -182,7 +182,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/</id>
     <published>2023-02-08T12:02:00.000Z</published>
-    <updated>2023-05-15T06:19:33.260Z</updated>
+    <updated>2023-05-16T14:43:31.517Z</updated>
     
     <summary type="html">
     
@@ -209,7 +209,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/</id>
     <published>2023-01-12T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.348Z</updated>
+    <updated>2023-05-16T14:43:31.605Z</updated>
     
     <summary type="html">
     
@@ -238,7 +238,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/</id>
     <published>2023-01-05T12:02:00.000Z</published>
-    <updated>2023-05-15T06:19:33.256Z</updated>
+    <updated>2023-05-16T14:43:31.513Z</updated>
     
     <summary type="html">
     
@@ -263,7 +263,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/</id>
     <published>2022-10-16T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.308Z</updated>
+    <updated>2023-05-16T14:43:31.565Z</updated>
     
     <summary type="html">
     
@@ -286,7 +286,7 @@
     <link href="https://hiyongz.github.io/posts/java-maven-install-and-configure/"/>
     <id>https://hiyongz.github.io/posts/java-maven-install-and-configure/</id>
     <published>2022-10-14T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.424Z</updated>
+    <updated>2023-05-16T14:43:31.681Z</updated>
     
     <summary type="html">
     
@@ -309,7 +309,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/</id>
     <published>2022-09-28T12:16:00.000Z</published>
-    <updated>2023-05-15T06:19:33.344Z</updated>
+    <updated>2023-05-16T14:43:31.601Z</updated>
     
     <summary type="html">
     
@@ -334,7 +334,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/</id>
     <published>2022-09-21T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.352Z</updated>
+    <updated>2023-05-16T14:43:31.609Z</updated>
     
     <summary type="html">
     
@@ -359,7 +359,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-index/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-index/</id>
     <published>2022-09-07T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.392Z</updated>
+    <updated>2023-05-16T14:43:31.649Z</updated>
     
     <summary type="html">
     
@@ -383,7 +383,7 @@
     <link href="https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/"/>
     <id>https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/</id>
     <published>2022-09-04T12:02:00.000Z</published>
-    <updated>2023-05-15T06:19:33.424Z</updated>
+    <updated>2023-05-16T14:43:31.677Z</updated>
     
     <summary type="html">
     
@@ -406,7 +406,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
     <published>2022-08-25T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.400Z</updated>
+    <updated>2023-05-16T14:43:31.657Z</updated>
     
     <summary type="html">
     
@@ -429,7 +429,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.404Z</updated>
+    <updated>2023-05-16T14:43:31.657Z</updated>
     
     <summary type="html">
     
@@ -452,7 +452,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.400Z</updated>
+    <updated>2023-05-16T14:43:31.657Z</updated>
     
     <summary type="html">
     
@@ -475,7 +475,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
     <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2023-05-15T06:19:33.392Z</updated>
+    <updated>2023-05-16T14:43:31.649Z</updated>
     
     <summary type="html">
     
