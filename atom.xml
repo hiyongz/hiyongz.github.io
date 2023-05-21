@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hiyongz.github.io/"/>
-  <updated>2023-05-16T14:43:31.661Z</updated>
+  <updated>2023-05-21T10:22:45.138Z</updated>
   <id>https://hiyongz.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Windows远程执行进程工具psexec和wmiexec介绍</title>
+    <link href="https://hiyongz.github.io/posts/windows-lateral-movement-tool-psexec-and-wmiexec/"/>
+    <id>https://hiyongz.github.io/posts/windows-lateral-movement-tool-psexec-and-wmiexec/</id>
+    <published>2023-05-21T12:12:00.000Z</published>
+    <updated>2023-05-21T10:22:45.138Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在自动化测试或者自动化工具开发中，通常需要向其它电脑或者服务器发送指令，比如Windows发送命令到Linux服务器开启某个服务进程，或者读取状态信息，我们可以使用ssh协议实现。&lt;/p&gt;
+&lt;p&gt;如果Windows主机需要发送命令到局域网内的其它Windows电脑要如何实现呢？在网络安全中称为横向移动的内网渗透方法可实现远程执行命令，横向移动工具有很多，本文介绍psexec和wmiexec这两个工具如何实现远程执行进程。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="软件工具" scheme="https://hiyongz.github.io/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="PsExec" scheme="https://hiyongz.github.io/tags/PsExec/"/>
+    
+  </entry>
+  
+  <entry>
     <title>代码评审平台Gerrit安装配置方法介绍</title>
     <link href="https://hiyongz.github.io/posts/devtest-notes-for-gerrit-install/"/>
     <id>https://hiyongz.github.io/posts/devtest-notes-for-gerrit-install/</id>
     <published>2023-04-27T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.661Z</updated>
+    <updated>2023-05-21T10:22:44.982Z</updated>
     
     <summary type="html">
     
@@ -44,7 +66,7 @@
     <link href="https://hiyongz.github.io/posts/performance-testing-with-ixchariot/"/>
     <id>https://hiyongz.github.io/posts/performance-testing-with-ixchariot/</id>
     <published>2023-04-05T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.721Z</updated>
+    <updated>2023-05-21T10:22:45.042Z</updated>
     
     <summary type="html">
     
@@ -67,7 +89,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-subprocess/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-subprocess/</id>
     <published>2023-03-26T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.749Z</updated>
+    <updated>2023-05-21T10:22:45.070Z</updated>
     
     <summary type="html">
     
@@ -92,7 +114,7 @@
     <link href="https://hiyongz.github.io/posts/python-notes-for-logging/"/>
     <id>https://hiyongz.github.io/posts/python-notes-for-logging/</id>
     <published>2023-03-20T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.745Z</updated>
+    <updated>2023-05-21T10:22:45.066Z</updated>
     
     <summary type="html">
     
@@ -117,7 +139,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-migrate-from-svn-to-git/</id>
     <published>2023-03-02T00:00:00.000Z</published>
-    <updated>2023-05-16T14:43:31.809Z</updated>
+    <updated>2023-05-21T10:22:45.130Z</updated>
     
     <summary type="html">
     
@@ -138,7 +160,7 @@
     <link href="https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/"/>
     <id>https://hiyongz.github.io/posts/version-management-notes-for-git-merge-and-git-rebase/</id>
     <published>2023-02-15T12:16:00.000Z</published>
-    <updated>2023-05-16T14:43:31.809Z</updated>
+    <updated>2023-05-21T10:22:45.130Z</updated>
     
     <summary type="html">
     
@@ -159,7 +181,7 @@
     <link href="https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/"/>
     <id>https://hiyongz.github.io/posts/devtest-notes-for-zentao-extension-skills/</id>
     <published>2023-02-15T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.669Z</updated>
+    <updated>2023-05-21T10:22:44.986Z</updated>
     
     <summary type="html">
     
@@ -182,7 +204,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-jmeter/</id>
     <published>2023-02-08T12:02:00.000Z</published>
-    <updated>2023-05-16T14:43:31.517Z</updated>
+    <updated>2023-05-21T10:22:44.838Z</updated>
     
     <summary type="html">
     
@@ -209,7 +231,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-view/</id>
     <published>2023-01-12T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.605Z</updated>
+    <updated>2023-05-21T10:22:44.922Z</updated>
     
     <summary type="html">
     
@@ -238,7 +260,7 @@
     <link href="https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/"/>
     <id>https://hiyongz.github.io/posts/api-test-guide-for-mobile-app-with-fiddler/</id>
     <published>2023-01-05T12:02:00.000Z</published>
-    <updated>2023-05-16T14:43:31.513Z</updated>
+    <updated>2023-05-21T10:22:44.834Z</updated>
     
     <summary type="html">
     
@@ -263,7 +285,7 @@
     <link href="https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/"/>
     <id>https://hiyongz.github.io/posts/app-testing-tools-for-fastbot-android/</id>
     <published>2022-10-16T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.565Z</updated>
+    <updated>2023-05-21T10:22:44.882Z</updated>
     
     <summary type="html">
     
@@ -286,7 +308,7 @@
     <link href="https://hiyongz.github.io/posts/java-maven-install-and-configure/"/>
     <id>https://hiyongz.github.io/posts/java-maven-install-and-configure/</id>
     <published>2022-10-14T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.681Z</updated>
+    <updated>2023-05-21T10:22:44.998Z</updated>
     
     <summary type="html">
     
@@ -309,7 +331,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-api-create-job-and-slave/</id>
     <published>2022-09-28T12:16:00.000Z</published>
-    <updated>2023-05-16T14:43:31.601Z</updated>
+    <updated>2023-05-21T10:22:44.918Z</updated>
     
     <summary type="html">
     
@@ -334,7 +356,7 @@
     <link href="https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/"/>
     <id>https://hiyongz.github.io/posts/continuous-integration-for-jenkins-docker-images-upgrade/</id>
     <published>2022-09-21T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.609Z</updated>
+    <updated>2023-05-21T10:22:44.926Z</updated>
     
     <summary type="html">
     
@@ -359,7 +381,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-index/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-index/</id>
     <published>2022-09-07T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.649Z</updated>
+    <updated>2023-05-21T10:22:44.966Z</updated>
     
     <summary type="html">
     
@@ -383,7 +405,7 @@
     <link href="https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/"/>
     <id>https://hiyongz.github.io/posts/java-install-on-windows-and-centos7/</id>
     <published>2022-09-04T12:02:00.000Z</published>
-    <updated>2023-05-16T14:43:31.677Z</updated>
+    <updated>2023-05-21T10:22:44.998Z</updated>
     
     <summary type="html">
     
@@ -406,7 +428,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-lock/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-lock/</id>
     <published>2022-08-25T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.657Z</updated>
+    <updated>2023-05-21T10:22:44.974Z</updated>
     
     <summary type="html">
     
@@ -429,7 +451,7 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-transaction-isolation/</id>
     <published>2022-08-23T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.657Z</updated>
+    <updated>2023-05-21T10:22:44.978Z</updated>
     
     <summary type="html">
     
@@ -452,34 +474,11 @@
     <link href="https://hiyongz.github.io/posts/database-for-mysql-log-system/"/>
     <id>https://hiyongz.github.io/posts/database-for-mysql-log-system/</id>
     <published>2022-07-05T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.657Z</updated>
+    <updated>2023-05-21T10:22:44.974Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;日志是 MySQL 数据库的重要组成部分，比如数据持久化、主从复制、数据回滚等操作都依赖日志系统来实现。本文将介绍MySQL的三种日志：归档日志binlog、重做日志redo log 和回滚日志undo log。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="测试开发" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="数据库" scheme="https://hiyongz.github.io/categories/%E6%B5%8B%E8%AF%95%E5%BC%80%E5%8F%91/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-      <category term="MySQL" scheme="https://hiyongz.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL基础架构：SQL查询语句执行过程</title>
-    <link href="https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/"/>
-    <id>https://hiyongz.github.io/posts/database-for-mysql-architecture-introduction/</id>
-    <published>2022-07-01T12:12:00.000Z</published>
-    <updated>2023-05-16T14:43:31.649Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;MySQL是一种关系型数据库管理系统，采用的是分层结构，本文中将简单介绍MySQL数据库的内部架构。&lt;/p&gt;
     
     </summary>
     
